@@ -176,7 +176,7 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
         formattedLabel: String,
         x: CGFloat,
         y: CGFloat,
-        attributes: [NSAttributedStringKey: NSObject],
+        attributes: [NSAttributedStringKey : AnyObject],
         anchor: CGPoint,
         angleRadians: CGFloat)
     {

@@ -12,7 +12,7 @@
 import Foundation
 
 /// Determines how to round DataSet index values for `ChartDataSet.entryIndex(x, rounding)` when an exact x-value is not found.
-@objc
+
 public enum ChartDataSetRounding: Int
 {
     case up = 0
@@ -519,7 +519,7 @@ open class ChartDataSet: ChartBaseDataSet
     {
         for entry in _values
         {
-            if (entry.isEqual(e))
+            if entry == e
             {
                 return true
             }
@@ -536,19 +536,6 @@ open class ChartDataSet: ChartBaseDataSet
     }
     
     // MARK: - Data functions and accessors
-
-    // MARK: - NSCopying
-    
-    open override func copyWithZone(_ zone: NSZone?) -> AnyObject
-    {
-        let copy = super.copyWithZone(zone) as! ChartDataSet
-        
-        copy._values = _values
-        copy._yMax = _yMax
-        copy._yMin = _yMin
-
-        return copy
-    }
 }
 
 

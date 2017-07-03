@@ -12,7 +12,7 @@
 import Foundation
 import CoreGraphics
 
-@objc
+
 public protocol IRadarChartDataSet: ILineRadarChartDataSet
 {
     // MARK: - Data functions and accessors

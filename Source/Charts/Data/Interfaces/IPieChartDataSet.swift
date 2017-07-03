@@ -16,7 +16,7 @@ import CoreGraphics
     import UIKit
 #endif
 
-@objc
+
 public protocol IPieChartDataSet: IChartDataSet
 {
     // MARK: - Styling functions and accessors

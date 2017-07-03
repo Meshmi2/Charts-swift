@@ -13,7 +13,6 @@ import Foundation
 import CoreGraphics
 
 /// Base class for all axes
-@objc(ChartAxisBase)
 open class AxisBase: ComponentBase
 {
     public override init()

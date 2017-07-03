@@ -148,18 +148,4 @@ open class BarChartDataSet: BarLineScatterCandleBubbleChartDataSet, IBarChartDat
 
     /// the alpha value (transparency) that is used for drawing the highlight indicator bar. min = 0.0 (fully transparent), max = 1.0 (fully opaque)
     open var highlightAlpha = CGFloat(120.0 / 255.0)
-    
-    // MARK: - NSCopying
-    
-    open override func copyWithZone(_ zone: NSZone?) -> AnyObject
-    {
-        let copy = super.copyWithZone(zone) as! BarChartDataSet
-        copy._stackSize = _stackSize
-        copy._entryCountStacks = _entryCountStacks
-        copy.stackLabels = stackLabels
-
-        copy.barShadowColor = barShadowColor
-        copy.highlightAlpha = highlightAlpha
-        return copy
-    }
 }

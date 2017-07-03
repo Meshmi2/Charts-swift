@@ -19,7 +19,6 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
     internal var _fillFormatter: IFillFormatter!
     
     /// enum that allows to specify the order in which the different data objects for the combined-chart are drawn
-    @objc(CombinedChartDrawOrder)
     public enum DrawOrder: Int
     {
         case bar

@@ -11,38 +11,29 @@
 
 import Foundation
 
-open class ChartDataEntryBase: NSObject
+open class ChartDataEntryBase
 {
     /// the y value
-    @objc open var y = Double(0.0)
+     open var y = Double(0.0)
     
     /// optional spot for additional data this Entry represents
-    @objc open var data: AnyObject?
+     open var data: Any?
     
     /// optional icon image
     open var icon: NSUIImage?
-    
-    public override required init()
-    {
-        super.init()
-    }
     
     /// An Entry represents one single entry in the chart.
     /// - parameter y: the y value (the actual value of the entry)
     public init(y: Double)
     {
-        super.init()
-        
         self.y = y
     }
     
     /// - parameter y: the y value (the actual value of the entry)
     /// - parameter data: Space for additional data this Entry represents.
     
-    public init(y: Double, data: AnyObject?)
+    public init(y: Double, data: Any?)
     {
-        super.init()
-        
         self.y = y
         self.data = data
     }
@@ -52,8 +43,6 @@ open class ChartDataEntryBase: NSObject
     
     public init(y: Double, icon: NSUIImage?)
     {
-        super.init()
-        
         self.y = y
         self.icon = icon
     }
@@ -62,71 +51,43 @@ open class ChartDataEntryBase: NSObject
     /// - parameter icon: icon image
     /// - parameter data: Space for additional data this Entry represents.
     
-    public init(y: Double, icon: NSUIImage?, data: AnyObject?)
+    public init(y: Double, icon: NSUIImage?, data: Any?)
     {
-        super.init()
-        
         self.y = y
         self.icon = icon
         self.data = data
     }
     
-    // MARK: NSObject
-    
-    open override func isEqual(_ object: Any?) -> Bool
-    {
-        if object == nil
-        {
-            return false
-        }
-        
-        if !(object! as AnyObject).isKind(of: type(of: self))
-        {
-            return false
-        }
-        
-        if (object! as AnyObject).data !== data && !((object! as AnyObject).data??.isEqual(self.data))!
-        {
-            return false
-        }
-        
-        if fabs((object! as AnyObject).y - y) > Double.ulpOfOne
-        {
-            return false
-        }
-        
-        return true
-    }
-    
-    // MARK: NSObject
-    
-    open override var description: String
+    // TODO: Move to extension when it can be overriden
+    open var description: String
     {
         return "ChartDataEntryBase, y \(y)"
     }
-}
-
-public func ==(lhs: ChartDataEntryBase, rhs: ChartDataEntryBase) -> Bool
-{
-    if lhs === rhs
+    
+    // TODO: Move to extension when it can be overriden
+    open static func ==(lhs: ChartDataEntryBase, rhs: ChartDataEntryBase) -> Bool
     {
+        if lhs === rhs {
+            return true
+        }
+        
+        // TODO: Make this equatable somehow
+//        if lhs.data !== rhs.data
+//        {
+//            return false
+//        }
+        
+        if fabs(lhs.y - rhs.y) > Double.ulpOfOne
+        {
+            return false
+        }
+        
         return true
     }
-    
-    if !lhs.isKind(of: type(of: rhs))
-    {
-        return false
-    }
-    
-    if lhs.data !== rhs.data && !lhs.data!.isEqual(rhs.data)
-    {
-        return false
-    }
-    
-    if fabs(lhs.y - rhs.y) > Double.ulpOfOne
-    {
-        return false
-    }
-    
-    return true
+}
+
+extension ChartDataEntryBase: CustomStringConvertible {
+}
+
+extension ChartDataEntryBase: Equatable {
 }

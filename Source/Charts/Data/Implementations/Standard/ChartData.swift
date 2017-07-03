@@ -11,7 +11,7 @@
 
 import Foundation
 
-open class ChartData: NSObject
+open class ChartData
 {
     internal var _yMax: Double = -Double.greatestFiniteMagnitude
     internal var _yMin: Double = Double.greatestFiniteMagnitude
@@ -24,25 +24,17 @@ open class ChartData: NSObject
     
     internal var _dataSets = [IChartDataSet]()
     
-    public override init()
-    {
-        super.init()
-        
-        _dataSets = [IChartDataSet]()
-    }
     
-    public init(dataSets: [IChartDataSet]?)
+    public init(dataSets: [IChartDataSet] = [])
     {
-        super.init()
-        
-        _dataSets = dataSets ?? [IChartDataSet]()
+        _dataSets = dataSets
         
         self.initialize(dataSets: _dataSets)
     }
     
-    public convenience init(dataSet: IChartDataSet?)
+    public convenience init(dataSet: IChartDataSet)
     {
-        self.init(dataSets: dataSet === nil ? nil : [dataSet!])
+        self.init(dataSets: [dataSet])
     }
     
     internal func initialize(dataSets: [IChartDataSet])
@@ -87,12 +79,10 @@ open class ChartData: NSObject
         _rightAxisMin = Double.greatestFiniteMagnitude
         
         // left axis
-        let firstLeft = getFirstLeft(dataSets: dataSets)
-        
-        if firstLeft !== nil
+        if let firstLeft = getFirstLeft(dataSets: dataSets)
         {
-            _leftAxisMax = firstLeft!.yMax
-            _leftAxisMin = firstLeft!.yMin
+            _leftAxisMax = firstLeft.yMax
+            _leftAxisMin = firstLeft.yMin
             
             for dataSet in _dataSets
             {
@@ -112,12 +102,10 @@ open class ChartData: NSObject
         }
         
         // right axis
-        let firstRight = getFirstRight(dataSets: dataSets)
-        
-        if firstRight !== nil
+        if let firstRight = getFirstRight(dataSets: dataSets)
         {
-            _rightAxisMax = firstRight!.yMax
-            _rightAxisMin = firstRight!.yMin
+            _rightAxisMax = firstRight.yMax
+            _rightAxisMin = firstRight.yMin
             
             for dataSet in _dataSets
             {
@@ -454,17 +442,11 @@ open class ChartData: NSObject
     /// Also recalculates all minimum and maximum values.
     ///
     /// - returns: `true` if a DataSet was removed, `false` ifno DataSet could be removed.
-    @discardableResult open func removeDataSet(_ dataSet: IChartDataSet!) -> Bool
+    @discardableResult open func removeDataSet(_ dataSet: IChartDataSet) -> Bool
     {
-        if dataSet === nil
-        {
-            return false
-        }
-        
         for i in 0 ..< _dataSets.count
         {
-            if _dataSets[i] === dataSet
-            {
+            if _dataSets[i] === dataSet {
                 return removeDataSetByIndex(i)
             }
         }

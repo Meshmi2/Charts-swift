@@ -16,7 +16,6 @@ import CoreGraphics
     import UIKit
 #endif
 
-@objc(ChartXAxisRenderer)
 open class XAxisRenderer: AxisRendererBase
 {
     public init(viewPortHandler: ViewPortHandler?, xAxis: XAxis?, transformer: Transformer?)
@@ -190,7 +189,7 @@ open class XAxisRenderer: AxisRendererBase
         #endif
         paraStyle.alignment = .center
         
-        let labelAttrs: [NSAttributedStringKey : NSObject] = [.font: xAxis.labelFont,
+        let labelAttrs: [NSAttributedStringKey : AnyObject] = [.font: xAxis.labelFont,
             .foregroundColor: xAxis.labelTextColor,
             .paragraphStyle: paraStyle]
         let labelRotationAngleRadians = xAxis.labelRotationAngle * ChartUtils.Math.FDEG2RAD
@@ -267,7 +266,7 @@ open class XAxisRenderer: AxisRendererBase
         formattedLabel: String,
         x: CGFloat,
         y: CGFloat,
-        attributes: [NSAttributedStringKey: NSObject],
+        attributes: [NSAttributedStringKey : AnyObject],
         constrainedToSize: CGSize,
         anchor: CGPoint,
         angleRadians: CGFloat)

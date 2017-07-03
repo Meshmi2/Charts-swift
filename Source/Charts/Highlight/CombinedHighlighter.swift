@@ -12,7 +12,6 @@
 import Foundation
 import CoreGraphics
 
-@objc(CombinedChartHighlighter)
 open class CombinedHighlighter: ChartHighlighter
 {
     /// bar highlighter for supporting stacked highlighting

@@ -12,7 +12,6 @@
 import Foundation
 import CoreGraphics
 
-@objc(ChartDataRendererBase)
 open class DataRenderer: Renderer
 {
     open var animator: Animator?

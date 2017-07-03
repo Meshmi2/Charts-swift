@@ -24,12 +24,7 @@ open class CandleChartDataEntry: ChartDataEntry
     
     /// open value
     open var open = Double(0.0)
-    
-    public required init()
-    {
-        super.init()
-    }
-    
+        
     public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double)
     {
         super.init(x: x, y: (shadowH + shadowL) / 2.0)
@@ -93,17 +88,5 @@ open class CandleChartDataEntry: ChartDataEntry
         {
             super.y = (high + low) / 2.0
         }
-    }
-    
-    // MARK: NSCopying
-    
-    open override func copyWithZone(_ zone: NSZone?) -> AnyObject
-    {
-        let copy = super.copyWithZone(zone) as! CandleChartDataEntry
-        copy.high = high
-        copy.low = low
-        copy.open = open
-        copy.close = close
-        return copy
     }
 }

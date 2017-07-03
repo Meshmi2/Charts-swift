@@ -14,11 +14,6 @@ import CoreGraphics
 
 open class PieChartDataEntry: ChartDataEntry
 {
-    public required init()
-    {
-        super.init()
-    }
-    
     /// - parameter value: The value on the y-axis
     /// - parameter label: The label for the x-axis
     public convenience init(value: Double, label: String?)
@@ -104,14 +99,5 @@ open class PieChartDataEntry: ChartDataEntry
             super.x = newValue
             print("Pie entries do not have x values")
         }
-    }
-    
-    // MARK: NSCopying
-    
-    open override func copyWithZone(_ zone: NSZone?) -> AnyObject
-    {
-        let copy = super.copyWithZone(zone) as! PieChartDataEntry
-        copy.label = label
-        return copy
     }
 }

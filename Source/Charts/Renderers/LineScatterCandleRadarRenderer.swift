@@ -12,7 +12,6 @@
 import Foundation
 import CoreGraphics
 
-@objc(LineScatterCandleRadarChartRenderer)
 open class LineScatterCandleRadarRenderer: BarLineScatterCandleBubbleRenderer
 {
     public override init(animator: Animator?, viewPortHandler: ViewPortHandler?)

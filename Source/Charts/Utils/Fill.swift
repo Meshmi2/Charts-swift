@@ -12,8 +12,7 @@
 import Foundation
 import CoreGraphics
 
-@objc(ChartFillType)
-public enum FillType: Int
+public enum FillType
 {
     case empty
     case color
@@ -24,8 +23,7 @@ public enum FillType: Int
     case layer
 }
 
-@objc(ChartFill)
-open class Fill: NSObject
+open class Fill
 {
     fileprivate var _type: FillType = FillType.empty
     fileprivate var _color: CGColor?
@@ -91,11 +89,6 @@ open class Fill: NSObject
     }
     
     // MARK: Constructors
-    
-    public override init()
-    {
-    }
-    
     public init(CGColor: CGColor)
     {
         _type = .color

@@ -16,13 +16,12 @@ import CoreGraphics
     import UIKit
 #endif
 
-@objc(ChartLegend)
 open class Legend: ComponentBase
 {
     /// This property is deprecated - Use `horizontalAlignment`, `verticalAlignment`, `orientation`, `drawInside`, `direction`.
     @available(*, deprecated: 1.0, message: "Use `horizontalAlignment`, `verticalAlignment`, `orientation`, `drawInside`, `direction`.")
-    @objc(ChartLegendPosition)
-    public enum Position: Int
+    
+    public enum Position//TODO: Int
     {
         case rightOfChart
         case rightOfChartCenter
@@ -39,8 +38,7 @@ open class Legend: ComponentBase
         case piechartCenter
     }
     
-    @objc(ChartLegendForm)
-    public enum Form: Int
+    public enum Form//TODO: Int
     {
         /// Avoid drawing a form
         case none
@@ -61,31 +59,27 @@ open class Legend: ComponentBase
         case line
     }
     
-    @objc(ChartLegendHorizontalAlignment)
-    public enum HorizontalAlignment: Int
+    public enum HorizontalAlignment//TODO: Int
     {
         case left
         case center
         case right
     }
     
-    @objc(ChartLegendVerticalAlignment)
-    public enum VerticalAlignment: Int
+    public enum VerticalAlignment//TODO: Int
     {
         case top
         case center
         case bottom
     }
     
-    @objc(ChartLegendOrientation)
-    public enum Orientation: Int
+    public enum Orientation//TODO: Int
     {
         case horizontal
         case vertical
     }
     
-    @objc(ChartLegendDirection)
-    public enum Direction: Int
+    public enum Direction//TODO: Int
     {
         case leftToRight
         case rightToLeft

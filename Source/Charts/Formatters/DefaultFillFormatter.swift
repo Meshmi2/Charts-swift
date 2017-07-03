@@ -17,8 +17,7 @@ import CoreGraphics
 #endif
 
 /// Default formatter that calculates the position of the filled line.
-@objc(ChartDefaultFillFormatter)
-open class DefaultFillFormatter: NSObject, IFillFormatter
+open class DefaultFillFormatter: IFillFormatter
 {
     public typealias Block = (
         _ dataSet: ILineChartDataSet,
@@ -26,10 +25,8 @@ open class DefaultFillFormatter: NSObject, IFillFormatter
     
     open var block: Block?
     
-    public override init()
-    {
-        
-    }
+    // TODO: Reevaluate if this is necessary
+    public init() {}
     
     public init(block: @escaping Block)
     {

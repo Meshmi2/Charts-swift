@@ -13,16 +13,6 @@ import Foundation
 
 open class PieChartData: ChartData
 {
-    public override init()
-    {
-        super.init()
-    }
-    
-    public override init(dataSets: [IChartDataSet]?)
-    {
-        super.init(dataSets: dataSets)
-    }
-
     var dataSet: IPieChartDataSet?
     {
         get

@@ -17,11 +17,6 @@ open class BubbleChartDataEntry: ChartDataEntry
     /// The size of the bubble.
     open var size = CGFloat(0.0)
     
-    public required init()
-    {
-        super.init()
-    }
-    
     /// - parameter x: The index on the x-axis.
     /// - parameter y: The value on the y-axis.
     /// - parameter size: The size of the bubble.
@@ -64,14 +59,5 @@ open class BubbleChartDataEntry: ChartDataEntry
         super.init(x: x, y: y, icon: icon, data: data)
         
         self.size = size
-    }
-    
-    // MARK: NSCopying
-    
-    open override func copyWithZone(_ zone: NSZone?) -> AnyObject
-    {
-        let copy = super.copyWithZone(zone) as! BubbleChartDataEntry
-        copy.size = size
-        return copy
     }
 }

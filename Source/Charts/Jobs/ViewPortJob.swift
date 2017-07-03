@@ -13,8 +13,7 @@ import Foundation
 import CoreGraphics
 
 // This defines a viewport modification job, used for delaying or animating viewport changes
-@objc(ChartViewPortJob)
-open class ViewPortJob: NSObject
+open class ViewPortJob
 {
     internal var point: CGPoint = CGPoint()
     internal weak var viewPortHandler: ViewPortHandler?
@@ -29,9 +28,7 @@ open class ViewPortJob: NSObject
         yValue: Double,
         transformer: Transformer,
         view: ChartViewBase)
-    {
-        super.init()
-        
+    {        
         self.viewPortHandler = viewPortHandler
         self.xValue = xValue
         self.yValue = yValue

@@ -37,15 +37,4 @@ open class LineScatterCandleRadarChartDataSet: BarLineScatterCandleBubbleChartDa
         drawHorizontalHighlightIndicatorEnabled = enabled
         drawVerticalHighlightIndicatorEnabled = enabled
     }
-    
-    // MARK: NSCopying
-    
-    open override func copyWithZone(_ zone: NSZone?) -> AnyObject
-    {
-        let copy = super.copyWithZone(zone) as! LineScatterCandleRadarChartDataSet
-        copy.drawHorizontalHighlightIndicatorEnabled = drawHorizontalHighlightIndicatorEnabled
-        copy.drawVerticalHighlightIndicatorEnabled = drawVerticalHighlightIndicatorEnabled
-        return copy
-    }
-    
 }

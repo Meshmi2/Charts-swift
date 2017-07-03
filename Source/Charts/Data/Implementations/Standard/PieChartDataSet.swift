@@ -14,8 +14,7 @@ import CoreGraphics
 
 open class PieChartDataSet: ChartDataSet, IPieChartDataSet
 {
-    @objc(PieChartValuePosition)
-    public enum ValuePosition: Int
+    public enum ValuePosition
     {
         case insideSlice
         case outsideSlice
@@ -104,14 +103,4 @@ open class PieChartDataSet: ChartDataSet, IPieChartDataSet
     
     /// the color for the slice-text labels
     open var entryLabelColor: NSUIColor? = nil
-    
-    // MARK: - NSCopying
-    
-    open override func copyWithZone(_ zone: NSZone?) -> AnyObject
-    {
-        let copy = super.copyWithZone(zone) as! PieChartDataSet
-        copy._sliceSpace = _sliceSpace
-        copy.selectionShift = selectionShift
-        return copy
-    }
 }

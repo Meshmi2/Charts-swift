@@ -16,14 +16,12 @@ import CoreGraphics
     import UIKit
 #endif
 
-@objc(ChartLegendEntry)
-open class LegendEntry: NSObject
+open class LegendEntry
 {
-    public override init()
-    {
-        super.init()
+    // TODO: Revaluate need for this
+    public init() {
+        
     }
-    
     /// - parameter label:                  The legend entry text.
     ///                                     A `nil` label will start a group.
     /// - parameter form:                   The form to draw for this entry.

@@ -17,18 +17,13 @@ open class BarChartDataEntry: ChartDataEntry
     fileprivate var _yVals: [Double]?
     
     /// the ranges for the individual stack values - automatically calculated
-    fileprivate var _ranges: [Range]?
+    fileprivate var _ranges: [ClosedRange<Double>]?
     
     /// the sum of all negative values this entry (if stacked) contains
     fileprivate var _negativeSum: Double = 0.0
     
     /// the sum of all positive values this entry (if stacked) contains
     fileprivate var _positiveSum: Double = 0.0
-    
-    public required init()
-    {
-        super.init()
-    }
     
     /// Constructor for normal bars (not stacked).
     public override init(x: Double, y: Double)
@@ -172,7 +167,7 @@ open class BarChartDataEntry: ChartDataEntry
         
         if _ranges == nil
         {
-            _ranges = [Range]()
+            _ranges = [ClosedRange<Double>]()
         }
         else
         {
@@ -190,12 +185,12 @@ open class BarChartDataEntry: ChartDataEntry
             
             if value < 0
             {
-                _ranges?.append(Range(from: negRemain, to: negRemain - value))
+                _ranges?.append(negRemain...(negRemain - value))
                 negRemain -= value
             }
             else
             {
-                _ranges?.append(Range(from: posRemain, to: posRemain + value))
+                _ranges?.append(posRemain...(posRemain + value))
                 posRemain += value
             }
         }
@@ -220,20 +215,9 @@ open class BarChartDataEntry: ChartDataEntry
     }
     
     /// - returns: The ranges of the individual stack-entries. Will return null if this entry is not stacked.
-    open var ranges: [Range]?
+    open var ranges: [ClosedRange<Double>]?
     {
         return _ranges
-    }
-    
-    // MARK: NSCopying
-    
-    open override func copyWithZone(_ zone: NSZone?) -> AnyObject
-    {
-        let copy = super.copyWithZone(zone) as! BarChartDataEntry
-        copy._yVals = _yVals
-        copy.y = y
-        copy._negativeSum = _negativeSum
-        return copy
     }
     
     /// Calculates the sum across all values of the given stack.

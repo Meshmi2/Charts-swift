@@ -12,7 +12,6 @@
 import Foundation
 import CoreGraphics
 
-@objc(LineRadarChartRenderer)
 open class LineRadarRenderer: LineScatterCandleRadarRenderer
 {
     public override init(animator: Animator?, viewPortHandler: ViewPortHandler?)

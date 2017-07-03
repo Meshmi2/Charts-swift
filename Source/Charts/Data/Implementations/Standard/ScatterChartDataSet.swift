@@ -15,8 +15,7 @@ import CoreGraphics
 open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterChartDataSet
 {
     
-    @objc(ScatterShape)
-    public enum Shape: Int
+    public enum Shape
     {
         case square
         case circle
@@ -62,17 +61,5 @@ open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterChar
         case .chevronUp: return ChevronUpShapeRenderer()
         case .chevronDown: return ChevronDownShapeRenderer()
         }
-    }
-    
-    // MARK: NSCopying
-    
-    open override func copyWithZone(_ zone: NSZone?) -> AnyObject
-    {
-        let copy = super.copyWithZone(zone) as! ScatterChartDataSet
-        copy.scatterShapeSize = scatterShapeSize
-        copy.scatterShapeHoleRadius = scatterShapeHoleRadius
-        copy.scatterShapeHoleColor = scatterShapeHoleColor
-        copy.shapeRenderer = shapeRenderer
-        return copy
     }
 }

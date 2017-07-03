@@ -12,7 +12,6 @@
 import Foundation
 import CoreGraphics
 
-@objc(PieRadarChartHighlighter)
 open class PieRadarHighlighter: ChartHighlighter
 {    
     open override func getHighlight(x: CGFloat, y: CGFloat) -> Highlight?

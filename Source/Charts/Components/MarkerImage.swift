@@ -16,8 +16,7 @@ import CoreGraphics
     import UIKit
 #endif
 
-@objc(ChartMarkerImage)
-open class MarkerImage: NSObject, IMarker
+open class MarkerImage: IMarker
 {
     /// The marker image to render
     open var image: NSUIImage?
@@ -28,12 +27,7 @@ open class MarkerImage: NSObject, IMarker
     
     /// As long as size is 0.0/0.0 - it will default to the image's size
     open var size: CGSize = CGSize()
-    
-    public override init()
-    {
-        super.init()
-    }
-    
+        
     open func offsetForDrawing(atPoint point: CGPoint) -> CGPoint
     {
         var offset = self.offset

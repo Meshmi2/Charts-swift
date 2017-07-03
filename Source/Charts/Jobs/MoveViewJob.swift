@@ -16,7 +16,6 @@ import CoreGraphics
     import UIKit
 #endif
 
-@objc(MoveChartViewJob)
 open class MoveViewJob: ViewPortJob
 {
     public override init(

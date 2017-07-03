@@ -16,7 +16,6 @@ import CoreGraphics
     import UIKit
 #endif
 
-@objc(ZoomChartViewJob)
 open class ZoomViewJob: ViewPortJob
 {
     internal var scaleX: CGFloat = 0.0

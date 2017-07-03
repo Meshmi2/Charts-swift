@@ -11,8 +11,8 @@
 
 import Foundation
 
-@objc
-public protocol IShapeRenderer : NSObjectProtocol
+
+public protocol IShapeRenderer
 {
     /// Renders the provided ScatterDataSet with a shape.
     ///

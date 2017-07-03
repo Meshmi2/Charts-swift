@@ -10,7 +10,7 @@
 //
 import Foundation
 
-open class CrossShapeRenderer : NSObject, IShapeRenderer
+open class CrossShapeRenderer : IShapeRenderer
 {
     open func renderShape(
         context: CGContext,

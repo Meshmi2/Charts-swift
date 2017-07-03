@@ -16,7 +16,6 @@ import CoreGraphics
     import UIKit
 #endif
 
-@objc(ChartMarkerView)
 open class MarkerView: NSUIView, IMarker
 {
     open var offset: CGPoint = CGPoint()
@@ -71,7 +70,7 @@ open class MarkerView: NSUIView, IMarker
         context.restoreGState()
     }
     
-    @objc
+    
     open class func viewFromXib() -> MarkerView?
     {
         #if !os(OSX)

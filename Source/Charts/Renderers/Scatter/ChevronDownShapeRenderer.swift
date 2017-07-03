@@ -10,7 +10,7 @@
 //
 import Foundation
 
-open class ChevronDownShapeRenderer : NSObject, IShapeRenderer
+open class ChevronDownShapeRenderer : IShapeRenderer
 {
     open func renderShape(
         context: CGContext,

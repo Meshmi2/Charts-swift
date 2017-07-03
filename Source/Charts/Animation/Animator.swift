@@ -16,8 +16,7 @@ import CoreGraphics
     import UIKit
 #endif
 
-@objc(ChartAnimatorDelegate)
-public protocol AnimatorDelegate
+public protocol AnimatorDelegate: class
 {
     /// Called when the Animator has stepped.
     func animatorUpdated(_ animator: Animator)
@@ -26,8 +25,7 @@ public protocol AnimatorDelegate
     func animatorStopped(_ animator: Animator)
 }
 
-@objc(ChartAnimator)
-open class Animator: NSObject
+open class Animator
 {
     open weak var delegate: AnimatorDelegate?
     open var updateBlock: (() -> Void)?
@@ -55,11 +53,6 @@ open class Animator: NSObject
     
     fileprivate var _easingX: ChartEasingFunctionBlock?
     fileprivate var _easingY: ChartEasingFunctionBlock?
-    
-    public override init()
-    {
-        super.init()
-    }
     
     deinit
     {
@@ -114,7 +107,7 @@ open class Animator: NSObject
             {
                 elapsed = duration
             }
-           
+            
             if _easingX != nil
             {
                 phaseX = _easingX!(elapsed, duration)

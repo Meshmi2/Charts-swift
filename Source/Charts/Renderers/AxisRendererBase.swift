@@ -12,7 +12,6 @@
 import Foundation
 import CoreGraphics
 
-@objc(ChartAxisRendererBase)
 open class AxisRendererBase: Renderer
 {
     /// base axis this axis renderer works with
@@ -20,12 +19,7 @@ open class AxisRendererBase: Renderer
     
     /// transformer to transform values to screen pixels and return
     open var transformer: Transformer?
-    
-    public override init()
-    {
-        super.init()
-    }
-    
+        
     public init(viewPortHandler: ViewPortHandler?, transformer: Transformer?, axis: AxisBase?)
     {
         super.init(viewPortHandler: viewPortHandler)

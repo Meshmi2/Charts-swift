@@ -10,7 +10,7 @@
 //
 import Foundation
 
-open class TriangleShapeRenderer : NSObject, IShapeRenderer
+open class TriangleShapeRenderer : IShapeRenderer
 {
     open func renderShape(
         context: CGContext,

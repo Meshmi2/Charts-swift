@@ -16,7 +16,6 @@ import CoreGraphics
     import UIKit
 #endif
 
-@objc(ChartLegendRenderer)
 open class LegendRenderer: Renderer
 {
     /// the legend object this renderer renders

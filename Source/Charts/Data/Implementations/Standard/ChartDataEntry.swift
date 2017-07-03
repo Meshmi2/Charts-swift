@@ -14,12 +14,7 @@ import Foundation
 open class ChartDataEntry: ChartDataEntryBase
 {
     /// the x value
-    @objc open var x = Double(0.0)
-    
-    public required init()
-    {
-        super.init()
-    }
+    open var x = Double(0.0)
     
     /// An Entry represents one single entry in the chart.
     /// - parameter x: the x value
@@ -70,70 +65,37 @@ open class ChartDataEntry: ChartDataEntryBase
         self.x = x
     }
     
-    // MARK: NSObject
-    
-    open override func isEqual(_ object: Any?) -> Bool
-    {
-        if !super.isEqual(object)
-        {
-            return false
-        }
-        
-        if fabs((object! as AnyObject).x - x) > Double.ulpOfOne
-        {
-            return false
-        }
-        
-        return true
-    }
-    
-    // MARK: NSObject
+    // MARK
     
     open override var description: String
     {
         return "ChartDataEntry, x: \(x), y \(y)"
     }
     
-    // MARK: NSCopying
-    
-    open func copyWithZone(_ zone: NSZone?) -> AnyObject
+    // TODO: Move to extension when it can be overriden
+    open static func ==(lhs: ChartDataEntry, rhs: ChartDataEntry) -> Bool
     {
-        let copy = type(of: self).init()
+        if lhs === rhs
+        {
+            return true
+        }
         
-        copy.x = x
-        copy.y = y
-        copy.data = data
+        // TODO: Figure out how to equate these
+//        if lhs.data !== rhs.data
+//        {
+//            return false
+//        }
         
-        return copy
-    }
-}
-
-public func ==(lhs: ChartDataEntry, rhs: ChartDataEntry) -> Bool
-{
-    if lhs === rhs
-    {
+        if fabs(lhs.x - rhs.x) > Double.ulpOfOne
+        {
+            return false
+        }
+        
+        if fabs(lhs.y - rhs.y) > Double.ulpOfOne
+        {
+            return false
+        }
+        
         return true
     }
-    
-    if !lhs.isKind(of: type(of: rhs))
-    {
-        return false
-    }
-    
-    if lhs.data !== rhs.data && !lhs.data!.isEqual(rhs.data)
-    {
-        return false
-    }
-    
-    if fabs(lhs.x - rhs.x) > Double.ulpOfOne
-    {
-        return false
-    }
-    
-    if fabs(lhs.y - rhs.y) > Double.ulpOfOne
-    {
-        return false
-    }
-    
-    return true
 }

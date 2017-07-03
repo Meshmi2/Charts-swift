@@ -12,7 +12,6 @@
 import Foundation
 import CoreGraphics
 
-@objc(BarChartHighlighter)
 open class BarHighlighter: ChartHighlighter
 {
     open override func getHighlight(x: CGFloat, y: CGFloat) -> Highlight?
@@ -82,7 +81,7 @@ open class BarHighlighter: ChartHighlighter
             
             let pixel = chart
                 .getTransformer(forAxis: set.axisDependency)
-                .pixelForValues(x: high.x, y: ranges[stackIndex].to)
+                .pixelForValues(x: high.x, y: ranges[stackIndex].upperBound)
             
             return Highlight(x: entry.x,
                              y: entry.y,
@@ -100,7 +99,7 @@ open class BarHighlighter: ChartHighlighter
     /// - parameter entry:
     /// - parameter value:
     /// - returns:
-    open func getClosestStackIndex(ranges: [Range]?, value: Double) -> Int
+    open func getClosestStackIndex(ranges: [ClosedRange<Double>]?, value: Double) -> Int
     {
         if ranges == nil
         {
@@ -123,6 +122,6 @@ open class BarHighlighter: ChartHighlighter
         
         let length = max(ranges!.count - 1, 0)
         
-        return (value > ranges![length].to) ? length : 0
+        return (value > ranges![length].upperBound) ? length : 0
     }
 }

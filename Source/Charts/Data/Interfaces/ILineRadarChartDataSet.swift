@@ -12,7 +12,7 @@
 import Foundation
 import CoreGraphics
 
-@objc
+
 public protocol ILineRadarChartDataSet: ILineScatterCandleRadarChartDataSet
 {
     // MARK: - Data functions and accessors

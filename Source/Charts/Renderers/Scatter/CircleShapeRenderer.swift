@@ -10,7 +10,7 @@
 //
 import Foundation
 
-open class CircleShapeRenderer : NSObject, IShapeRenderer
+open class CircleShapeRenderer : IShapeRenderer
 {
     open func renderShape(
         context: CGContext,

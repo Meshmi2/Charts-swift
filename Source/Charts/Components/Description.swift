@@ -12,7 +12,6 @@
 import Foundation
 import CoreGraphics
 
-@objc(ChartDescription)
 open class Description: ComponentBase
 {
     public override init()

@@ -11,41 +11,40 @@
 
 import Foundation
 
-@objc(ChartRange)
-open class Range: NSObject
-{
-    open var from: Double
-    open var to: Double
-    
-    public init(from: Double, to: Double)
-    {
-        self.from = from
-        self.to = to
-        
-        super.init()
-    }
+// TODO: Remove this class
+//open class Range
+//{
+//    open var from: Double
+//    open var to: Double
+//    
+//    public init(from: Double, to: Double)
+//    {
+//        self.from = from
+//        self.to = to
+//    }
+//
+//    /// - returns: `true` if this range contains (if the value is in between) the given value, `false` ifnot.
+//    /// - parameter value:
+//    open func contains(_ value: Double) -> Bool
+//    {
+//        if value > from && value <= to
+//        {
+//            return true
+//        }
+//        else
+//        {
+//            return false
+//        }
+//    }
+//    
+//    open func isLarger(_ value: Double) -> Bool
+//    {
+//        return value > to
+//    }
+//    
+//    open func isSmaller(_ value: Double) -> Bool
+//    {
+//        return value < from
+//    }
+//}
 
-    /// - returns: `true` if this range contains (if the value is in between) the given value, `false` ifnot.
-    /// - parameter value:
-    open func contains(_ value: Double) -> Bool
-    {
-        if value > from && value <= to
-        {
-            return true
-        }
-        else
-        {
-            return false
-        }
-    }
-    
-    open func isLarger(_ value: Double) -> Bool
-    {
-        return value > to
-    }
-    
-    open func isSmaller(_ value: Double) -> Bool
-    {
-        return value < from
-    }
-}

@@ -532,7 +532,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             
             let h = getHighlightByTouchPoint(recognizer.location(in: self))
             
-            if h === nil || h!.isEqual(self.lastHighlighted)
+            if h === nil || h == self.lastHighlighted
             {
                 self.highlightValue(nil, callDelegate: true)
                 self.lastHighlighted = nil
@@ -654,7 +654,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                     
                     if delegate !== nil
                     {
-                        delegate?.chartScaled?(self, scaleX: scaleX, scaleY: scaleY)
+                        delegate?.chartScaled(self, scaleX: scaleX, scaleY: scaleY)
                     }
                 }
                 
@@ -735,7 +735,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 
                 if ((h === nil && lastHighlighted !== nil) ||
                     (h !== nil && lastHighlighted === nil) ||
-                    (h !== nil && lastHighlighted !== nil && !h!.isEqual(lastHighlighted)))
+                    (h !== nil && lastHighlighted !== nil && h != lastHighlighted))
                 {
                     self.lastHighlighted = h
                     self.highlightValue(h, callDelegate: true)
@@ -793,7 +793,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         
         if delegate !== nil
         {
-            delegate?.chartTranslated?(self, dX: translation.x, dY: translation.y)
+            delegate?.chartTranslated(self, dX: translation.x, dY: translation.y)
         }
         
         // Did we managed to actually drag or did we reach the edge?
@@ -1702,7 +1702,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
 
     /// - returns: The y-axis object to the corresponding AxisDependency. In the
     /// horizontal bar-chart, LEFT == top, RIGHT == BOTTOM
-    @objc
+    
     open func getAxis(_ axis: YAxis.AxisDependency) -> YAxis
     {
         if axis == .left

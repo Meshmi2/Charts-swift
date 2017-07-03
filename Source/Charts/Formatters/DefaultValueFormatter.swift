@@ -11,8 +11,7 @@
 
 import Foundation
 
-@objc(ChartDefaultValueFormatter)
-open class DefaultValueFormatter: NSObject, IValueFormatter
+open class DefaultValueFormatter: IValueFormatter
 {
     public typealias Block = (
         _ value: Double,
@@ -52,25 +51,19 @@ open class DefaultValueFormatter: NSObject, IValueFormatter
         }
     }
     
-    public override init()
+    public init()
     {
-        super.init()
-        
         self.formatter = NumberFormatter()
         hasAutoDecimals = true
     }
     
     public init(formatter: NumberFormatter)
     {
-        super.init()
-        
         self.formatter = formatter
     }
     
     public init(decimals: Int)
     {
-        super.init()
-        
         self.formatter = NumberFormatter()
         self.formatter?.usesGroupingSeparator = true
         self.decimals = decimals
@@ -78,9 +71,7 @@ open class DefaultValueFormatter: NSObject, IValueFormatter
     }
     
     public init(block: @escaping Block)
-    {
-        super.init()
-        
+    {        
         self.block = block
     }
     

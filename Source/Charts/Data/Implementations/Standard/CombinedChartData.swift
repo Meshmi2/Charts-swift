@@ -18,17 +18,7 @@ open class CombinedChartData: BarLineScatterCandleBubbleChartData
     fileprivate var _scatterData: ScatterChartData!
     fileprivate var _candleData: CandleChartData!
     fileprivate var _bubbleData: BubbleChartData!
-    
-    public override init()
-    {
-        super.init()
-    }
-    
-    public override init(dataSets: [IChartDataSet]?)
-    {
-        super.init(dataSets: dataSets)
-    }
-    
+        
     open var lineData: LineChartData!
     {
         get
@@ -195,7 +185,7 @@ open class CombinedChartData: BarLineScatterCandleBubbleChartData
     
     open func dataIndex(_ data: ChartData) -> Int?
     {
-        return allData.index(of: data)
+        return allData.index(where: { $0 === data })
     }
     
     open override func removeDataSet(_ dataSet: IChartDataSet!) -> Bool

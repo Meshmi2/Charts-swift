@@ -13,12 +13,10 @@ import Foundation
 import CoreGraphics
 
 
-open class ChartBaseDataSet: NSObject, IChartDataSet
+open class ChartBaseDataSet: IChartDataSet
 {
-    public required override init()
+    public required init()
     {
-        super.init()
-        
         // default color
         colors.append(NSUIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
         valueColors.append(NSUIColor.black)
@@ -26,8 +24,6 @@ open class ChartBaseDataSet: NSObject, IChartDataSet
     
     public init(label: String?)
     {
-        super.init()
-        
         // default color
         colors.append(NSUIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
         valueColors.append(NSUIColor.black)
@@ -392,12 +388,12 @@ open class ChartBaseDataSet: NSObject, IChartDataSet
     
     // MARK: - NSObject
     
-    open override var description: String
+    open var description: String
     {
         return String(format: "%@, label: %@, %i entries", arguments: [NSStringFromClass(type(of: self)), self.label ?? "", self.entryCount])
     }
     
-    open override var debugDescription: String
+    open var debugDescription: String
     {
         var desc = description + ":"
         
@@ -408,19 +404,9 @@ open class ChartBaseDataSet: NSObject, IChartDataSet
         
         return desc
     }
-    
-    // MARK: - NSCopying
-    
-    open func copyWithZone(_ zone: NSZone?) -> AnyObject
-    {
-        let copy = type(of: self).init()
-        
-        copy.colors = colors
-        copy.valueColors = valueColors
-        copy.label = label
-        
-        return copy
-    }
 }
 
+extension ChartBaseDataSet: CustomStringConvertible, CustomDebugStringConvertible {
+    
+}
 

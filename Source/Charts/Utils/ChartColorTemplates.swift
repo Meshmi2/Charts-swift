@@ -17,7 +17,7 @@ import CoreGraphics
 #endif
 
 
-open class ChartColorTemplates: NSObject
+open class ChartColorTemplates
 {
     open class func liberty () -> [NSUIColor]
     {

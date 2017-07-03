@@ -10,7 +10,7 @@
 //
 import Foundation
 
-open class XShapeRenderer : NSObject, IShapeRenderer
+open class XShapeRenderer : IShapeRenderer
 {
     open func renderShape(
         context: CGContext,
