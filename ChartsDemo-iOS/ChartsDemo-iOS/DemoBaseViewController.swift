@@ -210,7 +210,7 @@ class DemoBaseViewController: UIViewController {
     func setup(barLineChartView chartView: BarLineChartViewBase) {
         chartView.chartDescription?.enabled = false
         
-        chartView.drawGridBackgroundEnabled = false
+        chartView.isDrawGridBackgroundEnabled = false
         
         chartView.dragEnabled = true
         chartView.setScaleEnabled(true)

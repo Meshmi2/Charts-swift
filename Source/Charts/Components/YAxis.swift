@@ -48,7 +48,7 @@ open class YAxis: AxisBase
     open var drawZeroLineEnabled = false
     
     /// Color of the zero line
-    open var zeroLineColor: NSUIColor? = NSUIColor.gray
+    open var zeroLineColor: NSUIColor? = .gray
     
     /// Width of the zero line
     open var zeroLineWidth: CGFloat = 1.0
@@ -82,7 +82,7 @@ open class YAxis: AxisBase
     /// use Infinity for disabling the maximum.
     /// 
     /// **default**: CGFloat.infinity
-    open var maxWidth = CGFloat(CGFloat.infinity)
+    open var maxWidth = CGFloat.infinity
     
     public override init()
     {

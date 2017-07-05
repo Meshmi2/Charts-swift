@@ -16,7 +16,7 @@ import CoreGraphics
     import UIKit
 #endif
 
-open class MarkerImage: IMarker
+open class MarkerImage: Marker
 {
     /// The marker image to render
     open var image: NSUIImage?

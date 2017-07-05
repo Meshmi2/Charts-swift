@@ -59,25 +59,13 @@ open class ChartLimitLine: ComponentBase
     }
     
     /// set the line width of the chart (min = 0.2, max = 12); default 2
-    open var lineWidth: CGFloat
-    {
-        get
-        {
-            return _lineWidth
-        }
-        set
-        {
-            if newValue < 0.2
-            {
-                _lineWidth = 0.2
-            }
-            else if newValue > 12.0
-            {
-                _lineWidth = 12.0
-            }
-            else
-            {
-                _lineWidth = newValue
+    open var lineWidth: CGFloat {
+        get { return _lineWidth }
+        set {
+            switch newValue {
+            case ..<0.2: _lineWidth = 0.2
+            case 12.0...: _lineWidth = 12.0
+            default: _lineWidth = newValue
             }
         }
     }

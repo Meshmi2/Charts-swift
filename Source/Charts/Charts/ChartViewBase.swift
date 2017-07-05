@@ -72,59 +72,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     /// The `Description` object of the chart.
     /// This should have been called just "description", but
     open var chartDescription: Description?
-    
-    /// This property is deprecated - Use `chartDescription.text` instead.
-    @available(*, deprecated: 1.0, message: "Use `chartDescription.text` instead.")
-    open var descriptionText: String
-    {
-        get { return chartDescription?.text ?? "" }
-        set { chartDescription?.text = newValue }
-    }
-    
-    /// This property is deprecated - Use `chartDescription.font` instead.
-    @available(*, deprecated: 1.0, message: "Use `chartDescription.font` instead.")
-    open var descriptionFont: NSUIFont?
-    {
-        get { return chartDescription?.font }
-        set
-        {
-            if let value = newValue
-            {
-                chartDescription?.font = value
-            }
-        }
-    }
-    
-    /// This property is deprecated - Use `chartDescription.textColor` instead.
-    @available(*, deprecated: 1.0, message: "Use `chartDescription.textColor` instead.")
-    open var descriptionTextColor: NSUIColor?
-    {
-        get { return chartDescription?.textColor }
-        set
-        {
-            if let value = newValue
-            {
-                chartDescription?.textColor = value
-            }
-        }
-    }
-    
-    /// This property is deprecated - Use `chartDescription.textAlign` instead.
-    @available(*, deprecated: 1.0, message: "Use `chartDescription.textAlign` instead.")
-    open var descriptionTextAlign: NSTextAlignment
-    {
-        get { return chartDescription?.textAlign ?? NSTextAlignment.right }
-        set { chartDescription?.textAlign = newValue }
-    }
-    
-    /// This property is deprecated - Use `chartDescription.position` instead.
-    @available(*, deprecated: 1.0, message: "Use `chartDescription.position` instead.")
-    open var descriptionTextPosition: CGPoint?
-    {
-        get { return chartDescription?.position }
-        set { chartDescription?.position = newValue }
-    }
-    
+        
     /// The legend object containing all data associated with the legend
     internal var _legend: Legend!
     
@@ -168,7 +116,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     open var isDrawMarkersEnabled: Bool { return drawMarkers }
     
     /// The marker that is displayed when a value is clicked on the chart
-    open var marker: IMarker?
+    open var marker: Marker?
     
     fileprivate var _interceptTouchEvents = false
     

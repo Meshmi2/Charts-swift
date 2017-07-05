@@ -297,23 +297,7 @@ open class AxisBase: ComponentBase
     }
     
     open var isAxisMaxCustom: Bool { return _customAxisMax }
-    
-    /// This property is deprecated - Use `axisMinimum` instead.
-    @available(*, deprecated: 1.0, message: "Use axisMinimum instead.")
-    open var axisMinValue: Double
-    {
-        get { return axisMinimum }
-        set { axisMinimum = newValue }
-    }
-    
-    /// This property is deprecated - Use `axisMaximum` instead.
-    @available(*, deprecated: 1.0, message: "Use axisMaximum instead.")
-    open var axisMaxValue: Double
-    {
-        get { return axisMaximum }
-        set { axisMaximum = newValue }
-    }
-    
+        
     /// The minimum value for this axis.
     /// If set, this value will not be calculated automatically depending on the provided data.
     /// Use `resetCustomAxisMin()` to undo this.

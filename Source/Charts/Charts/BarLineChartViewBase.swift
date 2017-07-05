@@ -40,14 +40,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     open var borderLineWidth: CGFloat = 1.0
     
     /// flag indicating if the grid background should be drawn or not
-    open var drawGridBackgroundEnabled = false
+    /// **default**: true
+    /// - returns: `true` if drawing the grid background is enabled, `false` ifnot.
+    open var isDrawGridBackgroundEnabled = false
     
     /// When enabled, the borders rectangle will be rendered.
     /// If this is enabled, there is no point drawing the axis-lines of x- and y-axis.
-    open var drawBordersEnabled = false
+    /// **default**: false
+    /// - returns: `true` if drawing the borders rectangle is enabled, `false` ifnot.
+    open var isDrawBordersEnabled = false
     
     /// When enabled, the values will be clipped to contentRect, otherwise they can bleed outside the content rect.
-    open var clipValuesToContentEnabled: Bool = false
+    open var isClipValuesToContentEnabled: Bool = false
 
     /// Sets the minimum offset (padding) around the chart, defaults to 10
     open var minOffset = CGFloat(10.0)
@@ -253,7 +257,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         _leftYAxisRenderer.renderAxisLabels(context: context)
         _rightYAxisRenderer.renderAxisLabels(context: context)
 
-        if clipValuesToContentEnabled
+        if isClipValuesToContentEnabled
         {
             context.saveGState()
             context.clip(to: _viewPortHandler.contentRect)
@@ -472,26 +476,26 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     /// draws the grid background
     internal func drawGridBackground(context: CGContext)
     {
-        if drawGridBackgroundEnabled || drawBordersEnabled
+        if isDrawGridBackgroundEnabled || isDrawBordersEnabled
         {
             context.saveGState()
         }
         
-        if drawGridBackgroundEnabled
+        if isDrawGridBackgroundEnabled
         {
             // draw the grid background
             context.setFillColor(gridBackgroundColor.cgColor)
             context.fill(_viewPortHandler.contentRect)
         }
         
-        if drawBordersEnabled
+        if isDrawBordersEnabled
         {
             context.setLineWidth(borderLineWidth)
             context.setStrokeColor(borderColor.cgColor)
             context.stroke(_viewPortHandler.contentRect)
         }
         
-        if drawGridBackgroundEnabled || drawBordersEnabled
+        if isDrawGridBackgroundEnabled || isDrawBordersEnabled
         {
             context.restoreGState()
         }
@@ -1615,20 +1619,6 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         return highlightPerDragEnabled
     }
     
-    /// **default**: true
-    /// - returns: `true` if drawing the grid background is enabled, `false` ifnot.
-    open var isDrawGridBackgroundEnabled: Bool
-    {
-        return drawGridBackgroundEnabled
-    }
-    
-    /// **default**: false
-    /// - returns: `true` if drawing the borders rectangle is enabled, `false` ifnot.
-    open var isDrawBordersEnabled: Bool
-    {
-        return drawBordersEnabled
-    }
-
     /// - returns: The x and y values in the chart at the given touch point
     /// (encapsulated in a `CGPoint`). This method transforms pixel coordinates to
     /// coordinates / values in the chart. This is the opposite method to

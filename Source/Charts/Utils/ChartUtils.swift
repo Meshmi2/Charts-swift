@@ -16,7 +16,7 @@ import CoreGraphics
     import UIKit
 #endif
 
-open class ChartUtils
+public struct ChartUtils
 {
     fileprivate static var _defaultValueFormatter: IValueFormatter = ChartUtils.generateDefaultValueFormatter()
     
@@ -28,7 +28,7 @@ open class ChartUtils
         internal static let RAD2DEG = 180.0 / Double.pi
     }
     
-    internal class func roundToNextSignificant(number: Double) -> Double
+    internal static func roundToNextSignificant(number: Double) -> Double
     {
         if number.isInfinite || number.isNaN || number == 0
         {
@@ -42,7 +42,7 @@ open class ChartUtils
         return shifted / magnitude
     }
     
-    internal class func decimals(_ number: Double) -> Int
+    internal static func decimals(_ number: Double) -> Int
     {
         if number.isNaN || number.isInfinite || number == 0.0
         {
@@ -59,7 +59,7 @@ open class ChartUtils
         return Int(ceil(-log10(i))) + 2
     }
     
-    internal class func nextUp(_ number: Double) -> Double
+    internal static func nextUp(_ number: Double) -> Double
     {
         if number.isInfinite || number.isNaN
         {
@@ -72,7 +72,7 @@ open class ChartUtils
     }
     
     /// Calculates the position around a center point, depending on the distance from the center, and the angle of the position around the center.
-    internal class func getPosition(center: CGPoint, dist: CGFloat, angle: CGFloat) -> CGPoint
+    internal static func getPosition(center: CGPoint, dist: CGFloat, angle: CGFloat) -> CGPoint
     {
         return CGPoint(
             x: center.x + dist * cos(angle * Math.FDEG2RAD),
@@ -80,7 +80,7 @@ open class ChartUtils
         )
     }
     
-    open class func drawImage(
+    public static func drawImage(
         context: CGContext,
         image: NSUIImage,
         x: CGFloat,
@@ -123,7 +123,7 @@ open class ChartUtils
         NSUIGraphicsPopContext()
     }
     
-    open class func drawText(context: CGContext, text: String, point: CGPoint, align: NSTextAlignment, attributes: [NSAttributedStringKey : AnyObject]?)
+    public static func drawText(context: CGContext, text: String, point: CGPoint, align: NSTextAlignment, attributes: [NSAttributedStringKey : AnyObject]?)
     {
         var point = point
         
@@ -143,7 +143,7 @@ open class ChartUtils
         NSUIGraphicsPopContext()
     }
     
-    open class func drawText(context: CGContext, text: String, point: CGPoint, attributes: [NSAttributedStringKey : AnyObject]?, anchor: CGPoint, angleRadians: CGFloat)
+    public static func drawText(context: CGContext, text: String, point: CGPoint, attributes: [NSAttributedStringKey : AnyObject]?, anchor: CGPoint, angleRadians: CGFloat)
     {
         var drawOffset = CGPoint()
         
@@ -195,7 +195,7 @@ open class ChartUtils
         NSUIGraphicsPopContext()
     }
     
-    internal class func drawMultilineText(context: CGContext, text: String, knownTextSize: CGSize, point: CGPoint, attributes: [NSAttributedStringKey : AnyObject]?, constrainedToSize: CGSize, anchor: CGPoint, angleRadians: CGFloat)
+    internal static func drawMultilineText(context: CGContext, text: String, knownTextSize: CGSize, point: CGPoint, attributes: [NSAttributedStringKey : AnyObject]?, constrainedToSize: CGSize, anchor: CGPoint, angleRadians: CGFloat)
     {
         var rect = CGRect(origin: CGPoint(), size: knownTextSize)
         
@@ -243,14 +243,14 @@ open class ChartUtils
         NSUIGraphicsPopContext()
     }
     
-    internal class func drawMultilineText(context: CGContext, text: String, point: CGPoint, attributes: [NSAttributedStringKey : AnyObject]?, constrainedToSize: CGSize, anchor: CGPoint, angleRadians: CGFloat)
+    internal static func drawMultilineText(context: CGContext, text: String, point: CGPoint, attributes: [NSAttributedStringKey : AnyObject]?, constrainedToSize: CGSize, anchor: CGPoint, angleRadians: CGFloat)
     {
         let rect = text.boundingRect(with: constrainedToSize, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
         drawMultilineText(context: context, text: text, knownTextSize: rect.size, point: point, attributes: attributes, constrainedToSize: constrainedToSize, anchor: anchor, angleRadians: angleRadians)
     }
     
     /// - returns: An angle between 0.0 < 360.0 (not less than zero, less than 360)
-    internal class func normalizedAngleFromAngle(_ angle: CGFloat) -> CGFloat
+    internal static func normalizedAngleFromAngle(_ angle: CGFloat) -> CGFloat
     {
         var angle = angle
         
@@ -262,96 +262,40 @@ open class ChartUtils
         return angle.truncatingRemainder(dividingBy: 360.0)
     }
     
-    fileprivate class func generateDefaultValueFormatter() -> IValueFormatter
+    fileprivate static func generateDefaultValueFormatter() -> IValueFormatter
     {
         let formatter = DefaultValueFormatter(decimals: 1)
         return formatter
     }
     
     /// - returns: The default value formatter used for all chart components that needs a default
-    open class func defaultValueFormatter() -> IValueFormatter
+    public static func defaultValueFormatter() -> IValueFormatter
     {
         return _defaultValueFormatter
     }
     
-    internal class func sizeOfRotatedRectangle(_ rectangleSize: CGSize, degrees: CGFloat) -> CGSize
+    internal static func sizeOfRotatedRectangle(_ rectangleSize: CGSize, degrees: CGFloat) -> CGSize
     {
         let radians = degrees * Math.FDEG2RAD
         return sizeOfRotatedRectangle(rectangleWidth: rectangleSize.width, rectangleHeight: rectangleSize.height, radians: radians)
     }
     
-    internal class func sizeOfRotatedRectangle(_ rectangleSize: CGSize, radians: CGFloat) -> CGSize
+    internal static func sizeOfRotatedRectangle(_ rectangleSize: CGSize, radians: CGFloat) -> CGSize
     {
         return sizeOfRotatedRectangle(rectangleWidth: rectangleSize.width, rectangleHeight: rectangleSize.height, radians: radians)
     }
     
-    internal class func sizeOfRotatedRectangle(rectangleWidth: CGFloat, rectangleHeight: CGFloat, degrees: CGFloat) -> CGSize
+    internal static func sizeOfRotatedRectangle(rectangleWidth: CGFloat, rectangleHeight: CGFloat, degrees: CGFloat) -> CGSize
     {
         let radians = degrees * Math.FDEG2RAD
         return sizeOfRotatedRectangle(rectangleWidth: rectangleWidth, rectangleHeight: rectangleHeight, radians: radians)
     }
     
-    internal class func sizeOfRotatedRectangle(rectangleWidth: CGFloat, rectangleHeight: CGFloat, radians: CGFloat) -> CGSize
+    internal static func sizeOfRotatedRectangle(rectangleWidth: CGFloat, rectangleHeight: CGFloat, radians: CGFloat) -> CGSize
     {
         return CGSize(
             width: abs(rectangleWidth * cos(radians)) + abs(rectangleHeight * sin(radians)),
             height: abs(rectangleWidth * sin(radians)) + abs(rectangleHeight * cos(radians))
         )
-    }
-    
-    /// MARK: - Bridging functions
-    
-    internal class func bridgedObjCGetNSUIColorArray (swift array: [NSUIColor?]) -> [NSObject]
-    {
-        var newArray = [NSObject]()
-        for val in array
-        {
-            if val == nil
-            {
-                newArray.append(NSNull())
-            }
-            else
-            {
-                newArray.append(val!)
-            }
-        }
-        return newArray
-    }
-    
-    internal class func bridgedObjCGetNSUIColorArray (objc array: [NSObject]) -> [NSUIColor?]
-    {
-        var newArray = [NSUIColor?]()
-        for object in array
-        {
-            newArray.append(object as? NSUIColor)
-        }
-        return newArray
-    }
-    
-    internal class func bridgedObjCGetStringArray (swift array: [String?]) -> [NSObject]
-    {
-        var newArray = [NSObject]()
-        for val in array
-        {
-            if val == nil
-            {
-                newArray.append(NSNull())
-            }
-            else
-            {
-                newArray.append(val! as NSObject)
-            }
-        }
-        return newArray
-    }
-    
-    internal class func bridgedObjCGetStringArray (objc array: [NSObject]) -> [String?]
-    {
-        var newArray = [String?]()
-        for object in array
-        {
-            newArray.append(object as? String)
-        }
-        return newArray
     }
 }

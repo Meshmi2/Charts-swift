@@ -67,10 +67,6 @@ open class ChartDataEntryBase
     // TODO: Move to extension when it can be overriden
     open static func ==(lhs: ChartDataEntryBase, rhs: ChartDataEntryBase) -> Bool
     {
-        if lhs === rhs {
-            return true
-        }
-        
         // TODO: Make this equatable somehow
 //        if lhs.data !== rhs.data
 //        {

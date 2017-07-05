@@ -17,9 +17,9 @@ import CoreGraphics
 #endif
 
 
-open class ChartColorTemplates
+public struct ChartColorTemplates
 {
-    open class func liberty () -> [NSUIColor]
+    public static func liberty () -> [NSUIColor]
     {
         return [
             NSUIColor(red: 207/255.0, green: 248/255.0, blue: 246/255.0, alpha: 1.0),
@@ -30,7 +30,7 @@ open class ChartColorTemplates
         ]
     }
     
-    open class func joyful () -> [NSUIColor]
+    public static func joyful () -> [NSUIColor]
     {
         return [
             NSUIColor(red: 217/255.0, green: 80/255.0, blue: 138/255.0, alpha: 1.0),
@@ -41,7 +41,7 @@ open class ChartColorTemplates
         ]
     }
     
-    open class func pastel () -> [NSUIColor]
+    public static func pastel () -> [NSUIColor]
     {
         return [
             NSUIColor(red: 64/255.0, green: 89/255.0, blue: 128/255.0, alpha: 1.0),
@@ -52,7 +52,7 @@ open class ChartColorTemplates
         ]
     }
     
-    open class func colorful () -> [NSUIColor]
+    public static func colorful () -> [NSUIColor]
     {
         return [
             NSUIColor(red: 193/255.0, green: 37/255.0, blue: 82/255.0, alpha: 1.0),
@@ -63,7 +63,7 @@ open class ChartColorTemplates
         ]
     }
     
-    open class func vordiplom () -> [NSUIColor]
+    public static func vordiplom () -> [NSUIColor]
     {
         return [
             NSUIColor(red: 192/255.0, green: 255/255.0, blue: 140/255.0, alpha: 1.0),
@@ -74,7 +74,7 @@ open class ChartColorTemplates
         ]
     }
     
-    open class func material () -> [NSUIColor]
+    public static func material () -> [NSUIColor]
     {
         return [
             NSUIColor(red: 46/255.0, green: 204/255.0, blue: 113/255.0, alpha: 1.0),
@@ -84,7 +84,7 @@ open class ChartColorTemplates
         ]
     }
     
-    open class func colorFromString(_ colorString: String) -> NSUIColor
+    public static func colorFromString(_ colorString: String) -> NSUIColor
     {
         let leftParenCharset: CharacterSet = CharacterSet(charactersIn: "( ")
         let commaCharset: CharacterSet = CharacterSet(charactersIn: ", ")

@@ -386,7 +386,7 @@ open class ChartBaseDataSet: IChartDataSet
         return visible
     }
     
-    // MARK: - NSObject
+    // MARK: - CustomStringConvertible
     
     open var description: String
     {

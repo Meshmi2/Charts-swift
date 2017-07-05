@@ -32,7 +32,7 @@ open class BarChartDataEntry: ChartDataEntry
     }
     
     /// Constructor for normal bars (not stacked).
-    public override init(x: Double, y: Double, data: AnyObject?)
+    public override init(x: Double, y: Double, data: Any?)
     {
         super.init(x: x, y: y, data: data)
     }
@@ -44,7 +44,7 @@ open class BarChartDataEntry: ChartDataEntry
     }
     
     /// Constructor for normal bars (not stacked).
-    public override init(x: Double, y: Double, icon: NSUIImage?, data: AnyObject?)
+    public override init(x: Double, y: Double, icon: NSUIImage?, data: Any?)
     {
         super.init(x: x, y: y, icon: icon, data: data)
     }
@@ -58,18 +58,8 @@ open class BarChartDataEntry: ChartDataEntry
         calcRanges()
     }
     
-    /// This constructor is misleading, please use the `data` argument instead of `label`.
-    @available(*, deprecated: 1.0, message: "Use `data` argument instead of `label`.")
-    public init(x: Double, yValues: [Double], label: String)
-    {
-        super.init(x: x, y: BarChartDataEntry.calcSum(values: yValues), data: label as AnyObject?)
-        self._yVals = yValues
-        calcPosNegSum()
-        calcRanges()
-    }
-    
     /// Constructor for stacked bar entries. One data object for whole stack
-    public init(x: Double, yValues: [Double], data: AnyObject?)
+    public init(x: Double, yValues: [Double], data: Any)
     {
         super.init(x: x, y: BarChartDataEntry.calcSum(values: yValues), data: data)
         self._yVals = yValues
@@ -78,7 +68,7 @@ open class BarChartDataEntry: ChartDataEntry
     }
     
     /// Constructor for stacked bar entries. One data object for whole stack
-    public init(x: Double, yValues: [Double], icon: NSUIImage?, data: AnyObject?)
+    public init(x: Double, yValues: [Double], icon: NSUIImage, data: Any)
     {
         super.init(x: x, y: BarChartDataEntry.calcSum(values: yValues), icon: icon, data: data)
         self._yVals = yValues
@@ -87,7 +77,7 @@ open class BarChartDataEntry: ChartDataEntry
     }
     
     /// Constructor for stacked bar entries. One data object for whole stack
-    public init(x: Double, yValues: [Double], icon: NSUIImage?)
+    public init(x: Double, yValues: [Double], icon: NSUIImage)
     {
         super.init(x: x, y: BarChartDataEntry.calcSum(values: yValues), icon: icon)
         self._yVals = yValues

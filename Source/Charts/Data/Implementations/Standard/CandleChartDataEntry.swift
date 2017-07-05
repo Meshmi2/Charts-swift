@@ -35,7 +35,7 @@ open class CandleChartDataEntry: ChartDataEntry
         self.close = close
     }
     
-    public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double, data: AnyObject?)
+    public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double, data: Any?)
     {
         super.init(x: x, y: (shadowH + shadowL) / 2.0, data: data)
         
@@ -55,7 +55,7 @@ open class CandleChartDataEntry: ChartDataEntry
         self.close = close
     }
     
-    public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double, icon: NSUIImage?, data: AnyObject?)
+    public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double, icon: NSUIImage?, data: Any?)
     {
         super.init(x: x, y: (shadowH + shadowL) / 2.0, icon: icon, data: data)
         

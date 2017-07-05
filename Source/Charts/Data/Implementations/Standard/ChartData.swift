@@ -235,7 +235,6 @@ open class ChartData
         return _yMin
     }
     
-    @nonobjc
     open func getYMin() -> Double
     {
         return _yMin
@@ -273,7 +272,6 @@ open class ChartData
         return _yMax
     }
     
-    @nonobjc
     open func getYMax() -> Double
     {
         return _yMax

@@ -27,7 +27,7 @@
 		06B120511D811B8900D14B02 /* AxisBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FC11D811B8900D14B02 /* AxisBase.swift */; };
 		06B120521D811B8900D14B02 /* ChartLimitLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FC21D811B8900D14B02 /* ChartLimitLine.swift */; };
 		06B120531D811B8900D14B02 /* ComponentBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FC31D811B8900D14B02 /* ComponentBase.swift */; };
-		06B120541D811B8900D14B02 /* IMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FC41D811B8900D14B02 /* IMarker.swift */; };
+		06B120541D811B8900D14B02 /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FC41D811B8900D14B02 /* Marker.swift */; };
 		06B120551D811B8900D14B02 /* Legend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FC51D811B8900D14B02 /* Legend.swift */; };
 		06B120561D811B8900D14B02 /* LegendEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FC61D811B8900D14B02 /* LegendEntry.swift */; };
 		06B120571D811B8900D14B02 /* MarkerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FC71D811B8900D14B02 /* MarkerImage.swift */; };
@@ -90,7 +90,6 @@
 		06B120901D811B8900D14B02 /* PieHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120071D811B8900D14B02 /* PieHighlighter.swift */; };
 		06B120911D811B8900D14B02 /* PieRadarHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120081D811B8900D14B02 /* PieRadarHighlighter.swift */; };
 		06B120921D811B8900D14B02 /* RadarHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120091D811B8900D14B02 /* RadarHighlighter.swift */; };
-		06B120931D811B8900D14B02 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1200A1D811B8900D14B02 /* Range.swift */; };
 		06B120941D811B8900D14B02 /* BarChartDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1200C1D811B8900D14B02 /* BarChartDataProvider.swift */; };
 		06B120951D811B8900D14B02 /* BarLineScatterCandleBubbleChartDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1200D1D811B8900D14B02 /* BarLineScatterCandleBubbleChartDataProvider.swift */; };
 		06B120961D811B8900D14B02 /* BubbleChartDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1200E1D811B8900D14B02 /* BubbleChartDataProvider.swift */; };
@@ -183,7 +182,7 @@
 		06B11FC11D811B8900D14B02 /* AxisBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxisBase.swift; sourceTree = "<group>"; };
 		06B11FC21D811B8900D14B02 /* ChartLimitLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartLimitLine.swift; sourceTree = "<group>"; };
 		06B11FC31D811B8900D14B02 /* ComponentBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentBase.swift; sourceTree = "<group>"; };
-		06B11FC41D811B8900D14B02 /* IMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMarker.swift; sourceTree = "<group>"; };
+		06B11FC41D811B8900D14B02 /* Marker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
 		06B11FC51D811B8900D14B02 /* Legend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legend.swift; sourceTree = "<group>"; };
 		06B11FC61D811B8900D14B02 /* LegendEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegendEntry.swift; sourceTree = "<group>"; };
 		06B11FC71D811B8900D14B02 /* MarkerImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerImage.swift; sourceTree = "<group>"; };
@@ -246,7 +245,6 @@
 		06B120071D811B8900D14B02 /* PieHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieHighlighter.swift; sourceTree = "<group>"; };
 		06B120081D811B8900D14B02 /* PieRadarHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieRadarHighlighter.swift; sourceTree = "<group>"; };
 		06B120091D811B8900D14B02 /* RadarHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadarHighlighter.swift; sourceTree = "<group>"; };
-		06B1200A1D811B8900D14B02 /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
 		06B1200C1D811B8900D14B02 /* BarChartDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartDataProvider.swift; sourceTree = "<group>"; };
 		06B1200D1D811B8900D14B02 /* BarLineScatterCandleBubbleChartDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarLineScatterCandleBubbleChartDataProvider.swift; sourceTree = "<group>"; };
 		06B1200E1D811B8900D14B02 /* BubbleChartDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleChartDataProvider.swift; sourceTree = "<group>"; };
@@ -427,7 +425,7 @@
 				06B11FC21D811B8900D14B02 /* ChartLimitLine.swift */,
 				06B11FC31D811B8900D14B02 /* ComponentBase.swift */,
 				5B56A9CC1D905EB300F58178 /* Description.swift */,
-				06B11FC41D811B8900D14B02 /* IMarker.swift */,
+				06B11FC41D811B8900D14B02 /* Marker.swift */,
 				06B11FC51D811B8900D14B02 /* Legend.swift */,
 				06B11FC61D811B8900D14B02 /* LegendEntry.swift */,
 				06B11FC71D811B8900D14B02 /* MarkerImage.swift */,
@@ -547,7 +545,6 @@
 				06B120071D811B8900D14B02 /* PieHighlighter.swift */,
 				06B120081D811B8900D14B02 /* PieRadarHighlighter.swift */,
 				06B120091D811B8900D14B02 /* RadarHighlighter.swift */,
-				06B1200A1D811B8900D14B02 /* Range.swift */,
 			);
 			name = Highlight;
 			path = Source/Charts/Highlight;
@@ -880,7 +877,7 @@
 				06B120461D811B8900D14B02 /* BarLineChartViewBase.swift in Sources */,
 				06B120A61D811B8900D14B02 /* CandleStickChartRenderer.swift in Sources */,
 				06B120491D811B8900D14B02 /* ChartViewBase.swift in Sources */,
-				06B120541D811B8900D14B02 /* IMarker.swift in Sources */,
+				06B120541D811B8900D14B02 /* Marker.swift in Sources */,
 				06B120BF1D811B8900D14B02 /* YAxisRendererRadarChart.swift in Sources */,
 				06B1207C1D811B8900D14B02 /* IChartDataSet.swift in Sources */,
 				06B120941D811B8900D14B02 /* BarChartDataProvider.swift in Sources */,
@@ -931,7 +928,6 @@
 				06B120641D811B8900D14B02 /* CandleChartData.swift in Sources */,
 				06B120AA1D811B8900D14B02 /* LegendRenderer.swift in Sources */,
 				06B120B41D811B8900D14B02 /* CrossShapeRenderer.swift in Sources */,
-				06B120931D811B8900D14B02 /* Range.swift in Sources */,
 				06B120A21D811B8900D14B02 /* AxisRendererBase.swift in Sources */,
 				06B1208E1D811B8900D14B02 /* HorizontalBarHighlighter.swift in Sources */,
 				06B1206E1D811B8900D14B02 /* LineRadarChartDataSet.swift in Sources */,
@@ -1011,20 +1007,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos macosx";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Debug;
 		};
@@ -1068,20 +1064,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos macosx";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;
 		};

@@ -16,7 +16,7 @@ import CoreGraphics
     import UIKit
 #endif
 
-open class MarkerView: NSUIView, IMarker
+open class MarkerView: NSUIView, Marker
 {
     open var offset: CGPoint = CGPoint()
     

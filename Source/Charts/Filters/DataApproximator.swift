@@ -11,10 +11,9 @@
 
 import Foundation
 
-open class DataApproximator
-{
+public struct DataApproximator {
     /// uses the douglas peuker algorithm to reduce the given arraylist of entries
-    open class func reduceWithDouglasPeuker(_ points: [CGPoint], tolerance: CGFloat) -> [CGPoint]
+    public static func reduceWithDouglasPeuker(_ points: [CGPoint], tolerance: CGFloat) -> [CGPoint]
     {
         // if a shape has 2 or less points it cannot be reduced
         if tolerance <= 0 || points.count < 3
@@ -54,7 +53,7 @@ open class DataApproximator
     /// - parameter tolerance:
     /// - parameter start:
     /// - parameter end:
-    open class func reduceWithDouglasPeuker(
+    public static func reduceWithDouglasPeuker(
         points: [CGPoint],
         tolerance: CGFloat,
         start: Int,
@@ -94,7 +93,7 @@ open class DataApproximator
         } // else don't keep the point...
     }
     
-    fileprivate class Line
+    private struct Line
     {
         var sxey: CGFloat
         var exsy: CGFloat

@@ -38,7 +38,7 @@ class ColoredLineChartViewController: DemoBaseViewController {
         
         chart.chartDescription?.enabled = false
         
-        chart.drawGridBackgroundEnabled = false
+        chart.isDrawGridBackgroundEnabled = false
         chart.dragEnabled = true
         chart.setScaleEnabled(true)
         chart.pinchZoomEnabled = false
