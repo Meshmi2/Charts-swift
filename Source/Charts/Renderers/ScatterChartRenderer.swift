@@ -21,7 +21,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
 {
     open weak var dataProvider: ScatterChartDataProvider?
     
-    public init(dataProvider: ScatterChartDataProvider?, animator: Animator?, viewPortHandler: ViewPortHandler?)
+    public init(dataProvider: ScatterChartDataProvider?, animator: Animator?, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         
@@ -54,8 +54,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
     {
         guard
             let dataProvider = dataProvider,
-            let animator = animator,
-            let viewPortHandler = self.viewPortHandler
+            let animator = animator
             else { return }
         
         let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
@@ -107,8 +106,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
         guard
             let dataProvider = dataProvider,
             let scatterData = dataProvider.scatterData,
-            let animator = animator,
-            let viewPortHandler = self.viewPortHandler
+            let animator = animator
             else { return }
         
         // if values are drawn

@@ -18,24 +18,20 @@ import CoreGraphics
 
 open class LegendRenderer: Renderer
 {
+    public let viewPortHandler: ViewPortHandler
+    
     /// the legend object this renderer renders
-    open var legend: Legend?
+    open var legend: Legend
 
-    public init(viewPortHandler: ViewPortHandler?, legend: Legend?)
+    public init(viewPortHandler: ViewPortHandler, legend: Legend)
     {
-        super.init(viewPortHandler: viewPortHandler)
-        
         self.legend = legend
+        self.viewPortHandler = viewPortHandler
     }
 
     /// Prepares the legend and calculates all needed forms, labels and colors.
     open func computeLegend(data: ChartData)
     {
-        guard
-            let legend = legend,
-            let viewPortHandler = self.viewPortHandler
-            else { return }
-        
         if !legend.isLegendCustom
         {
             var entries: [LegendEntry] = []
@@ -192,12 +188,7 @@ open class LegendRenderer: Renderer
     }
     
     open func renderLegend(context: CGContext)
-    {
-        guard
-            let legend = legend,
-            let viewPortHandler = self.viewPortHandler
-            else { return }
-        
+    {        
         if !legend.enabled
         {
             return

@@ -26,7 +26,7 @@ open class CombinedChartRenderer: DataRenderer
     
     internal var _drawOrder: [CombinedChartView.DrawOrder] = [.bar, .bubble, .line, .candle, .scatter]
     
-    public init(chart: CombinedChartView?, animator: Animator, viewPortHandler: ViewPortHandler?)
+    public init(chart: CombinedChartView?, animator: Animator, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         
@@ -42,8 +42,7 @@ open class CombinedChartRenderer: DataRenderer
         
         guard let
             chart = chart,
-            let animator = animator,
-            let viewPortHandler = self.viewPortHandler
+            let animator = animator
             else { return }
 
         for order in drawOrder

@@ -23,13 +23,13 @@ open class HorizontalBarChartView: BarChartView
     {
         super.initialize()
         
-        _leftAxisTransformer = TransformerHorizontalBarChart(viewPortHandler: _viewPortHandler)
-        _rightAxisTransformer = TransformerHorizontalBarChart(viewPortHandler: _viewPortHandler)
+        _leftAxisTransformer = TransformerHorizontalBarChart(viewPortHandler: viewPortHandler)
+        _rightAxisTransformer = TransformerHorizontalBarChart(viewPortHandler: viewPortHandler)
         
-        renderer = HorizontalBarChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: _viewPortHandler)
-        _leftYAxisRenderer = YAxisRendererHorizontalBarChart(viewPortHandler: _viewPortHandler, yAxis: _leftAxis, transformer: _leftAxisTransformer)
-        _rightYAxisRenderer = YAxisRendererHorizontalBarChart(viewPortHandler: _viewPortHandler, yAxis: _rightAxis, transformer: _rightAxisTransformer)
-        _xAxisRenderer = XAxisRendererHorizontalBarChart(viewPortHandler: _viewPortHandler, xAxis: _xAxis, transformer: _leftAxisTransformer, chart: self)
+        renderer = HorizontalBarChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: viewPortHandler)
+        _leftYAxisRenderer = YAxisRendererHorizontalBarChart(viewPortHandler: viewPortHandler, yAxis: _leftAxis, transformer: _leftAxisTransformer)
+        _rightYAxisRenderer = YAxisRendererHorizontalBarChart(viewPortHandler: viewPortHandler, yAxis: _rightAxis, transformer: _rightAxisTransformer)
+        _xAxisRenderer = XAxisRendererHorizontalBarChart(viewPortHandler: viewPortHandler, xAxis: _xAxis, transformer: _leftAxisTransformer, chart: self)
         
         self.highlighter = HorizontalBarHighlighter(chart: self)
     }
@@ -82,7 +82,7 @@ open class HorizontalBarChartView: BarChartView
         offsetBottom += self.extraBottomOffset
         offsetLeft += self.extraLeftOffset
         
-        _viewPortHandler.restrainViewPort(
+        viewPortHandler.restrainViewPort(
             offsetLeft: max(self.minOffset, offsetLeft),
             offsetTop: max(self.minOffset, offsetTop),
             offsetRight: max(self.minOffset, offsetRight),

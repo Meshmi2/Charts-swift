@@ -74,7 +74,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     open var chartDescription: Description?
         
     /// The legend object containing all data associated with the legend
-    internal var _legend: Legend!
+    open var legend: Legend = Legend()
     
     /// delegate to receive chart events
     open weak var delegate: ChartViewDelegate?
@@ -96,10 +96,13 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     open var highlighter: IHighlighter?
     
     /// object that manages the bounds and drawing constraints of the chart
-    internal var _viewPortHandler: ViewPortHandler!
+    /// - returns: The ViewPortHandler of the chart that is responsible for the
+    /// content area of the chart and its offsets and dimensions.
+    open let viewPortHandler: ViewPortHandler = ViewPortHandler()
     
+    //FIXME: ----
     /// object responsible for animations
-    internal var _animator: Animator!
+    internal var _animator: Animator = Animator()
     
     /// flag that indicates if offsets calculation has already been done or not
     fileprivate var _offsetsCalculated = false
@@ -166,16 +169,13 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
             self.backgroundColor = NSUIColor.clear
         #endif
 
-        _animator = Animator()
         _animator.delegate = self
 
-        _viewPortHandler = ViewPortHandler()
-        _viewPortHandler.setChartDimens(width: bounds.size.width, height: bounds.size.height)
+        viewPortHandler.setChartDimens(width: bounds.size.width, height: bounds.size.height)
         
         chartDescription = Description()
         
-        _legend = Legend()
-        _legendRenderer = LegendRenderer(viewPortHandler: _viewPortHandler, legend: _legend)
+        _legendRenderer = LegendRenderer(viewPortHandler: viewPortHandler, legend: legend)
         
         _xAxis = XAxis()
         
@@ -349,8 +349,8 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         {
             let frame = self.bounds
             position = CGPoint(
-                x: frame.width - _viewPortHandler.offsetRight - description.xOffset,
-                y: frame.height - _viewPortHandler.offsetBottom - description.yOffset - description.font.lineHeight)
+                x: frame.width - viewPortHandler.offsetRight - description.xOffset,
+                y: frame.height - viewPortHandler.offsetBottom - description.yOffset - description.font.lineHeight)
         }
         
         var attrs = [NSAttributedStringKey : AnyObject]()
@@ -570,7 +570,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
             let pos = getMarkerPosition(highlight: highlight)
 
             // check bounds
-            if !_viewPortHandler.isInBounds(x: pos.x, y: pos.y)
+            if !viewPortHandler.isInBounds(x: pos.x, y: pos.y)
             {
                 continue
             }
@@ -741,13 +741,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     /// - returns: The center of the chart taking offsets under consideration. (returns the center of the content rectangle)
     open var centerOffsets: CGPoint
     {
-        return _viewPortHandler.contentCenter
-    }
-    
-    /// - returns: The Legend object of the chart. This method can be used to get an instance of the legend in order to customize the automatically generated Legend.
-    open var legend: Legend
-    {
-        return _legend
+        return viewPortHandler.contentCenter
     }
     
     /// - returns: The renderer object responsible for rendering / drawing the Legend.
@@ -759,14 +753,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     /// - returns: The rectangle that defines the borders of the chart-value surface (into which the actual values are drawn).
     open var contentRect: CGRect
     {
-        return _viewPortHandler.contentRect
-    }
-    
-    /// - returns: The ViewPortHandler of the chart that is responsible for the
-    /// content area of the chart and its offsets and dimensions.
-    open var viewPortHandler: ViewPortHandler!
-    {
-        return _viewPortHandler
+        return viewPortHandler.contentRect
     }
     
     /// - returns: The bitmap that represents the chart.
@@ -854,11 +841,11 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         {
             let bounds = self.bounds
             
-            if (_viewPortHandler !== nil &&
-                (bounds.size.width != _viewPortHandler.chartWidth ||
-                bounds.size.height != _viewPortHandler.chartHeight))
+            if (viewPortHandler !== nil &&
+                (bounds.size.width != viewPortHandler.chartWidth ||
+                bounds.size.height != viewPortHandler.chartHeight))
             {
-                _viewPortHandler.setChartDimens(width: bounds.size.width, height: bounds.size.height)
+                viewPortHandler.setChartDimens(width: bounds.size.width, height: bounds.size.height)
                 
                 // This may cause the chart view to mutate properties affecting the view port -- lets do this
                 // before we try to run any pending jobs on the view port itself
@@ -889,7 +876,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     
     open func addViewportJob(_ job: ViewPortJob)
     {
-        if _viewPortHandler.hasChartDimens
+        if viewPortHandler.hasChartDimens
         {
             job.doJob()
         }

@@ -86,7 +86,7 @@ open class PieChartView: PieRadarChartViewBase
     {
         super.initialize()
         
-        renderer = PieChartRenderer(chart: self, animator: _animator, viewPortHandler: _viewPortHandler)
+        renderer = PieChartRenderer(chart: self, animator: _animator, viewPortHandler: viewPortHandler)
         _xAxis = nil
         
         self.highlighter = PieHighlighter(chart: self)
@@ -385,11 +385,11 @@ open class PieChartView: PieRadarChartViewBase
             else
             {
                 #if os(OSX)
-                    let paragraphStyle = NSParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+                    let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
                 #else
                     let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
                 #endif
-                paragraphStyle.lineBreakMode = NSLineBreakMode.byTruncatingTail
+                paragraphStyle.lineBreakMode = .byTruncatingTail
                 paragraphStyle.alignment = .center
                 
                 attrString = NSMutableAttributedString(string: newValue!)
@@ -456,7 +456,7 @@ open class PieChartView: PieRadarChartViewBase
     
     internal override var requiredLegendOffset: CGFloat
     {
-        return _legend.font.pointSize * 2.0
+        return legend.font.pointSize * 2.0
     }
     
     internal override var requiredBaseOffset: CGFloat

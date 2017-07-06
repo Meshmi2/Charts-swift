@@ -170,7 +170,7 @@ class DemoBaseViewController: UIViewController {
         chartView.drawSlicesUnderHoleEnabled = false
         chartView.holeRadiusPercent = 0.58
         chartView.transparentCircleRadiusPercent = 0.61
-        chartView.chartDescription?.enabled = false
+        chartView.chartDescription?.isEnabled = false
         chartView.setExtraOffsets(left: 5, top: 10, right: 5, bottom: 5)
         
         chartView.drawCenterTextEnabled = true
@@ -193,7 +193,7 @@ class DemoBaseViewController: UIViewController {
         chartView.rotationEnabled = true
         chartView.highlightPerTapEnabled = true
         
-        let l = chartView.legend
+        var l = chartView.legend
         l.horizontalAlignment = .right
         l.verticalAlignment = .top
         l.orientation = .vertical
@@ -201,14 +201,15 @@ class DemoBaseViewController: UIViewController {
         l.xEntrySpace = 7
         l.yEntrySpace = 0
         l.yOffset = 0
+        chartView.legend = l
     }
     
     func setup(radarChartView chartView: RadarChartView) {
-        chartView.chartDescription?.enabled = false
+        chartView.chartDescription?.isEnabled = false
     }
     
     func setup(barLineChartView chartView: BarLineChartViewBase) {
-        chartView.chartDescription?.enabled = false
+        chartView.chartDescription?.isEnabled = false
         
         chartView.isDrawGridBackgroundEnabled = false
         

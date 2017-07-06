@@ -21,7 +21,7 @@ open class RadarChartRenderer: LineRadarRenderer
 {
     open weak var chart: RadarChartView?
 
-    public init(chart: RadarChartView?, animator: Animator?, viewPortHandler: ViewPortHandler?)
+    public init(chart: RadarChartView?, animator: Animator?, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         

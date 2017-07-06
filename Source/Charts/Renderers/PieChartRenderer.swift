@@ -21,7 +21,7 @@ open class PieChartRenderer: DataRenderer
 {
     open weak var chart: PieChartView?
     
-    public init(chart: PieChartView?, animator: Animator?, viewPortHandler: ViewPortHandler?)
+    public init(chart: PieChartView?, animator: Animator?, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         
@@ -92,7 +92,6 @@ open class PieChartRenderer: DataRenderer
     {
         guard
             dataSet.automaticallyDisableSliceSpacing,
-            let viewPortHandler = self.viewPortHandler,
             let data = chart?.data as? PieChartData
             else { return dataSet.sliceSpace }
         

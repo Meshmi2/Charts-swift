@@ -12,34 +12,42 @@
 import Foundation
 import CoreGraphics
 
-open class Description: ComponentBase
-{
-    public override init()
+public struct Description {
+    public init()
     {
         #if os(tvOS)
             // 23 is the smallest recommended font size on the TV
             font = NSUIFont.systemFont(ofSize: 23)
         #elseif os(OSX)
-            font = NSUIFont.systemFont(ofSize: NSUIFont.systemFontSize())
+            font = NSUIFont.systemFont(ofSize: NSUIFont.systemFontSize)
         #else
             font = NSUIFont.systemFont(ofSize: 8.0)
         #endif
-        
-        super.init()
     }
     
     /// The text to be shown as the description.
-    open var text: String? = "Description Label"
+    public var text: String? = "Description Label"
     
     /// Custom position for the description text in pixels on the screen.
-    open var position: CGPoint? = nil
+    public var position: CGPoint? = nil
     
     /// The text alignment of the description text. Default RIGHT.
-    open var textAlign: NSTextAlignment = NSTextAlignment.right
+    public var textAlign: NSTextAlignment = .right
     
     /// Font object used for drawing the description text.
-    open var font: NSUIFont
+    public var font: NSUIFont
     
     /// Text color used for drawing the description text
-    open var textColor = NSUIColor.black
+    public var textColor = NSUIColor.black
+    
+    /// flag that indicates if this component is enabled or not
+    public var isEnabled = true
+    
+    /// The offset this component has on the x-axis
+    /// **default**: 5.0
+    public var xOffset = CGFloat(5.0)
+    
+    /// The offset this component has on the x-axis
+    /// **default**: 5.0 (or 0.0 on ChartYAxis)
+    public var yOffset = CGFloat(5.0)
 }

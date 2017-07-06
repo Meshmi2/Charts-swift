@@ -222,7 +222,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 	public typealias NSUIImage = NSImage
 	public typealias NSUIScrollView = NSScrollView
 	public typealias NSUIGestureRecognizer = NSGestureRecognizer
-	public typealias NSUIGestureRecognizerState = NSGestureRecognizerState
+    public typealias NSUIGestureRecognizerState = NSGestureRecognizer.State
 	public typealias NSUIGestureRecognizerDelegate = NSGestureRecognizerDelegate
 	public typealias NSUITapGestureRecognizer = NSClickGestureRecognizer
 	public typealias NSUIPanGestureRecognizer = NSPanGestureRecognizer
@@ -529,7 +529,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 
 	func NSUIGraphicsGetCurrentContext() -> CGContext?
     {
-		return NSGraphicsContext.current()?.cgContext
+        return NSGraphicsContext.current?.cgContext
 	}
 
 	func NSUIGraphicsPushContext(_ context: CGContext)

@@ -30,7 +30,7 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
     internal override func initialize() {
         super.initialize()
         
-        renderer = BarChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: _viewPortHandler)
+        renderer = BarChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: viewPortHandler)
         
         self.highlighter = BarHighlighter(chart: self)
         
