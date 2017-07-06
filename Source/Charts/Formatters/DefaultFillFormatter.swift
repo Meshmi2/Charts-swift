@@ -17,28 +17,21 @@ import CoreGraphics
 #endif
 
 /// Default formatter that calculates the position of the filled line.
-open class DefaultFillFormatter: IFillFormatter
+public struct DefaultFillFormatter: FillFormatter
 {
     public typealias Block = (
         _ dataSet: ILineChartDataSet,
         _ dataProvider: LineChartDataProvider) -> CGFloat
     
-    open var block: Block?
+    public var block: Block?
     
-    // TODO: Reevaluate if this is necessary
     public init() {}
     
-    public init(block: @escaping Block)
-    {
+    public init(block: @escaping Block) {
         self.block = block
     }
     
-    public static func with(block: @escaping Block) -> DefaultFillFormatter?
-    {
-        return DefaultFillFormatter(block: block)
-    }
-    
-    open func getFillLinePosition(
+    public func getFillLinePosition(
         dataSet: ILineChartDataSet,
         dataProvider: LineChartDataProvider) -> CGFloat
     {

@@ -11,7 +11,7 @@
 
 import Foundation
 
-open class DefaultValueFormatter: IValueFormatter
+open class DefaultValueFormatter: ValueFormatter
 {
     public typealias Block = (
         _ value: Double,

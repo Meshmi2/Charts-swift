@@ -18,7 +18,7 @@ import CoreGraphics
 
 public struct ChartUtils
 {
-    fileprivate static var _defaultValueFormatter: IValueFormatter = ChartUtils.generateDefaultValueFormatter()
+    fileprivate static var _defaultValueFormatter: ValueFormatter = ChartUtils.generateDefaultValueFormatter()
     
     internal struct Math
     {
@@ -262,14 +262,14 @@ public struct ChartUtils
         return angle.truncatingRemainder(dividingBy: 360.0)
     }
     
-    fileprivate static func generateDefaultValueFormatter() -> IValueFormatter
+    fileprivate static func generateDefaultValueFormatter() -> ValueFormatter
     {
         let formatter = DefaultValueFormatter(decimals: 1)
         return formatter
     }
     
     /// - returns: The default value formatter used for all chart components that needs a default
-    public static func defaultValueFormatter() -> IValueFormatter
+    public static func defaultValueFormatter() -> ValueFormatter
     {
         return _defaultValueFormatter
     }

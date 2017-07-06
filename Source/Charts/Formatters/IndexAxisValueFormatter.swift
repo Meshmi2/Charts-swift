@@ -12,44 +12,19 @@
 import Foundation
 
 /// This formatter is used for passing an array of x-axis labels, on whole x steps.
-open class IndexAxisValueFormatter: IAxisValueFormatter
+public struct IndexAxisValueFormatter: AxisValueFormatter
 {
-    private var _values: [String] = [String]()
-    private var _valueCount: Int = 0
+    public var values: [String] = []
     
-    public var values: [String]
-    {
-        get
-        {
-            return _values
-        }
-        set
-        {
-            _values = newValue
-            _valueCount = _values.count
-        }
-    }
-    
-    public init(values: [String])
-    {        
-        self.values = values
-    }
-    
-    public static func with(values: [String]) -> IndexAxisValueFormatter?
-    {
-        return IndexAxisValueFormatter(values: values)
-    }
-    
-    open func stringForValue(_ value: Double,
-                             axis: AxisBase?) -> String
+    public func stringForValue(_ value: Double, axis: AxisBase) -> String
     {
         let index = Int(value.rounded())
         
-        if index < 0 || index >= _valueCount || index != Int(value)
+        if index < 0 || index >= values.count || index != Int(value)
         {
             return ""
         }
         
-        return _values[index]
+        return values[index]
     }
 }

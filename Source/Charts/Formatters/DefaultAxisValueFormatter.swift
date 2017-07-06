@@ -11,7 +11,7 @@
 
 import Foundation
 
-open class DefaultAxisValueFormatter: IAxisValueFormatter
+open class DefaultAxisValueFormatter: AxisValueFormatter
 {
     public typealias Block = (
         _ value: Double,
@@ -78,12 +78,11 @@ open class DefaultAxisValueFormatter: IAxisValueFormatter
         return DefaultAxisValueFormatter(block: block)
     }
     
-    open func stringForValue(_ value: Double,
-                               axis: AxisBase?) -> String
+    open func stringForValue(_ value: Double, axis: AxisBase) -> String
     {
-        if block != nil
+        if let block = block
         {
-            return block!(value, axis)
+            return block(value, axis)
         }
         else
         {

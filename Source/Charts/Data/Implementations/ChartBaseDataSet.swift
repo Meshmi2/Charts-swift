@@ -266,10 +266,10 @@ open class ChartBaseDataSet: IChartDataSet
     open var isHighlightEnabled: Bool { return highlightEnabled }
     
     /// Custom formatter that is used instead of the auto-formatter if set
-    internal var _valueFormatter: IValueFormatter?
+    internal var _valueFormatter: ValueFormatter?
     
     /// Custom formatter that is used instead of the auto-formatter if set
-    open var valueFormatter: IValueFormatter?
+    open var valueFormatter: ValueFormatter?
     {
         get
         {

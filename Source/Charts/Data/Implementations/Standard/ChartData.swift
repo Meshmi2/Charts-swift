@@ -613,8 +613,8 @@ open class ChartData
         return colors
     }
     
-    /// Sets a custom IValueFormatter for all DataSets this data object contains.
-    open func setValueFormatter(_ formatter: IValueFormatter?)
+    /// Sets a custom ValueFormatter for all DataSets this data object contains.
+    open func setValueFormatter(_ formatter: ValueFormatter?)
     {
         guard let formatter = formatter
             else { return }

@@ -12,7 +12,7 @@
 import Foundation
 
 /// An interface for providing custom axis Strings.
-public protocol IAxisValueFormatter
+public protocol AxisValueFormatter
 {
     
     /// Called when a value from an axis is formatted before being drawn.
@@ -24,6 +24,6 @@ public protocol IAxisValueFormatter
     /// - parameter axis:            the axis that the value belongs to
     ///
     func stringForValue(_ value: Double,
-                        axis: AxisBase?) -> String
+                        axis: AxisBase) -> String
     
 }

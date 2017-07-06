@@ -78,9 +78,9 @@
 		06B120841D811B8900D14B02 /* DefaultAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FFA1D811B8900D14B02 /* DefaultAxisValueFormatter.swift */; };
 		06B120851D811B8900D14B02 /* DefaultFillFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FFB1D811B8900D14B02 /* DefaultFillFormatter.swift */; };
 		06B120861D811B8900D14B02 /* DefaultValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FFC1D811B8900D14B02 /* DefaultValueFormatter.swift */; };
-		06B120871D811B8900D14B02 /* IAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FFD1D811B8900D14B02 /* IAxisValueFormatter.swift */; };
-		06B120881D811B8900D14B02 /* IFillFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FFE1D811B8900D14B02 /* IFillFormatter.swift */; };
-		06B120891D811B8900D14B02 /* IValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FFF1D811B8900D14B02 /* IValueFormatter.swift */; };
+		06B120871D811B8900D14B02 /* AxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FFD1D811B8900D14B02 /* AxisValueFormatter.swift */; };
+		06B120881D811B8900D14B02 /* FillFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FFE1D811B8900D14B02 /* FillFormatter.swift */; };
+		06B120891D811B8900D14B02 /* ValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B11FFF1D811B8900D14B02 /* ValueFormatter.swift */; };
 		06B1208A1D811B8900D14B02 /* BarHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120011D811B8900D14B02 /* BarHighlighter.swift */; };
 		06B1208B1D811B8900D14B02 /* ChartHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120021D811B8900D14B02 /* ChartHighlighter.swift */; };
 		06B1208C1D811B8900D14B02 /* CombinedHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120031D811B8900D14B02 /* CombinedHighlighter.swift */; };
@@ -233,9 +233,9 @@
 		06B11FFA1D811B8900D14B02 /* DefaultAxisValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAxisValueFormatter.swift; sourceTree = "<group>"; };
 		06B11FFB1D811B8900D14B02 /* DefaultFillFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultFillFormatter.swift; sourceTree = "<group>"; };
 		06B11FFC1D811B8900D14B02 /* DefaultValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultValueFormatter.swift; sourceTree = "<group>"; };
-		06B11FFD1D811B8900D14B02 /* IAxisValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAxisValueFormatter.swift; sourceTree = "<group>"; };
-		06B11FFE1D811B8900D14B02 /* IFillFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFillFormatter.swift; sourceTree = "<group>"; };
-		06B11FFF1D811B8900D14B02 /* IValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IValueFormatter.swift; sourceTree = "<group>"; };
+		06B11FFD1D811B8900D14B02 /* AxisValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxisValueFormatter.swift; sourceTree = "<group>"; };
+		06B11FFE1D811B8900D14B02 /* FillFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillFormatter.swift; sourceTree = "<group>"; };
+		06B11FFF1D811B8900D14B02 /* ValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueFormatter.swift; sourceTree = "<group>"; };
 		06B120011D811B8900D14B02 /* BarHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarHighlighter.swift; sourceTree = "<group>"; };
 		06B120021D811B8900D14B02 /* ChartHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartHighlighter.swift; sourceTree = "<group>"; };
 		06B120031D811B8900D14B02 /* CombinedHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedHighlighter.swift; sourceTree = "<group>"; };
@@ -524,9 +524,9 @@
 				06B11FFA1D811B8900D14B02 /* DefaultAxisValueFormatter.swift */,
 				06B11FFB1D811B8900D14B02 /* DefaultFillFormatter.swift */,
 				06B11FFC1D811B8900D14B02 /* DefaultValueFormatter.swift */,
-				06B11FFD1D811B8900D14B02 /* IAxisValueFormatter.swift */,
-				06B11FFE1D811B8900D14B02 /* IFillFormatter.swift */,
-				06B11FFF1D811B8900D14B02 /* IValueFormatter.swift */,
+				06B11FFD1D811B8900D14B02 /* AxisValueFormatter.swift */,
+				06B11FFE1D811B8900D14B02 /* FillFormatter.swift */,
+				06B11FFF1D811B8900D14B02 /* ValueFormatter.swift */,
 				5BF8813A1DDC4DF70033370C /* IndexAxisValueFormatter.swift */,
 			);
 			name = Formatters;
@@ -832,13 +832,13 @@
 				06B120841D811B8900D14B02 /* DefaultAxisValueFormatter.swift in Sources */,
 				06B120711D811B8900D14B02 /* PieChartDataEntry.swift in Sources */,
 				06B120C61D811B8900D14B02 /* ViewPortHandler.swift in Sources */,
-				06B120881D811B8900D14B02 /* IFillFormatter.swift in Sources */,
+				06B120881D811B8900D14B02 /* FillFormatter.swift in Sources */,
 				06B1204F1D811B8900D14B02 /* RadarChartView.swift in Sources */,
 				06B120611D811B8900D14B02 /* BubbleChartData.swift in Sources */,
 				06B120441D811B8900D14B02 /* ChartAnimationEasing.swift in Sources */,
 				06B120761D811B8900D14B02 /* ScatterChartData.swift in Sources */,
 				06B120691D811B8900D14B02 /* ChartDataEntryBase.swift in Sources */,
-				06B120891D811B8900D14B02 /* IValueFormatter.swift in Sources */,
+				06B120891D811B8900D14B02 /* ValueFormatter.swift in Sources */,
 				06B120811D811B8900D14B02 /* IRadarChartDataSet.swift in Sources */,
 				06B120581D811B8900D14B02 /* MarkerView.swift in Sources */,
 				06B120751D811B8900D14B02 /* RadarChartDataSet.swift in Sources */,
@@ -891,7 +891,7 @@
 				06B120A81D811B8900D14B02 /* CombinedChartRenderer.swift in Sources */,
 				06B120981D811B8900D14B02 /* ChartDataProvider.swift in Sources */,
 				06B1204B1D811B8900D14B02 /* HorizontalBarChartView.swift in Sources */,
-				06B120871D811B8900D14B02 /* IAxisValueFormatter.swift in Sources */,
+				06B120871D811B8900D14B02 /* AxisValueFormatter.swift in Sources */,
 				06B1208A1D811B8900D14B02 /* BarHighlighter.swift in Sources */,
 				06B120A11D811B8900D14B02 /* ZoomViewJob.swift in Sources */,
 				06B120731D811B8900D14B02 /* RadarChartData.swift in Sources */,
