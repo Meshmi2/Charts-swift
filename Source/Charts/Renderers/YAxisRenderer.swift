@@ -18,7 +18,7 @@ import CoreGraphics
 
 open class YAxisRenderer: AxisRendererBase
 {
-    public init(viewPortHandler: ViewPortHandler, yAxis: YAxis?, transformer: Transformer?)
+    public init(viewPortHandler: ViewPortHandler, yAxis: YAxis, transformer: Transformer?)
     {
         super.init(viewPortHandler: viewPortHandler, transformer: transformer, axis: yAxis)
     }
@@ -201,7 +201,7 @@ open class YAxisRenderer: AxisRendererBase
     open var gridClippingRect: CGRect
     {
         var contentRect = viewPortHandler.contentRect
-        let dy = self.axis?.gridLineWidth ?? 0.0
+        let dy = self.axis.gridLineWidth
         contentRect.origin.y -= dy / 2.0
         contentRect.size.height += dy
         return contentRect

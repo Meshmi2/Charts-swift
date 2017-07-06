@@ -17,12 +17,12 @@ open class AxisRendererBase: Renderer
     public let viewPortHandler: ViewPortHandler
     
     /// base axis this axis renderer works with
-    open var axis: AxisBase?
+    open var axis: AxisBase
     
     /// transformer to transform values to screen pixels and return
     open var transformer: Transformer?
         
-    public init(viewPortHandler: ViewPortHandler, transformer: Transformer?, axis: AxisBase?)
+    public init(viewPortHandler: ViewPortHandler, transformer: Transformer?, axis: AxisBase)
     {
         self.viewPortHandler = viewPortHandler
         
@@ -87,9 +87,7 @@ open class AxisRendererBase: Renderer
     
     /// Sets up the axis values. Computes the desired number of labels between the two given extremes.
     open func computeAxisValues(min: Double, max: Double)
-    {
-        guard let axis = self.axis else { return }
-        
+    {        
         let yMin = min
         let yMax = max
         

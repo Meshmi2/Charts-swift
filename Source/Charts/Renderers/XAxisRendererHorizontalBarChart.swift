@@ -18,13 +18,12 @@ import CoreGraphics
 
 open class XAxisRendererHorizontalBarChart: XAxisRenderer
 {
-    internal var chart: BarChartView?
+    internal var chart: BarChartView
     
-    public init(viewPortHandler: ViewPortHandler, xAxis: XAxis?, transformer: Transformer?, chart: BarChartView?)
+    public init(viewPortHandler: ViewPortHandler, xAxis: XAxis, transformer: Transformer?, chart: BarChartView)
     {
-        super.init(viewPortHandler: viewPortHandler, xAxis: xAxis, transformer: transformer)
-        
         self.chart = chart
+        super.init(viewPortHandler: viewPortHandler, xAxis: xAxis, transformer: transformer)
     }
     
     open override func computeAxis(min: Double, max: Double, inverted: Bool)
@@ -81,7 +80,7 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
     {
         guard let xAxis = self.axis as? XAxis else { return }
         
-        if !xAxis.isEnabled || !xAxis.isDrawLabelsEnabled || chart?.data === nil
+        if !xAxis.isEnabled || !xAxis.isDrawLabelsEnabled
         {
             return
         }
@@ -184,7 +183,7 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
     open override var gridClippingRect: CGRect
     {
         var contentRect = viewPortHandler.contentRect
-        let dy = self.axis?.gridLineWidth ?? 0.0
+        let dy = self.axis.gridLineWidth
         contentRect.origin.y -= dy / 2.0
         contentRect.size.height += dy
         return contentRect

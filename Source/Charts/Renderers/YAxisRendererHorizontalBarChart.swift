@@ -18,7 +18,7 @@ import CoreGraphics
 
 open class YAxisRendererHorizontalBarChart: YAxisRenderer
 {
-    public override init(viewPortHandler: ViewPortHandler, yAxis: YAxis?, transformer: Transformer?)
+    public override init(viewPortHandler: ViewPortHandler, yAxis: YAxis, transformer: Transformer?)
     {
         super.init(viewPortHandler: viewPortHandler, yAxis: yAxis, transformer: transformer)
     }
@@ -175,7 +175,7 @@ open class YAxisRendererHorizontalBarChart: YAxisRenderer
     open override var gridClippingRect: CGRect
     {
         var contentRect = viewPortHandler.contentRect
-        let dx = self.axis?.gridLineWidth ?? 0.0
+        let dx = self.axis.gridLineWidth
         contentRect.origin.x -= dx / 2.0
         contentRect.size.width += dx
         return contentRect
