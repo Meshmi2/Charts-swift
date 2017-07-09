@@ -32,22 +32,25 @@ open class PieRadarChartViewBase: ChartViewBase
     open var minOffset = CGFloat(0.0)
 
     /// iOS && OSX only: Enabled multi-touch rotation using two fingers.
-    fileprivate var _rotationWithTwoFingers = false
+    /// flag that indicates if rotation is done with two fingers or one.
+    /// when the chart is inside a scrollview, you need a two-finger rotation because a one-finger rotation eats up all touch events.
+    ///
+    /// On iOS this will disable one-finger rotation.
+    /// On OSX this will keep two-finger multitouch rotation, and one-pointer mouse rotation.
+    ///
+    /// **default**: false
+    open var isRotationWithTwoFingers: Bool = false {
+        didSet {
+            #if !os(tvOS)
+                _rotationGestureRecognizer.isEnabled = isRotationWithTwoFingers
+            #endif
+        }
+    }
     
     fileprivate var _tapGestureRecognizer: NSUITapGestureRecognizer!
     #if !os(tvOS)
     fileprivate var _rotationGestureRecognizer: NSUIRotationGestureRecognizer!
     #endif
-    
-    public override init(frame: CGRect)
-    {
-        super.init(frame: frame)
-    }
-    
-    public required init?(coder aDecoder: NSCoder)
-    {
-        super.init(coder: aDecoder)
-    }
     
     deinit
     {
@@ -65,7 +68,7 @@ open class PieRadarChartViewBase: ChartViewBase
         #if !os(tvOS)
             _rotationGestureRecognizer = NSUIRotationGestureRecognizer(target: self, action: #selector(rotationGestureRecognized(_:)))
             self.addGestureRecognizer(_rotationGestureRecognizer)
-            _rotationGestureRecognizer.isEnabled = rotationWithTwoFingers
+            _rotationGestureRecognizer.isEnabled = isRotationWithTwoFingers
         #endif
     }
     
@@ -389,78 +392,34 @@ open class PieRadarChartViewBase: ChartViewBase
     }
     
     open var isRotationEnabled: Bool { return rotationEnabled }
-    
-    /// flag that indicates if rotation is done with two fingers or one.
-    /// when the chart is inside a scrollview, you need a two-finger rotation because a one-finger rotation eats up all touch events.
-    ///
-    /// On iOS this will disable one-finger rotation.
-    /// On OSX this will keep two-finger multitouch rotation, and one-pointer mouse rotation.
-    /// 
-    /// **default**: false
-    open var rotationWithTwoFingers: Bool
-    {
-        get
-        {
-            return _rotationWithTwoFingers
-        }
-        set
-        {
-            _rotationWithTwoFingers = newValue
-            #if !os(tvOS)
-                _rotationGestureRecognizer.isEnabled = _rotationWithTwoFingers
-            #endif
-        }
-    }
-    
-    /// flag that indicates if rotation is done with two fingers or one.
-    /// when the chart is inside a scrollview, you need a two-finger rotation because a one-finger rotation eats up all touch events.
-    ///
-    /// On iOS this will disable one-finger rotation.
-    /// On OSX this will keep two-finger multitouch rotation, and one-pointer mouse rotation.
-    ///
-    /// **default**: false
-    open var isRotationWithTwoFingers: Bool
-    {
-        return _rotationWithTwoFingers
-    }
-    
+        
     // MARK: - Animation
     
-    fileprivate var _spinAnimator: Animator!
+    private var _spinAnimator: Animator?
     
     /// Applys a spin animation to the Chart.
-    open func spin(duration: TimeInterval, fromAngle: CGFloat, toAngle: CGFloat, easing: ChartEasingFunctionBlock?)
-    {
-        if _spinAnimator != nil
-        {
-            _spinAnimator.stop()
-        }
-        
-        _spinAnimator = Animator()
-        _spinAnimator.updateBlock = {
-            self.rotationAngle = (toAngle - fromAngle) * CGFloat(self._spinAnimator.phaseX) + fromAngle
-        }
-        _spinAnimator.stopBlock = { self._spinAnimator = nil }
-        
-        _spinAnimator.animate(xAxisDuration: duration, easing: easing)
-    }
-    
     open func spin(duration: TimeInterval, fromAngle: CGFloat, toAngle: CGFloat, easingOption: ChartEasingOption)
     {
-        spin(duration: duration, fromAngle: fromAngle, toAngle: toAngle, easing: easingFunctionFromOption(easingOption))
+        _spinAnimator?.stop()
+        
+        let animator = Animator()
+        animator.updateBlock = {
+            self.rotationAngle = (toAngle - fromAngle) * CGFloat(self._spinAnimator!.phaseX) + fromAngle
+        }
+        animator.stopBlock = { self._spinAnimator = nil }
+        
+        _spinAnimator = animator
+        _spinAnimator?.animate(xAxisDuration: duration, easingOption: easingOption)
     }
     
     open func spin(duration: TimeInterval, fromAngle: CGFloat, toAngle: CGFloat)
     {
-        spin(duration: duration, fromAngle: fromAngle, toAngle: toAngle, easing: nil)
+        spin(duration: duration, fromAngle: fromAngle, toAngle: toAngle, easingOption: .none)
     }
     
     open func stopSpinAnimation()
     {
-        if _spinAnimator != nil
-        {
-            _spinAnimator.stop()
-        }
+        _spinAnimator?.stop()
     }
     
     // MARK: - Gestures
@@ -553,7 +512,7 @@ open class PieRadarChartViewBase: ChartViewBase
         {
             stopDeceleration()
             
-            if !rotationWithTwoFingers
+            if !isRotationWithTwoFingers
             {
                 let touch = touches.first as NSUITouch!
                 
@@ -571,7 +530,7 @@ open class PieRadarChartViewBase: ChartViewBase
     
     open override func nsuiTouchesMoved(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
     {
-        if rotationEnabled && !rotationWithTwoFingers
+        if rotationEnabled && !isRotationWithTwoFingers
         {
             let touch = touches.first as NSUITouch!
             
@@ -593,7 +552,7 @@ open class PieRadarChartViewBase: ChartViewBase
             super.nsuiTouchesEnded(touches, withEvent: event)
         }
         
-        if rotationEnabled && !rotationWithTwoFingers
+        if rotationEnabled && !isRotationWithTwoFingers
         {
             let touch = touches.first as NSUITouch!
             

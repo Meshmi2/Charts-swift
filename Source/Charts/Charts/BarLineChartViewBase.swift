@@ -1081,7 +1081,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         yValue: Double,
         axis: YAxis.AxisDependency,
         duration: TimeInterval,
-        easing: ChartEasingFunctionBlock?)
+        easingOption: ChartEasingOption)
     {
         let origin = valueForTouchPoint(
             point: CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop),
@@ -1102,30 +1102,9 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             zoomOriginX: origin.x,
             zoomOriginY: origin.y,
             duration: duration,
-            easing: easing)
+            easingOption: easingOption)
             
         addViewportJob(job)
-    }
-    
-    /// Zooms by the specified scale factor to the specified values on the specified axis.
-    ///
-    /// - parameter scaleX:
-    /// - parameter scaleY:
-    /// - parameter xValue:
-    /// - parameter yValue:
-    /// - parameter axis: which axis should be used as a reference for the y-axis
-    /// - parameter duration: the duration of the animation in seconds
-    /// - parameter easing:
-    open func zoomAndCenterViewAnimated(
-        scaleX: CGFloat,
-        scaleY: CGFloat,
-        xValue: Double,
-        yValue: Double,
-        axis: YAxis.AxisDependency,
-        duration: TimeInterval,
-        easingOption: ChartEasingOption)
-    {
-        zoomAndCenterViewAnimated(scaleX: scaleX, scaleY: scaleY, xValue: xValue, yValue: yValue, axis: axis, duration: duration, easing: easingFunctionFromOption(easingOption))
     }
     
     /// Zooms by the specified scale factor to the specified values on the specified axis.
@@ -1305,7 +1284,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         yValue: Double,
         axis: YAxis.AxisDependency,
         duration: TimeInterval,
-        easing: ChartEasingFunctionBlock?)
+        easingOption: ChartEasingOption = .easeInOutSine)
     {
         let bounds = valueForTouchPoint(
             point: CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop),
@@ -1322,45 +1301,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             xOrigin: bounds.x,
             yOrigin: bounds.y,
             duration: duration,
-            easing: easing)
+            easingOption: easingOption)
         
         addViewportJob(job)
     }
     
-    /// This will move the left side of the current viewport to the specified x-position and center the viewport to the specified y-position animated.
-    /// This also refreshes the chart by calling setNeedsDisplay().
-    ///
-    /// - parameter xValue:
-    /// - parameter yValue:
-    /// - parameter axis: which axis should be used as a reference for the y-axis
-    /// - parameter duration: the duration of the animation in seconds
-    /// - parameter easing:
-    open func moveViewToAnimated(
-        xValue: Double,
-        yValue: Double,
-        axis: YAxis.AxisDependency,
-        duration: TimeInterval,
-        easingOption: ChartEasingOption)
-    {
-        moveViewToAnimated(xValue: xValue, yValue: yValue, axis: axis, duration: duration, easing: easingFunctionFromOption(easingOption))
-    }
-    
-    /// This will move the left side of the current viewport to the specified x-position and center the viewport to the specified y-position animated.
-    /// This also refreshes the chart by calling setNeedsDisplay().
-    ///
-    /// - parameter xValue:
-    /// - parameter yValue:
-    /// - parameter axis: which axis should be used as a reference for the y-axis
-    /// - parameter duration: the duration of the animation in seconds
-    /// - parameter easing:
-    open func moveViewToAnimated(
-        xValue: Double,
-        yValue: Double,
-        axis: YAxis.AxisDependency,
-        duration: TimeInterval)
-    {
-        moveViewToAnimated(xValue: xValue, yValue: yValue, axis: axis, duration: duration, easingOption: .easeInOutSine)
-    }
+    // FIXME: Why have separate Move/Animated Move. Can't we turn this into one API?
     
     /// This will move the center of the current viewport to the specified x-value and y-value.
     /// This also refreshes the chart by calling setNeedsDisplay().
@@ -1398,7 +1344,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         yValue: Double,
         axis: YAxis.AxisDependency,
         duration: TimeInterval,
-        easing: ChartEasingFunctionBlock?)
+        easingOption: ChartEasingOption)
     {
         let bounds = valueForTouchPoint(
             point: CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop),
@@ -1416,26 +1362,9 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             xOrigin: bounds.x,
             yOrigin: bounds.y,
             duration: duration,
-            easing: easing)
+            easingOption: easingOption)
         
         addViewportJob(job)
-    }
-    
-    /// This will move the center of the current viewport to the specified x-value and y-value animated.
-    ///
-    /// - parameter xValue:
-    /// - parameter yValue:
-    /// - parameter axis: which axis should be used as a reference for the y-axis
-    /// - parameter duration: the duration of the animation in seconds
-    /// - parameter easing:
-    open func centerViewToAnimated(
-        xValue: Double,
-        yValue: Double,
-        axis: YAxis.AxisDependency,
-        duration: TimeInterval,
-        easingOption: ChartEasingOption)
-    {
-        centerViewToAnimated(xValue: xValue, yValue: yValue, axis: axis, duration: duration, easing: easingFunctionFromOption(easingOption))
     }
     
     /// This will move the center of the current viewport to the specified x-value and y-value animated.

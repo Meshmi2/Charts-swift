@@ -28,7 +28,7 @@ open class BarHighlighter: ChartHighlighter
             let pos = getValsForTouch(x: x, y: y)
             
             if
-                let set = barData.getDataSetByIndex(high!.dataSetIndex) as? IBarChartDataSet,
+                let set = barData.getDataSetByIndex(high!.dataSetIndex) as? BarChartDataSet,
                 set.isStacked
             {
                 return getStackedHighlight(high: high!,
@@ -59,7 +59,7 @@ open class BarHighlighter: ChartHighlighter
     /// - parameter yValue:
     /// - returns:
     open func getStackedHighlight(high: Highlight,
-                                  set: IBarChartDataSet,
+                                  set: BarChartDataSet,
                                   xValue: Double,
                                   yValue: Double) -> Highlight?
     {
