@@ -83,10 +83,10 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     open var noDataText = "No chart data available."
     
     /// Font to be used for the no data text.
-    open var noDataFont: NSUIFont! = NSUIFont(name: "HelveticaNeue", size: 12.0)
+    open var noDataFont: Font! = Font(name: "HelveticaNeue", size: 12.0)
     
     /// color of the no data text
-    open var noDataTextColor: NSUIColor = NSUIColor.black
+    open var noDataTextColor: Color = Color.black
     
     internal var _legendRenderer: LegendRenderer!
     
@@ -166,7 +166,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     internal func initialize()
     {
         #if os(iOS)
-            self.backgroundColor = NSUIColor.clear
+            self.backgroundColor = Color.clear
         #endif
 
         _animator.delegate = self
@@ -757,7 +757,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     }
     
     /// - returns: The bitmap that represents the chart.
-    open func getChartImage(transparent: Bool) -> NSUIImage?
+    open func getChartImage(transparent: Bool) -> Image?
     {
         NSUIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque || !transparent, NSUIMainScreen()?.nsuiScale ?? 1.0)
         
@@ -769,7 +769,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         if isOpaque || !transparent
         {
             // Background color may be partially transparent, we must fill with white if we want to output an opaque image
-            context.setFillColor(NSUIColor.white.cgColor)
+            context.setFillColor(Color.white.cgColor)
             context.fill(rect)
             
             if let backgroundColor = self.backgroundColor
@@ -841,9 +841,8 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         {
             let bounds = self.bounds
             
-            if (viewPortHandler !== nil &&
-                (bounds.size.width != viewPortHandler.chartWidth ||
-                bounds.size.height != viewPortHandler.chartHeight))
+            if (bounds.size.width != viewPortHandler.chartWidth ||
+                bounds.size.height != viewPortHandler.chartHeight)
             {
                 viewPortHandler.setChartDimens(width: bounds.size.width, height: bounds.size.height)
                 

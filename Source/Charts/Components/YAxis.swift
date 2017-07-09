@@ -48,7 +48,7 @@ open class YAxis: AxisBase
     open var drawZeroLineEnabled = false
     
     /// Color of the zero line
-    open var zeroLineColor: NSUIColor? = .gray
+    open var zeroLineColor: Color? = .gray
     
     /// Width of the zero line
     open var zeroLineWidth: CGFloat = 1.0

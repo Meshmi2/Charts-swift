@@ -90,7 +90,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
                     continue
                 }
                 
-                renderer.renderShape(context: context, dataSet: dataSet, viewPortHandler: viewPortHandler, point: point, color: dataSet.color(atIndex: j))
+                renderer.renderShape(context: context, dataSet: dataSet, point: point, color: dataSet.color(atIndex: j))
             }
             
             context.restoreGState()

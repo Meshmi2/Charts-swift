@@ -36,7 +36,7 @@ public struct LegendEntry
                 formLineWidth: CGFloat,
                 formLineDashPhase: CGFloat,
                 formLineDashLengths: [CGFloat]?,
-                formColor: NSUIColor?)
+                formColor: Color?)
     {
         self.label = label
         self.form = form
@@ -85,5 +85,5 @@ public struct LegendEntry
     public var formLineDashLengths: [CGFloat]?
     
     /// The color for drawing the form
-    public var formColor: NSUIColor?
+    public var formColor: Color?
 }

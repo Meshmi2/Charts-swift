@@ -23,15 +23,15 @@ open class AxisBase: ComponentBase
     /// Custom formatter that is used instead of the auto-formatter if set
     fileprivate var _axisValueFormatter: AxisValueFormatter?
     
-    open var labelFont = NSUIFont.systemFont(ofSize: 10.0)
-    open var labelTextColor = NSUIColor.black
+    open var labelFont = Font.systemFont(ofSize: 10.0)
+    open var labelTextColor = Color.black
     
-    open var axisLineColor = NSUIColor.gray
+    open var axisLineColor = Color.gray
     open var axisLineWidth = CGFloat(0.5)
     open var axisLineDashPhase = CGFloat(0.0)
     open var axisLineDashLengths: [CGFloat]!
     
-    open var gridColor = NSUIColor.gray.withAlphaComponent(0.9)
+    open var gridColor = Color.gray.withAlphaComponent(0.9)
     open var gridLineWidth = CGFloat(0.5)
     open var gridLineDashPhase = CGFloat(0.0)
     open var gridLineDashLengths: [CGFloat]!

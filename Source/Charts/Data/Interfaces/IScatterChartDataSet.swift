@@ -29,8 +29,8 @@ public protocol IScatterChartDataSet: ILineScatterCandleRadarChartDataSet
     
     /// - returns: Color for the hole in the shape. Setting to `nil` will behave as transparent.
     /// **default**: nil
-    var scatterShapeHoleColor: NSUIColor? { get }
+    var scatterShapeHoleColor: Color? { get }
     
     /// - returns: The IShapeRenderer responsible for rendering this DataSet.
-    var shapeRenderer: IShapeRenderer? { get }
+    var shapeRenderer: ShapeRenderer? { get }
 }

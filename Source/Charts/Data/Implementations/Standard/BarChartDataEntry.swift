@@ -38,13 +38,13 @@ open class BarChartDataEntry: ChartDataEntry
     }
     
     /// Constructor for normal bars (not stacked).
-    public override init(x: Double, y: Double, icon: NSUIImage?)
+    public override init(x: Double, y: Double, icon: Image?)
     {
         super.init(x: x, y: y, icon: icon)
     }
     
     /// Constructor for normal bars (not stacked).
-    public override init(x: Double, y: Double, icon: NSUIImage?, data: Any?)
+    public override init(x: Double, y: Double, icon: Image?, data: Any?)
     {
         super.init(x: x, y: y, icon: icon, data: data)
     }
@@ -68,7 +68,7 @@ open class BarChartDataEntry: ChartDataEntry
     }
     
     /// Constructor for stacked bar entries. One data object for whole stack
-    public init(x: Double, yValues: [Double], icon: NSUIImage, data: Any)
+    public init(x: Double, yValues: [Double], icon: Image, data: Any)
     {
         super.init(x: x, y: BarChartDataEntry.calcSum(values: yValues), icon: icon, data: data)
         self._yVals = yValues
@@ -77,7 +77,7 @@ open class BarChartDataEntry: ChartDataEntry
     }
     
     /// Constructor for stacked bar entries. One data object for whole stack
-    public init(x: Double, yValues: [Double], icon: NSUIImage)
+    public init(x: Double, yValues: [Double], icon: Image)
     {
         super.init(x: x, y: BarChartDataEntry.calcSum(values: yValues), icon: icon)
         self._yVals = yValues

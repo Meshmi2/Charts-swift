@@ -17,11 +17,11 @@ public struct Description {
     {
         #if os(tvOS)
             // 23 is the smallest recommended font size on the TV
-            font = NSUIFont.systemFont(ofSize: 23)
+            font = Font.systemFont(ofSize: 23)
         #elseif os(OSX)
-            font = NSUIFont.systemFont(ofSize: NSUIFont.systemFontSize)
+            font = Font.systemFont(ofSize: Font.systemFontSize)
         #else
-            font = NSUIFont.systemFont(ofSize: 8.0)
+            font = Font.systemFont(ofSize: 8.0)
         #endif
     }
     
@@ -35,10 +35,10 @@ public struct Description {
     public var textAlign: NSTextAlignment = .right
     
     /// Font object used for drawing the description text.
-    public var font: NSUIFont
+    public var font: Font
     
     /// Text color used for drawing the description text
-    public var textColor = NSUIColor.black
+    public var textColor = Color.black
     
     /// flag that indicates if this component is enabled or not
     public var isEnabled = true

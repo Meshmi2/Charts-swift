@@ -6,11 +6,11 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 #if os(iOS) || os(tvOS)
 	import UIKit
 	
-	public typealias NSUIFont = UIFont
-	public typealias NSUIColor = UIColor
+	public typealias Font = UIFont
+	public typealias Color = UIColor
 	public typealias NSUIEvent = UIEvent
 	public typealias NSUITouch = UITouch
-	public typealias NSUIImage = UIImage
+	public typealias Image = UIImage
 	public typealias NSUIScrollView = UIScrollView
 	public typealias NSUIGestureRecognizer = UIGestureRecognizer
 	public typealias NSUIGestureRecognizerState = UIGestureRecognizerState
@@ -169,7 +169,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 		return UIGraphicsGetCurrentContext()
 	}
 
-    func NSUIGraphicsGetImageFromCurrentImageContext() -> NSUIImage!
+    func NSUIGraphicsGetImageFromCurrentImageContext() -> Image!
     {
 		return UIGraphicsGetImageFromCurrentImageContext()
 	}
@@ -189,12 +189,12 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 		UIGraphicsEndImageContext()
 	}
 
-	func NSUIImagePNGRepresentation(_ image: NSUIImage) -> Data?
+	func NSUIImagePNGRepresentation(_ image: Image) -> Data?
     {
 		return UIImagePNGRepresentation(image)
 	}
 
-	func NSUIImageJPEGRepresentation(_ image: NSUIImage, _ quality: CGFloat = 0.8) -> Data?
+	func NSUIImageJPEGRepresentation(_ image: Image, _ quality: CGFloat = 0.8) -> Data?
     {
 		return UIImageJPEGRepresentation(image, quality)
 	}
@@ -215,11 +215,11 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 	import Cocoa
 	import Quartz
 
-	public typealias NSUIFont = NSFont
-	public typealias NSUIColor = NSColor
+	public typealias Font = NSFont
+	public typealias Color = NSColor
 	public typealias NSUIEvent = NSEvent
 	public typealias NSUITouch = NSTouch
-	public typealias NSUIImage = NSImage
+	public typealias Image = NSImage
 	public typealias NSUIScrollView = NSScrollView
 	public typealias NSUIGestureRecognizer = NSGestureRecognizer
     public typealias NSUIGestureRecognizerState = NSGestureRecognizer.State
@@ -445,7 +445,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 			super.touchesCancelled(with: event!)
         }
         
-		open var backgroundColor: NSUIColor?
+		open var backgroundColor: Color?
         {
             get
             {
@@ -504,27 +504,25 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 
 	extension NSScrollView
     {
-		var scrollEnabled: Bool
-        {
-			get
-            {
-				return true
-			}
-            set
-            {
-                // FIXME: We can't disable  scrolling it on OSX
+		var scrollEnabled: Bool {
+            get {
+                return true
             }
-		}
+            set {
+                // FIXME: Can't disable scroll on max OS
+            }
+        }
     }
     
+    // FIXME:
     extension NSString
     {
         // iOS: size(attributes: ...), OSX: size(withAttributes: ...)
         // Both are translated into sizeWithAttributes: on ObjC. So conflict...
-        func size(attributes attrs: [String : Any]? = nil) -> NSSize
-        {
-            return size(withAttributes: attrs)
-        }
+//        func size(attributes attrs: [NSAttributedStringKey : Any]? = nil) -> NSSize
+//        {
+//            return size(withAttributes: attrs)
+//        }
     }
 
 	func NSUIGraphicsGetCurrentContext() -> CGContext?
@@ -536,7 +534,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
     {
         let cx = NSGraphicsContext(cgContext: context, flipped: true)
 		NSGraphicsContext.saveGraphicsState()
-		NSGraphicsContext.setCurrent(cx)
+        NSGraphicsContext.current = cx
 	}
 
 	func NSUIGraphicsPopContext()
@@ -544,20 +542,20 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 		NSGraphicsContext.restoreGraphicsState()
 	}
 
-	func NSUIImagePNGRepresentation(_ image: NSUIImage) -> Data?
+	func NSUIImagePNGRepresentation(_ image: Image) -> Data?
     {
 		image.lockFocus()
 		let rep = NSBitmapImageRep(focusedViewRect: NSMakeRect(0, 0, image.size.width, image.size.height))
 		image.unlockFocus()
-		return rep?.representation(using: NSPNGFileType, properties: [:])
+		return rep?.representation(using: .png, properties: [:])
 	}
 
-	func NSUIImageJPEGRepresentation(_ image: NSUIImage, _ quality: CGFloat = 0.9) -> Data?
+	func NSUIImageJPEGRepresentation(_ image: Image, _ quality: CGFloat = 0.9) -> Data?
     {
 		image.lockFocus()
 		let rep = NSBitmapImageRep(focusedViewRect: NSMakeRect(0, 0, image.size.width, image.size.height))
 		image.unlockFocus()
-        return rep?.representation(using: NSJPEGFileType, properties: [NSImageCompressionFactor: quality])
+        return rep?.representation(using: .jpeg, properties: [.compressionFactor: quality])
 	}
 
 	private var imageContextStack: [CGFloat] = []
@@ -567,7 +565,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 		var scale = scale
 		if scale == 0.0
         {
-			scale = NSScreen.main()?.backingScaleFactor ?? 1.0
+			scale = NSScreen.main?.backingScaleFactor ?? 1.0
 		}
 
 		let width = Int(size.width * scale)
@@ -588,7 +586,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 		}
 	}
 
-	func NSUIGraphicsGetImageFromCurrentImageContext() -> NSUIImage?
+	func NSUIGraphicsGetImageFromCurrentImageContext() -> Image?
     {
 		if !imageContextStack.isEmpty
         {
@@ -617,7 +615,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 
 	func NSUIMainScreen() -> NSUIScreen?
     {
-		return NSUIScreen.main()
+		return NSUIScreen.main
 	}
     
 #endif

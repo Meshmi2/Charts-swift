@@ -22,8 +22,8 @@ open class PieChartDataSet: ChartDataSet, IPieChartDataSet
     
     fileprivate func initialize()
     {
-        self.valueTextColor = NSUIColor.white
-        self.valueFont = NSUIFont.systemFont(ofSize: 13.0)
+        self.valueTextColor = Color.white
+        self.valueFont = Font.systemFont(ofSize: 13.0)
     }
     
     public required init()
@@ -81,7 +81,7 @@ open class PieChartDataSet: ChartDataSet, IPieChartDataSet
     open var yValuePosition: ValuePosition = .insideSlice
     
     /// When valuePosition is OutsideSlice, indicates line color
-    open var valueLineColor: NSUIColor? = NSUIColor.black
+    open var valueLineColor: Color? = Color.black
     
     /// When valuePosition is OutsideSlice, indicates line width
     open var valueLineWidth: CGFloat = 1.0
@@ -99,8 +99,8 @@ open class PieChartDataSet: ChartDataSet, IPieChartDataSet
     open var valueLineVariableLength: Bool = true
     
     /// the font for the slice-text labels
-    open var entryLabelFont: NSUIFont? = nil
+    open var entryLabelFont: Font? = nil
     
     /// the color for the slice-text labels
-    open var entryLabelColor: NSUIColor? = nil
+    open var entryLabelColor: Color? = nil
 }

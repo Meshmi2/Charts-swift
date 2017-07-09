@@ -24,10 +24,10 @@ open class RadarChartView: PieRadarChartViewBase
     open var innerWebLineWidth = CGFloat(0.75)
     
     /// color for the web lines that come from the center
-    open var webColor = NSUIColor(red: 122/255.0, green: 122/255.0, blue: 122.0/255.0, alpha: 1.0)
+    open var webColor = Color(red: 122/255.0, green: 122/255.0, blue: 122.0/255.0, alpha: 1.0)
     
     /// color for the web lines in between the lines that come from the center.
-    open var innerWebColor = NSUIColor(red: 122/255.0, green: 122/255.0, blue: 122.0/255.0, alpha: 1.0)
+    open var innerWebColor = Color(red: 122/255.0, green: 122/255.0, blue: 122.0/255.0, alpha: 1.0)
     
     /// transparency the grid is drawn with (0.0 - 1.0)
     open var webAlpha: CGFloat = 150.0 / 255.0

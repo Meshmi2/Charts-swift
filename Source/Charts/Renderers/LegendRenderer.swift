@@ -41,7 +41,7 @@ open class LegendRenderer: Renderer
             {
                 guard let dataSet = data.getDataSetByIndex(i) else { continue }
                 
-                var clrs: [NSUIColor] = dataSet.colors
+                var clrs: [Color] = dataSet.colors
                 let entryCount = dataSet.entryCount
                 
                 // if we have a barchart with stacked bars
@@ -496,7 +496,7 @@ open class LegendRenderer: Renderer
     {
         guard
             let formColor = entry.formColor,
-            formColor != NSUIColor.clear
+            formColor != Color.clear
             else { return }
         
         var form = entry.form
@@ -559,7 +559,7 @@ open class LegendRenderer: Renderer
     }
 
     /// Draws the provided label at the given position.
-    open func drawLabel(context: CGContext, x: CGFloat, y: CGFloat, label: String, font: NSUIFont, textColor: NSUIColor)
+    open func drawLabel(context: CGContext, x: CGFloat, y: CGFloat, label: String, font: Font, textColor: Color)
     {
         ChartUtils.drawText(context: context, text: label, point: CGPoint(x: x, y: y), align: .left, attributes: [.font: font, .foregroundColor: textColor])
     }

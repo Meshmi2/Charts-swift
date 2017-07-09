@@ -34,13 +34,13 @@ open class PieChartView: PieRadarChartViewBase
     /// if true, the hole inside the chart will be drawn
     fileprivate var _drawHoleEnabled = true
     
-    fileprivate var _holeColor: NSUIColor? = NSUIColor.white
+    fileprivate var _holeColor: Color? = Color.white
     
     /// Sets the color the entry labels are drawn with.
-    fileprivate var _entryLabelColor: NSUIColor? = NSUIColor.white
+    fileprivate var _entryLabelColor: Color? = Color.white
     
     /// Sets the font the entry labels are drawn with.
-    fileprivate var _entryLabelFont: NSUIFont? = NSUIFont(name: "HelveticaNeue", size: 13.0)
+    fileprivate var _entryLabelFont: Font? = Font(name: "HelveticaNeue", size: 13.0)
     
     /// if true, the hole will see-through to the inner tips of the slices
     fileprivate var _drawSlicesUnderHoleEnabled = false
@@ -59,7 +59,7 @@ open class PieChartView: PieRadarChartViewBase
     /// **default**: `0.5`
     fileprivate var _holeRadiusPercent = CGFloat(0.5)
     
-    fileprivate var _transparentCircleColor: NSUIColor? = NSUIColor(white: 1.0, alpha: 105.0/255.0)
+    fileprivate var _transparentCircleColor: Color? = Color(white: 1.0, alpha: 105.0/255.0)
     
     /// the radius of the transparent circle next to the chart-hole in the center
     fileprivate var _transparentCircleRadiusPercent = CGFloat(0.55)
@@ -310,7 +310,7 @@ open class PieChartView: PieRadarChartViewBase
     /// The color for the hole that is drawn in the center of the PieChart (if enabled).
     /// 
     /// - note: Use holeTransparent with holeColor = nil to make the hole transparent.*
-    open var holeColor: NSUIColor?
+    open var holeColor: Color?
     {
         get
         {
@@ -384,18 +384,14 @@ open class PieChartView: PieRadarChartViewBase
             }
             else
             {
-                #if os(OSX)
-                    let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-                #else
-                    let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-                #endif
+                let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
                 paragraphStyle.lineBreakMode = .byTruncatingTail
                 paragraphStyle.alignment = .center
                 
                 attrString = NSMutableAttributedString(string: newValue!)
                 attrString?.setAttributes([
-                    NSAttributedStringKey.foregroundColor: NSUIColor.black,
-                    NSAttributedStringKey.font: NSUIFont.systemFont(ofSize: 12.0),
+                    NSAttributedStringKey.foregroundColor: Color.black,
+                    NSAttributedStringKey.font: Font.systemFont(ofSize: 12.0),
                     NSAttributedStringKey.paragraphStyle: paragraphStyle
                     ], range: NSMakeRange(0, attrString!.length))
             }
@@ -500,7 +496,7 @@ open class PieChartView: PieRadarChartViewBase
     /// The color that the transparent-circle should have.
     ///
     /// **default**: `nil`
-    open var transparentCircleColor: NSUIColor?
+    open var transparentCircleColor: Color?
     {
         get
         {
@@ -530,7 +526,7 @@ open class PieChartView: PieRadarChartViewBase
     }
         
     /// The color the entry labels are drawn with.
-    open var entryLabelColor: NSUIColor?
+    open var entryLabelColor: Color?
     {
         get { return _entryLabelColor }
         set
@@ -541,7 +537,7 @@ open class PieChartView: PieRadarChartViewBase
     }
     
     /// The font the entry labels are drawn with.
-    open var entryLabelFont: NSUIFont?
+    open var entryLabelFont: Font?
     {
         get { return _entryLabelFont }
         set

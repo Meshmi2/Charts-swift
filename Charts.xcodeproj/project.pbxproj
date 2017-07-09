@@ -123,7 +123,7 @@
 		06B120B21D811B8900D14B02 /* ChevronUpShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1202D1D811B8900D14B02 /* ChevronUpShapeRenderer.swift */; };
 		06B120B31D811B8900D14B02 /* CircleShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1202E1D811B8900D14B02 /* CircleShapeRenderer.swift */; };
 		06B120B41D811B8900D14B02 /* CrossShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B1202F1D811B8900D14B02 /* CrossShapeRenderer.swift */; };
-		06B120B51D811B8900D14B02 /* IShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120301D811B8900D14B02 /* IShapeRenderer.swift */; };
+		06B120B51D811B8900D14B02 /* ShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120301D811B8900D14B02 /* ShapeRenderer.swift */; };
 		06B120B61D811B8900D14B02 /* SquareShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120311D811B8900D14B02 /* SquareShapeRenderer.swift */; };
 		06B120B71D811B8900D14B02 /* TriangleShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120321D811B8900D14B02 /* TriangleShapeRenderer.swift */; };
 		06B120B81D811B8900D14B02 /* XShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120331D811B8900D14B02 /* XShapeRenderer.swift */; };
@@ -278,7 +278,7 @@
 		06B1202D1D811B8900D14B02 /* ChevronUpShapeRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChevronUpShapeRenderer.swift; sourceTree = "<group>"; };
 		06B1202E1D811B8900D14B02 /* CircleShapeRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleShapeRenderer.swift; sourceTree = "<group>"; };
 		06B1202F1D811B8900D14B02 /* CrossShapeRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossShapeRenderer.swift; sourceTree = "<group>"; };
-		06B120301D811B8900D14B02 /* IShapeRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IShapeRenderer.swift; sourceTree = "<group>"; };
+		06B120301D811B8900D14B02 /* ShapeRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeRenderer.swift; sourceTree = "<group>"; };
 		06B120311D811B8900D14B02 /* SquareShapeRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareShapeRenderer.swift; sourceTree = "<group>"; };
 		06B120321D811B8900D14B02 /* TriangleShapeRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleShapeRenderer.swift; sourceTree = "<group>"; };
 		06B120331D811B8900D14B02 /* XShapeRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XShapeRenderer.swift; sourceTree = "<group>"; };
@@ -583,7 +583,6 @@
 		06B1201B1D811B8900D14B02 /* Renderers */ = {
 			isa = PBXGroup;
 			children = (
-				06B1201C1D811B8900D14B02 /* AxisRendererBase.swift */,
 				06B1201D1D811B8900D14B02 /* BarChartRenderer.swift */,
 				06B1201E1D811B8900D14B02 /* BarLineScatterCandleBubbleRenderer.swift */,
 				06B1201F1D811B8900D14B02 /* BubbleChartRenderer.swift */,
@@ -600,6 +599,7 @@
 				06B1202A1D811B8900D14B02 /* Renderer.swift */,
 				06B1202B1D811B8900D14B02 /* Scatter */,
 				06B120341D811B8900D14B02 /* ScatterChartRenderer.swift */,
+				06B1201C1D811B8900D14B02 /* AxisRendererBase.swift */,
 				06B120351D811B8900D14B02 /* XAxisRenderer.swift */,
 				06B120361D811B8900D14B02 /* XAxisRendererHorizontalBarChart.swift */,
 				06B120371D811B8900D14B02 /* XAxisRendererRadarChart.swift */,
@@ -618,7 +618,7 @@
 				06B1202D1D811B8900D14B02 /* ChevronUpShapeRenderer.swift */,
 				06B1202E1D811B8900D14B02 /* CircleShapeRenderer.swift */,
 				06B1202F1D811B8900D14B02 /* CrossShapeRenderer.swift */,
-				06B120301D811B8900D14B02 /* IShapeRenderer.swift */,
+				06B120301D811B8900D14B02 /* ShapeRenderer.swift */,
 				06B120311D811B8900D14B02 /* SquareShapeRenderer.swift */,
 				06B120321D811B8900D14B02 /* TriangleShapeRenderer.swift */,
 				06B120331D811B8900D14B02 /* XShapeRenderer.swift */,
@@ -867,7 +867,7 @@
 				06B1205B1D811B8900D14B02 /* ChartBaseDataSet.swift in Sources */,
 				06B120471D811B8900D14B02 /* BubbleChartView.swift in Sources */,
 				06B120BE1D811B8900D14B02 /* YAxisRendererHorizontalBarChart.swift in Sources */,
-				06B120B51D811B8900D14B02 /* IShapeRenderer.swift in Sources */,
+				06B120B51D811B8900D14B02 /* ShapeRenderer.swift in Sources */,
 				06B120B71D811B8900D14B02 /* TriangleShapeRenderer.swift in Sources */,
 				06B120971D811B8900D14B02 /* CandleChartDataProvider.swift in Sources */,
 				06B120C11D811B8900D14B02 /* ChartUtils.swift in Sources */,

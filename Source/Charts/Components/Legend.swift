@@ -112,8 +112,8 @@ public struct Legend
     /// The text direction of the legend
     public var direction: Direction = .leftToRight
 
-    public var font: NSUIFont = .systemFont(ofSize: 10.0)
-    public var textColor = NSUIColor.black
+    public var font: Font = .systemFont(ofSize: 10.0)
+    public var textColor = Color.black
 
     /// The form/shape of the legend forms
     public var form = Form.square
@@ -154,7 +154,7 @@ public struct Legend
         self.entries = entries
     }
     
-    public func getMaximumEntrySize(withFont font: NSUIFont) -> CGSize
+    public func getMaximumEntrySize(withFont font: Font) -> CGSize
     {
         var maxW = CGFloat(0.0)
         var maxH = CGFloat(0.0)
@@ -212,7 +212,7 @@ public struct Legend
     /// **default**: 0.95 (95%)
     public var maxSizePercent: CGFloat = 0.95
     
-    public mutating func calculateDimensions(labelFont: NSUIFont, viewPortHandler: ViewPortHandler)
+    public mutating func calculateDimensions(labelFont: Font, viewPortHandler: ViewPortHandler)
     {
         let maxEntrySize = getMaximumEntrySize(withFont: labelFont)
         let defaultFormSize = self.formSize
