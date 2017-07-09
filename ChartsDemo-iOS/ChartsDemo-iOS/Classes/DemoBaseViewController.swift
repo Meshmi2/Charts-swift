@@ -9,6 +9,25 @@
 import UIKit
 import Charts
 
+struct Option {
+    let key: Key
+    let label: String
+    
+    enum Key {
+        case toggleValues
+        case toggleIcons
+        case toggleHighlight
+        case animateX
+        case animateY
+        case animateXY
+        case saveToGallery
+        case togglePinchZoom
+        case toggleAutoScaleMinMax
+        case toggleData
+        case toggleBarBorders
+    }
+}
+
 class DemoBaseViewController: UIViewController {
     private var optionsTableView: UITableView? = nil
     let parties = ["Party A", "Party B", "Party C", "Party D", "Party E", "Party F",
@@ -18,7 +37,7 @@ class DemoBaseViewController: UIViewController {
                    "Party Y", "Party Z"]
     
     @IBOutlet weak var optionsButton: UIButton!
-    var options: [[String : Any]]!
+    var options: [Option]!
     
     var shouldHideData: Bool = false
     
@@ -36,23 +55,9 @@ class DemoBaseViewController: UIViewController {
         self.edgesForExtendedLayout = []
     }
     
-    private func optionTapped(key: Key) {}
+    private func optionTapped(key: Option.Key) {}
     
-    enum Key {
-        case toggleValues
-        case toggleIcons
-        case toggleHighlight
-        case animateX
-        case animateY
-        case animateXY
-        case saveToGallery
-        case togglePinchZoom
-        case toggleAutoScaleMinMax
-        case toggleData
-        case toggleBarBorders
-    }
-    
-    func handleOption(key: Key, forChartView chartView: ChartViewBase) {
+    func handleOption(key: Option.Key, forChartView chartView: ChartViewBase) {
         switch key {
         case .toggleValues:
             for set in chartView.data!.dataSets {
