@@ -46,11 +46,11 @@ class ColoredLineChartViewController: DemoBaseViewController {
         
         chart.legend.isEnabled = false
         
-        chart.leftAxis.enabled = false
+        chart.leftAxis.isEnabled = false
         chart.leftAxis.spaceTop = 0.4
         chart.leftAxis.spaceBottom = 0.4
-        chart.rightAxis.enabled = false
-        chart.xAxis.enabled = false
+        chart.rightAxis.isEnabled = false
+        chart.xAxis.isEnabled = false
         
         chart.data = data
         

@@ -227,7 +227,7 @@ class DemoBaseViewController: UIViewController {
         let xAxis = chartView.xAxis
         xAxis.labelPosition = .bottom
         
-        chartView.rightAxis.enabled = false
+        chartView.rightAxis.isEnabled = false
     }
 }
 

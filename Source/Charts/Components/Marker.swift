@@ -12,7 +12,7 @@
 import Foundation
 import CoreGraphics
 
-public protocol Marker
+public protocol Marker: class
 {
     /// - returns: The desired (general) offset you wish the IMarker to have on the x-axis.
     ///

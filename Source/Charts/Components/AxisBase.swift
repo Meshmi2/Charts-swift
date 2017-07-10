@@ -90,7 +90,8 @@ open class AxisBase: ComponentBase
     /// When false, axis values could possibly be repeated.
     /// This could happen if two adjacent axis values are rounded to same value.
     /// If using granularity this could be avoided by having fewer axis values visible.
-    open var granularityEnabled = false
+    /// The minimum interval between axis values.
+    open var isGranularityEnabled = false
     
     fileprivate var _granularity = Double(1.0)
     
@@ -109,19 +110,10 @@ open class AxisBase: ComponentBase
             _granularity = newValue
             
             // set this to `true` if it was disabled, as it makes no sense to set this property with granularity disabled
-            granularityEnabled = true
+            isGranularityEnabled = true
         }
     }
-    
-    /// The minimum interval between axis values.
-    open var isGranularityEnabled: Bool
-    {
-        get
-        {
-            return granularityEnabled
-        }
-    }
-    
+        
     /// if true, the set number of y-labels will be forced
     open var forceLabelsEnabled = false
     

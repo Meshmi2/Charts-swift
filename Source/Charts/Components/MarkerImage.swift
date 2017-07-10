@@ -27,7 +27,12 @@ open class MarkerImage: Marker
     
     /// As long as size is 0.0/0.0 - it will default to the image's size
     open var size: CGSize = CGSize()
-        
+    
+    public init() {
+        self.image = nil
+        self.chartView = nil
+    }
+    
     open func offsetForDrawing(atPoint point: CGPoint) -> CGPoint
     {
         var offset = self.offset
