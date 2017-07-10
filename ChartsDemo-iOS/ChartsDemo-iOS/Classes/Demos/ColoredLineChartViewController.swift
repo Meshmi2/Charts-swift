@@ -41,10 +41,10 @@ class ColoredLineChartViewController: DemoBaseViewController {
         chart.isDrawGridBackgroundEnabled = false
         chart.dragEnabled = true
         chart.setScaleEnabled(true)
-        chart.pinchZoomEnabled = false
+        chart.isPinchZoomEnabled = false
         chart.setViewPortOffsets(left: 10, top: 0, right: 10, bottom: 0)
         
-        chart.legend.enabled = false
+        chart.legend.isEnabled = false
         
         chart.leftAxis.enabled = false
         chart.leftAxis.spaceTop = 0.4
@@ -71,7 +71,7 @@ class ColoredLineChartViewController: DemoBaseViewController {
         set1.setColor(.white)
         set1.setCircleColor(.white)
         set1.highlightColor = .white
-        set1.drawValuesEnabled = false
+        set1.isDrawValuesEnabled = false
         
         return LineChartData(dataSet: set1)
     }

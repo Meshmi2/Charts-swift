@@ -20,7 +20,8 @@ open class CombinedChartRenderer: DataRenderer
     open var drawValueAboveBarEnabled = true
     
     /// if set to true, a grey area is drawn behind each bar that indicates the maximum value
-    open var drawBarShadowEnabled = false
+    /// - returns: `true` if drawing shadows (maxvalue) for each bar is enabled, `false` ifnot
+    open var isDrawBarShadowEnabled = false    
     
     internal var _renderers = [DataRenderer]()
     
@@ -181,9 +182,6 @@ open class CombinedChartRenderer: DataRenderer
     
     /// - returns: `true` if drawing values above bars is enabled, `false` ifnot
     open var isDrawValueAboveBarEnabled: Bool { return drawValueAboveBarEnabled }
-    
-    /// - returns: `true` if drawing shadows (maxvalue) for each bar is enabled, `false` ifnot
-    open var isDrawBarShadowEnabled: Bool { return drawBarShadowEnabled }
     
     /// the order in which the provided data objects should be drawn.
     /// The earlier you place them in the provided array, the further they will be in the background.

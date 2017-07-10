@@ -21,23 +21,102 @@ class AnotherBarChartViewController: DemoBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.options
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.options = [Option(key: .toggleValues, label: "Toggle Values"),
+                        Option(key: .toggleHighlight, label: "Toggle Highlight"),
+                        Option(key: .animateX, label: "Animate X"),
+                        Option(key: .animateY, label: "Animate Y"),
+                        Option(key: .animateXY, label: "Animate XY"),
+                        Option(key: .saveToGallery, label: "Save to Camera Roll"),
+                        Option(key: .togglePinchZoom, label: "Toggle PinchZoom"),
+                        Option(key: .toggleData, label: "Toggle Data"),
+                        Option(key: .toggleBarBorders, label: "Toggle Bar Borders")
+        ]
+        
+        chartView.delegate = self
+        
+        chartView.chartDescription?.isEnabled = false
+        chartView.maxVisibleCount = 60
+        chartView.isPinchZoomEnabled = false
+        chartView.isDrawBarShadowEnabled = false
+        chartView.isDrawGridBackgroundEnabled = false
+        
+        let xAxis = chartView.xAxis
+        xAxis.labelPosition = .bottom
+        xAxis.isDrawGridLinesEnabled = false
+        
+        chartView.leftAxis.isDrawGridLinesEnabled = false
+        chartView.rightAxis.isDrawGridLinesEnabled = false
+        
+        chartView.legend.isEnabled = false
+        
+        sliderX.value = 10
+        sliderY.value = 100
+        self.slidersValueChanged(nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    override func updateChartData() {
+        if self.shouldHideData {
+            chartView.data = nil
+            return
+        }
+        
+        self.setDataCount(Int(sliderX.value) + 1, range: Double(sliderY.value))
     }
-    */
+    
+    func setDataCount(_ count: Int, range: Double) {
+        let yVals = (0..<count).map { (i) -> BarChartDataEntry in
+            let mult = range + 1
+            let val = Double(arc4random_uniform(UInt32(mult))) + mult/3
+            return BarChartDataEntry(x: Double(i), y: val)
+        }
+        
+        var set1: BarChartDataSet! = nil
+        if let set = chartView.data?.dataSets.first as? BarChartDataSet {
+            set1 = set
+            set1?.values = yVals
+            chartView.data?.notifyDataChanged()
+            chartView.notifyDataSetChanged()
+        } else {
+            set1 = BarChartDataSet(values: yVals, label: "Data Set")
+            set1.colors = ChartColorTemplates.vordiplom
+            set1.isDrawValuesEnabled = false
+            
+            let data = BarChartData(dataSet: set1)
+            chartView.data = data
+            chartView.fitBars = true
+        }
+        
+        chartView.setNeedsDisplay()
+    }
+    
+    override func optionTapped(key: Option.Key) {
+        super.handleOption(key: key, forChartView: chartView)
+    }
+    
+    // MARK: - Actions
+    @IBAction func slidersValueChanged(_ sender: Any?) {
+        sliderTextX.text = "\(Int(sliderX.value))"
+        sliderTextY.text = "\(Int(sliderY.value))"
+        
+        self.updateChartData()
+    }
+}
 
+extension AnotherBarChartViewController: ChartViewDelegate {
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        NSLog("chartValueSelected");
+    }
+    
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        NSLog("chartValueNothingSelected");
+    }
+    
+    func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
+        
+    }
+    
+    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
+        
+    }
 }

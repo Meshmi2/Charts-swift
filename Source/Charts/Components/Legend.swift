@@ -424,7 +424,7 @@ public struct Legend
     }
     
     /// flag that indicates if this component is enabled or not
-    public var enabled = true
+    public var isEnabled = true
     
     /// The offset this component has on the x-axis
     /// **default**: 5.0
@@ -433,7 +433,4 @@ public struct Legend
     /// The offset this component has on the x-axis
     /// **default**: 5.0 (or 0.0 on ChartYAxis)
     public var yOffset = CGFloat(5.0)
-    
-    public var isEnabled: Bool { return enabled }
-    
 }

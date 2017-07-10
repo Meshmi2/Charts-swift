@@ -83,7 +83,7 @@ open class YAxisRenderer: AxisRendererBase
     {
         guard let yAxis = self.axis as? YAxis else { return }
         
-        if !yAxis.isEnabled || !yAxis.drawAxisLineEnabled
+        if !yAxis.isEnabled || !yAxis.isDrawAxisLineEnabled
         {
             return
         }
@@ -161,7 +161,7 @@ open class YAxisRenderer: AxisRendererBase
             return
         }
         
-        if yAxis.drawGridLinesEnabled
+        if yAxis.isDrawGridLinesEnabled
         {
             let positions = transformedPositions()
             
@@ -169,7 +169,7 @@ open class YAxisRenderer: AxisRendererBase
             defer { context.restoreGState() }
             context.clip(to: self.gridClippingRect)
             
-            context.setShouldAntialias(yAxis.gridAntialiasEnabled)
+            context.setShouldAntialias(yAxis.isGridAntialiasEnabled)
             context.setStrokeColor(yAxis.gridColor.cgColor)
             context.setLineWidth(yAxis.gridLineWidth)
             context.setLineCap(yAxis.gridLineCap)

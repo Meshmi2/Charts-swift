@@ -189,7 +189,7 @@ open class LegendRenderer: Renderer
     
     open func renderLegend(context: CGContext)
     {        
-        if !legend.enabled
+        if !legend.isEnabled
         {
             return
         }

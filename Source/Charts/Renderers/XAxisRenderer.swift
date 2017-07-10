@@ -282,7 +282,7 @@ open class XAxisRenderer: AxisRendererBase
         defer { context.restoreGState() }
         context.clip(to: self.gridClippingRect)
         
-        context.setShouldAntialias(xAxis.gridAntialiasEnabled)
+        context.setShouldAntialias(xAxis.isGridAntialiasEnabled)
         context.setStrokeColor(xAxis.gridColor.cgColor)
         context.setLineWidth(xAxis.gridLineWidth)
         context.setLineCap(xAxis.gridLineCap)

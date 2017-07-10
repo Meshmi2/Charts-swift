@@ -26,7 +26,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     /// flag that indicates if auto scaling on the y axis is enabled
     fileprivate var _autoScaleMinMaxEnabled = false
     
-    fileprivate var _pinchZoomEnabled = false
+    /// flag that indicates if pinch-zoom is enabled. if true, both x and y axis can be scaled simultaneously with 2 fingers, if false, x and y axis can be scaled separately
+    /// **default**: false
+    /// - returns: `true` if pinch-zoom is enabled, `false` ifnot
+    open var isPinchZoomEnabled: Bool = false {
+        didSet {
+            #if !os(tvOS)
+                _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
+            #endif
+            
+        }
+    }
     fileprivate var _doubleTapToZoomEnabled = true
     fileprivate var _dragEnabled = true
     
@@ -134,7 +144,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             _pinchGestureRecognizer = NSUIPinchGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.pinchGestureRecognized(_:)))
             _pinchGestureRecognizer.delegate = self
             self.addGestureRecognizer(_pinchGestureRecognizer)
-            _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
+            _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
         #endif
     }
     
@@ -582,11 +592,11 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             stopDeceleration()
             
             if _data !== nil &&
-                (_pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled)
+                (isPinchZoomEnabled || _scaleXEnabled || _scaleYEnabled)
             {
                 _isScaling = true
                 
-                if _pinchZoomEnabled
+                if isPinchZoomEnabled
                 {
                     _gestureScaleAxis = .both
                 }
@@ -865,7 +875,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             #if !os(tvOS)
                 if gestureRecognizer == _pinchGestureRecognizer
                 {
-                    if _data === nil || (!_pinchZoomEnabled && !_scaleXEnabled && !_scaleYEnabled)
+                    if _data === nil || (!isPinchZoomEnabled && !_scaleXEnabled && !_scaleYEnabled)
                     {
                         return false
                     }
@@ -1465,7 +1475,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             _scaleXEnabled = enabled
             _scaleYEnabled = enabled
             #if !os(tvOS)
-                _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
+                _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
             #endif
         }
     }
@@ -1482,7 +1492,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             {
                 _scaleXEnabled = newValue
                 #if !os(tvOS)
-                    _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
+                    _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
                 #endif
             }
         }
@@ -1500,7 +1510,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             {
                 _scaleYEnabled = newValue
                 #if !os(tvOS)
-                    _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
+                    _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
                 #endif
             }
         }
@@ -1621,29 +1631,6 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
     }
     
-    /// flag that indicates if pinch-zoom is enabled. if true, both x and y axis can be scaled simultaneously with 2 fingers, if false, x and y axis can be scaled separately
-    open var pinchZoomEnabled: Bool
-    {
-        get
-        {
-            return _pinchZoomEnabled
-        }
-        set
-        {
-            if _pinchZoomEnabled != newValue
-            {
-                _pinchZoomEnabled = newValue
-                #if !os(tvOS)
-                    _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
-                #endif
-            }
-        }
-    }
-
-    /// **default**: false
-    /// - returns: `true` if pinch-zoom is enabled, `false` ifnot
-    open var isPinchZoomEnabled: Bool { return pinchZoomEnabled }
-
     /// Set an offset in dp that allows the user to drag the chart over it's
     /// bounds on the x-axis.
     open func setDragOffsetX(_ offset: CGFloat)

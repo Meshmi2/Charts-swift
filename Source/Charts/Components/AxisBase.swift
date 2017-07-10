@@ -37,11 +37,11 @@ open class AxisBase: ComponentBase
     open var gridLineDashLengths: [CGFloat]!
     open var gridLineCap = CGLineCap.butt
     
-    open var drawGridLinesEnabled = true
-    open var drawAxisLineEnabled = true
+    open var isDrawGridLinesEnabled = true
+    open var isDrawAxisLineEnabled = true
     
     /// flag that indicates of the labels of this axis should be drawn or not
-    open var drawLabelsEnabled = true
+    open var isDrawLabelsEnabled = true
     
     fileprivate var _centerAxisLabelsEnabled = false
 
@@ -64,10 +64,10 @@ open class AxisBase: ComponentBase
     /// Are the LimitLines drawn behind the data or in front of the data?
     /// 
     /// **default**: false
-    open var drawLimitLinesBehindDataEnabled = false
+    open var isDrawLimitLinesBehindDataEnabled = false
 
     /// the flag can be used to turn off the antialias for grid lines
-    open var gridAntialiasEnabled = true
+    open var isGridAntialiasEnabled = true
     
     /// the actual array of entries
     open var entries = [Double]()
@@ -175,17 +175,6 @@ open class AxisBase: ComponentBase
             _axisValueFormatter = newValue ?? DefaultAxisValueFormatter(decimals: decimals)
         }
     }
-    
-    open var isDrawGridLinesEnabled: Bool { return drawGridLinesEnabled }
-    
-    open var isDrawAxisLineEnabled: Bool { return drawAxisLineEnabled }
-    
-    open var isDrawLabelsEnabled: Bool { return drawLabelsEnabled }
-    
-    /// Are the LimitLines drawn behind the data or in front of the data?
-    /// 
-    /// **default**: false
-    open var isDrawLimitLinesBehindDataEnabled: Bool { return drawLimitLinesBehindDataEnabled }
     
     /// Extra spacing for `axisMinimum` to be added to automatically calculated `axisMinimum`
     open var spaceMin: Double = 0.0

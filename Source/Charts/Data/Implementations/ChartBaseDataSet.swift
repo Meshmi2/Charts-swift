@@ -260,10 +260,8 @@ open class ChartBaseDataSet: IChartDataSet
     }
     
     /// if true, value highlighting is enabled
-    open var highlightEnabled = true
-    
     /// - returns: `true` if value highlighting is enabled for this dataset
-    open var isHighlightEnabled: Bool { return highlightEnabled }
+    open var isHighlightEnabled = true
     
     /// Custom formatter that is used instead of the auto-formatter if set
     internal var _valueFormatter: ValueFormatter?
@@ -351,24 +349,14 @@ open class ChartBaseDataSet: IChartDataSet
     /// Set this to true to draw y-values on the chart.
     ///
     /// - note: For bar and line charts: if `maxVisibleCount` is reached, no values will be drawn even if this is enabled.
-    open var drawValuesEnabled = true
-    
     /// - returns: `true` if y-value drawing is enabled, `false` ifnot
-    open var isDrawValuesEnabled: Bool
-    {
-        return drawValuesEnabled
-    }
-
+    open var isDrawValuesEnabled = true
+    
     /// Set this to true to draw y-icons on the chart.
     ///
     /// - note: For bar and line charts: if `maxVisibleCount` is reached, no icons will be drawn even if this is enabled.
-    open var drawIconsEnabled = true
-    
     /// Returns true if y-icon drawing is enabled, false if not
-    open var isDrawIconsEnabled: Bool
-    {
-        return drawIconsEnabled
-    }
+    open var isDrawIconsEnabled = true
     
     /// Offset of icons drawn on the chart.  
     ///

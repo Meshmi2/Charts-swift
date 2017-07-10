@@ -648,7 +648,7 @@ open class ChartData
     {
         for set in dataSets
         {
-            set.drawValuesEnabled = enabled
+            set.isDrawValuesEnabled = enabled
         }
     }
     
@@ -660,7 +660,7 @@ open class ChartData
         {
             for set in dataSets
             {
-                if !set.highlightEnabled
+                if !set.isHighlightEnabled
                 {
                     return false
                 }
@@ -672,7 +672,7 @@ open class ChartData
         {
             for set in dataSets
             {
-                set.highlightEnabled = newValue
+                set.isHighlightEnabled = newValue
             }
         }
     }

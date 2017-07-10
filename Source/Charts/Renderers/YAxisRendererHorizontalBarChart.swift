@@ -107,7 +107,7 @@ open class YAxisRendererHorizontalBarChart: YAxisRenderer
     {
         guard let yAxis = axis as? YAxis else { return }
         
-        if !yAxis.isEnabled || !yAxis.drawAxisLineEnabled
+        if !yAxis.isEnabled || !yAxis.isDrawAxisLineEnabled
         {
             return
         }

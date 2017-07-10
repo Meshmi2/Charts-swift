@@ -55,19 +55,19 @@ class DemoBaseViewController: UIViewController {
         self.edgesForExtendedLayout = []
     }
     
-    private func optionTapped(key: Option.Key) {}
+    func optionTapped(key: Option.Key) {}
     
     func handleOption(key: Option.Key, forChartView chartView: ChartViewBase) {
         switch key {
         case .toggleValues:
             for set in chartView.data!.dataSets {
-                set.drawValuesEnabled = !set.isDrawValuesEnabled
+                set.isDrawValuesEnabled = !set.isDrawValuesEnabled
             }
             chartView.setNeedsDisplay()
             
         case .toggleIcons:
             for set in chartView.data!.dataSets {
-                set.drawIconsEnabled = !set.isDrawIconsEnabled
+                set.isDrawIconsEnabled = !set.isDrawIconsEnabled
             }
             chartView.setNeedsDisplay()
             
@@ -89,7 +89,7 @@ class DemoBaseViewController: UIViewController {
             
         case .togglePinchZoom:
             let barLineChart = chartView as! BarLineChartViewBase
-            barLineChart.pinchZoomEnabled = !barLineChart.isPinchZoomEnabled
+            barLineChart.isPinchZoomEnabled = !barLineChart.isPinchZoomEnabled
             chartView.setNeedsDisplay()
             
         case .toggleAutoScaleMinMax:
@@ -220,7 +220,7 @@ class DemoBaseViewController: UIViewController {
         
         chartView.dragEnabled = true
         chartView.setScaleEnabled(true)
-        chartView.pinchZoomEnabled = false
+        chartView.isPinchZoomEnabled = false
         
         // ChartYAxis *leftAxis = chartView.leftAxis;
         
@@ -271,7 +271,7 @@ extension DemoBaseViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.backgroundColor = .clear
             cell?.textLabel?.textColor = .white
         }
-        cell?.textLabel?.text = self.options[indexPath.row]["label"] as? String
+        cell?.textLabel?.text = self.options[indexPath.row].label
         
         return cell!
     }
@@ -284,7 +284,7 @@ extension DemoBaseViewController: UITableViewDelegate, UITableViewDataSource {
             optionsTableView?.removeFromSuperview()
             self.optionsTableView = nil
             
-            self.optionTapped(key: self.options[indexPath.row]["key"] as! Key)
+            self.optionTapped(key: self.options[indexPath.row].key)
         }
         
     }

@@ -19,7 +19,7 @@ import CoreGraphics
 
 public struct ChartColorTemplates
 {
-    public static func liberty () -> [Color]
+    public static var liberty: [Color]
     {
         return [
             Color(red: 207/255.0, green: 248/255.0, blue: 246/255.0, alpha: 1.0),
@@ -30,7 +30,7 @@ public struct ChartColorTemplates
         ]
     }
     
-    public static func joyful () -> [Color]
+    public static var joyful: [Color]
     {
         return [
             Color(red: 217/255.0, green: 80/255.0, blue: 138/255.0, alpha: 1.0),
@@ -41,7 +41,7 @@ public struct ChartColorTemplates
         ]
     }
     
-    public static func pastel () -> [Color]
+    public static var pastel: [Color]
     {
         return [
             Color(red: 64/255.0, green: 89/255.0, blue: 128/255.0, alpha: 1.0),
@@ -52,7 +52,7 @@ public struct ChartColorTemplates
         ]
     }
     
-    public static func colorful () -> [Color]
+    public static var colorful: [Color]
     {
         return [
             Color(red: 193/255.0, green: 37/255.0, blue: 82/255.0, alpha: 1.0),
@@ -63,7 +63,7 @@ public struct ChartColorTemplates
         ]
     }
     
-    public static func vordiplom () -> [Color]
+    public static var vordiplom: [Color]
     {
         return [
             Color(red: 192/255.0, green: 255/255.0, blue: 140/255.0, alpha: 1.0),
@@ -74,7 +74,7 @@ public struct ChartColorTemplates
         ]
     }
     
-    public static func material () -> [Color]
+    public static var material: [Color]
     {
         return [
             Color(red: 46/255.0, green: 204/255.0, blue: 113/255.0, alpha: 1.0),
