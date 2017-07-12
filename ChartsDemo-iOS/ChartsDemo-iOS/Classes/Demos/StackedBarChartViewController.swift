@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Charts
 
-class StackedBarChartViewController: UIViewController {
+class StackedBarChartViewController: DemoBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

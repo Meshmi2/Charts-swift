@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Charts
 
-class ScatterChartViewController: UIViewController {
+class ScatterChartViewController: DemoBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

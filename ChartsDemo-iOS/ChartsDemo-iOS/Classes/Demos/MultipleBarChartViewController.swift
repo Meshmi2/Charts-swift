@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Charts
 
-class MultipleBarChartViewController: UIViewController {
+class MultipleBarChartViewController: DemoBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

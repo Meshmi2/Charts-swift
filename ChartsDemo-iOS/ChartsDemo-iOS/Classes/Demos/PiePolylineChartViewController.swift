@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Charts
 
-class PiePolylineChartViewController: UIViewController {
+class PiePolylineChartViewController: DemoBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

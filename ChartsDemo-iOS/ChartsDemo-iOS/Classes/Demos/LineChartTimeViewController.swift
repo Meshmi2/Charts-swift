@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Charts
 
-class LineChartTimeViewController: UIViewController {
+class LineChartTimeViewController: DemoBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

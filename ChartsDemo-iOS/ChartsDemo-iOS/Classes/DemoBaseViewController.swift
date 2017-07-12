@@ -48,7 +48,7 @@ struct Option {
     }
 }
 
-class DemoBaseViewController: UIViewController {
+class DemoBaseViewController: UIViewController, ChartViewDelegate {
     private var optionsTableView: UITableView? = nil
     let parties = ["Party A", "Party B", "Party C", "Party D", "Party E", "Party F",
                    "Party G", "Party H", "Party I", "Party J", "Party K", "Party L",
@@ -251,6 +251,23 @@ class DemoBaseViewController: UIViewController {
         
         chartView.rightAxis.isEnabled = false
     }
+    // TODO: Cannot override from extensions
+    //extension DemoBaseViewController: ChartViewDelegate {
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        NSLog("chartValueSelected");
+    }
+    
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        NSLog("chartValueNothingSelected");
+    }
+    
+    func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
+        
+    }
+    
+    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
+        
+    }
 }
 
 extension DemoBaseViewController: UITableViewDelegate, UITableViewDataSource {
@@ -312,20 +329,3 @@ extension DemoBaseViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension DemoBaseViewController: ChartViewDelegate {
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        NSLog("chartValueSelected");
-    }
-    
-    func chartValueNothingSelected(_ chartView: ChartViewBase) {
-        NSLog("chartValueNothingSelected");
-    }
-    
-    func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
-        
-    }
-    
-    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
-        
-    }
-}

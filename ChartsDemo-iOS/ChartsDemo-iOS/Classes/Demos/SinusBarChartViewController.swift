@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Charts
 
-class SinusBarChartViewController: UIViewController {
+class SinusBarChartViewController: DemoBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Charts
 
-class LineChartFilledViewController: UIViewController {
+class LineChartFilledViewController: DemoBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

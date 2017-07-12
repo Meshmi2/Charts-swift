@@ -30,10 +30,6 @@
 		5B8EAF301AB32E15009697AA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B8EAF2F1AB32E15009697AA /* Images.xcassets */; };
 		5B9624411B38608C007763E2 /* NegativeStackedBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B96243F1B38608C007763E2 /* NegativeStackedBarChartViewController.m */; };
 		5B9624421B38608C007763E2 /* NegativeStackedBarChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B9624401B38608C007763E2 /* NegativeStackedBarChartViewController.xib */; };
-		5BD47E601ABB3C91008FCEC6 /* LineChart2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD47E5E1ABB3C91008FCEC6 /* LineChart2ViewController.m */; };
-		5BD47E611ABB3C91008FCEC6 /* LineChart2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BD47E5F1ABB3C91008FCEC6 /* LineChart2ViewController.xib */; };
-		5BD8F0741AB89CE500566E05 /* LineChart1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD8F0721AB89CE500566E05 /* LineChart1ViewController.m */; };
-		5BD8F0751AB89CE500566E05 /* LineChart1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BD8F0731AB89CE500566E05 /* LineChart1ViewController.xib */; };
 		5BE673921D5B4E0900A87BA2 /* LineChartFilledViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE6738D1D5B4E0900A87BA2 /* LineChartFilledViewController.m */; };
 		5BE673931D5B4E0900A87BA2 /* LineChartFilledViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE6738E1D5B4E0900A87BA2 /* LineChartFilledViewController.xib */; };
 		5BE673941D5B4E0900A87BA2 /* LineChartTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE673901D5B4E0900A87BA2 /* LineChartTimeViewController.m */; };
@@ -122,12 +118,6 @@
 		5B96243F1B38608C007763E2 /* NegativeStackedBarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NegativeStackedBarChartViewController.m; sourceTree = "<group>"; };
 		5B9624401B38608C007763E2 /* NegativeStackedBarChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NegativeStackedBarChartViewController.xib; sourceTree = "<group>"; };
 		5BD47E5C1ABB0273008FCEC6 /* ChartsDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChartsDemo-Bridging-Header.h"; sourceTree = "<group>"; };
-		5BD47E5D1ABB3C91008FCEC6 /* LineChart2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChart2ViewController.h; sourceTree = "<group>"; };
-		5BD47E5E1ABB3C91008FCEC6 /* LineChart2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChart2ViewController.m; sourceTree = "<group>"; };
-		5BD47E5F1ABB3C91008FCEC6 /* LineChart2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineChart2ViewController.xib; sourceTree = "<group>"; };
-		5BD8F0711AB89CE500566E05 /* LineChart1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChart1ViewController.h; sourceTree = "<group>"; };
-		5BD8F0721AB89CE500566E05 /* LineChart1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChart1ViewController.m; sourceTree = "<group>"; };
-		5BD8F0731AB89CE500566E05 /* LineChart1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineChart1ViewController.xib; sourceTree = "<group>"; };
 		5BE6738C1D5B4E0900A87BA2 /* LineChartFilledViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChartFilledViewController.h; sourceTree = "<group>"; };
 		5BE6738D1D5B4E0900A87BA2 /* LineChartFilledViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChartFilledViewController.m; sourceTree = "<group>"; };
 		5BE6738E1D5B4E0900A87BA2 /* LineChartFilledViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineChartFilledViewController.xib; sourceTree = "<group>"; };
@@ -264,12 +254,6 @@
 		5BD8F06F1AB89C7100566E05 /* Demos */ = {
 			isa = PBXGroup;
 			children = (
-				5BD8F0711AB89CE500566E05 /* LineChart1ViewController.h */,
-				5BD8F0721AB89CE500566E05 /* LineChart1ViewController.m */,
-				5BD8F0731AB89CE500566E05 /* LineChart1ViewController.xib */,
-				5BD47E5D1ABB3C91008FCEC6 /* LineChart2ViewController.h */,
-				5BD47E5E1ABB3C91008FCEC6 /* LineChart2ViewController.m */,
-				5BD47E5F1ABB3C91008FCEC6 /* LineChart2ViewController.xib */,
 				5BE6738C1D5B4E0900A87BA2 /* LineChartFilledViewController.h */,
 				5BE6738D1D5B4E0900A87BA2 /* LineChartFilledViewController.m */,
 				5BE6738E1D5B4E0900A87BA2 /* LineChartFilledViewController.xib */,
@@ -401,7 +385,6 @@
 				5B43162E1AB8D8AE0009FCAA /* iTunesArtwork@2x in Resources */,
 				5B4316281AB8D8AE0009FCAA /* Icon-29@3x.png in Resources */,
 				5B4316361AB8D8B70009FCAA /* Default-667h@2x.png in Resources */,
-				5BD47E611ABB3C91008FCEC6 /* LineChart2ViewController.xib in Resources */,
 				5BEAED411ABC1AC60013F194 /* SinusBarChartViewController.xib in Resources */,
 				5BEAED371ABC192F0013F194 /* RadarChartViewController.xib in Resources */,
 				5B4316351AB8D8B70009FCAA /* Default-568h@2x.png in Resources */,
@@ -415,7 +398,6 @@
 				5B0CC7861ABB875400665592 /* PieChartViewController.xib in Resources */,
 				5BEAED1C1ABBFB340013F194 /* ScatterChartViewController.xib in Resources */,
 				0471CBFC1CA1090A00E52DBC /* PiePolylineChartViewController.xib in Resources */,
-				5BD8F0751AB89CE500566E05 /* LineChart1ViewController.xib in Resources */,
 				5B43162D1AB8D8AE0009FCAA /* iTunesArtwork in Resources */,
 				5B4316371AB8D8B70009FCAA /* Default-736h@3x.png in Resources */,
 				5BE673951D5B4E0900A87BA2 /* LineChartTimeViewController.xib in Resources */,
@@ -436,7 +418,6 @@
 				5BEAED1B1ABBFB340013F194 /* ScatterChartViewController.m in Sources */,
 				5B0CC7851ABB875400665592 /* PieChartViewController.m in Sources */,
 				0439A3541C9FF95F00496F83 /* PiePolylineChartViewController.m in Sources */,
-				5BD8F0741AB89CE500566E05 /* LineChart1ViewController.m in Sources */,
 				5BEAED401ABC1AC60013F194 /* SinusBarChartViewController.m in Sources */,
 				5BE7E7621C693098000A0377 /* PositiveNegativeBarChartViewController.m in Sources */,
 				5BEAED251ABC0BE20013F194 /* MultipleBarChartViewController.m in Sources */,
@@ -444,7 +425,6 @@
 				5BE673921D5B4E0900A87BA2 /* LineChartFilledViewController.m in Sources */,
 				5BE673941D5B4E0900A87BA2 /* LineChartTimeViewController.m in Sources */,
 				5BEAED1D1ABBFB340013F194 /* StackedBarChartViewController.m in Sources */,
-				5BD47E601ABB3C91008FCEC6 /* LineChart2ViewController.m in Sources */,
 				5B57BBB51A9B26AA0036A6CC /* main.m in Sources */,
 				5BEAED361ABC192F0013F194 /* RadarChartViewController.m in Sources */,
 				5B9624411B38608C007763E2 /* NegativeStackedBarChartViewController.m in Sources */,

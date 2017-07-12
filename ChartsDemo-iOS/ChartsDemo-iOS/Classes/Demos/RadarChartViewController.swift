@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Charts
 
-class RadarChartViewController: UIViewController {
+class RadarChartViewController: DemoBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

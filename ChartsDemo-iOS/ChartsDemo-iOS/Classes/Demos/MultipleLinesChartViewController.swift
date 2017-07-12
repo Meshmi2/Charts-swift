@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Charts
 
-class MultipleLinesChartViewController: UIViewController {
+class MultipleLinesChartViewController: DemoBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

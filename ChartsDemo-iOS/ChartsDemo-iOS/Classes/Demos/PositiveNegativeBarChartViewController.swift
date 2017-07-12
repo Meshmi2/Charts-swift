@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Charts
 
-class PositiveNegativeBarChartViewController: UIViewController {
+class PositiveNegativeBarChartViewController: DemoBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

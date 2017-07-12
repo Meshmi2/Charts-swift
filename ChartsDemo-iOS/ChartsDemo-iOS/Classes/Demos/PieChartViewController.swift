@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Charts
 
-class PieChartViewController: UIViewController {
+class PieChartViewController: DemoBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
