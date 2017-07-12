@@ -13,8 +13,6 @@ private class CubicLineSampleFillFormatter: FillFormatter {
     func getFillLinePosition(dataSet: ILineChartDataSet, dataProvider: LineChartDataProvider) -> CGFloat {
         return -10
     }
-    
-    
 }
 
 class CubicLineChartViewController: DemoBaseViewController {

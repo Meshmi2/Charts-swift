@@ -35,37 +35,38 @@ open class YAxis: AxisBase
         case right
     }
     
+    
     /// indicates if the bottom y-label entry is drawn or not
-    open var drawBottomYLabelEntryEnabled = true
+    public var isDrawBottomYLabelEntryEnabled = true
     
     /// indicates if the top y-label entry is drawn or not
-    open var drawTopYLabelEntryEnabled = true
-    
+    public var isDrawTopYLabelEntryEnabled = true
+
     /// flag that indicates if the axis is inverted or not
-    open var inverted = false
+    public var isInverted = false
     
     /// flag that indicates if the zero-line should be drawn regardless of other grid lines
-    open var isDrawZeroLineEnabled = false
+    public var isDrawZeroLineEnabled = false
     
     /// Color of the zero line
-    open var zeroLineColor: Color? = .gray
+    public var zeroLineColor: Color? = .gray
     
     /// Width of the zero line
-    open var zeroLineWidth: CGFloat = 1.0
+    public var zeroLineWidth: CGFloat = 1.0
     
     /// This is how much (in pixels) into the dash pattern are we starting from.
-    open var zeroLineDashPhase = CGFloat(0.0)
+    public var zeroLineDashPhase = CGFloat(0.0)
     
     /// This is the actual dash pattern.
     /// I.e. [2, 3] will paint [--   --   ]
     /// [1, 3, 4, 2] will paint [-   ----  -   ----  ]
-    open var zeroLineDashLengths: [CGFloat]?
+    public var zeroLineDashLengths: [CGFloat]?
 
     /// axis space from the largest value to the top in percent of the total axis range
-    open var spaceTop = CGFloat(0.1)
+    public var spaceTop = CGFloat(0.1)
 
     /// axis space from the smallest value to the bottom in percent of the total axis range
-    open var spaceBottom = CGFloat(0.1)
+    public var spaceBottom = CGFloat(0.1)
     
     /// the position of the y-labels relative to the chart
     open var labelPosition = LabelPosition.outsideChart
@@ -132,9 +133,7 @@ open class YAxis: AxisBase
             return false
         }
     }
-    
-    open var isInverted: Bool { return inverted }
-    
+        
     open override func calculate(min dataMin: Double, max dataMax: Double)
     {
         // if custom, use value as is, else use data value
@@ -168,9 +167,4 @@ open class YAxis: AxisBase
         // calc actual range
         axisRange = abs(_axisMaximum - _axisMinimum)
     }
-    
-    open var isDrawBottomYLabelEntryEnabled: Bool { return drawBottomYLabelEntryEnabled }
-    
-    open var isDrawTopYLabelEntryEnabled: Bool { return drawTopYLabelEntryEnabled }
-
 }
