@@ -106,9 +106,6 @@ public struct Legend
     /// Flag indicating whether the legend will draw inside the chart or outside
     public var drawInside: Bool = false
     
-    /// Flag indicating whether the legend will draw inside the chart or outside
-    public var isDrawInsideEnabled: Bool { return drawInside }
-    
     /// The text direction of the legend
     public var direction: Direction = .leftToRight
 

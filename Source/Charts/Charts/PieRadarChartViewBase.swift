@@ -26,7 +26,7 @@ open class PieRadarChartViewBase: ChartViewBase
     fileprivate var _rawRotationAngle = CGFloat(270.0)
     
     /// flag that indicates if rotation is enabled or not
-    open var rotationEnabled = true
+    open var isRotationEnabled = true
     
     /// Sets the minimum offset (padding) around the chart, defaults to 0.0
     open var minOffset = CGFloat(0.0)
@@ -391,8 +391,6 @@ open class PieRadarChartViewBase: ChartViewBase
         return 0.0
     }
     
-    open var isRotationEnabled: Bool { return rotationEnabled }
-        
     // MARK: - Animation
     
     private var _spinAnimator: Animator?
@@ -444,7 +442,7 @@ open class PieRadarChartViewBase: ChartViewBase
     {
         self.resetVelocity()
         
-        if rotationEnabled
+        if isRotationEnabled
         {
             self.sampleVelocity(touchLocation: location)
         }
@@ -508,7 +506,7 @@ open class PieRadarChartViewBase: ChartViewBase
     open override func nsuiTouchesBegan(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
     {
         // if rotation by touch is enabled
-        if rotationEnabled
+        if isRotationEnabled
         {
             stopDeceleration()
             
@@ -530,7 +528,7 @@ open class PieRadarChartViewBase: ChartViewBase
     
     open override func nsuiTouchesMoved(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
     {
-        if rotationEnabled && !isRotationWithTwoFingers
+        if isRotationEnabled && !isRotationWithTwoFingers
         {
             let touch = touches.first as NSUITouch!
             
@@ -552,7 +550,7 @@ open class PieRadarChartViewBase: ChartViewBase
             super.nsuiTouchesEnded(touches, withEvent: event)
         }
         
-        if rotationEnabled && !isRotationWithTwoFingers
+        if isRotationEnabled && !isRotationWithTwoFingers
         {
             let touch = touches.first as NSUITouch!
             
@@ -579,7 +577,7 @@ open class PieRadarChartViewBase: ChartViewBase
     open override func mouseDown(with theEvent: NSEvent)
     {
         // if rotation by touch is enabled
-        if rotationEnabled
+        if isRotationEnabled
         {
             stopDeceleration()
         
@@ -596,7 +594,7 @@ open class PieRadarChartViewBase: ChartViewBase
     
     open override func mouseDragged(with theEvent: NSEvent)
     {
-        if rotationEnabled
+        if isRotationEnabled
         {
             let location = self.convert(theEvent.locationInWindow, from: nil)
             
@@ -616,7 +614,7 @@ open class PieRadarChartViewBase: ChartViewBase
             super.mouseUp(with: theEvent)
         }
         
-        if rotationEnabled
+        if isRotationEnabled
         {
             let location = self.convert(theEvent.locationInWindow, from: nil)
             
@@ -783,7 +781,7 @@ open class PieRadarChartViewBase: ChartViewBase
     {
         if recognizer.state == NSUIGestureRecognizerState.ended
         {
-            if !self.isHighLightPerTapEnabled { return }
+            if !self.isHighlightPerTapEnabled { return }
             
             let location = recognizer.location(in: self)
             

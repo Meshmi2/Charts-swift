@@ -589,36 +589,16 @@ open class ChartData
     }
     
     /// - returns: All colors used across all DataSet objects this object represents.
-    open func getColors() -> [Color]?
-    {
-        var clrcnt = 0
-        
-        for i in 0 ..< _dataSets.count
-        {
-            clrcnt += _dataSets[i].colors.count
-        }
-        
-        var colors = [Color]()
-        
-        for i in 0 ..< _dataSets.count
-        {
-            let clrs = _dataSets[i].colors
-            
-            for clr in clrs
-            {
-                colors.append(clr)
-            }
+    public var colors: [Color] {
+        let colors = (0..<_dataSets.count).flatMap { (i) -> [Color] in
+            return _dataSets[i].colors
         }
         
         return colors
     }
     
     /// Sets a custom ValueFormatter for all DataSets this data object contains.
-    open func setValueFormatter(_ formatter: ValueFormatter?)
-    {
-        guard let formatter = formatter
-            else { return }
-        
+    open func setValueFormatter(_ formatter: ValueFormatter) {
         for set in dataSets
         {
             set.valueFormatter = formatter
@@ -626,11 +606,11 @@ open class ChartData
     }
     
     /// Sets the color of the value-text (color in which the value-labels are drawn) for all DataSets this data object contains.
-    open func setValueTextColor(_ color: Color!)
+    open func setValueTextColor(_ color: Color)
     {
         for set in dataSets
         {
-            set.valueTextColor = color ?? set.valueTextColor
+            set.valueTextColor = color
         }
     }
     

@@ -53,9 +53,6 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     /// object that holds all data that was originally set for the chart, before it was modified or any filtering algorithms had been applied
     internal var _data: ChartData?
     
-    /// Flag that indicates if highlighting per tap (touch) is enabled
-    fileprivate var _highlightPerTapEnabled = true
-    
     /// If set to true, chart continues to scroll after touch up
     open var dragDecelerationEnabled = true
     
@@ -374,20 +371,12 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         return _indicesToHighlight
     }
     
+    /// Flag that indicates if highlighting per tap (touch) is enabled
     /// Set this to false to prevent values from being highlighted by tap gesture.
     /// Values can still be highlighted via drag or programmatically.
     /// **default**: true
-    open var highlightPerTapEnabled: Bool
-    {
-        get { return _highlightPerTapEnabled }
-        set { _highlightPerTapEnabled = newValue }
-    }
-    
     /// - returns: `true` if values can be highlighted via tap gesture, `false` ifnot.
-    open var isHighLightPerTapEnabled: Bool
-    {
-        return highlightPerTapEnabled
-    }
+    open var isHighlightPerTapEnabled = true
     
     /// Checks if the highlight array is null, has a length of zero or if the first object is null.
     /// - returns: `true` if there are values to highlight, `false` ifthere are no values to highlight.

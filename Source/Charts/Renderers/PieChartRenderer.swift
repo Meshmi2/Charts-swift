@@ -122,7 +122,7 @@ open class PieChartRenderer: DataRenderer
         var drawAngles = chart.drawAngles
         let center = chart.centerCircleBox
         let radius = chart.radius
-        let drawInnerArc = chart.drawHoleEnabled && !chart.drawSlicesUnderHoleEnabled
+        let drawInnerArc = chart.isDrawHoleEnabled && !chart.isDrawSlicesUnderHoleEnabled
         let userInnerRadius = drawInnerArc ? radius * chart.holeRadiusPercent : 0.0
         
         var visibleAngleCount = 0
@@ -278,7 +278,7 @@ open class PieChartRenderer: DataRenderer
         
         var labelRadiusOffset = radius / 10.0 * 3.0
         
-        if chart.drawHoleEnabled
+        if chart.isDrawHoleEnabled
         {
             labelRadiusOffset = (radius - (radius * chart.holeRadiusPercent)) / 2.0
         }
@@ -290,7 +290,7 @@ open class PieChartRenderer: DataRenderer
         let yValueSum = (data as! PieChartData).yValueSum
         
         let drawEntryLabels = chart.isDrawEntryLabelsEnabled
-        let usePercentValuesEnabled = chart.usePercentValuesEnabled
+        let usePercentValuesEnabled = chart.usePercentValues
         let entryLabelColor = chart.entryLabelColor
         let entryLabelFont = chart.entryLabelFont
         
@@ -377,7 +377,7 @@ open class PieChartRenderer: DataRenderer
                     
                     var line1Radius: CGFloat
                     
-                    if chart.drawHoleEnabled
+                    if chart.isDrawHoleEnabled
                     {
                         line1Radius = (radius - (radius * chart.holeRadiusPercent)) * valueLinePart1OffsetPercentage + (radius * chart.holeRadiusPercent)
                     }
@@ -563,7 +563,7 @@ open class PieChartRenderer: DataRenderer
             let animator = animator
             else { return }
         
-        if chart.drawHoleEnabled
+        if chart.isDrawHoleEnabled
         {
             context.saveGState()
             
@@ -622,11 +622,11 @@ open class PieChartRenderer: DataRenderer
             let centerAttributedText = chart.centerAttributedText
             else { return }
         
-        if chart.drawCenterTextEnabled && centerAttributedText.length > 0
+        if chart.isDrawCenterTextEnabled && centerAttributedText.length > 0
         {
             let center = chart.centerCircleBox
             let offset = chart.centerTextOffset
-            let innerRadius = chart.drawHoleEnabled && !chart.drawSlicesUnderHoleEnabled ? chart.radius * chart.holeRadiusPercent : chart.radius
+            let innerRadius = chart.isDrawHoleEnabled && !chart.isDrawSlicesUnderHoleEnabled ? chart.radius * chart.holeRadiusPercent : chart.radius
             
             let x = center.x + offset.x
             let y = center.y + offset.y
@@ -683,7 +683,7 @@ open class PieChartRenderer: DataRenderer
         var absoluteAngles = chart.absoluteAngles
         let center = chart.centerCircleBox
         let radius = chart.radius
-        let drawInnerArc = chart.drawHoleEnabled && !chart.drawSlicesUnderHoleEnabled
+        let drawInnerArc = chart.isDrawHoleEnabled && !chart.isDrawSlicesUnderHoleEnabled
         let userInnerRadius = drawInnerArc ? radius * chart.holeRadiusPercent : 0.0
         
         for i in 0 ..< indices.count
