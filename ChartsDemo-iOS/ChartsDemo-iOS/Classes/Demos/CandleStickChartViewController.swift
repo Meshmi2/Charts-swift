@@ -7,29 +7,118 @@
 //
 
 import UIKit
+import Charts
 
-class CandleStickChartViewController: UIViewController {
+class CandleStickChartViewController: DemoBaseViewController {
 
+    @IBOutlet var chartView: CandleStickChartView!
+    @IBOutlet var sliderX: UISlider!
+    @IBOutlet var sliderY: UISlider!
+    @IBOutlet var sliderTextX: UITextField!
+    @IBOutlet var sliderTextY: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.title = "Bubble Chart"
+        self.options = [Option(key: .toggleValues, label: "Toggle Values"),
+                        Option(key: .toggleIcons, label: "Toggle Icons"),
+                        Option(key: .toggleHighlight, label: "Toggle Highlight"),
+                        Option(key: .animateX, label: "Animate X"),
+                        Option(key: .animateY, label: "Animate Y"),
+                        Option(key: .animateXY, label: "Animate XY"),
+                        Option(key: .saveToGallery, label: "Save to Camera Roll"),
+                        Option(key: .togglePinchZoom, label: "Toggle PinchZoom"),
+                        Option(key: .toggleAutoScaleMinMax, label: "Toggle auto scale min/max"),
+                    Option(key: .toggleShadowColorSameAsCandle, label: "Toggle shadow same color"),
+                        Option(key: .toggleData, label: "Toggle Data")
+        ]
+        
+        chartView.delegate = self
+        
+        chartView.chartDescription?.isEnabled = false
+        
+        chartView.isDrawGridBackgroundEnabled = false
+        chartView.isDragEnabled = false
+        chartView.setScaleEnabled(true)
+        chartView.maxVisibleCount = 200
+        chartView.isPinchZoomEnabled = true
+        
+        chartView.legend.horizontalAlignment = .right
+        chartView.legend.verticalAlignment = .top
+        chartView.legend.orientation = .vertical
+        chartView.legend.drawInside = false
+        chartView.legend.font = UIFont(name: "HelveticaNeue-Light", size: 10)!
+        
+        chartView.leftAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size: 10)!
+        chartView.leftAxis.spaceTop = 0.3
+        chartView.leftAxis.spaceBottom = 0.3
+        chartView.leftAxis.axisMinimum = 0
+        
+        chartView.rightAxis.isEnabled = false
+        
+        chartView.xAxis.labelPosition = .bottom
+        chartView.xAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size: 10)!
+        
+        sliderX.value = 10
+        sliderY.value = 50
+        slidersValueChanged(nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func updateChartData() {
+        if self.shouldHideData {
+            chartView.data = nil
+            return
+        }
+        
+        self.setDataCount(Int(sliderX.value), range: UInt32(sliderY.value))
     }
-    */
-
-}
+    
+    func setDataCount(_ count: Int, range: UInt32) {
+        let yVals1 = (0..<count).map { (i) -> CandleChartDataEntry in
+            let mult = range + 1
+            let val = Double(arc4random_uniform(40) + mult)
+            let high = Double(arc4random_uniform(9) + 8)
+            let low = Double(arc4random_uniform(9) + 8)
+            let open = Double(arc4random_uniform(6) + 1)
+            let close = Double(arc4random_uniform(6) + 1)
+            let even = i % 2 == 0
+            
+            return CandleChartDataEntry(x: Double(i), shadowH: val + high, shadowL: val - low, open: even ? val + open : val - open, close: even ? val - close : val + close, icon: UIImage(named: "icon")!)
+        }
+        
+        let set1 = CandleChartDataSet(values: yVals1, label: "Data Set")
+        set1.axisDependency = .left
+        set1.setColor(UIColor(white: 80/255, alpha: 1))
+        set1.isDrawIconsEnabled = false
+        set1.shadowColor = .darkGray
+        set1.shadowWidth = 0.7
+        set1.decreasingColor = .red
+        set1.decreasingFilled = true
+        set1.increasingColor = UIColor(red: 122/255, green: 242/255, blue: 84/255, alpha: 1)
+        set1.increasingFilled = false
+        set1.neutralColor = .blue
+        
+        let data = CandleChartData(dataSet: set1)
+        chartView.data = data
+    }
+    
+    override func optionTapped(key: Option.Key) {
+        if .toggleShadowColorSameAsCandle ~= key {
+            for set in chartView.data!.dataSets as! [ICandleChartDataSet] {
+                set.shadowColorSameAsCandle = !set.shadowColorSameAsCandle
+            }
+            chartView.notifyDataSetChanged()
+        } else {
+            super.handleOption(key: key, forChartView: chartView)
+        }
+    }
+    
+    // MARK: - Actions
+    @IBAction func slidersValueChanged(_ sender: Any?) {
+        sliderTextX.text = "\(Int(sliderX.value))"
+        sliderTextY.text = "\(Int(sliderY.value))"
+        
+        self.updateChartData()
+    }}

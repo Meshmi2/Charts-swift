@@ -18,15 +18,12 @@ public protocol ILineScatterCandleRadarChartDataSet: IBarLineScatterCandleBubble
     
     // MARK: - Styling functions and accessors
     
+    
     /// Enables / disables the horizontal highlight-indicator. If disabled, the indicator is not drawn.
-    var drawHorizontalHighlightIndicatorEnabled: Bool { get set }
-    
-    /// Enables / disables the vertical highlight-indicator. If disabled, the indicator is not drawn.
-    var drawVerticalHighlightIndicatorEnabled: Bool { get set }
-    
     /// - returns: `true` if horizontal highlight indicator lines are enabled (drawn)
     var isHorizontalHighlightIndicatorEnabled: Bool { get }
     
+    /// Enables / disables the vertical highlight-indicator. If disabled, the indicator is not drawn.
     /// - returns: `true` if vertical highlight indicator lines are enabled (drawn)
     var isVerticalHighlightIndicatorEnabled: Bool { get }
     

@@ -254,7 +254,7 @@ open class ChartBaseDataSet: IChartDataSet
     /// Sets colors with a specific alpha value.
     /// - parameter colors: the colors to set
     /// - parameter alpha: alpha to apply to the set `colors`
-    open func setColors(_ colors: Color...)
+    open func setColors(_ colors: [Color])
     {
         self.colors = colors
     }

@@ -39,7 +39,7 @@ class ColoredLineChartViewController: DemoBaseViewController {
         chart.chartDescription?.isEnabled = false
         
         chart.isDrawGridBackgroundEnabled = false
-        chart.dragEnabled = true
+        chart.isDragEnabled = true
         chart.setScaleEnabled(true)
         chart.isPinchZoomEnabled = false
         chart.setViewPortOffsets(left: 10, top: 0, right: 10, bottom: 0)
@@ -74,23 +74,5 @@ class ColoredLineChartViewController: DemoBaseViewController {
         set1.isDrawValuesEnabled = false
         
         return LineChartData(dataSet: set1)
-    }
-}
-
-extension ColoredLineChartViewController: ChartViewDelegate {
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        NSLog("chartValueSelected")
-    }
-    
-    func chartValueNothingSelected(_ chartView: ChartViewBase) {
-        NSLog("chartValueNothingSelected")
-    }
-    
-    func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
-        return
-    }
-    
-    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
-        return
     }
 }

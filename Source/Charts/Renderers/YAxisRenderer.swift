@@ -191,7 +191,7 @@ open class YAxisRenderer: AxisRendererBase
             }
         }
 
-        if yAxis.drawZeroLineEnabled
+        if yAxis.isDrawZeroLineEnabled
         {
             // draw zero line
             drawZeroLine(context: context)

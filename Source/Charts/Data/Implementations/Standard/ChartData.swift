@@ -635,11 +635,11 @@ open class ChartData
     }
     
     /// Sets the font for all value-labels for all DataSets this data object contains.
-    open func setValueFont(_ font: Font!)
+    open func setValueFont(_ font: Font)
     {
         for set in dataSets
         {
-            set.valueFont = font ?? set.valueFont
+            set.valueFont = font
         }
     }
     

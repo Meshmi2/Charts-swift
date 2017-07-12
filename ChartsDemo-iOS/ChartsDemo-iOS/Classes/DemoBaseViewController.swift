@@ -13,6 +13,7 @@ struct Option {
     let key: Key
     let label: String
     
+    // TODO: Turn in to struct and move extensions into appropriate classes
     enum Key {
         case toggleValues
         case toggleIcons
@@ -25,6 +26,18 @@ struct Option {
         case toggleAutoScaleMinMax
         case toggleData
         case toggleBarBorders
+        // CandleChart
+        case toggleShadowColorSameAsCandle
+        // CombinedChart
+        case toggleLineValues
+        case toggleBarValues
+        case removeDataSet
+        // CubicLineSampleFillFormatter
+        case toggleFilled
+        case toggleCircles
+        case toggleCubic
+        case toggleHorizontalCubic
+        case toggleStepped
     }
 }
 
@@ -108,6 +121,8 @@ class DemoBaseViewController: UIViewController {
                 }
             }
             chartView.setNeedsDisplay()
+        default:
+            break
         }
     }
     
@@ -218,7 +233,7 @@ class DemoBaseViewController: UIViewController {
         
         chartView.isDrawGridBackgroundEnabled = false
         
-        chartView.dragEnabled = true
+        chartView.isDragEnabled = true
         chartView.setScaleEnabled(true)
         chartView.isPinchZoomEnabled = false
         
@@ -286,6 +301,24 @@ extension DemoBaseViewController: UITableViewDelegate, UITableViewDataSource {
             
             self.optionTapped(key: self.options[indexPath.row].key)
         }
+        
+    }
+}
+
+extension DemoBaseViewController: ChartViewDelegate {
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        NSLog("chartValueSelected");
+    }
+    
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        NSLog("chartValueNothingSelected");
+    }
+    
+    func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
+        
+    }
+    
+    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
         
     }
 }

@@ -45,7 +45,7 @@ open class YAxis: AxisBase
     open var inverted = false
     
     /// flag that indicates if the zero-line should be drawn regardless of other grid lines
-    open var drawZeroLineEnabled = false
+    open var isDrawZeroLineEnabled = false
     
     /// Color of the zero line
     open var zeroLineColor: Color? = .gray

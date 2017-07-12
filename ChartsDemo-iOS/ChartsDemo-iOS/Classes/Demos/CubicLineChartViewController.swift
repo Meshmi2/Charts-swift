@@ -7,29 +7,154 @@
 //
 
 import UIKit
+import Charts
 
-class CubicLineChartViewController: UIViewController {
+private class CubicLineSampleFillFormatter: FillFormatter {
+    func getFillLinePosition(dataSet: ILineChartDataSet, dataProvider: LineChartDataProvider) -> CGFloat {
+        return -10
+    }
+    
+    
+}
+
+class CubicLineChartViewController: DemoBaseViewController {
+
+    @IBOutlet var chartView: LineChartView!
+    @IBOutlet var sliderX: UISlider!
+    @IBOutlet var sliderY: UISlider!
+    @IBOutlet var sliderTextX: UITextField!
+    @IBOutlet var sliderTextY: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.title = "Cubic Line Chart"
+        
+        self.options = [Option(key: .toggleValues, label: "Toggle Values"),
+                        Option(key: .toggleFilled, label: "Toggle Filled"),
+                        Option(key: .toggleCircles, label: "ToggleCircles"),
+                        Option(key: .toggleCubic, label: "Toggle Cubic"),
+                        Option(key: .toggleHorizontalCubic, label: "Toggle Horizontal Cubic"),
+                        Option(key: .toggleStepped, label: "Toggle Stepped"),
+                        Option(key: .toggleHighlight, label: "Toggle Highlight"),
+                        Option(key: .animateX, label: "Animate X"),
+                        Option(key: .animateY, label: "Animate Y"),
+                        Option(key: .animateXY, label: "Animate XY"),
+                        Option(key: .saveToGallery, label: "Save to Camera Roll"),
+                        Option(key: .togglePinchZoom, label: "Toggle PinchZoom"),
+                        Option(key: .toggleAutoScaleMinMax, label: "Toggle auto scale min/max"),
+                        Option(key: .toggleData, label: "Toggle Data")
+        ]
+
+        chartView.delegate = self
+
+        chartView.setViewPortOffsets(left: 0, top: 20, right: 0, bottom: 0)
+        chartView.backgroundColor = UIColor(red: 104/255, green: 241/255, blue: 175/255, alpha: 1)
+        
+        chartView.isDragEnabled = true
+        chartView.setScaleEnabled(true)
+        chartView.isPinchZoomEnabled = false
+        chartView.isDrawGridBackgroundEnabled = false
+        chartView.maxHighlightDistance = 300
+        
+        chartView.xAxis.isEnabled = false
+        
+        var yAxis = chartView.leftAxis
+        yAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size:12)!
+        yAxis.setLabelCount(6, force: false)
+        yAxis.labelTextColor = .white
+        yAxis.labelPosition = .insideChart
+        yAxis.isDrawGridLinesEnabled = false
+        yAxis.axisLineColor = .white
+        
+        chartView.rightAxis.isEnabled = false
+        chartView.legend.isEnabled = false
+        
+        sliderX.value = 45
+        sliderY.value = 100
+        self.slidersValueChanged(nil)
+        
+        chartView.animate(xAxisDuration: 2, yAxisDuration: 2)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func updateChartData() {
+        if self.shouldHideData {
+            chartView.data = nil
+            return
+        }
+        
+        self.setDataCount(Int(sliderX.value + 1), range: UInt32(sliderY.value))
     }
     
+    func setDataCount(_ count: Int, range: UInt32) {
+        let yVals1 = (0..<count).map { (i) -> ChartDataEntry in
+            let mult = range + 1
+            let val = Double(arc4random_uniform(mult) + 20)
+            return ChartDataEntry(x: Double(i), y: val)
+        }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let set1 = LineChartDataSet(values: yVals1, label: "DataSet 1")
+        set1.mode = .cubicBezier
+        set1.isDrawCirclesEnabled = false
+        set1.lineWidth = 1.8
+        set1.circleRadius = 4
+        set1.setCircleColor(.white)
+        set1.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
+        set1.fillColor = .white
+        set1.fillAlpha = 1
+        set1.isHorizontalHighlightIndicatorEnabled = false
+        set1.fillFormatter = CubicLineSampleFillFormatter()
+        
+        let data = LineChartData(dataSet: set1)
+        data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 9)!)
+        data.setDrawValues(false)
+        
+        chartView.data = data
     }
-    */
+    
+    override func optionTapped(key: Option.Key) {
+        switch key {
+        case .toggleFilled:
+            for set in chartView.data!.dataSets as! [LineChartDataSet] {
+                set.isDrawFilledEnabled = !set.isDrawFilledEnabled
+            }
+            chartView.setNeedsDisplay()
+            
+        case .toggleCircles:
+            for set in chartView.data!.dataSets as! [LineChartDataSet] {
+                set.isDrawCirclesEnabled = !set.isDrawCirclesEnabled
+            }
+            chartView.setNeedsDisplay()
 
+        case .toggleCubic:
+            for set in chartView.data!.dataSets as! [LineChartDataSet] {
+                set.mode = (set.mode == .cubicBezier) ? .linear : .cubicBezier
+            }
+            chartView.setNeedsDisplay()
+            
+        case .toggleStepped:
+            for set in chartView.data!.dataSets as! [LineChartDataSet] {
+                set.mode = (set.mode == .stepped) ? .linear : .stepped
+            }
+            chartView.setNeedsDisplay()
+
+        case .toggleHorizontalCubic:
+            for set in chartView.data!.dataSets as! [LineChartDataSet] {
+                set.mode = (set.mode == .cubicBezier) ? .horizontalBezier : .cubicBezier
+            }
+            chartView.setNeedsDisplay()
+            
+        default:
+            super.handleOption(key: key, forChartView: chartView)
+        }
+    }
+    
+    // MARK: - Actions
+    @IBAction func slidersValueChanged(_ sender: Any?) {
+        sliderTextX.text = "\(Int(sliderX.value))"
+        sliderTextY.text = "\(Int(sliderY.value))"
+        
+        self.updateChartData()
+    }
 }

@@ -7,29 +7,123 @@
 //
 
 import UIKit
+import Charts
 
-class BubbleChartViewController: UIViewController {
-
+class BubbleChartViewController: DemoBaseViewController {
+    
+    @IBOutlet var chartView: BubbleChartView!
+    @IBOutlet var sliderX: UISlider!
+    @IBOutlet var sliderY: UISlider!
+    @IBOutlet var sliderTextX: UITextField!
+    @IBOutlet var sliderTextY: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.title = "Bubble Chart"
+        self.options = [Option(key: .toggleValues, label: "Toggle Values"),
+                        Option(key: .toggleIcons, label: "Toggle Icons"),
+                        Option(key: .toggleHighlight, label: "Toggle Highlight"),
+                        Option(key: .animateX, label: "Animate X"),
+                        Option(key: .animateY, label: "Animate Y"),
+                        Option(key: .animateXY, label: "Animate XY"),
+                        Option(key: .saveToGallery, label: "Save to Camera Roll"),
+                        Option(key: .togglePinchZoom, label: "Toggle PinchZoom"),
+                        Option(key: .toggleAutoScaleMinMax, label: "Toggle auto scale min/max"),
+                        Option(key: .toggleData, label: "Toggle Data")
+        ]
+        
+        chartView.delegate = self
+        
+        chartView.chartDescription?.isEnabled = false
+        
+        chartView.isDrawGridBackgroundEnabled = false
+        chartView.isDragEnabled = false
+        chartView.setScaleEnabled(true)
+        chartView.maxVisibleCount = 200
+        chartView.isPinchZoomEnabled = true
+        
+        chartView.legend.horizontalAlignment = .right
+        chartView.legend.verticalAlignment = .top
+        chartView.legend.orientation = .vertical
+        chartView.legend.drawInside = false
+        chartView.legend.font = UIFont(name: "HelveticaNeue-Light", size: 10)!
+        
+        chartView.leftAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size: 10)!
+        chartView.leftAxis.spaceTop = 0.3
+        chartView.leftAxis.spaceBottom = 0.3
+        chartView.leftAxis.axisMinimum = 0
+        
+        chartView.rightAxis.isEnabled = false
+        
+        chartView.xAxis.labelPosition = .bottom
+        chartView.xAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size: 10)!
+        
+        sliderX.value = 10
+        sliderY.value = 50
+        slidersValueChanged(nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func updateChartData() {
+        if self.shouldHideData {
+            chartView.data = nil
+            return
+        }
+        
+        self.setDataCount(Int(sliderX.value), range: UInt32(sliderY.value))
     }
-    */
-
+    
+    func setDataCount(_ count: Int, range: UInt32) {
+        let yVals1 = (0..<count).map { (i) -> BubbleChartDataEntry in
+            let val = Double(arc4random_uniform(range))
+            let size = CGFloat(arc4random_uniform(range))
+            return BubbleChartDataEntry(x: Double(i), y: val, size: size, icon: UIImage(named: "icon"))
+        }
+        let yVals2 = (0..<count).map { (i) -> BubbleChartDataEntry in
+            let val = Double(arc4random_uniform(range))
+            let size = CGFloat(arc4random_uniform(range))
+            return BubbleChartDataEntry(x: Double(i), y: val, size: size, icon: UIImage(named: "icon"))
+        }
+        let yVals3 = (0..<count).map { (i) -> BubbleChartDataEntry in
+            let val = Double(arc4random_uniform(range))
+            let size = CGFloat(arc4random_uniform(range))
+            return BubbleChartDataEntry(x: Double(i), y: val, size: size)
+        }
+        
+        let set1 = BubbleChartDataSet(values: yVals1, label: "DS 1")
+        set1.isDrawIconsEnabled = false
+        set1.setColor(ChartColorTemplates.colorful[0], alpha: 0.5)
+        set1.isDrawValuesEnabled = true
+        
+        let set2 = BubbleChartDataSet(values: yVals2, label: "DS 2")
+        set2.isDrawIconsEnabled = false
+        set2.iconsOffset = CGPoint(x: 0, y: 15)
+        set2.setColor(ChartColorTemplates.colorful[1], alpha: 0.5)
+        set2.isDrawValuesEnabled = true
+        
+        let set3 = BubbleChartDataSet(values: yVals3, label: "DS 3")
+        set3.setColor(ChartColorTemplates.colorful[2], alpha: 0.5)
+        set3.isDrawValuesEnabled = true
+        
+        let data = BubbleChartData(dataSets: [set1, set2, set3])
+        data.setDrawValues(false)
+        data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 7)!)
+        data.setHighlightCircleWidth(1.5)
+        data.setValueTextColor(.white)
+        
+        chartView.data = data
+    }
+    
+    override func optionTapped(key: Option.Key) {
+        super.handleOption(key: key, forChartView: chartView)
+    }
+    
+    // MARK: - Actions
+    @IBAction func slidersValueChanged(_ sender: Any?) {
+        sliderTextX.text = "\(Int(sliderX.value))"
+        sliderTextY.text = "\(Int(sliderY.value))"
+        
+        self.updateChartData()
+    }
 }

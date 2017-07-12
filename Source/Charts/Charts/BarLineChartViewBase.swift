@@ -32,16 +32,40 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     open var isPinchZoomEnabled: Bool = false {
         didSet {
             #if !os(tvOS)
-                _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
+                _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || isScaleXEnabled || isScaleYEnabled
             #endif
             
         }
     }
-    fileprivate var _doubleTapToZoomEnabled = true
-    fileprivate var _dragEnabled = true
     
-    fileprivate var _scaleXEnabled = true
-    fileprivate var _scaleYEnabled = true
+    /// flag that indicates if double tap zoom is enabled or not
+    /// **default**: true
+    /// - returns: `true` if zooming via double-tap is enabled `false` ifnot.
+    public var isDoubleTapToZoomEnabled = true {
+        willSet {
+            if isDoubleTapToZoomEnabled != newValue {
+                _doubleTapGestureRecognizer.isEnabled = newValue
+            }
+        }
+    }
+    
+    /// is dragging enabled? (moving the chart with the finger) for the chart (this does not affect scaling).
+    open var isDragEnabled: Bool = true
+    
+    public var isScaleXEnabled = true {
+        didSet {
+            #if !os(tvOS)
+                _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || isScaleXEnabled || isScaleYEnabled
+            #endif
+        }
+    }
+    public var isScaleYEnabled = true {
+        didSet {
+            #if !os(tvOS)
+                _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || isScaleXEnabled || isScaleYEnabled
+            #endif
+        }
+    }
     
     /// the color for the background of the chart-drawing area (everything behind the grid lines).
     open var gridBackgroundColor = Color(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
@@ -137,14 +161,14 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         self.addGestureRecognizer(_doubleTapGestureRecognizer)
         self.addGestureRecognizer(_panGestureRecognizer)
         
-        _doubleTapGestureRecognizer.isEnabled = _doubleTapToZoomEnabled
-        _panGestureRecognizer.isEnabled = _dragEnabled
+        _doubleTapGestureRecognizer.isEnabled = isDoubleTapToZoomEnabled
+        _panGestureRecognizer.isEnabled = isDragEnabled
 
         #if !os(tvOS)
             _pinchGestureRecognizer = NSUIPinchGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.pinchGestureRecognized(_:)))
             _pinchGestureRecognizer.delegate = self
             self.addGestureRecognizer(_pinchGestureRecognizer)
-            _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
+            _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || isScaleXEnabled || isScaleYEnabled
         #endif
     }
     
@@ -565,7 +589,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         
         if recognizer.state == NSUIGestureRecognizerState.ended
         {
-            if _data !== nil && _doubleTapToZoomEnabled && (data?.entryCount ?? 0) > 0
+            if _data !== nil && isDoubleTapToZoomEnabled && (data?.entryCount ?? 0) > 0
             {
                 var location = recognizer.location(in: self)
                 location.x = location.x - viewPortHandler.offsetLeft
@@ -592,7 +616,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             stopDeceleration()
             
             if _data !== nil &&
-                (isPinchZoomEnabled || _scaleXEnabled || _scaleYEnabled)
+                (isPinchZoomEnabled || isScaleXEnabled || isScaleYEnabled)
             {
                 _isScaling = true
                 
@@ -605,9 +629,9 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                     let x = abs(recognizer.location(in: self).x - recognizer.nsuiLocationOfTouch(1, inView: self).x)
                     let y = abs(recognizer.location(in: self).y - recognizer.nsuiLocationOfTouch(1, inView: self).y)
                     
-                    if _scaleXEnabled != _scaleYEnabled
+                    if isScaleXEnabled != isScaleYEnabled
                     {
-                        _gestureScaleAxis = _scaleXEnabled ? .x : .y
+                        _gestureScaleAxis = isScaleXEnabled ? .x : .y
                     }
                     else
                     {
@@ -636,8 +660,8 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             
             if _isScaling
             {
-                canZoomMoreX = canZoomMoreX && _scaleXEnabled && (_gestureScaleAxis == .both || _gestureScaleAxis == .x)
-                canZoomMoreY = canZoomMoreY && _scaleYEnabled && (_gestureScaleAxis == .both || _gestureScaleAxis == .y)
+                canZoomMoreX = canZoomMoreX && isScaleXEnabled && (_gestureScaleAxis == .both || _gestureScaleAxis == .x)
+                canZoomMoreY = canZoomMoreY && isScaleYEnabled && (_gestureScaleAxis == .both || _gestureScaleAxis == .y)
                 if canZoomMoreX || canZoomMoreY
                 {
                     var location = recognizer.location(in: self)
@@ -864,7 +888,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     {
         if gestureRecognizer == _panGestureRecognizer
         {
-            if _data === nil || !_dragEnabled ||
+            if _data === nil || !isDragEnabled ||
                 (self.hasNoDragOffset && self.isFullyZoomedOut && !self.isHighlightPerDragEnabled)
             {
                 return false
@@ -875,7 +899,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             #if !os(tvOS)
                 if gestureRecognizer == _pinchGestureRecognizer
                 {
-                    if _data === nil || (!isPinchZoomEnabled && !_scaleXEnabled && !_scaleYEnabled)
+                    if _data === nil || (!isPinchZoomEnabled && !isScaleXEnabled && !isScaleYEnabled)
                     {
                         return false
                     }
@@ -1444,103 +1468,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
 
         return vals
     }
-
-    /// is dragging enabled? (moving the chart with the finger) for the chart (this does not affect scaling).
-    open var dragEnabled: Bool
-    {
-        get
-        {
-            return _dragEnabled
-        }
-        set
-        {
-            if _dragEnabled != newValue
-            {
-                _dragEnabled = newValue
-            }
-        }
-    }
-    
-    /// is dragging enabled? (moving the chart with the finger) for the chart (this does not affect scaling).
-    open var isDragEnabled: Bool
-    {
-        return dragEnabled
-    }
     
     /// is scaling enabled? (zooming in and out by gesture) for the chart (this does not affect dragging).
     open func setScaleEnabled(_ enabled: Bool)
     {
-        if _scaleXEnabled != enabled || _scaleYEnabled != enabled
+        if isScaleXEnabled != enabled || isScaleYEnabled != enabled
         {
-            _scaleXEnabled = enabled
-            _scaleYEnabled = enabled
+            isScaleXEnabled = enabled
+            isScaleYEnabled = enabled
             #if !os(tvOS)
-                _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
+                _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || isScaleXEnabled || isScaleYEnabled
             #endif
         }
-    }
-    
-    open var scaleXEnabled: Bool
-    {
-        get
-        {
-            return _scaleXEnabled
-        }
-        set
-        {
-            if _scaleXEnabled != newValue
-            {
-                _scaleXEnabled = newValue
-                #if !os(tvOS)
-                    _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
-                #endif
-            }
-        }
-    }
-    
-    open var scaleYEnabled: Bool
-    {
-        get
-        {
-            return _scaleYEnabled
-        }
-        set
-        {
-            if _scaleYEnabled != newValue
-            {
-                _scaleYEnabled = newValue
-                #if !os(tvOS)
-                    _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
-                #endif
-            }
-        }
-    }
-    
-    open var isScaleXEnabled: Bool { return scaleXEnabled }
-    open var isScaleYEnabled: Bool { return scaleYEnabled }
-    
-    /// flag that indicates if double tap zoom is enabled or not
-    open var doubleTapToZoomEnabled: Bool
-    {
-        get
-        {
-            return _doubleTapToZoomEnabled
-        }
-        set
-        {
-            if _doubleTapToZoomEnabled != newValue
-            {
-                _doubleTapToZoomEnabled = newValue
-                _doubleTapGestureRecognizer.isEnabled = _doubleTapToZoomEnabled
-            }
-        }
-    }
-    
-    /// **default**: true
-    /// - returns: `true` if zooming via double-tap is enabled `false` ifnot.
-    open var isDoubleTapToZoomEnabled: Bool
-    {
-        return doubleTapToZoomEnabled
     }
     
     /// flag that indicates if highlighting per dragging over a fully zoomed out chart is enabled
