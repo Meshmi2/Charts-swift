@@ -34,10 +34,6 @@
 		5BD47E611ABB3C91008FCEC6 /* LineChart2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BD47E5F1ABB3C91008FCEC6 /* LineChart2ViewController.xib */; };
 		5BD8F0741AB89CE500566E05 /* LineChart1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD8F0721AB89CE500566E05 /* LineChart1ViewController.m */; };
 		5BD8F0751AB89CE500566E05 /* LineChart1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BD8F0731AB89CE500566E05 /* LineChart1ViewController.xib */; };
-		5BDEDC411ABB7F73007D3A60 /* HorizontalBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEDC3F1ABB7F73007D3A60 /* HorizontalBarChartViewController.m */; };
-		5BDEDC421ABB7F73007D3A60 /* HorizontalBarChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BDEDC401ABB7F73007D3A60 /* HorizontalBarChartViewController.xib */; };
-		5BE673801D5B496500A87BA2 /* HalfPieChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE6737E1D5B496500A87BA2 /* HalfPieChartViewController.m */; };
-		5BE673811D5B496500A87BA2 /* HalfPieChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE6737F1D5B496500A87BA2 /* HalfPieChartViewController.xib */; };
 		5BE673921D5B4E0900A87BA2 /* LineChartFilledViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE6738D1D5B4E0900A87BA2 /* LineChartFilledViewController.m */; };
 		5BE673931D5B4E0900A87BA2 /* LineChartFilledViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE6738E1D5B4E0900A87BA2 /* LineChartFilledViewController.xib */; };
 		5BE673941D5B4E0900A87BA2 /* LineChartTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE673901D5B4E0900A87BA2 /* LineChartTimeViewController.m */; };
@@ -132,12 +128,6 @@
 		5BD8F0711AB89CE500566E05 /* LineChart1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChart1ViewController.h; sourceTree = "<group>"; };
 		5BD8F0721AB89CE500566E05 /* LineChart1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChart1ViewController.m; sourceTree = "<group>"; };
 		5BD8F0731AB89CE500566E05 /* LineChart1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineChart1ViewController.xib; sourceTree = "<group>"; };
-		5BDEDC3E1ABB7F73007D3A60 /* HorizontalBarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalBarChartViewController.h; sourceTree = "<group>"; };
-		5BDEDC3F1ABB7F73007D3A60 /* HorizontalBarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalBarChartViewController.m; sourceTree = "<group>"; };
-		5BDEDC401ABB7F73007D3A60 /* HorizontalBarChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HorizontalBarChartViewController.xib; sourceTree = "<group>"; };
-		5BE6737D1D5B496500A87BA2 /* HalfPieChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HalfPieChartViewController.h; sourceTree = "<group>"; };
-		5BE6737E1D5B496500A87BA2 /* HalfPieChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HalfPieChartViewController.m; sourceTree = "<group>"; };
-		5BE6737F1D5B496500A87BA2 /* HalfPieChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HalfPieChartViewController.xib; sourceTree = "<group>"; };
 		5BE6738C1D5B4E0900A87BA2 /* LineChartFilledViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChartFilledViewController.h; sourceTree = "<group>"; };
 		5BE6738D1D5B4E0900A87BA2 /* LineChartFilledViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChartFilledViewController.m; sourceTree = "<group>"; };
 		5BE6738E1D5B4E0900A87BA2 /* LineChartFilledViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineChartFilledViewController.xib; sourceTree = "<group>"; };
@@ -274,12 +264,6 @@
 		5BD8F06F1AB89C7100566E05 /* Demos */ = {
 			isa = PBXGroup;
 			children = (
-				5BE6737D1D5B496500A87BA2 /* HalfPieChartViewController.h */,
-				5BE6737E1D5B496500A87BA2 /* HalfPieChartViewController.m */,
-				5BE6737F1D5B496500A87BA2 /* HalfPieChartViewController.xib */,
-				5BDEDC3E1ABB7F73007D3A60 /* HorizontalBarChartViewController.h */,
-				5BDEDC3F1ABB7F73007D3A60 /* HorizontalBarChartViewController.m */,
-				5BDEDC401ABB7F73007D3A60 /* HorizontalBarChartViewController.xib */,
 				5BD8F0711AB89CE500566E05 /* LineChart1ViewController.h */,
 				5BD8F0721AB89CE500566E05 /* LineChart1ViewController.m */,
 				5BD8F0731AB89CE500566E05 /* LineChart1ViewController.xib */,
@@ -432,9 +416,7 @@
 				5BEAED1C1ABBFB340013F194 /* ScatterChartViewController.xib in Resources */,
 				0471CBFC1CA1090A00E52DBC /* PiePolylineChartViewController.xib in Resources */,
 				5BD8F0751AB89CE500566E05 /* LineChart1ViewController.xib in Resources */,
-				5BE673811D5B496500A87BA2 /* HalfPieChartViewController.xib in Resources */,
 				5B43162D1AB8D8AE0009FCAA /* iTunesArtwork in Resources */,
-				5BDEDC421ABB7F73007D3A60 /* HorizontalBarChartViewController.xib in Resources */,
 				5B4316371AB8D8B70009FCAA /* Default-736h@3x.png in Resources */,
 				5BE673951D5B4E0900A87BA2 /* LineChartTimeViewController.xib in Resources */,
 				5B4316291AB8D8AE0009FCAA /* Icon-40@2x.png in Resources */,
@@ -459,10 +441,8 @@
 				5BE7E7621C693098000A0377 /* PositiveNegativeBarChartViewController.m in Sources */,
 				5BEAED251ABC0BE20013F194 /* MultipleBarChartViewController.m in Sources */,
 				5BEAED271ABC0BE20013F194 /* MultipleLinesChartViewController.m in Sources */,
-				5BE673801D5B496500A87BA2 /* HalfPieChartViewController.m in Sources */,
 				5BE673921D5B4E0900A87BA2 /* LineChartFilledViewController.m in Sources */,
 				5BE673941D5B4E0900A87BA2 /* LineChartTimeViewController.m in Sources */,
-				5BDEDC411ABB7F73007D3A60 /* HorizontalBarChartViewController.m in Sources */,
 				5BEAED1D1ABBFB340013F194 /* StackedBarChartViewController.m in Sources */,
 				5BD47E601ABB3C91008FCEC6 /* LineChart2ViewController.m in Sources */,
 				5B57BBB51A9B26AA0036A6CC /* main.m in Sources */,

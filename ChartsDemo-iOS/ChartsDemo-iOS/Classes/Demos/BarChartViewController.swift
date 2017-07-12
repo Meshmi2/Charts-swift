@@ -74,14 +74,16 @@ class BarChartViewController: DemoBaseViewController {
         rightAxis.spaceTop = 0.15
         rightAxis.axisMinimum = 0
         
-        chartView.legend.horizontalAlignment = .left
-        chartView.legend.verticalAlignment = .bottom
-        chartView.legend.orientation = .horizontal
-        chartView.legend.drawInside = false
-        chartView.legend.form = .square
-        chartView.legend.formSize = 9
-        chartView.legend.font = UIFont(name: "HelveticaNeue-Light", size: 11)!
-        chartView.legend.xEntrySpace = 4
+        var l = chartView.legend
+        l.horizontalAlignment = .left
+        l.verticalAlignment = .bottom
+        l.orientation = .horizontal
+        l.drawInside = false
+        l.form = .square
+        l.formSize = 9
+        l.font = UIFont(name: "HelveticaNeue-Light", size: 11)!
+        l.xEntrySpace = 4
+        chartView.legend = l
         
         let marker = XYMarkerView(color: UIColor(white: 180/250, alpha: 1),
                                   font: .systemFont(ofSize: 12),
@@ -103,15 +105,15 @@ class BarChartViewController: DemoBaseViewController {
             return
         }
         
-        self.setDataCount(Int(sliderX.value) + 1, range: Double(sliderY.value))
+        self.setDataCount(Int(sliderX.value) + 1, range: UInt32(sliderY.value))
     }
     
-    func setDataCount(_ count: Int, range: Double) {
+    func setDataCount(_ count: Int, range: UInt32) {
         let start = 1
         
         let yVals = (start..<start+count+1).map { (i) -> BarChartDataEntry in
             let mult = range + 1
-            let val = Double(arc4random_uniform(UInt32(mult)))
+            let val = Double(arc4random_uniform(mult))
             if arc4random_uniform(100) < 25 {
                 return BarChartDataEntry(x: Double(i), y: val, icon: UIImage(named: "icon"))
             } else {
