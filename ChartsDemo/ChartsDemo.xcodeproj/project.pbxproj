@@ -11,8 +11,6 @@
 		0471CBFC1CA1090A00E52DBC /* PiePolylineChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0471CBFB1CA1090A00E52DBC /* PiePolylineChartViewController.xib */; };
 		0630AE511D81271B008859B0 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0630AE411D8126C0008859B0 /* Charts.framework */; };
 		0630AE521D81271B008859B0 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0630AE411D8126C0008859B0 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5B0CC7851ABB875400665592 /* PieChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CC7831ABB875400665592 /* PieChartViewController.m */; };
-		5B0CC7861ABB875400665592 /* PieChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B0CC7841ABB875400665592 /* PieChartViewController.xib */; };
 		5B4316271AB8D8AE0009FCAA /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B43161F1AB8D8AE0009FCAA /* Icon-29@2x.png */; };
 		5B4316281AB8D8AE0009FCAA /* Icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4316201AB8D8AE0009FCAA /* Icon-29@3x.png */; };
 		5B4316291AB8D8AE0009FCAA /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4316211AB8D8AE0009FCAA /* Icon-40@2x.png */; };
@@ -84,9 +82,6 @@
 		0471CBFB1CA1090A00E52DBC /* PiePolylineChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PiePolylineChartViewController.xib; sourceTree = "<group>"; };
 		0630AE391D8126C0008859B0 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = ../Charts.xcodeproj; sourceTree = "<group>"; };
 		066750AC1E2DB68D00E22DC6 /* Carthage.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Carthage.xcconfig; path = ../Carthage.xcconfig; sourceTree = "<group>"; };
-		5B0CC7821ABB875400665592 /* PieChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartViewController.h; sourceTree = "<group>"; };
-		5B0CC7831ABB875400665592 /* PieChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartViewController.m; sourceTree = "<group>"; };
-		5B0CC7841ABB875400665592 /* PieChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PieChartViewController.xib; sourceTree = "<group>"; };
 		5B43161F1AB8D8AE0009FCAA /* Icon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@2x.png"; sourceTree = "<group>"; };
 		5B4316201AB8D8AE0009FCAA /* Icon-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@3x.png"; sourceTree = "<group>"; };
 		5B4316211AB8D8AE0009FCAA /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
@@ -229,9 +224,6 @@
 		5BD8F06F1AB89C7100566E05 /* Demos */ = {
 			isa = PBXGroup;
 			children = (
-				5B0CC7821ABB875400665592 /* PieChartViewController.h */,
-				5B0CC7831ABB875400665592 /* PieChartViewController.m */,
-				5B0CC7841ABB875400665592 /* PieChartViewController.xib */,
 				0439A3511C9FF95F00496F83 /* PiePolylineChartViewController.h */,
 				0439A3521C9FF95F00496F83 /* PiePolylineChartViewController.m */,
 				0471CBFB1CA1090A00E52DBC /* PiePolylineChartViewController.xib */,
@@ -351,7 +343,6 @@
 				5B4316381AB8D8B70009FCAA /* Default@2x.png in Resources */,
 				5B613DA41D526AD5000F1E98 /* radar_marker@3x.png in Resources */,
 				5BE7E7631C693098000A0377 /* PositiveNegativeBarChartViewController.xib in Resources */,
-				5B0CC7861ABB875400665592 /* PieChartViewController.xib in Resources */,
 				5BEAED1C1ABBFB340013F194 /* ScatterChartViewController.xib in Resources */,
 				0471CBFC1CA1090A00E52DBC /* PiePolylineChartViewController.xib in Resources */,
 				5B43162D1AB8D8AE0009FCAA /* iTunesArtwork in Resources */,
@@ -371,7 +362,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BEAED1B1ABBFB340013F194 /* ScatterChartViewController.m in Sources */,
-				5B0CC7851ABB875400665592 /* PieChartViewController.m in Sources */,
 				0439A3541C9FF95F00496F83 /* PiePolylineChartViewController.m in Sources */,
 				5BEAED401ABC1AC60013F194 /* SinusBarChartViewController.m in Sources */,
 				5BE7E7621C693098000A0377 /* PositiveNegativeBarChartViewController.m in Sources */,
