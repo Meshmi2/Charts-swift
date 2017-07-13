@@ -12,10 +12,6 @@ import Charts
 class NegativeStackedBarChartViewController: DemoBaseViewController {
 
     @IBOutlet var chartView: HorizontalBarChartView!
-    @IBOutlet var sliderX: UISlider!
-    @IBOutlet var sliderY: UISlider!
-    @IBOutlet var sliderTextX: UITextField!
-    @IBOutlet var sliderTextY: UITextField!
     
     lazy var customFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
