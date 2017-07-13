@@ -38,11 +38,9 @@ open class RadarChartDataSet: LineRadarChartDataSet, IRadarChartDataSet
     
     /// flag indicating whether highlight circle should be drawn or not
     /// **default**: false
-    open var drawHighlightCircleEnabled: Bool = false
-    
     /// - returns: `true` if highlight circle should be drawn, `false` ifnot
-    open var isDrawHighlightCircleEnabled: Bool { return drawHighlightCircleEnabled }
-    
+    open var isDrawHighlightCircleEnabled: Bool = false
+        
     open var highlightCircleFillColor: Color? = Color.white
     
     /// The stroke color for highlight circle.

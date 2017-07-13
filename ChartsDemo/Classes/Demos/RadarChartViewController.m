@@ -59,7 +59,7 @@
     _chartView.innerWebColor = UIColor.lightGrayColor;
     _chartView.webAlpha = 1.0;
     
-    RadarMarkerView *marker = (RadarMarkerView *)[RadarMarkerView viewFromXib];
+    RadarMarkerView *marker A= (RadarMarkerView *)[RadarMarkerView viewFromXib];
     marker.chartView = _chartView;
     _chartView.marker = marker;
     

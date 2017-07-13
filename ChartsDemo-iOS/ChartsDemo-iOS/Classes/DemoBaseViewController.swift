@@ -44,7 +44,11 @@ struct Option {
         case toggleHole
         case spin
         case drawCenter
-        
+        // RadarChart
+        case toggleXLabels
+        case toggleYLabels
+        case toggleRotate
+        case toggleHighlightCircle
     }
 }
 
