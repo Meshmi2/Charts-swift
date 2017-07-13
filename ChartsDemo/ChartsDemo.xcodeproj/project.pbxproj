@@ -24,12 +24,8 @@
 		5B57BBB51A9B26AA0036A6CC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B57BBB41A9B26AA0036A6CC /* main.m */; };
 		5B613DA41D526AD5000F1E98 /* radar_marker@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B613DA31D526AD5000F1E98 /* radar_marker@3x.png */; };
 		5B8EAF301AB32E15009697AA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B8EAF2F1AB32E15009697AA /* Images.xcassets */; };
-		5BEAED1B1ABBFB340013F194 /* ScatterChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEAED161ABBFB340013F194 /* ScatterChartViewController.m */; };
-		5BEAED1C1ABBFB340013F194 /* ScatterChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BEAED171ABBFB340013F194 /* ScatterChartViewController.xib */; };
 		5BEAED1D1ABBFB340013F194 /* StackedBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEAED191ABBFB340013F194 /* StackedBarChartViewController.m */; };
 		5BEAED1E1ABBFB340013F194 /* StackedBarChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BEAED1A1ABBFB340013F194 /* StackedBarChartViewController.xib */; };
-		5BEAED361ABC192F0013F194 /* RadarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEAED341ABC192F0013F194 /* RadarChartViewController.m */; };
-		5BEAED371ABC192F0013F194 /* RadarChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BEAED351ABC192F0013F194 /* RadarChartViewController.xib */; };
 		5BEAED401ABC1AC60013F194 /* SinusBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEAED3E1ABC1AC60013F194 /* SinusBarChartViewController.m */; };
 		5BEAED411ABC1AC60013F194 /* SinusBarChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BEAED3F1ABC1AC60013F194 /* SinusBarChartViewController.xib */; };
 /* End PBXBuildFile section */
@@ -93,15 +89,9 @@
 		5B613DA31D526AD5000F1E98 /* radar_marker@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radar_marker@3x.png"; sourceTree = "<group>"; };
 		5B8EAF2F1AB32E15009697AA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5BD47E5C1ABB0273008FCEC6 /* ChartsDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChartsDemo-Bridging-Header.h"; sourceTree = "<group>"; };
-		5BEAED151ABBFB340013F194 /* ScatterChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScatterChartViewController.h; sourceTree = "<group>"; };
-		5BEAED161ABBFB340013F194 /* ScatterChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScatterChartViewController.m; sourceTree = "<group>"; };
-		5BEAED171ABBFB340013F194 /* ScatterChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScatterChartViewController.xib; sourceTree = "<group>"; };
 		5BEAED181ABBFB340013F194 /* StackedBarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackedBarChartViewController.h; sourceTree = "<group>"; };
 		5BEAED191ABBFB340013F194 /* StackedBarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackedBarChartViewController.m; sourceTree = "<group>"; };
 		5BEAED1A1ABBFB340013F194 /* StackedBarChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StackedBarChartViewController.xib; sourceTree = "<group>"; };
-		5BEAED331ABC192F0013F194 /* RadarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadarChartViewController.h; sourceTree = "<group>"; };
-		5BEAED341ABC192F0013F194 /* RadarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadarChartViewController.m; sourceTree = "<group>"; };
-		5BEAED351ABC192F0013F194 /* RadarChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadarChartViewController.xib; sourceTree = "<group>"; };
 		5BEAED3D1ABC1AC60013F194 /* SinusBarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinusBarChartViewController.h; sourceTree = "<group>"; };
 		5BEAED3E1ABC1AC60013F194 /* SinusBarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinusBarChartViewController.m; sourceTree = "<group>"; };
 		5BEAED3F1ABC1AC60013F194 /* SinusBarChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SinusBarChartViewController.xib; sourceTree = "<group>"; };
@@ -214,12 +204,6 @@
 		5BD8F06F1AB89C7100566E05 /* Demos */ = {
 			isa = PBXGroup;
 			children = (
-				5BEAED331ABC192F0013F194 /* RadarChartViewController.h */,
-				5BEAED341ABC192F0013F194 /* RadarChartViewController.m */,
-				5BEAED351ABC192F0013F194 /* RadarChartViewController.xib */,
-				5BEAED151ABBFB340013F194 /* ScatterChartViewController.h */,
-				5BEAED161ABBFB340013F194 /* ScatterChartViewController.m */,
-				5BEAED171ABBFB340013F194 /* ScatterChartViewController.xib */,
 				5BEAED3D1ABC1AC60013F194 /* SinusBarChartViewController.h */,
 				5BEAED3E1ABC1AC60013F194 /* SinusBarChartViewController.m */,
 				5BEAED3F1ABC1AC60013F194 /* SinusBarChartViewController.xib */,
@@ -321,12 +305,10 @@
 				5B4316281AB8D8AE0009FCAA /* Icon-29@3x.png in Resources */,
 				5B4316361AB8D8B70009FCAA /* Default-667h@2x.png in Resources */,
 				5BEAED411ABC1AC60013F194 /* SinusBarChartViewController.xib in Resources */,
-				5BEAED371ABC192F0013F194 /* RadarChartViewController.xib in Resources */,
 				5B4316351AB8D8B70009FCAA /* Default-568h@2x.png in Resources */,
 				5B43162A1AB8D8AE0009FCAA /* Icon-40@3x.png in Resources */,
 				5B4316381AB8D8B70009FCAA /* Default@2x.png in Resources */,
 				5B613DA41D526AD5000F1E98 /* radar_marker@3x.png in Resources */,
-				5BEAED1C1ABBFB340013F194 /* ScatterChartViewController.xib in Resources */,
 				5B43162D1AB8D8AE0009FCAA /* iTunesArtwork in Resources */,
 				5B4316371AB8D8B70009FCAA /* Default-736h@3x.png in Resources */,
 				5B4316291AB8D8AE0009FCAA /* Icon-40@2x.png in Resources */,
@@ -343,11 +325,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BEAED1B1ABBFB340013F194 /* ScatterChartViewController.m in Sources */,
 				5BEAED401ABC1AC60013F194 /* SinusBarChartViewController.m in Sources */,
 				5BEAED1D1ABBFB340013F194 /* StackedBarChartViewController.m in Sources */,
 				5B57BBB51A9B26AA0036A6CC /* main.m in Sources */,
-				5BEAED361ABC192F0013F194 /* RadarChartViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
