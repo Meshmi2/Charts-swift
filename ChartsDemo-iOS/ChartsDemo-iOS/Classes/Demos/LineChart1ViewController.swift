@@ -45,7 +45,6 @@ class LineChart1ViewController: DemoBaseViewController {
         chartView.isDragEnabled = true
         chartView.setScaleEnabled(true)
         chartView.isPinchZoomEnabled = true
-        chartView.isDrawGridBackgroundEnabled = false
         
         // x-axis limit line
         let llXAxis = ChartLimitLine(limit: 10, label: "Index 10")
@@ -76,7 +75,6 @@ class LineChart1ViewController: DemoBaseViewController {
         leftAxis.axisMaximum = 200
         leftAxis.axisMinimum = -50
         leftAxis.gridLineDashLengths = [5, 5]
-        leftAxis.isDrawZeroLineEnabled = false
         leftAxis.isDrawLimitLinesBehindDataEnabled = true
         
         chartView.rightAxis.isEnabled = false

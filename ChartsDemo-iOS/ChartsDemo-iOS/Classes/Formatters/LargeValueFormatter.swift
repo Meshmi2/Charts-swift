@@ -19,7 +19,7 @@ open class LargeValueFormatter: ValueFormatter, AxisValueFormatter {
     /// An appendix text to be added at the end of the formatted value.
     open var appendix: String?
     
-    public init(appendix: String?) {
+    public init(appendix: String? = nil) {
         self.appendix = appendix
     }
     

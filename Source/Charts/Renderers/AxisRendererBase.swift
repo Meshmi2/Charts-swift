@@ -121,7 +121,7 @@ open class AxisRendererBase: Renderer
             interval = floor(10.0 * Double(intervalMagnitude))
         }
         
-        var n = axis.centerAxisLabelsEnabled ? 1 : 0
+        var n = axis.isCenterAxisLabelsEnabled ? 1 : 0
         
         // force label count
         if axis.isForceLabelsEnabled
@@ -148,7 +148,7 @@ open class AxisRendererBase: Renderer
         
             var first = interval == 0.0 ? 0.0 : ceil(yMin / interval) * interval
             
-            if axis.centerAxisLabelsEnabled
+            if axis.isCenterAxisLabelsEnabled
             {
                 first -= interval
             }
@@ -194,7 +194,7 @@ open class AxisRendererBase: Renderer
             axis.decimals = 0
         }
         
-        if axis.centerAxisLabelsEnabled
+        if axis.isCenterAxisLabelsEnabled
         {
             axis.centeredEntries.reserveCapacity(n)
             axis.centeredEntries.removeAll()

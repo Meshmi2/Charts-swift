@@ -39,7 +39,6 @@ class CandleStickChartViewController: DemoBaseViewController {
         
         chartView.chartDescription?.isEnabled = false
         
-        chartView.isDrawGridBackgroundEnabled = false
         chartView.isDragEnabled = false
         chartView.setScaleEnabled(true)
         chartView.maxVisibleCount = 200

@@ -46,7 +46,6 @@ class BarChartViewController: DemoBaseViewController {
         let xAxis = chartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.labelFont = .systemFont(ofSize: 10)
-        xAxis.isDrawGridLinesEnabled = false
         xAxis.granularity = 1
         xAxis.labelCount = 7
         xAxis.valueFormatter = DayAxisValueFormatter(chart: chartView)
@@ -67,7 +66,6 @@ class BarChartViewController: DemoBaseViewController {
         
         let rightAxis = chartView.rightAxis
         rightAxis.isEnabled = true
-        rightAxis.isDrawGridLinesEnabled = false
         rightAxis.labelFont = .systemFont(ofSize: 10)
         rightAxis.labelCount = 8
         rightAxis.valueFormatter = leftAxis.valueFormatter

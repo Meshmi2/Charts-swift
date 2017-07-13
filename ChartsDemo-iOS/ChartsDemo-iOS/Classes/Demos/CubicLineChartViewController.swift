@@ -53,7 +53,6 @@ class CubicLineChartViewController: DemoBaseViewController {
         chartView.isDragEnabled = true
         chartView.setScaleEnabled(true)
         chartView.isPinchZoomEnabled = false
-        chartView.isDrawGridBackgroundEnabled = false
         chartView.maxHighlightDistance = 300
         
         chartView.xAxis.isEnabled = false
@@ -63,7 +62,6 @@ class CubicLineChartViewController: DemoBaseViewController {
         yAxis.setLabelCount(6, force: false)
         yAxis.labelTextColor = .white
         yAxis.labelPosition = .insideChart
-        yAxis.isDrawGridLinesEnabled = false
         yAxis.axisLineColor = .white
         
         chartView.rightAxis.isEnabled = false

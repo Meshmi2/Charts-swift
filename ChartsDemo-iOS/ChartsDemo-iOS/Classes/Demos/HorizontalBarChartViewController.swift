@@ -11,7 +11,7 @@ import Charts
 
 class HorizontalBarChartViewController: DemoBaseViewController {
 
-    @IBOutlet var chartView: BarChartView!
+    @IBOutlet var chartView: HorizontalBarChartView!
     @IBOutlet var sliderX: UISlider!
     @IBOutlet var sliderY: UISlider!
     @IBOutlet var sliderTextX: UITextField!
@@ -48,7 +48,6 @@ class HorizontalBarChartViewController: DemoBaseViewController {
         xAxis.labelPosition = .bottom
         xAxis.labelFont = .systemFont(ofSize: 10)
         xAxis.isDrawAxisLineEnabled = true
-        xAxis.isDrawGridLinesEnabled = false
         xAxis.granularity = 10
         
         let leftAxis = chartView.leftAxis
@@ -61,7 +60,6 @@ class HorizontalBarChartViewController: DemoBaseViewController {
         rightAxis.isEnabled = true
         rightAxis.labelFont = .systemFont(ofSize: 10)
         rightAxis.isDrawAxisLineEnabled = true
-        rightAxis.isDrawGridLinesEnabled = false
         rightAxis.axisMinimum = 0
 
         var l = chartView.legend

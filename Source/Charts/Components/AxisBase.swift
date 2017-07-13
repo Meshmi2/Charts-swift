@@ -37,7 +37,7 @@ open class AxisBase: ComponentBase
     open var gridLineDashLengths: [CGFloat]!
     open var gridLineCap = CGLineCap.butt
     
-    open var isDrawGridLinesEnabled = true
+    open var isDrawGridLinesEnabled = false
     open var isDrawAxisLineEnabled = true
     
     /// flag that indicates of the labels of this axis should be drawn or not
@@ -47,17 +47,12 @@ open class AxisBase: ComponentBase
 
     /// Centers the axis labels instead of drawing them at their original position.
     /// This is useful especially for grouped BarChart.
-    open var centerAxisLabelsEnabled: Bool
+    open var isCenterAxisLabelsEnabled: Bool
     {
         get { return _centerAxisLabelsEnabled && entryCount > 0 }
         set { _centerAxisLabelsEnabled = newValue }
     }
     
-    open var isCenterAxisLabelsEnabled: Bool
-    {
-        get { return centerAxisLabelsEnabled }
-    }
-
     /// array of limitlines that can be set for the axis
     fileprivate var _limitLines = [ChartLimitLine]()
     
@@ -113,9 +108,6 @@ open class AxisBase: ComponentBase
             isGranularityEnabled = true
         }
     }
-        
-    /// if true, the set number of y-labels will be forced
-    open var forceLabelsEnabled = false
     
     open func getLongestLabel() -> String
     {
@@ -217,18 +209,20 @@ open class AxisBase: ComponentBase
                 _labelCount = 2
             }
             
-            forceLabelsEnabled = false
+            isForceLabelsEnabled = false
         }
     }
     
     open func setLabelCount(_ count: Int, force: Bool)
     {
         self.labelCount = count
-        forceLabelsEnabled = force
+        isForceLabelsEnabled = force
     }
     
     /// - returns: `true` if focing the y-label count is enabled. Default: false
-    open var isForceLabelsEnabled: Bool { return forceLabelsEnabled }
+    
+    /// if true, the set number of y-labels will be forced
+    public var isForceLabelsEnabled = false
     
     /// Adds a new ChartLimitLine to this axis.
     open func addLimitLine(_ line: ChartLimitLine)

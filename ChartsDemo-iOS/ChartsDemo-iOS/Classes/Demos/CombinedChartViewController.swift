@@ -37,7 +37,6 @@ class CombinedChartViewController: DemoBaseViewController {
         
         chartView.chartDescription?.isEnabled = false
         
-        chartView.isDrawGridBackgroundEnabled = false
         chartView.isDrawBarShadowEnabled = false
         chartView.isHighlightFullBarEnabled = false
         
@@ -57,11 +56,9 @@ class CombinedChartViewController: DemoBaseViewController {
         chartView.legend = l
         
         let rightAxis = chartView.rightAxis
-        rightAxis.isDrawGridLinesEnabled = false
         rightAxis.axisMinimum = 0
         
         let leftAxis = chartView.leftAxis
-        leftAxis.isDrawGridLinesEnabled = false
         leftAxis.axisMinimum = 0
         
         let xAxis = chartView.xAxis

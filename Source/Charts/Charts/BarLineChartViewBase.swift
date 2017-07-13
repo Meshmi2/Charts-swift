@@ -1483,17 +1483,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     
     /// flag that indicates if highlighting per dragging over a fully zoomed out chart is enabled
-    open var highlightPerDragEnabled = true
-    
     /// If set to true, highlighting per dragging over a fully zoomed out chart is enabled
     /// You might want to disable this when using inside a `NSUIScrollView`
-    /// 
+    ///
     /// **default**: true
-    open var isHighlightPerDragEnabled: Bool
-    {
-        return highlightPerDragEnabled
-    }
-    
+    open var isHighlightPerDragEnabled = true
+        
     /// - returns: The x and y values in the chart at the given touch point
     /// (encapsulated in a `CGPoint`). This method transforms pixel coordinates to
     /// coordinates / values in the chart. This is the opposite method to

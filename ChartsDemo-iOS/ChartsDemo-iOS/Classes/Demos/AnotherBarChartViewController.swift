@@ -38,15 +38,10 @@ class AnotherBarChartViewController: DemoBaseViewController {
         chartView.maxVisibleCount = 60
         chartView.isPinchZoomEnabled = false
         chartView.isDrawBarShadowEnabled = false
-        chartView.isDrawGridBackgroundEnabled = false
         
         let xAxis = chartView.xAxis
         xAxis.labelPosition = .bottom
-        xAxis.isDrawGridLinesEnabled = false
-        
-        chartView.leftAxis.isDrawGridLinesEnabled = false
-        chartView.rightAxis.isDrawGridLinesEnabled = false
-        
+                
         chartView.legend.isEnabled = false
         
         sliderX.value = 10

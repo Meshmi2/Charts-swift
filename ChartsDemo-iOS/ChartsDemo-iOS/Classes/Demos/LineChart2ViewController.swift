@@ -43,7 +43,6 @@ class LineChart2ViewController: DemoBaseViewController {
         chartView.chartDescription?.isEnabled = false
         chartView.isDragEnabled = true
         chartView.setScaleEnabled(true)
-        chartView.isDrawGridBackgroundEnabled = false
         chartView.isPinchZoomEnabled = true
         
         var l = chartView.legend
@@ -58,7 +57,6 @@ class LineChart2ViewController: DemoBaseViewController {
         let xAxis = chartView.xAxis
         xAxis.labelFont = .systemFont(ofSize: 11)
         xAxis.labelTextColor = .white
-        xAxis.isDrawGridLinesEnabled = false
         xAxis.isDrawAxisLineEnabled = false
         
         let leftAxis = chartView.leftAxis
@@ -66,14 +64,12 @@ class LineChart2ViewController: DemoBaseViewController {
         leftAxis.axisMaximum = 200
         leftAxis.axisMinimum = 0
         leftAxis.isDrawGridLinesEnabled = true
-        leftAxis.isDrawZeroLineEnabled = false
         leftAxis.isGranularityEnabled = true
         
         let rightAxis = chartView.rightAxis
         rightAxis.labelTextColor = .red
         rightAxis.axisMaximum = 900
         rightAxis.axisMinimum = -200
-        rightAxis.isDrawGridLinesEnabled = false
         rightAxis.isGranularityEnabled = false
         
         sliderX.value = 20
