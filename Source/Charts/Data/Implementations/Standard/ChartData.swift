@@ -235,7 +235,6 @@ open class ChartData
         return _yMin
     }
     
-    @nonobjc
     open func getYMin() -> Double
     {
         return _yMin
@@ -273,7 +272,6 @@ open class ChartData
         return _yMax
     }
     
-    @nonobjc
     open func getYMax() -> Double
     {
         return _yMax
@@ -591,36 +589,16 @@ open class ChartData
     }
     
     /// - returns: All colors used across all DataSet objects this object represents.
-    open func getColors() -> [NSUIColor]?
-    {
-        var clrcnt = 0
-        
-        for i in 0 ..< _dataSets.count
-        {
-            clrcnt += _dataSets[i].colors.count
-        }
-        
-        var colors = [NSUIColor]()
-        
-        for i in 0 ..< _dataSets.count
-        {
-            let clrs = _dataSets[i].colors
-            
-            for clr in clrs
-            {
-                colors.append(clr)
-            }
+    public var colors: [Color] {
+        let colors = (0..<_dataSets.count).flatMap { (i) -> [Color] in
+            return _dataSets[i].colors
         }
         
         return colors
     }
     
-    /// Sets a custom IValueFormatter for all DataSets this data object contains.
-    open func setValueFormatter(_ formatter: IValueFormatter?)
-    {
-        guard let formatter = formatter
-            else { return }
-        
+    /// Sets a custom ValueFormatter for all DataSets this data object contains.
+    open func setValueFormatter(_ formatter: ValueFormatter) {
         for set in dataSets
         {
             set.valueFormatter = formatter
@@ -628,20 +606,20 @@ open class ChartData
     }
     
     /// Sets the color of the value-text (color in which the value-labels are drawn) for all DataSets this data object contains.
-    open func setValueTextColor(_ color: NSUIColor!)
+    open func setValueTextColor(_ color: Color)
     {
         for set in dataSets
         {
-            set.valueTextColor = color ?? set.valueTextColor
+            set.valueTextColor = color
         }
     }
     
     /// Sets the font for all value-labels for all DataSets this data object contains.
-    open func setValueFont(_ font: NSUIFont!)
+    open func setValueFont(_ font: Font)
     {
         for set in dataSets
         {
-            set.valueFont = font ?? set.valueFont
+            set.valueFont = font
         }
     }
     
@@ -650,7 +628,7 @@ open class ChartData
     {
         for set in dataSets
         {
-            set.drawValuesEnabled = enabled
+            set.isDrawValuesEnabled = enabled
         }
     }
     
@@ -662,7 +640,7 @@ open class ChartData
         {
             for set in dataSets
             {
-                if !set.highlightEnabled
+                if !set.isHighlightEnabled
                 {
                     return false
                 }
@@ -674,7 +652,7 @@ open class ChartData
         {
             for set in dataSets
             {
-                set.highlightEnabled = newValue
+                set.isHighlightEnabled = newValue
             }
         }
     }

@@ -21,7 +21,7 @@ open class RadarChartRenderer: LineRadarRenderer
 {
     open weak var chart: RadarChartView?
 
-    public init(chart: RadarChartView?, animator: Animator?, viewPortHandler: ViewPortHandler?)
+    public init(chart: RadarChartView?, animator: Animator?, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         
@@ -385,8 +385,8 @@ open class RadarChartRenderer: LineRadarRenderer
         atPoint point: CGPoint,
         innerRadius: CGFloat,
         outerRadius: CGFloat,
-        fillColor: NSUIColor?,
-        strokeColor: NSUIColor?,
+        fillColor: Color?,
+        strokeColor: Color?,
         strokeWidth: CGFloat)
     {
         context.saveGState()

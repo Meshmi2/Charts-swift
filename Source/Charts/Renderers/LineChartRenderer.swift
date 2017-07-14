@@ -21,7 +21,7 @@ open class LineChartRenderer: LineRadarRenderer
 {
     open weak var dataProvider: LineChartDataProvider?
     
-    public init(dataProvider: LineChartDataProvider?, animator: Animator?, viewPortHandler: ViewPortHandler?)
+    public init(dataProvider: LineChartDataProvider?, animator: Animator?, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         
@@ -294,8 +294,7 @@ open class LineChartRenderer: LineRadarRenderer
     {
         guard
             let dataProvider = dataProvider,
-            let animator = animator,
-            let viewPortHandler = self.viewPortHandler
+            let animator = animator
             else { return }
         
         let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
@@ -510,8 +509,7 @@ open class LineChartRenderer: LineRadarRenderer
         guard
             let dataProvider = dataProvider,
             let lineData = dataProvider.lineData,
-            let animator = animator,
-            let viewPortHandler = self.viewPortHandler
+            let animator = animator
             else { return }
         
         if isDrawingValuesAllowed(dataProvider: dataProvider)
@@ -606,8 +604,7 @@ open class LineChartRenderer: LineRadarRenderer
         guard
             let dataProvider = dataProvider,
             let lineData = dataProvider.lineData,
-            let animator = animator,
-            let viewPortHandler = self.viewPortHandler
+            let animator = animator
             else { return }
         
         let phaseY = animator.phaseY
@@ -643,7 +640,7 @@ open class LineChartRenderer: LineRadarRenderer
                 circleHoleRadius > 0.0
             let drawTransparentCircleHole = drawCircleHole &&
                 (dataSet.circleHoleColor == nil ||
-                    dataSet.circleHoleColor == NSUIColor.clear)
+                    dataSet.circleHoleColor == Color.clear)
             
             for j in stride(from: _xBounds.min, through: _xBounds.range + _xBounds.min, by: 1)
             {

@@ -20,7 +20,7 @@ open class ChartDataEntryBase
      open var data: Any?
     
     /// optional icon image
-    open var icon: NSUIImage?
+    open var icon: Image?
     
     /// An Entry represents one single entry in the chart.
     /// - parameter y: the y value (the actual value of the entry)
@@ -41,7 +41,7 @@ open class ChartDataEntryBase
     /// - parameter y: the y value (the actual value of the entry)
     /// - parameter icon: icon image
     
-    public init(y: Double, icon: NSUIImage?)
+    public init(y: Double, icon: Image?)
     {
         self.y = y
         self.icon = icon
@@ -51,7 +51,7 @@ open class ChartDataEntryBase
     /// - parameter icon: icon image
     /// - parameter data: Space for additional data this Entry represents.
     
-    public init(y: Double, icon: NSUIImage?, data: Any?)
+    public init(y: Double, icon: Image?, data: Any?)
     {
         self.y = y
         self.icon = icon
@@ -67,10 +67,6 @@ open class ChartDataEntryBase
     // TODO: Move to extension when it can be overriden
     open static func ==(lhs: ChartDataEntryBase, rhs: ChartDataEntryBase) -> Bool
     {
-        if lhs === rhs {
-            return true
-        }
-        
         // TODO: Make this equatable somehow
 //        if lhs.data !== rhs.data
 //        {

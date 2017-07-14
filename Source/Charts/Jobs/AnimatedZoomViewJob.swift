@@ -38,7 +38,7 @@ open class AnimatedZoomViewJob: AnimatedViewPortJob
         zoomOriginX: CGFloat,
         zoomOriginY: CGFloat,
         duration: TimeInterval,
-        easing: ChartEasingFunctionBlock?)
+        easingOption: ChartEasingOption)
     {
         super.init(viewPortHandler: viewPortHandler,
             xValue: 0.0,
@@ -48,7 +48,7 @@ open class AnimatedZoomViewJob: AnimatedViewPortJob
             xOrigin: xOrigin,
             yOrigin: yOrigin,
             duration: duration,
-            easing: easing)
+            easingOption: easingOption)
         
         self.yAxis = yAxis
         self.xAxisRange = xAxisRange

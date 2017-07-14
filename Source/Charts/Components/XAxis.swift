@@ -12,8 +12,7 @@
 import Foundation
 import CoreGraphics
 
-open class XAxis: AxisBase
-{
+open class XAxis: AxisBase {
     public enum LabelPosition
     {
         case top

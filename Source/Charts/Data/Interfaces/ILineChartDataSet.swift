@@ -30,51 +30,35 @@ public protocol ILineChartDataSet: ILineRadarChartDataSet
     /// **default**: 0.2
     var cubicIntensity: CGFloat { get set }
     
-    @available(*, deprecated: 1.0, message: "Use `mode` instead.")
-    var drawCubicEnabled: Bool { get set }
-    
-    @available(*, deprecated: 1.0, message: "Use `mode` instead.")
-    var isDrawCubicEnabled: Bool { get }
-    
-    @available(*, deprecated: 1.0, message: "Use `mode` instead.")
-    var drawSteppedEnabled: Bool { get set }
-    
-    @available(*, deprecated: 1.0, message: "Use `mode` instead.")
-    var isDrawSteppedEnabled: Bool { get }
-
     /// The radius of the drawn circles.
     var circleRadius: CGFloat { get set }
     
     /// The hole radius of the drawn circles.
     var circleHoleRadius: CGFloat { get set }
     
-    var circleColors: [NSUIColor] { get set }
+    var circleColors: [Color] { get set }
     
     /// - returns: The color at the given index of the DataSet's circle-color array.
     /// Performs a IndexOutOfBounds check by modulus.
-    func getCircleColor(atIndex: Int) -> NSUIColor?
+    func getCircleColor(atIndex: Int) -> Color?
     
     /// Sets the one and ONLY color that should be used for this DataSet.
     /// Internally, this recreates the colors array and adds the specified color.
-    func setCircleColor(_ color: NSUIColor)
+    func setCircleColor(_ color: Color)
     
     /// Resets the circle-colors array and creates a new one
     func resetCircleColors(_ index: Int)
     
     /// If true, drawing circles is enabled
-    var drawCirclesEnabled: Bool { get set }
-    
     /// - returns: `true` if drawing circles for this DataSet is enabled, `false` ifnot
-    var isDrawCirclesEnabled: Bool { get }
+    var isDrawCirclesEnabled: Bool { get set }
     
     /// The color of the inner circle (the circle-hole).
-    var circleHoleColor: NSUIColor? { get set }
+    var circleHoleColor: Color? { get set }
     
     /// `true` if drawing circles for this DataSet is enabled, `false` ifnot
-    var drawCircleHoleEnabled: Bool { get set }
-    
     /// - returns: `true` if drawing the circle-holes is enabled, `false` ifnot.
-    var isDrawCircleHoleEnabled: Bool { get }
+    var isDrawCircleHoleEnabled: Bool { get set }
     
     /// This is how much (in pixels) into the dash pattern are we starting from.
     var lineDashPhase: CGFloat { get }
@@ -88,5 +72,5 @@ public protocol ILineChartDataSet: ILineRadarChartDataSet
     var lineCapType: CGLineCap { get set }
     
     /// Sets a custom IFillFormatter to the chart that handles the position of the filled-line for each DataSet. Set this to null to use the default logic.
-    var fillFormatter: IFillFormatter? { get set }
+    var fillFormatter: FillFormatter? { get set }
 }

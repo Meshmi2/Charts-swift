@@ -31,7 +31,7 @@ open class BubbleChartDataEntry: ChartDataEntry
     /// - parameter y: The value on the y-axis.
     /// - parameter size: The size of the bubble.
     /// - parameter data: Spot for additional data this Entry represents.
-    public init(x: Double, y: Double, size: CGFloat, data: AnyObject?)
+    public init(x: Double, y: Double, size: CGFloat, data: Any?)
     {
         super.init(x: x, y: y, data: data)
         
@@ -42,7 +42,7 @@ open class BubbleChartDataEntry: ChartDataEntry
     /// - parameter y: The value on the y-axis.
     /// - parameter size: The size of the bubble.
     /// - parameter icon: icon image
-    public init(x: Double, y: Double, size: CGFloat, icon: NSUIImage?)
+    public init(x: Double, y: Double, size: CGFloat, icon: Image?)
     {
         super.init(x: x, y: y, icon: icon)
         
@@ -54,7 +54,7 @@ open class BubbleChartDataEntry: ChartDataEntry
     /// - parameter size: The size of the bubble.
     /// - parameter icon: icon image
     /// - parameter data: Spot for additional data this Entry represents.
-    public init(x: Double, y: Double, size: CGFloat, icon: NSUIImage?, data: AnyObject?)
+    public init(x: Double, y: Double, size: CGFloat, icon: Image?, data: Any?)
     {
         super.init(x: x, y: y, icon: icon, data: data)
         

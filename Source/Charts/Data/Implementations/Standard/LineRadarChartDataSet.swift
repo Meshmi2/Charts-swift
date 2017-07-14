@@ -20,10 +20,10 @@ open class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, ILineRadar
     // MARK: - Styling functions and accessors
     
     /// The color that is used for filling the line surface area.
-    fileprivate var _fillColor = NSUIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+    fileprivate var _fillColor = Color(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     
     /// The color that is used for filling the line surface area.
-    open var fillColor: NSUIColor
+    open var fillColor: Color
     {
         get { return _fillColor }
         set
@@ -72,11 +72,6 @@ open class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, ILineRadar
     /// Set to `true` if the DataSet should be drawn filled (surface), and not just as a line.
     /// Disabling this will give great performance boost.
     /// Please note that this method uses the path clipping for drawing the filled area (with images, gradients and layers).
-    open var drawFilledEnabled = false
-    
     /// - returns: `true` if filled drawing is enabled, `false` ifnot
-    open var isDrawFilledEnabled: Bool
-    {
-        return drawFilledEnabled
-    }
+    open var isDrawFilledEnabled = false
 }

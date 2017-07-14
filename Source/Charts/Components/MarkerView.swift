@@ -16,7 +16,7 @@ import CoreGraphics
     import UIKit
 #endif
 
-open class MarkerView: NSUIView, IMarker
+open class MarkerView: NSUIView, Marker
 {
     open var offset: CGPoint = CGPoint()
     
@@ -81,10 +81,10 @@ open class MarkerView: NSUIView, IMarker
         #else
             
             var loadedObjects = NSArray()
-            let loadedObjectsPointer = AutoreleasingUnsafeMutablePointer<NSArray>(&loadedObjects)
+            let loadedObjectsPointer = AutoreleasingUnsafeMutablePointer<NSArray?>(&loadedObjects)
             
             if Bundle.main.loadNibNamed(
-                String(describing: self),
+                NSNib.Name(rawValue: String(describing: self)),
                 owner: nil,
                 topLevelObjects: loadedObjectsPointer)
             {

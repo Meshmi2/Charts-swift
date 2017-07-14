@@ -26,7 +26,7 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
     fileprivate func initialize()
     {
         // default color
-        circleColors.append(NSUIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
+        circleColors.append(Color(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
     }
     
     public required init()
@@ -74,50 +74,18 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
             }
         }
     }
-    
-    @available(*, deprecated: 1.0, message: "Use `mode` instead.")
-    open var drawCubicEnabled: Bool
-    {
-        get
-        {
-            return mode == .cubicBezier
-        }
-        set
-        {
-            mode = newValue ? LineChartDataSet.Mode.cubicBezier : LineChartDataSet.Mode.linear
-        }
-    }
-    
-    @available(*, deprecated: 1.0, message: "Use `mode` instead.")
-    open var isDrawCubicEnabled: Bool { return drawCubicEnabled }
-    
-    @available(*, deprecated: 1.0, message: "Use `mode` instead.")
-    open var drawSteppedEnabled: Bool
-    {
-        get
-        {
-            return mode == .stepped
-        }
-        set
-        {
-            mode = newValue ? LineChartDataSet.Mode.stepped : LineChartDataSet.Mode.linear
-        }
-    }
-    
-    @available(*, deprecated: 1.0, message: "Use `mode` instead.")
-    open var isDrawSteppedEnabled: Bool { return drawSteppedEnabled }
-    
+        
     /// The radius of the drawn circles.
     open var circleRadius = CGFloat(8.0)
     
     /// The hole radius of the drawn circles
     open var circleHoleRadius = CGFloat(4.0)
     
-    open var circleColors = [NSUIColor]()
+    open var circleColors = [Color]()
     
     /// - returns: The color at the given index of the DataSet's circle-color array.
     /// Performs a IndexOutOfBounds check by modulus.
-    open func getCircleColor(atIndex index: Int) -> NSUIColor?
+    open func getCircleColor(atIndex index: Int) -> Color?
     {
         let size = circleColors.count
         let index = index % size
@@ -130,13 +98,13 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
     
     /// Sets the one and ONLY color that should be used for this DataSet.
     /// Internally, this recreates the colors array and adds the specified color.
-    open func setCircleColor(_ color: NSUIColor)
+    open func setCircleColor(_ color: Color)
     {
         circleColors.removeAll(keepingCapacity: false)
         circleColors.append(color)
     }
     
-    open func setCircleColors(_ colors: NSUIColor...)
+    open func setCircleColors(_ colors: Color...)
     {
         circleColors.removeAll(keepingCapacity: false)
         circleColors.append(contentsOf: colors)
@@ -149,19 +117,15 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
     }
     
     /// If true, drawing circles is enabled
-    open var drawCirclesEnabled = true
-    
     /// - returns: `true` if drawing circles for this DataSet is enabled, `false` ifnot
-    open var isDrawCirclesEnabled: Bool { return drawCirclesEnabled }
+    open var isDrawCirclesEnabled = true
     
     /// The color of the inner circle (the circle-hole).
-    open var circleHoleColor: NSUIColor? = NSUIColor.white
+    open var circleHoleColor: Color? = Color.white
     
     /// `true` if drawing circles for this DataSet is enabled, `false` ifnot
-    open var drawCircleHoleEnabled = true
-    
     /// - returns: `true` if drawing the circle-holes is enabled, `false` ifnot.
-    open var isDrawCircleHoleEnabled: Bool { return drawCircleHoleEnabled }
+    open var isDrawCircleHoleEnabled = true
     
     /// This is how much (in pixels) into the dash pattern are we starting from.
     open var lineDashPhase = CGFloat(0.0)
@@ -175,10 +139,10 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
     open var lineCapType = CGLineCap.butt
     
     /// formatter for customizing the position of the fill-line
-    fileprivate var _fillFormatter: IFillFormatter = DefaultFillFormatter()
+    fileprivate var _fillFormatter: FillFormatter = DefaultFillFormatter()
     
     /// Sets a custom IFillFormatter to the chart that handles the position of the filled-line for each DataSet. Set this to null to use the default logic.
-    open var fillFormatter: IFillFormatter?
+    open var fillFormatter: FillFormatter?
     {
         get
         {

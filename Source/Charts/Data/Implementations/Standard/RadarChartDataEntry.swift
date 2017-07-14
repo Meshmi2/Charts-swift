@@ -16,7 +16,7 @@ open class RadarChartDataEntry: ChartDataEntry
 {    
     /// - parameter value: The value on the y-axis.
     /// - parameter data: Spot for additional data this Entry represents.
-    public init(value: Double, data: AnyObject?)
+    public init(value: Double, data: Any?)
     {
         super.init(x: 0.0, y: value, data: data)
     }

@@ -36,7 +36,7 @@ public protocol IPieChartDataSet: IChartDataSet
     var yValuePosition: PieChartDataSet.ValuePosition { get set }
     
     /// When valuePosition is OutsideSlice, indicates line color
-    var valueLineColor: NSUIColor? { get set }
+    var valueLineColor: Color? { get set }
     
     /// When valuePosition is OutsideSlice, indicates line width
     var valueLineWidth: CGFloat { get set }
@@ -54,8 +54,8 @@ public protocol IPieChartDataSet: IChartDataSet
     var valueLineVariableLength: Bool { get set }
     
     /// the font for the slice-text labels
-    var entryLabelFont: NSUIFont? { get set }
+    var entryLabelFont: Font? { get set }
     
     /// the color for the slice-text labels
-    var entryLabelColor: NSUIColor? { get set }
+    var entryLabelColor: Color? { get set }
 }

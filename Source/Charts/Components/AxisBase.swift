@@ -21,53 +21,48 @@ open class AxisBase: ComponentBase
     }
     
     /// Custom formatter that is used instead of the auto-formatter if set
-    fileprivate var _axisValueFormatter: IAxisValueFormatter?
+    fileprivate var _axisValueFormatter: AxisValueFormatter?
     
-    open var labelFont = NSUIFont.systemFont(ofSize: 10.0)
-    open var labelTextColor = NSUIColor.black
+    open var labelFont = Font.systemFont(ofSize: 10.0, weight: .light)
+    open var labelTextColor = Color.black
     
-    open var axisLineColor = NSUIColor.gray
+    open var axisLineColor = Color.gray
     open var axisLineWidth = CGFloat(0.5)
     open var axisLineDashPhase = CGFloat(0.0)
     open var axisLineDashLengths: [CGFloat]!
     
-    open var gridColor = NSUIColor.gray.withAlphaComponent(0.9)
+    open var gridColor = Color.gray.withAlphaComponent(0.9)
     open var gridLineWidth = CGFloat(0.5)
     open var gridLineDashPhase = CGFloat(0.0)
     open var gridLineDashLengths: [CGFloat]!
     open var gridLineCap = CGLineCap.butt
     
-    open var drawGridLinesEnabled = true
-    open var drawAxisLineEnabled = true
+    open var isDrawGridLinesEnabled = false
+    open var isDrawAxisLineEnabled = true
     
     /// flag that indicates of the labels of this axis should be drawn or not
-    open var drawLabelsEnabled = true
+    open var isDrawLabelsEnabled = true
     
     fileprivate var _centerAxisLabelsEnabled = false
 
     /// Centers the axis labels instead of drawing them at their original position.
     /// This is useful especially for grouped BarChart.
-    open var centerAxisLabelsEnabled: Bool
+    open var isCenterAxisLabelsEnabled: Bool
     {
         get { return _centerAxisLabelsEnabled && entryCount > 0 }
         set { _centerAxisLabelsEnabled = newValue }
     }
     
-    open var isCenterAxisLabelsEnabled: Bool
-    {
-        get { return centerAxisLabelsEnabled }
-    }
-
     /// array of limitlines that can be set for the axis
     fileprivate var _limitLines = [ChartLimitLine]()
     
     /// Are the LimitLines drawn behind the data or in front of the data?
     /// 
     /// **default**: false
-    open var drawLimitLinesBehindDataEnabled = false
+    open var isDrawLimitLinesBehindDataEnabled = false
 
     /// the flag can be used to turn off the antialias for grid lines
-    open var gridAntialiasEnabled = true
+    open var isGridAntialiasEnabled = true
     
     /// the actual array of entries
     open var entries = [Double]()
@@ -90,7 +85,8 @@ open class AxisBase: ComponentBase
     /// When false, axis values could possibly be repeated.
     /// This could happen if two adjacent axis values are rounded to same value.
     /// If using granularity this could be avoided by having fewer axis values visible.
-    open var granularityEnabled = false
+    /// The minimum interval between axis values.
+    open var isGranularityEnabled = false
     
     fileprivate var _granularity = Double(1.0)
     
@@ -109,21 +105,9 @@ open class AxisBase: ComponentBase
             _granularity = newValue
             
             // set this to `true` if it was disabled, as it makes no sense to set this property with granularity disabled
-            granularityEnabled = true
+            isGranularityEnabled = true
         }
     }
-    
-    /// The minimum interval between axis values.
-    open var isGranularityEnabled: Bool
-    {
-        get
-        {
-            return granularityEnabled
-        }
-    }
-    
-    /// if true, the set number of y-labels will be forced
-    open var forceLabelsEnabled = false
     
     open func getLongestLabel() -> String
     {
@@ -156,7 +140,7 @@ open class AxisBase: ComponentBase
     /// Sets the formatter to be used for formatting the axis labels.
     /// If no formatter is set, the chart will automatically determine a reasonable formatting (concerning decimals) for all the values that are drawn inside the chart.
     /// Use `nil` to use the formatter calculated by the chart.
-    open var valueFormatter: IAxisValueFormatter?
+    open var valueFormatter: AxisValueFormatter?
     {
         get
         {
@@ -175,17 +159,6 @@ open class AxisBase: ComponentBase
             _axisValueFormatter = newValue ?? DefaultAxisValueFormatter(decimals: decimals)
         }
     }
-    
-    open var isDrawGridLinesEnabled: Bool { return drawGridLinesEnabled }
-    
-    open var isDrawAxisLineEnabled: Bool { return drawAxisLineEnabled }
-    
-    open var isDrawLabelsEnabled: Bool { return drawLabelsEnabled }
-    
-    /// Are the LimitLines drawn behind the data or in front of the data?
-    /// 
-    /// **default**: false
-    open var isDrawLimitLinesBehindDataEnabled: Bool { return drawLimitLinesBehindDataEnabled }
     
     /// Extra spacing for `axisMinimum` to be added to automatically calculated `axisMinimum`
     open var spaceMin: Double = 0.0
@@ -236,18 +209,20 @@ open class AxisBase: ComponentBase
                 _labelCount = 2
             }
             
-            forceLabelsEnabled = false
+            isForceLabelsEnabled = false
         }
     }
     
     open func setLabelCount(_ count: Int, force: Bool)
     {
         self.labelCount = count
-        forceLabelsEnabled = force
+        isForceLabelsEnabled = force
     }
     
     /// - returns: `true` if focing the y-label count is enabled. Default: false
-    open var isForceLabelsEnabled: Bool { return forceLabelsEnabled }
+    
+    /// if true, the set number of y-labels will be forced
+    public var isForceLabelsEnabled = false
     
     /// Adds a new ChartLimitLine to this axis.
     open func addLimitLine(_ line: ChartLimitLine)
@@ -297,23 +272,7 @@ open class AxisBase: ComponentBase
     }
     
     open var isAxisMaxCustom: Bool { return _customAxisMax }
-    
-    /// This property is deprecated - Use `axisMinimum` instead.
-    @available(*, deprecated: 1.0, message: "Use axisMinimum instead.")
-    open var axisMinValue: Double
-    {
-        get { return axisMinimum }
-        set { axisMinimum = newValue }
-    }
-    
-    /// This property is deprecated - Use `axisMaximum` instead.
-    @available(*, deprecated: 1.0, message: "Use axisMaximum instead.")
-    open var axisMaxValue: Double
-    {
-        get { return axisMaximum }
-        set { axisMaximum = newValue }
-    }
-    
+        
     /// The minimum value for this axis.
     /// If set, this value will not be calculated automatically depending on the provided data.
     /// Use `resetCustomAxisMin()` to undo this.

@@ -14,15 +14,17 @@ import CoreGraphics
 
 open class AxisRendererBase: Renderer
 {
+    public let viewPortHandler: ViewPortHandler
+    
     /// base axis this axis renderer works with
-    open var axis: AxisBase?
+    open var axis: AxisBase
     
     /// transformer to transform values to screen pixels and return
     open var transformer: Transformer?
         
-    public init(viewPortHandler: ViewPortHandler?, transformer: Transformer?, axis: AxisBase?)
+    public init(viewPortHandler: ViewPortHandler, transformer: Transformer?, axis: AxisBase)
     {
-        super.init(viewPortHandler: viewPortHandler)
+        self.viewPortHandler = viewPortHandler
         
         self.transformer = transformer
         self.axis = axis
@@ -62,23 +64,20 @@ open class AxisRendererBase: Renderer
         if let transformer = self.transformer
         {
             // calculate the starting and entry point of the y-labels (depending on zoom / contentrect bounds)
-            if let viewPortHandler = viewPortHandler
+            if viewPortHandler.contentWidth > 10.0 && !viewPortHandler.isFullyZoomedOutY
             {
-                if viewPortHandler.contentWidth > 10.0 && !viewPortHandler.isFullyZoomedOutY
+                let p1 = transformer.valueForTouchPoint(CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop))
+                let p2 = transformer.valueForTouchPoint(CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentBottom))
+                
+                if !inverted
                 {
-                    let p1 = transformer.valueForTouchPoint(CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop))
-                    let p2 = transformer.valueForTouchPoint(CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentBottom))
-                    
-                    if !inverted
-                    {
-                        min = Double(p2.y)
-                        max = Double(p1.y)
-                    }
-                    else
-                    {
-                        min = Double(p1.y)
-                        max = Double(p2.y)
-                    }
+                    min = Double(p2.y)
+                    max = Double(p1.y)
+                }
+                else
+                {
+                    min = Double(p1.y)
+                    max = Double(p2.y)
                 }
             }
         }
@@ -88,9 +87,7 @@ open class AxisRendererBase: Renderer
     
     /// Sets up the axis values. Computes the desired number of labels between the two given extremes.
     open func computeAxisValues(min: Double, max: Double)
-    {
-        guard let axis = self.axis else { return }
-        
+    {        
         let yMin = min
         let yMax = max
         
@@ -110,7 +107,7 @@ open class AxisRendererBase: Renderer
         
         // If granularity is enabled, then do not allow the interval to go below specified granularity.
         // This is used to avoid repeated values when rounding values for display.
-        if axis.granularityEnabled
+        if axis.isGranularityEnabled
         {
             interval = interval < axis.granularity ? axis.granularity : interval
         }
@@ -124,7 +121,7 @@ open class AxisRendererBase: Renderer
             interval = floor(10.0 * Double(intervalMagnitude))
         }
         
-        var n = axis.centerAxisLabelsEnabled ? 1 : 0
+        var n = axis.isCenterAxisLabelsEnabled ? 1 : 0
         
         // force label count
         if axis.isForceLabelsEnabled
@@ -151,7 +148,7 @@ open class AxisRendererBase: Renderer
         
             var first = interval == 0.0 ? 0.0 : ceil(yMin / interval) * interval
             
-            if axis.centerAxisLabelsEnabled
+            if axis.isCenterAxisLabelsEnabled
             {
                 first -= interval
             }
@@ -197,7 +194,7 @@ open class AxisRendererBase: Renderer
             axis.decimals = 0
         }
         
-        if axis.centerAxisLabelsEnabled
+        if axis.isCenterAxisLabelsEnabled
         {
             axis.centeredEntries.reserveCapacity(n)
             axis.centeredEntries.removeAll()

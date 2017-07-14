@@ -9,17 +9,9 @@
 //  https://github.com/danielgindi/Charts
 //
 
-import Foundation
-import CoreGraphics
-
-open class Renderer
+public protocol Renderer: class
 {
     /// the component that handles the drawing area of the chart and it's offsets
-    open var viewPortHandler: ViewPortHandler?
-    
-    public init(viewPortHandler: ViewPortHandler?)
-    {
-        self.viewPortHandler = viewPortHandler
-    }
+    var viewPortHandler: ViewPortHandler { get }
 }
         

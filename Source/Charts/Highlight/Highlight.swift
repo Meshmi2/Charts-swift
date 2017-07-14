@@ -169,10 +169,6 @@ open class Highlight
 extension Highlight: Equatable {
     open static func ==(lhs: Highlight, rhs: Highlight) -> Bool
     {
-        if lhs === rhs {
-            return true
-        }
-        
         return lhs._x == rhs._x
             && lhs._y == rhs._y
             && lhs.dataIndex == rhs.dataIndex

@@ -27,7 +27,7 @@ open class AnimatedMoveViewJob: AnimatedViewPortJob
         xOrigin: CGFloat,
         yOrigin: CGFloat,
         duration: TimeInterval,
-        easing: ChartEasingFunctionBlock?)
+        easingOption: ChartEasingOption)
     {
         super.init(viewPortHandler: viewPortHandler,
             xValue: xValue,
@@ -37,7 +37,7 @@ open class AnimatedMoveViewJob: AnimatedViewPortJob
             xOrigin: xOrigin,
             yOrigin: yOrigin,
             duration: duration,
-            easing: easing)
+            easingOption: easingOption)
     }
     
     internal override func animationUpdate()

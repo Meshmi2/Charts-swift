@@ -31,7 +31,7 @@ open class ChartDataEntry: ChartDataEntryBase
     /// - parameter y: the y value (the actual value of the entry)
     /// - parameter data: Space for additional data this Entry represents.
     
-    public init(x: Double, y: Double, data: AnyObject?)
+    public init(x: Double, y: Double, data: Any?)
     {
         super.init(y: y)
         
@@ -45,7 +45,7 @@ open class ChartDataEntry: ChartDataEntryBase
     /// - parameter y: the y value (the actual value of the entry)
     /// - parameter icon: icon image
     
-    public init(x: Double, y: Double, icon: NSUIImage?)
+    public init(x: Double, y: Double, icon: Image?)
     {
         super.init(y: y, icon: icon)
         
@@ -58,7 +58,7 @@ open class ChartDataEntry: ChartDataEntryBase
     /// - parameter icon: icon image
     /// - parameter data: Space for additional data this Entry represents.
     
-    public init(x: Double, y: Double, icon: NSUIImage?, data: AnyObject?)
+    public init(x: Double, y: Double, icon: Image?, data: Any?)
     {
         super.init(y: y, icon: icon, data: data)
         
@@ -75,11 +75,6 @@ open class ChartDataEntry: ChartDataEntryBase
     // TODO: Move to extension when it can be overriden
     open static func ==(lhs: ChartDataEntry, rhs: ChartDataEntry) -> Bool
     {
-        if lhs === rhs
-        {
-            return true
-        }
-        
         // TODO: Figure out how to equate these
 //        if lhs.data !== rhs.data
 //        {

@@ -18,15 +18,15 @@ open class ChartBaseDataSet: IChartDataSet
     public required init()
     {
         // default color
-        colors.append(NSUIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
-        valueColors.append(NSUIColor.black)
+        colors.append(Color(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
+        valueColors.append(Color.black)
     }
     
     public init(label: String?)
     {
         // default color
-        colors.append(NSUIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
-        valueColors.append(NSUIColor.black)
+        colors.append(Color(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
+        valueColors.append(Color.black)
         
         self.label = label
     }
@@ -183,10 +183,10 @@ open class ChartBaseDataSet: IChartDataSet
     
     /// All the colors that are used for this DataSet.
     /// Colors are reused as soon as the number of Entries the DataSet represents is higher than the size of the colors array.
-    open var colors = [NSUIColor]()
+    open var colors = [Color]()
     
     /// List representing all colors that are used for drawing the actual values for this DataSet
-    open var valueColors = [NSUIColor]()
+    open var valueColors = [Color]()
 
     /// The label string that describes the DataSet.
     open var label: String? = "DataSet"
@@ -196,7 +196,7 @@ open class ChartBaseDataSet: IChartDataSet
     
     /// - returns: The color at the given index of the DataSet's color array.
     /// This prevents out-of-bounds by performing a modulus on the color index, so colours will repeat themselves.
-    open func color(atIndex index: Int) -> NSUIColor
+    open func color(atIndex index: Int) -> Color
     {
         var index = index
         if index < 0
@@ -214,7 +214,7 @@ open class ChartBaseDataSet: IChartDataSet
     
     /// Adds a new color to the colors array of the DataSet.
     /// - parameter color: the color to add
-    open func addColor(_ color: NSUIColor)
+    open func addColor(_ color: Color)
     {
         colors.append(color)
     }
@@ -222,7 +222,7 @@ open class ChartBaseDataSet: IChartDataSet
     /// Sets the one and **only** color that should be used for this DataSet.
     /// Internally, this recreates the colors array and adds the specified color.
     /// - parameter color: the color to set
-    open func setColor(_ color: NSUIColor)
+    open func setColor(_ color: Color)
     {
         colors.removeAll(keepingCapacity: false)
         colors.append(color)
@@ -231,7 +231,7 @@ open class ChartBaseDataSet: IChartDataSet
     /// Sets colors to a single color a specific alpha value.
     /// - parameter color: the color to set
     /// - parameter alpha: alpha to apply to the set `color`
-    open func setColor(_ color: NSUIColor, alpha: CGFloat)
+    open func setColor(_ color: Color, alpha: CGFloat)
     {
         setColor(color.withAlphaComponent(alpha))
     }
@@ -239,7 +239,7 @@ open class ChartBaseDataSet: IChartDataSet
     /// Sets colors with a specific alpha value.
     /// - parameter colors: the colors to set
     /// - parameter alpha: alpha to apply to the set `colors`
-    open func setColors(_ colors: [NSUIColor], alpha: CGFloat)
+    open func setColors(_ colors: [Color], alpha: CGFloat)
     {
         var colorsWithAlpha = colors
         
@@ -254,22 +254,20 @@ open class ChartBaseDataSet: IChartDataSet
     /// Sets colors with a specific alpha value.
     /// - parameter colors: the colors to set
     /// - parameter alpha: alpha to apply to the set `colors`
-    open func setColors(_ colors: NSUIColor...)
+    open func setColors(_ colors: [Color])
     {
         self.colors = colors
     }
     
     /// if true, value highlighting is enabled
-    open var highlightEnabled = true
-    
     /// - returns: `true` if value highlighting is enabled for this dataset
-    open var isHighlightEnabled: Bool { return highlightEnabled }
+    open var isHighlightEnabled = true
     
     /// Custom formatter that is used instead of the auto-formatter if set
-    internal var _valueFormatter: IValueFormatter?
+    internal var _valueFormatter: ValueFormatter?
     
     /// Custom formatter that is used instead of the auto-formatter if set
-    open var valueFormatter: IValueFormatter?
+    open var valueFormatter: ValueFormatter?
     {
         get
         {
@@ -296,7 +294,7 @@ open class ChartBaseDataSet: IChartDataSet
     /// Sets/get a single color for value text.
     /// Setting the color clears the colors array and adds a single color.
     /// Getting will return the first color in the array.
-    open var valueTextColor: NSUIColor
+    open var valueTextColor: Color
     {
         get
         {
@@ -310,7 +308,7 @@ open class ChartBaseDataSet: IChartDataSet
     }
     
     /// - returns: The color at the specified index that is used for drawing the values inside the chart. Uses modulus internally.
-    open func valueTextColorAt(_ index: Int) -> NSUIColor
+    open func valueTextColorAt(_ index: Int) -> Color
     {
         var index = index
         if index < 0
@@ -321,7 +319,7 @@ open class ChartBaseDataSet: IChartDataSet
     }
     
     /// the font for the value-text labels
-    open var valueFont: NSUIFont = NSUIFont.systemFont(ofSize: 7.0)
+    open var valueFont: Font = Font.systemFont(ofSize: 7.0)
     
     /// The form to draw for this dataset in the legend.
     open var form = Legend.Form.default
@@ -351,24 +349,14 @@ open class ChartBaseDataSet: IChartDataSet
     /// Set this to true to draw y-values on the chart.
     ///
     /// - note: For bar and line charts: if `maxVisibleCount` is reached, no values will be drawn even if this is enabled.
-    open var drawValuesEnabled = true
-    
     /// - returns: `true` if y-value drawing is enabled, `false` ifnot
-    open var isDrawValuesEnabled: Bool
-    {
-        return drawValuesEnabled
-    }
-
+    open var isDrawValuesEnabled = true
+    
     /// Set this to true to draw y-icons on the chart.
     ///
     /// - note: For bar and line charts: if `maxVisibleCount` is reached, no icons will be drawn even if this is enabled.
-    open var drawIconsEnabled = true
-    
     /// Returns true if y-icon drawing is enabled, false if not
-    open var isDrawIconsEnabled: Bool
-    {
-        return drawIconsEnabled
-    }
+    open var isDrawIconsEnabled = true
     
     /// Offset of icons drawn on the chart.  
     ///
@@ -386,7 +374,7 @@ open class ChartBaseDataSet: IChartDataSet
         return visible
     }
     
-    // MARK: - NSObject
+    // MARK: - CustomStringConvertible
     
     open var description: String
     {

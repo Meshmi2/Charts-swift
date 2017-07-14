@@ -27,7 +27,7 @@ open class AnimatedViewPortJob: ViewPortJob
     fileprivate var _duration: TimeInterval = 0.0
     fileprivate var _endTime: TimeInterval = 0.0
     
-    fileprivate var _easing: ChartEasingFunctionBlock?
+    fileprivate var _easing: ChartEasingOption
     
     public init(
         viewPortHandler: ViewPortHandler,
@@ -38,18 +38,18 @@ open class AnimatedViewPortJob: ViewPortJob
         xOrigin: CGFloat,
         yOrigin: CGFloat,
         duration: TimeInterval,
-        easing: ChartEasingFunctionBlock?)
+        easingOption: ChartEasingOption)
     {
+        self.xOrigin = xOrigin
+        self.yOrigin = yOrigin
+        self._duration = duration
+        self._easing = easingOption
+        
         super.init(viewPortHandler: viewPortHandler,
             xValue: xValue,
             yValue: yValue,
             transformer: transformer,
             view: view)
-        
-        self.xOrigin = xOrigin
-        self.yOrigin = yOrigin
-        self._duration = duration
-        self._easing = easing
     }
     
     deinit
@@ -106,14 +106,7 @@ open class AnimatedViewPortJob: ViewPortJob
             elapsed = duration
         }
         
-        if _easing != nil
-        {
-            phase = CGFloat(_easing!(elapsed, duration))
-        }
-        else
-        {
-            phase = CGFloat(elapsed / duration)
-        }
+        phase = CGFloat(_easing.function?(elapsed, duration) ?? elapsed / duration)
     }
     
     @objc fileprivate func animationLoop()

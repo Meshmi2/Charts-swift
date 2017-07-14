@@ -163,30 +163,28 @@ public protocol IChartDataSet: class
     var axisDependency: YAxis.AxisDependency { get }
     
     /// List representing all colors that are used for drawing the actual values for this DataSet
-    var valueColors: [NSUIColor] { get }
+    var valueColors: [Color] { get }
     
     /// All the colors that are used for this DataSet.
     /// Colors are reused as soon as the number of Entries the DataSet represents is higher than the size of the colors array.
-    var colors: [NSUIColor] { get }
+    var colors: [Color] { get }
     
     /// - returns: The color at the given index of the DataSet's color array.
     /// This prevents out-of-bounds by performing a modulus on the color index, so colours will repeat themselves.
-    func color(atIndex: Int) -> NSUIColor
+    func color(atIndex: Int) -> Color
     
     func resetColors()
     
-    func addColor(_ color: NSUIColor)
+    func addColor(_ color: Color)
     
-    func setColor(_ color: NSUIColor)
+    func setColor(_ color: Color)
     
     /// if true, value highlighting is enabled
-    var highlightEnabled: Bool { get set }
-    
     /// - returns: `true` if value highlighting is enabled for this dataset
-    var isHighlightEnabled: Bool { get }
+    var isHighlightEnabled: Bool { get set }
     
     /// Custom formatter that is used instead of the auto-formatter if set
-    var valueFormatter: IValueFormatter? { get set }
+    var valueFormatter: ValueFormatter? { get set }
     
     /// - returns: `true` if the valueFormatter object of this DataSet is null.
     var needsFormatter: Bool { get }
@@ -194,13 +192,13 @@ public protocol IChartDataSet: class
     /// Sets/get a single color for value text.
     /// Setting the color clears the colors array and adds a single color.
     /// Getting will return the first color in the array.
-    var valueTextColor: NSUIColor { get set }
+    var valueTextColor: Color { get set }
     
     /// - returns: The color at the specified index that is used for drawing the values inside the chart. Uses modulus internally.
-    func valueTextColorAt(_ index: Int) -> NSUIColor
+    func valueTextColorAt(_ index: Int) -> Color
     
     /// the font for the value-text labels
-    var valueFont: NSUIFont { get set }
+    var valueFont: Font { get set }
     
     /// The form to draw for this dataset in the legend.
     ///
@@ -232,18 +230,14 @@ public protocol IChartDataSet: class
     /// Set this to true to draw y-values on the chart.
     ///
     /// - note: For bar and line charts: if `maxVisibleCount` is reached, no values will be drawn even if this is enabled.
-    var drawValuesEnabled: Bool { get set }
-    
     /// - returns: `true` if y-value drawing is enabled, `false` ifnot
-    var isDrawValuesEnabled: Bool { get }
+    var isDrawValuesEnabled: Bool { get set }
     
     /// Set this to true to draw y-icons on the chart
     ///
     /// - note: For bar and line charts: if `maxVisibleCount` is reached, no icons will be drawn even if this is enabled.
-    var drawIconsEnabled: Bool { get set }
-    
     /// Returns true if y-icon drawing is enabled, false if not
-    var isDrawIconsEnabled: Bool { get }
+    var isDrawIconsEnabled: Bool { get set }
     
     /// Offset of icons drawn on the chart.
     ///

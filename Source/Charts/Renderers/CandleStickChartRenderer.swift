@@ -21,7 +21,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
 {
     open weak var dataProvider: CandleChartDataProvider?
     
-    public init(dataProvider: CandleChartDataProvider?, animator: Animator?, viewPortHandler: ViewPortHandler?)
+    public init(dataProvider: CandleChartDataProvider?, animator: Animator?, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         
@@ -114,7 +114,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
                 
                 // draw the shadows
                 
-                var shadowColor: NSUIColor! = nil
+                var shadowColor: Color! = nil
                 if dataSet.shadowColorSameAsCandle
                 {
                     if open > close
@@ -210,7 +210,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
                 trans.pointValuesToPixel(&_closePoints)
                 
                 // draw the ranges
-                var barColor: NSUIColor! = nil
+                var barColor: Color! = nil
                 
                 if open > close
                 {
@@ -239,7 +239,6 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
     {
         guard
             let dataProvider = dataProvider,
-            let viewPortHandler = self.viewPortHandler,
             let candleData = dataProvider.candleData,
             let animator = animator
             else { return }

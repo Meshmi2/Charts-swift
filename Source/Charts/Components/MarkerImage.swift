@@ -16,10 +16,10 @@ import CoreGraphics
     import UIKit
 #endif
 
-open class MarkerImage: IMarker
+open class MarkerImage: Marker
 {
     /// The marker image to render
-    open var image: NSUIImage?
+    open var image: Image?
     
     open var offset: CGPoint = CGPoint()
     
@@ -27,7 +27,12 @@ open class MarkerImage: IMarker
     
     /// As long as size is 0.0/0.0 - it will default to the image's size
     open var size: CGSize = CGSize()
-        
+    
+    public init() {
+        self.image = nil
+        self.chartView = nil
+    }
+    
     open func offsetForDrawing(atPoint point: CGPoint) -> CGPoint
     {
         var offset = self.offset
@@ -52,18 +57,18 @@ open class MarkerImage: IMarker
         {
             offset.x = -point.x
         }
-        else if chart != nil && point.x + width + offset.x > chart!.bounds.size.width
+        else if let chart = chart, point.x + width + offset.x > chart.bounds.size.width
         {
-            offset.x = chart!.bounds.size.width - point.x - width
+            offset.x = chart.bounds.size.width - point.x - width
         }
         
         if point.y + offset.y < 0
         {
             offset.y = -point.y
         }
-        else if chart != nil && point.y + height + offset.y > chart!.bounds.size.height
+        else if let chart = chart, point.y + height + offset.y > chart.bounds.size.height
         {
-            offset.y = chart!.bounds.size.height - point.y - height
+            offset.y = chart.bounds.size.height - point.y - height
         }
         
         return offset

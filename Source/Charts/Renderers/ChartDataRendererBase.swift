@@ -14,12 +14,13 @@ import CoreGraphics
 
 open class DataRenderer: Renderer
 {
+    open var viewPortHandler: ViewPortHandler
+    
     open var animator: Animator?
     
-    public init(animator: Animator?, viewPortHandler: ViewPortHandler?)
+    public init(animator: Animator?, viewPortHandler: ViewPortHandler)
     {
-        super.init(viewPortHandler: viewPortHandler)
-        
+        self.viewPortHandler = viewPortHandler
         self.animator = animator
     }
 
@@ -55,6 +56,6 @@ open class DataRenderer: Renderer
         guard let data = dataProvider?.data
             else { return false }
         
-        return data.entryCount < Int(CGFloat(dataProvider?.maxVisibleCount ?? 0) * (viewPortHandler?.scaleX ?? 1.0))
+        return data.entryCount < Int(CGFloat(dataProvider?.maxVisibleCount ?? 0) * viewPortHandler.scaleX)
     }
 }

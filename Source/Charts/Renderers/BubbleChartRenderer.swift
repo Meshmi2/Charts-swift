@@ -21,7 +21,7 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
 {
     open weak var dataProvider: BubbleChartDataProvider?
     
-    public init(dataProvider: BubbleChartDataProvider?, animator: Animator?, viewPortHandler: ViewPortHandler?)
+    public init(dataProvider: BubbleChartDataProvider?, animator: Animator?, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
         
@@ -64,7 +64,6 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
     {
         guard
             let dataProvider = dataProvider,
-            let viewPortHandler = self.viewPortHandler,
             let animator = animator
             else { return }
         
@@ -139,7 +138,6 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
     {
         guard let
             dataProvider = dataProvider,
-            let viewPortHandler = self.viewPortHandler,
             let bubbleData = dataProvider.bubbleData,
             let animator = animator
             else { return }
@@ -239,7 +237,6 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
     {
         guard let
             dataProvider = dataProvider,
-            let viewPortHandler = self.viewPortHandler,
             let bubbleData = dataProvider.bubbleData,
             let animator = animator
             else { return }
@@ -307,7 +304,7 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
             
             originalColor.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
             
-            let color = NSUIColor(hue: h, saturation: s, brightness: b * 0.5, alpha: a)
+            let color = Color(hue: h, saturation: s, brightness: b * 0.5, alpha: a)
             let rect = CGRect(
                 x: _pointBuffer.x - shapeHalf,
                 y: _pointBuffer.y - shapeHalf,
