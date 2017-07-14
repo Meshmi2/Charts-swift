@@ -7,7 +7,4 @@
    <FileRef
       location = "container:ChartsDemo-iOS/ChartsDemo-iOS.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:ChartsDemo/ChartsDemo.xcodeproj">
-   </FileRef>
 </Workspace>
