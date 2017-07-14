@@ -12,9 +12,7 @@ import Charts
 class LineChartTimeViewController: DemoBaseViewController {
     @IBOutlet var chartView: LineChartView!
     @IBOutlet var sliderX: UISlider!
-    @IBOutlet var sliderY: UISlider!
     @IBOutlet var sliderTextX: UITextField!
-    @IBOutlet var sliderTextY: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()

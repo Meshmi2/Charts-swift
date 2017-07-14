@@ -23,7 +23,7 @@ open class AxisBase: ComponentBase
     /// Custom formatter that is used instead of the auto-formatter if set
     fileprivate var _axisValueFormatter: AxisValueFormatter?
     
-    open var labelFont = Font.systemFont(ofSize: 10.0)
+    open var labelFont = Font.systemFont(ofSize: 10.0, weight: .light)
     open var labelTextColor = Color.black
     
     open var axisLineColor = Color.gray
