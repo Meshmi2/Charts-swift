@@ -12,8 +12,32 @@
 import Foundation
 import CoreGraphics
 
+//public protocol IRadarChartDataSet: ILineRadarChartDataSet
+//{
+//    // MARK: - Data functions and accessors
+//
+//    // MARK: - Styling functions and accessors
+//
+//    /// flag indicating whether highlight circle should be drawn or not
+//    var isDrawHighlightCircleEnabled: Bool { get set }
+//
+//    var highlightCircleFillColor: Color? { get set }
+//
+//    /// The stroke color for highlight circle.
+//    /// If `nil`, the color of the dataset is taken.
+//    var highlightCircleStrokeColor: Color? { get set }
+//
+//    var highlightCircleStrokeAlpha: CGFloat { get set }
+//
+//    var highlightCircleInnerRadius: CGFloat { get set }
+//
+//    var highlightCircleOuterRadius: CGFloat { get set }
+//
+//    var highlightCircleStrokeWidth: CGFloat { get set }
+//}
 
-open class RadarChartDataSet: LineRadarChartDataSet, IRadarChartDataSet
+
+open class RadarChartDataSet: LineRadarChartDataSet
 {
     fileprivate func initialize()
     {
@@ -26,9 +50,14 @@ open class RadarChartDataSet: LineRadarChartDataSet, IRadarChartDataSet
         initialize()
     }
     
-    public required override init(values: [ChartDataEntry]?, label: String?)
+    public required override init(values: [ChartDataEntry], label: String)
     {
         super.init(values: values, label: label)
+        initialize()
+    }
+    
+    public required init(arrayLiteral elements: ChartDataEntry...) {
+        super.init(values: elements)
         initialize()
     }
     

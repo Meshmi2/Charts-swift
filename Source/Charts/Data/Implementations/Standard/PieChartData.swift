@@ -13,11 +13,11 @@ import Foundation
 
 open class PieChartData: ChartData
 {
-    var dataSet: IPieChartDataSet?
+    var dataSet: PieChartDataSet?
     {
         get
         {
-            return dataSets.count > 0 ? dataSets[0] as? IPieChartDataSet : nil
+            return dataSets.first as? PieChartDataSet
         }
         set
         {
@@ -32,7 +32,7 @@ open class PieChartData: ChartData
         }
     }
     
-    open override func getDataSetByIndex(_ index: Int) -> IChartDataSet?
+    open override func getDataSetByIndex(_ index: Int) -> ChartDataSet?
     {
         if index != 0
         {
@@ -41,7 +41,7 @@ open class PieChartData: ChartData
         return super.getDataSetByIndex(index)
     }
     
-    open override func getDataSetByLabel(_ label: String, ignorecase: Bool) -> IChartDataSet?
+    open override func getDataSetByLabel(_ label: String, ignorecase: Bool) -> ChartDataSet?
     {
         if dataSets.count == 0 || dataSets[0].label == nil
         {
@@ -67,10 +67,10 @@ open class PieChartData: ChartData
     
     open override func entryForHighlight(_ highlight: Highlight) -> ChartDataEntry?
     {
-        return dataSet?.entryForIndex(Int(highlight.x))
+        return dataSet?[Int(highlight.x)]
     }
     
-    open override func addDataSet(_ d: IChartDataSet!)
+    open override func addDataSet(_ d: ChartDataSet)
     {   
         super.addDataSet(d)
     }
@@ -96,9 +96,10 @@ open class PieChartData: ChartData
         
         var yValueSum: Double = 0.0
         
-        for i in 0..<dataSet.entryCount
+        for i in 0..<dataSet.count
         {
-            yValueSum += dataSet.entryForIndex(i)?.y ?? 0.0
+            let entry = dataSet[i]
+            yValueSum += entry.y
         }
         
         return yValueSum

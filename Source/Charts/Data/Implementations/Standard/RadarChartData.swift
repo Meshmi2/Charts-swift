@@ -31,6 +31,6 @@ open class RadarChartData: ChartData
 
     open override func entryForHighlight(_ highlight: Highlight) -> ChartDataEntry?
     {
-        return getDataSetByIndex(highlight.dataSetIndex)?.entryForIndex(Int(highlight.x))
+        return getDataSetByIndex(highlight.dataSetIndex)?[Int(highlight.x)]
     }
 }

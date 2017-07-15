@@ -36,10 +36,9 @@ open class PieChartRenderer: DataRenderer
         
         if pieData != nil
         {
-            for set in pieData!.dataSets as! [IPieChartDataSet]
+            for set in pieData!.dataSets as! [PieChartDataSet]
             {
-                if set.isVisible && set.entryCount > 0
-                {
+                if set.isVisible && set.count > 0 {
                     drawDataSet(context: context, dataSet: set)
                 }
             }
@@ -88,7 +87,7 @@ open class PieChartRenderer: DataRenderer
     }
     
     /// Calculates the sliceSpace to use based on visible values and their size compared to the set sliceSpace.
-    open func getSliceSpace(dataSet: IPieChartDataSet) -> CGFloat
+    open func getSliceSpace(dataSet: PieChartDataSet) -> CGFloat
     {
         guard
             dataSet.automaticallyDisableSliceSpacing,
@@ -105,7 +104,7 @@ open class PieChartRenderer: DataRenderer
         return sliceSpace
     }
 
-    open func drawDataSet(context: CGContext, dataSet: IPieChartDataSet)
+    open func drawDataSet(context: CGContext, dataSet: PieChartDataSet)
     {
         guard
             let chart = chart,
@@ -118,7 +117,7 @@ open class PieChartRenderer: DataRenderer
         let phaseX = animator.phaseX
         let phaseY = animator.phaseY
         
-        let entryCount = dataSet.entryCount
+        let entryCount = dataSet.count
         var drawAngles = chart.drawAngles
         let center = chart.centerCircleBox
         let radius = chart.radius
@@ -128,7 +127,7 @@ open class PieChartRenderer: DataRenderer
         var visibleAngleCount = 0
         for j in 0 ..< entryCount
         {
-            guard let e = dataSet.entryForIndex(j) else { continue }
+            let e = dataSet[j]
             if ((abs(e.y) > Double.ulpOfOne))
             {
                 visibleAngleCount += 1
@@ -144,7 +143,7 @@ open class PieChartRenderer: DataRenderer
             let sliceAngle = drawAngles[j]
             var innerRadius = userInnerRadius
             
-            guard let e = dataSet.entryForIndex(j) else { continue }
+            let e = dataSet[j]
             
             // draw only if the value is greater than zero
             if (abs(e.y) > Double.ulpOfOne)
@@ -302,7 +301,7 @@ open class PieChartRenderer: DataRenderer
         
         for i in 0 ..< dataSets.count
         {
-            guard let dataSet = dataSets[i] as? IPieChartDataSet else { continue }
+            guard let dataSet = dataSets[i] as? PieChartDataSet else { continue }
             
             let drawValues = dataSet.isDrawValuesEnabled
             
@@ -322,9 +321,9 @@ open class PieChartRenderer: DataRenderer
             
             guard let formatter = dataSet.valueFormatter else { continue }
             
-            for j in 0 ..< dataSet.entryCount
+            for j in 0 ..< dataSet.count
             {
-                guard let e = dataSet.entryForIndex(j) else { continue }
+                let e = dataSet[j]
                 let pe = e as? PieChartDataEntry
                 
                 if xIndex == 0
@@ -695,18 +694,18 @@ open class PieChartRenderer: DataRenderer
                 continue
             }
             
-            guard let set = data.getDataSetByIndex(indices[i].dataSetIndex) as? IPieChartDataSet else { continue }
+            guard let set = data.getDataSetByIndex(indices[i].dataSetIndex) as? PieChartDataSet else { continue }
             
             if !set.isHighlightEnabled
             {
                 continue
             }
 
-            let entryCount = set.entryCount
+            let entryCount = set.count
             var visibleAngleCount = 0
             for j in 0 ..< entryCount
             {
-                guard let e = set.entryForIndex(j) else { continue }
+                let e = set[j]
                 if ((abs(e.y) > Double.ulpOfOne))
                 {
                     visibleAngleCount += 1

@@ -81,14 +81,10 @@ open class ChartHighlighter : IHighlighter
             data = self.data
             else { return vals }
         
-        for i in 0 ..< data.dataSetCount
+        for (i,dataSet) in data.dataSets.enumerated()
         {
-            guard let dataSet = data.getDataSetByIndex(i)
-                else { continue }
-            
             // don't include datasets that cannot be highlighted
-            if !dataSet.isHighlightEnabled
-            {
+            guard dataSet.isHighlightEnabled else {
                 continue
             }
             
@@ -103,10 +99,10 @@ open class ChartHighlighter : IHighlighter
     
     /// - returns: An array of `Highlight` objects corresponding to the selected xValue and dataSetIndex.
     internal func buildHighlights(
-        dataSet set: IChartDataSet,
+        dataSet set: ChartDataSet,
         dataSetIndex: Int,
         xValue: Double,
-        rounding: ChartDataSetRounding) -> [Highlight]
+        rounding: RoundingMode) -> [Highlight]
     {
         var highlights = [Highlight]()
         

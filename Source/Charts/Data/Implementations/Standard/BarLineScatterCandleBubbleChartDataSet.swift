@@ -12,10 +12,32 @@
 import Foundation
 import CoreGraphics
 
+//public protocol IBarLineScatterCandleBubbleChartDataSet: IChartDataSet
+//{
+//    // MARK: - Data functions and accessors
+//
+//    // MARK: - Styling functions and accessors
+//
+//    var highlightColor: Color { get set }
+//    var highlightLineWidth: CGFloat { get set }
+//    var highlightLineDashPhase: CGFloat { get set }
+//    var highlightLineDashLengths: [CGFloat]? { get set }
+//}
 
-open class BarLineScatterCandleBubbleChartDataSet: ChartDataSet, IBarLineScatterCandleBubbleChartDataSet
+open class BarLineScatterCandleBubbleChartDataSet: ChartDataSet
 {
     // MARK: - Data functions and accessors
+    public required init(arrayLiteral elements: ChartDataEntry...) {
+        super.init(values: elements)
+    }
+    
+    public required init() {
+        super.init()
+    }
+    
+    public override init(values: [ChartDataEntry], label: String = "Data Set") {
+        super.init(values: values, label: label)
+    }
     
     // MARK: - Styling functions and accessors
     

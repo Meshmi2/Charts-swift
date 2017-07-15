@@ -11,40 +11,45 @@
 
 import Foundation
 
+/// Determines how to round DataSet index values for `ChartDataSet.entryIndex(x, rounding)` when an exact x-value is not found.
+public enum RoundingMode {
+    case up
+    case down
+    case closest
+}
 
-public protocol IChartDataSet: class
+public protocol IChartDataSet: class, MutableCollection, RandomAccessCollection, RangeReplaceableCollection, ExpressibleByArrayLiteral
 {
+    associatedtype Base: MutableCollection, RandomAccessCollection, RangeReplaceableCollection, ExpressibleByArrayLiteral where Base.Index == Int, Base.Element: ChartDataEntry
+    
     // MARK: - Data functions and accessors
     
+    // The internal values
+    var values: Base { get set }
+
     /// Use this method to tell the data set that the underlying data has changed
     func notifyDataSetChanged()
     
     /// Calculates the minimum and maximum x and y values (_xMin, _xMax, _yMin, _yMax).
     func calcMinMax()
     
+    func calcMinMax(entry e: Base.Element)
+    
     /// Calculates the min and max y-values from the Entry closest to the given fromX to the Entry closest to the given toX value.
     /// This is only needed for the autoScaleMinMax feature.
     func calcMinMaxY(fromX: Double, toX: Double)
     
     /// - returns: The minimum y-value this DataSet holds
-    var yMin: Double { get }
+    var yMin: Double { get set }
     
     /// - returns: The maximum y-value this DataSet holds
-    var yMax: Double { get }
+    var yMax: Double { get set }
     
     /// - returns: The minimum x-value this DataSet holds
-    var xMin: Double { get }
+    var xMin: Double { get set }
     
     /// - returns: The maximum x-value this DataSet holds
-    var xMax: Double { get }
-    
-    /// - returns: The number of y-values this DataSet represents
-    var entryCount: Int { get }
-    
-    /// - returns: The entry object found at the given index (not x-value!)
-    /// - throws: out of bounds
-    /// if `i` is out of bounds, it may throw an out-of-bounds exception
-    func entryForIndex(_ i: Int) -> ChartDataEntry?
+    var xMax: Double { get set }
     
     /// - returns: The first Entry object found at the given x-value with binary search.
     /// If the no Entry at the specified x-value is found, this method returns the Entry at the closest x-value according to the rounding.
@@ -55,7 +60,7 @@ public protocol IChartDataSet: class
     func entryForXValue(
         _ xValue: Double,
         closestToY yValue: Double,
-        rounding: ChartDataSetRounding) -> ChartDataEntry?
+        rounding: RoundingMode) -> Base.Element?
     
     /// - returns: The first Entry object found at the given x-value with binary search.
     /// If the no Entry at the specified x-value is found, this method returns the Entry at the closest x-value.
@@ -64,11 +69,11 @@ public protocol IChartDataSet: class
     /// - parameter closestToY: If there are multiple y-values for the specified x-value,
     func entryForXValue(
         _ xValue: Double,
-        closestToY yValue: Double) -> ChartDataEntry?
+        closestToY yValue: Double) -> Base.Element?
     
     /// - returns: All Entry objects found at the given x-value with binary search.
     /// An empty array if no Entry object at that x-value.
-    func entriesForXValue(_ xValue: Double) -> [ChartDataEntry]
+    func entriesForXValue(_ xValue: Double) -> Base
     
     /// - returns: The array-index of the specified entry.
     /// If the no Entry at the specified x-value is found, this method returns the index of the Entry at the closest x-value according to the rounding.
@@ -79,21 +84,12 @@ public protocol IChartDataSet: class
     func entryIndex(
         x xValue: Double,
         closestToY yValue: Double,
-        rounding: ChartDataSetRounding) -> Int
+        rounding: RoundingMode) -> Base.Index
     
     /// - returns: The array-index of the specified entry
     ///
     /// - parameter e: the entry to search for
-    func entryIndex(entry e: ChartDataEntry) -> Int
-    
-    /// Adds an Entry to the DataSet dynamically.
-    ///
-    /// *optional feature, can return `false` ifnot implemented*
-    ///
-    /// Entries are added to the end of the list.
-    /// - parameter e: the entry to add
-    /// - returns: `true` if the entry was added successfully, `false` ifthis feature is not supported
-    func addEntry(_ e: ChartDataEntry) -> Bool
+    func entryIndex(entry e: Base.Element) -> Base.Index
     
     /// Adds an Entry to the DataSet dynamically.
     /// Entries are added to their appropriate index in the values array respective to their x-position.
@@ -104,7 +100,7 @@ public protocol IChartDataSet: class
     /// Entries are added to the end of the list.
     /// - parameter e: the entry to add
     /// - returns: `true` if the entry was added successfully, `false` ifthis feature is not supported
-    func addEntryOrdered(_ e: ChartDataEntry) -> Bool
+    func addEntryOrdered(_ e: Base.Element) -> Bool
     
     /// Removes an Entry from the DataSet dynamically.
     ///
@@ -112,15 +108,7 @@ public protocol IChartDataSet: class
     ///
     /// - parameter entry: the entry to remove
     /// - returns: `true` if the entry was removed successfully, `false` ifthe entry does not exist or if this feature is not supported
-    func removeEntry(_ entry: ChartDataEntry) -> Bool
-    
-    /// Removes the Entry object at the given index in the values array from the DataSet.
-    ///
-    /// *optional feature, can return `false` ifnot implemented*
-    ///
-    /// - parameter index: the index of the entry to remove
-    /// - returns: `true` if the entry was removed successfully, `false` ifthe entry does not exist or if this feature is not supported
-    func removeEntry(index: Int) -> Bool
+    func removeEntry(_ entry: Base.Element) -> Bool
     
     /// Removes the Entry object closest to the given x-value from the DataSet.
     ///
@@ -130,29 +118,10 @@ public protocol IChartDataSet: class
     /// - returns: `true` if the entry was removed successfully, `false` ifthe entry does not exist or if this feature is not supported
     func removeEntry(x: Double) -> Bool
     
-    /// Removes the first Entry (at index 0) of this DataSet from the entries array.
-    ///
-    /// *optional feature, can return `false` ifnot implemented*
-    ///
-    /// - returns: `true` if the entry was removed successfully, `false` ifthe entry does not exist or if this feature is not supported
-    func removeFirst() -> Bool
-    
-    /// Removes the last Entry (at index 0) of this DataSet from the entries array.
-    ///
-    /// *optional feature, can return `false` ifnot implemented*
-    ///
-    /// - returns: `true` if the entry was removed successfully, `false` ifthe entry does not exist or if this feature is not supported
-    func removeLast() -> Bool
-    
     /// Checks if this DataSet contains the specified Entry.
     ///
     /// - returns: `true` if contains the entry, `false` ifnot.
-    func contains(_ e: ChartDataEntry) -> Bool
-    
-    /// Removes all values from this DataSet and does all necessary recalculations.
-    ///
-    /// *optional feature, could throw if not implemented*
-    func clear()
+    func contains(_ e: Base.Element) -> Bool
     
     // MARK: - Styling functions and accessors
     
@@ -251,4 +220,118 @@ public protocol IChartDataSet: class
     
     /// - returns: `true` if this DataSet is visible inside the chart, or `false` ifit is currently hidden.
     var isVisible: Bool { get }
+}
+
+public extension IChartDataSet {
+    public func notifyDataSetChanged() {
+        calcMinMax()
+    }
+    
+    public func calcMinMaxX(entry e: Base.Element)
+    {
+        if e.x < xMin
+        {
+            xMin = e.x
+        }
+        if e.x > xMax
+        {
+            xMax = e.x
+        }
+    }
+    
+    public func calcMinMaxY(entry e: Base.Element)
+    {
+        if e.y < yMin {
+            yMin = e.y
+        }
+        if e.y > yMax {
+            yMax = e.y
+        }
+    }
+
+    /// Updates the min and max x and y value of this DataSet based on the given Entry.
+    ///
+    /// - parameter e:
+    public func calcMinMax(entry e: Base.Element)
+    {
+        calcMinMaxX(entry: e)
+        calcMinMaxY(entry: e)
+    }
+}
+
+// MARK: MutableCollection
+public extension IChartDataSet {
+    public var startIndex: Base.Index {
+        return values.startIndex
+    }
+    
+    public var endIndex: Base.Index {
+        return values.endIndex
+    }
+    
+    public func index(after: Base.Index) -> Base.Index {
+        return values.index(after: after)
+    }
+    
+    public subscript(position: Base.Index) -> Base.Element {
+        get{ return values[position] }
+        set{ self.values[position] = newValue }
+    }
+}
+
+// MARK: RandomAccessCollection
+public extension IChartDataSet {
+    public func index(before: Base.Index) -> Base.Index {
+        return values.index(before: before)
+    }
+}
+
+// MARK: RangeReplaceableCollection
+public extension IChartDataSet {
+    public func append(_ newElement: Base.Element) {
+        self.values.append(newElement)
+        calcMinMax(entry: newElement)
+    }
+    
+    public func remove(at position: Base.Index) -> Base.Element {
+        let element = self.values.remove(at: position)
+        notifyDataSetChanged()
+        return element
+    }
+    public func removeFirst() -> Base.Element {
+        let element = self.values.removeFirst()
+        notifyDataSetChanged()
+        return element
+    }
+    
+    public func removeFirst(_ n: Int) {
+        self.values.removeFirst(n)
+        notifyDataSetChanged()
+    }
+    
+    public func removeLast() -> Base.Element {
+        let element = self.values.removeLast()
+        notifyDataSetChanged()
+        return element
+    }
+    
+    public func removeLast(_ n: Int) {
+        self.values.removeLast(n)
+        notifyDataSetChanged()
+    }
+    
+    public func removeSubrange(_ bounds: Range<Base.Index>) {
+        self.values.removeSubrange(bounds)
+        notifyDataSetChanged()
+    }
+    
+    //    public mutating func removeSubrange<R>(_ bounds: R) where R : RangeExpression, Index == R.Bound {
+    //        self._values.removeSubrange(bounds)
+    //        notifyDataSetChanged()
+    //    }
+    
+    public func removeAll(keepingCapacity keepCapacity: Bool) {
+        self.values.removeAll(keepingCapacity: keepCapacity)
+        notifyDataSetChanged()
+    }
 }

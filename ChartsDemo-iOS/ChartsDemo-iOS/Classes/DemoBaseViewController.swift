@@ -127,7 +127,7 @@ class DemoBaseViewController: UIViewController, ChartViewDelegate {
             
         case .toggleBarBorders:
             for set in chartView.data!.dataSets {
-                if let set = set as? IBarChartDataSet {
+                if let set = set as? BarChartDataSet {
                     set.barBorderWidth = set.barBorderWidth == 1.0 ? 0.0 : 1.0
                 }
             }

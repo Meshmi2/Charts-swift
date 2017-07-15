@@ -35,7 +35,7 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
             let bubbleData = dataProvider.bubbleData
             else { return }
         
-        for set in bubbleData.dataSets as! [IBubbleChartDataSet]
+        for set in bubbleData.dataSets as! [BubbleChartDataSet]
         {
             if set.isVisible
             {
@@ -60,7 +60,7 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
     fileprivate var _pointBuffer = CGPoint()
     fileprivate var _sizeBuffer = [CGPoint](repeating: CGPoint(), count: 2)
     
-    open func drawDataSet(context: CGContext, dataSet: IBubbleChartDataSet)
+    open func drawDataSet(context: CGContext, dataSet: BubbleChartDataSet)
     {
         guard
             let dataProvider = dataProvider,
@@ -93,7 +93,7 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
         
         for j in stride(from: _xBounds.min, through: _xBounds.range + _xBounds.min, by: 1)
         {
-            guard let entry = dataSet.entryForIndex(j) as? BubbleChartDataEntry else { continue }
+            guard let entry = dataSet[j] as? BubbleChartDataEntry else { continue }
             
             _pointBuffer.x = CGFloat(entry.x)
             _pointBuffer.y = CGFloat(entry.y * phaseY)
@@ -145,7 +145,7 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
         // if values are drawn
         if isDrawingValuesAllowed(dataProvider: dataProvider)
         {
-            guard let dataSets = bubbleData.dataSets as? [IBubbleChartDataSet] else { return }
+            guard let dataSets = bubbleData.dataSets as? [BubbleChartDataSet] else { return }
             
             let phaseX = max(0.0, min(1.0, animator.phaseX))
             let phaseY = animator.phaseY
@@ -174,7 +174,7 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
                 
                 for j in stride(from: _xBounds.min, through: _xBounds.range + _xBounds.min, by: 1)
                 {
-                    guard let e = dataSet.entryForIndex(j) as? BubbleChartDataEntry else { break }
+                    guard let e = dataSet[j] as? BubbleChartDataEntry else { break }
                     
                     let valueTextColor = dataSet.valueTextColorAt(j).withAlphaComponent(CGFloat(alpha))
                     
@@ -248,7 +248,7 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
         for high in indices
         {
             guard
-                let dataSet = bubbleData.getDataSetByIndex(high.dataSetIndex) as? IBubbleChartDataSet,
+                let dataSet = bubbleData.getDataSetByIndex(high.dataSetIndex) as? BubbleChartDataSet,
                 dataSet.isHighlightEnabled
                 else { continue }
                         

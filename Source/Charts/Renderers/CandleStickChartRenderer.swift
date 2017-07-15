@@ -32,7 +32,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
     {
         guard let dataProvider = dataProvider, let candleData = dataProvider.candleData else { return }
 
-        for set in candleData.dataSets as! [ICandleChartDataSet]
+        for set in candleData.dataSets as! [CandleChartDataSet]
         {
             if set.isVisible
             {
@@ -48,7 +48,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
     fileprivate var _bodyRect = CGRect()
     fileprivate var _lineSegments = [CGPoint](repeating: CGPoint(), count: 2)
     
-    open func drawDataSet(context: CGContext, dataSet: ICandleChartDataSet)
+    open func drawDataSet(context: CGContext, dataSet: CandleChartDataSet)
     {
         guard let
             dataProvider = dataProvider,
@@ -70,7 +70,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
         for j in stride(from: _xBounds.min, through: _xBounds.range + _xBounds.min, by: 1)
         {
             // get the entry
-            guard let e = dataSet.entryForIndex(j) as? CandleChartDataEntry else { continue }
+            guard let e = dataSet[j] as? CandleChartDataEntry else { continue }
             
             let xPos = e.x
             
@@ -254,7 +254,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
             
             for i in 0 ..< dataSets.count
             {
-                guard let dataSet = dataSets[i] as? IBarLineScatterCandleBubbleChartDataSet
+                guard let dataSet = dataSets[i] as? BarLineScatterCandleBubbleChartDataSet
                     else { continue }
                 
                 if !shouldDrawValues(forDataSet: dataSet)
@@ -278,7 +278,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
                 
                 for j in stride(from: _xBounds.min, through: _xBounds.range + _xBounds.min, by: 1)
                 {
-                    guard let e = dataSet.entryForIndex(j) as? CandleChartDataEntry else { break }
+                    guard let e = dataSet[j] as? CandleChartDataEntry else { break }
                     
                     pt.x = CGFloat(e.x)
                     pt.y = CGFloat(e.high * phaseY)
@@ -340,7 +340,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
         for high in indices
         {
             guard
-                let set = candleData.getDataSetByIndex(high.dataSetIndex) as? ICandleChartDataSet,
+                let set = candleData.getDataSetByIndex(high.dataSetIndex) as? CandleChartDataSet,
                 set.isHighlightEnabled
                 else { continue }
             

@@ -36,7 +36,7 @@ open class BarChartData: BarLineScatterCandleBubbleChartData
         }
         
         let max = maxEntryCountSet
-        let maxEntryCount = max?.entryCount ?? 0
+        let maxEntryCount = max?.count ?? 0
         
         let groupSpaceWidthHalf = groupSpace / 2.0
         let barSpaceHalf = barSpace / 2.0
@@ -56,12 +56,10 @@ open class BarChartData: BarLineScatterCandleBubbleChartData
                 fromX += barSpaceHalf
                 fromX += barWidthHalf
                 
-                if i < set.entryCount
+                if i < set.count
                 {
-                    if let entry = set.entryForIndex(i)
-                    {
-                        entry.x = fromX
-                    }
+                    let entry = set[i]
+                    entry.x = fromX
                 }
                 
                 fromX += barWidthHalf

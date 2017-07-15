@@ -14,7 +14,7 @@ open class XShapeRenderer : ShapeRenderer
 {
     open func renderShape(
         context: CGContext,
-        dataSet: IScatterChartDataSet,
+        dataSet: ScatterChartDataSet,
         point: CGPoint,
         color: Color)
     {

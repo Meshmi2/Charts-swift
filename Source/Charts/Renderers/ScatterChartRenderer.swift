@@ -32,25 +32,16 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
     {
         guard let scatterData = dataProvider?.scatterData else { return }
         
-        for i in 0 ..< scatterData.dataSetCount
-        {
-            guard let set = scatterData.getDataSetByIndex(i) else { continue }
-            
-            if set.isVisible
-            {
-                if !(set is IScatterChartDataSet)
-                {
-                    fatalError("Datasets for ScatterChartRenderer must conform to IScatterChartDataSet")
-                }
-                
-                drawDataSet(context: context, dataSet: set as! IScatterChartDataSet)
+        for set in scatterData.dataSets as! [ScatterChartDataSet] {
+            if set.isVisible {
+                drawDataSet(context: context, dataSet: set)
             }
         }
     }
     
     fileprivate var _lineSegments = [CGPoint](repeating: CGPoint(), count: 2)
     
-    open func drawDataSet(context: CGContext, dataSet: IScatterChartDataSet)
+    open func drawDataSet(context: CGContext, dataSet: ScatterChartDataSet)
     {
         guard
             let dataProvider = dataProvider,
@@ -61,7 +52,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
         
         let phaseY = animator.phaseY
         
-        let entryCount = dataSet.entryCount
+        let entryCount = dataSet.count
         
         var point = CGPoint()
         
@@ -73,7 +64,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
             
             for j in 0 ..< Int(min(ceil(Double(entryCount) * animator.phaseX), Double(entryCount)))
             {
-                guard let e = dataSet.entryForIndex(j) else { continue }
+                let e = dataSet[j]
                 
                 point.x = CGFloat(e.x)
                 point.y = CGFloat(e.y * phaseY)
@@ -112,7 +103,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
         // if values are drawn
         if isDrawingValuesAllowed(dataProvider: dataProvider)
         {
-            guard let dataSets = scatterData.dataSets as? [IScatterChartDataSet] else { return }
+            guard let dataSets = scatterData.dataSets as? [ScatterChartDataSet] else { return }
             
             let phaseY = animator.phaseY
             
@@ -143,7 +134,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
                 
                 for j in stride(from: _xBounds.min, through: _xBounds.range + _xBounds.min, by: 1)
                 {
-                    guard let e = dataSet.entryForIndex(j) else { break }
+                    let e = dataSet[j]
                     
                     pt.x = CGFloat(e.x)
                     pt.y = CGFloat(e.y * phaseY)
@@ -211,7 +202,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
         for high in indices
         {
             guard
-                let set = scatterData.getDataSetByIndex(high.dataSetIndex) as? IScatterChartDataSet,
+                let set = scatterData.getDataSetByIndex(high.dataSetIndex) as? ScatterChartDataSet,
                 set.isHighlightEnabled
                 else { continue }
             

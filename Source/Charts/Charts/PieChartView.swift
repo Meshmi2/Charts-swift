@@ -170,27 +170,15 @@ open class PieChartView: PieRadarChartViewBase
         
         let yValueSum = (_data as! PieChartData).yValueSum
         
-        var dataSets = data.dataSets
-
         var cnt = 0
 
-        for i in 0 ..< data.dataSetCount
-        {
-            let set = dataSets[i]
-            let entryCount = set.entryCount
-
-            for j in 0 ..< entryCount
-            {
-                guard let e = set.entryForIndex(j) else { continue }
-                
+        for set in data.dataSets {
+            for e in set {
                 _drawAngles.append(calcAngle(value: abs(e.y), yValueSum: yValueSum))
 
-                if cnt == 0
-                {
+                if cnt == 0 {
                     _absoluteAngles.append(_drawAngles[cnt])
-                }
-                else
-                {
+                } else {
                     _absoluteAngles.append(_absoluteAngles[cnt - 1] + _drawAngles[cnt])
                 }
 
@@ -203,15 +191,14 @@ open class PieChartView: PieRadarChartViewBase
     open func needsHighlight(index: Int) -> Bool
     {
         // no highlight
-        if !valuesToHighlight()
-        {
+        guard valuesToHighlight() else {
             return false
         }
         
-        for i in 0 ..< _indicesToHighlight.count
+        for i in _indicesToHighlight
         {
             // check if the xvalue for the given dataset needs highlight
-            if Int(_indicesToHighlight[i].x) == index
+            if Int(i.x) == index
             {
                 return true
             }

@@ -14,7 +14,7 @@ open class ChevronUpShapeRenderer : ShapeRenderer
 {
     open func renderShape(
         context: CGContext,
-                dataSet: IScatterChartDataSet,
+                dataSet: ScatterChartDataSet,
                 point: CGPoint,
                 color: Color)
     {

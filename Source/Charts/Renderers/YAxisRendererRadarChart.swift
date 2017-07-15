@@ -250,7 +250,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
             
             context.beginPath()
             
-            for j in 0 ..< (data.maxEntryCountSet?.entryCount ?? 0)
+            for j in 0 ..< (data.maxEntryCountSet?.count ?? 0)
             {
                 let p = ChartUtils.getPosition(center: center, dist: r, angle: sliceangle * CGFloat(j) + chart.rotationAngle)
                 

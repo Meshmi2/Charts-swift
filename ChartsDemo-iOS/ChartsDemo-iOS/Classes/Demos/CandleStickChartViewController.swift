@@ -105,7 +105,7 @@ class CandleStickChartViewController: DemoBaseViewController {
     
     override func optionTapped(key: Option.Key) {
         if .toggleShadowColorSameAsCandle ~= key {
-            for set in chartView.data!.dataSets as! [ICandleChartDataSet] {
+            for set in chartView.data!.dataSets as! [CandleChartDataSet] {
                 set.shadowColorSameAsCandle = !set.shadowColorSameAsCandle
             }
             chartView.notifyDataSetChanged()

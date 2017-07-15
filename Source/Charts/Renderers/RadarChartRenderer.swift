@@ -36,9 +36,9 @@ open class RadarChartRenderer: LineRadarRenderer
         
         if radarData != nil
         {
-            let mostEntries = radarData?.maxEntryCountSet?.entryCount ?? 0
+            let mostEntries = radarData?.maxEntryCountSet?.count ?? 0
             
-            for set in radarData!.dataSets as! [IRadarChartDataSet]
+            for set in radarData!.dataSets as! [RadarChartDataSet]
             {
                 if set.isVisible
                 {
@@ -53,7 +53,7 @@ open class RadarChartRenderer: LineRadarRenderer
     /// - parameter context:
     /// - parameter dataSet:
     /// - parameter mostEntries: the entry count of the dataset with the most entries
-    internal func drawDataSet(context: CGContext, dataSet: IRadarChartDataSet, mostEntries: Int)
+    internal func drawDataSet(context: CGContext, dataSet: RadarChartDataSet, mostEntries: Int)
     {
         guard let
             chart = chart,
@@ -71,13 +71,13 @@ open class RadarChartRenderer: LineRadarRenderer
         let factor = chart.factor
         
         let center = chart.centerOffsets
-        let entryCount = dataSet.entryCount
+        let entryCount = dataSet.count
         let path = CGMutablePath()
         var hasMovedToPoint = false
         
         for j in 0 ..< entryCount
         {
-            guard let e = dataSet.entryForIndex(j) else { continue }
+            let e = dataSet[j]
             
             let p = ChartUtils.getPosition(
                 center: center,
@@ -101,7 +101,7 @@ open class RadarChartRenderer: LineRadarRenderer
         }
         
         // if this is the largest set, close it
-        if dataSet.entryCount < mostEntries
+        if dataSet.count < mostEntries
         {
             // if this is not the largest set, draw a line to the center before closing
             path.addLine(to: center)
@@ -157,23 +157,15 @@ open class RadarChartRenderer: LineRadarRenderer
         
         let yoffset = CGFloat(5.0)
         
-        for i in 0 ..< data.dataSetCount
+        for (i,dataSet) in (data.dataSets as! [RadarChartDataSet]).enumerated()
         {
-            let dataSet = data.getDataSetByIndex(i) as! IRadarChartDataSet
-            
-            if !shouldDrawValues(forDataSet: dataSet)
-            {
+            guard shouldDrawValues(forDataSet: dataSet) else {
                 continue
             }
             
-            let entryCount = dataSet.entryCount
-            
             let iconsOffset = dataSet.iconsOffset
             
-            for j in 0 ..< entryCount
-            {
-                guard let e = dataSet.entryForIndex(j) else { continue }
-                
+            for (j,e) in dataSet.enumerated() {
                 let p = ChartUtils.getPosition(
                     center: center,
                     dist: CGFloat(e.y - chart.chartYMin) * factor * CGFloat(phaseY),
@@ -248,7 +240,7 @@ open class RadarChartRenderer: LineRadarRenderer
         context.setAlpha(chart.webAlpha)
         
         let xIncrements = 1 + chart.skipWebLineCount
-        let maxEntryCount = chart.data?.maxEntryCountSet?.entryCount ?? 0
+        let maxEntryCount = chart.data?.maxEntryCountSet?.count ?? 0
 
         for i in stride(from: 0, to: maxEntryCount, by: xIncrements)
         {
@@ -315,11 +307,11 @@ open class RadarChartRenderer: LineRadarRenderer
         for high in indices
         {
             guard
-                let set = chart.data?.getDataSetByIndex(high.dataSetIndex) as? IRadarChartDataSet,
+                let set = chart.data?.getDataSetByIndex(high.dataSetIndex) as? RadarChartDataSet,
                 set.isHighlightEnabled
                 else { continue }
             
-            guard let e = set.entryForIndex(Int(high.x)) as? RadarChartDataEntry
+            guard let e = set[Int(high.x)] as? RadarChartDataEntry
                 else { continue }
             
             if !isInBoundsX(entry: e, dataSet: set)

@@ -51,7 +51,7 @@ open class XAxisRendererRadarChart: XAxisRenderer
         
         let center = chart.centerOffsets
         
-        for i in stride(from: 0, to: chart.data?.maxEntryCountSet?.entryCount ?? 0, by: 1)
+        for i in stride(from: 0, to: chart.data?.maxEntryCountSet?.count ?? 0, by: 1)
         {
             
             let label = xAxis.valueFormatter?.stringForValue(Double(i), axis: xAxis) ?? ""

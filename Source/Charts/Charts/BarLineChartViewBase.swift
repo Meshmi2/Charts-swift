@@ -544,7 +544,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     fileprivate var _isDragging = false
     fileprivate var _isScaling = false
     fileprivate var _gestureScaleAxis = GestureScaleAxis.both
-    fileprivate var _closestDataSetToTouch: IChartDataSet!
+    fileprivate var _closestDataSetToTouch: ChartDataSet!
     fileprivate var _panGestureReachedEdge: Bool = false
     fileprivate weak var _outerScrollView: NSUIScrollView?
     
@@ -1516,14 +1516,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     
     /// - returns: The DataSet object displayed at the touched position of the chart
-    open func getDataSetByTouchPoint(point pt: CGPoint) -> IBarLineScatterCandleBubbleChartDataSet!
+    open func getDataSetByTouchPoint(point pt: CGPoint) -> BarLineScatterCandleBubbleChartDataSet?
     {
-        let h = getHighlightByTouchPoint(pt)
-        if h !== nil
-        {
-            return _data?.getDataSetByIndex(h!.dataSetIndex) as! IBarLineScatterCandleBubbleChartDataSet!
+        guard let h = getHighlightByTouchPoint(pt) else {
+            return nil
         }
-        return nil
+        return _data?.getDataSetByIndex(h.dataSetIndex) as! BarLineScatterCandleBubbleChartDataSet
     }
 
     /// - returns: The current x-scale factor

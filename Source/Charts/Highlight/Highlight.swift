@@ -37,7 +37,7 @@ open class Highlight
     fileprivate var _stackIndex = Int(-1)
     
     /// the axis the highlighted value belongs to
-    fileprivate var _axis: YAxis.AxisDependency = YAxis.AxisDependency.left
+    fileprivate var _axis: YAxis.AxisDependency = .left
     
     /// the x-position (pixels) on which this highlight object was last drawn
     open var drawX: CGFloat = 0.0

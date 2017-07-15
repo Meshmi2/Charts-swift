@@ -551,7 +551,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
                 else { continue }
             
             let entryIndex = set.entryIndex(entry: e)
-            if entryIndex > Int(Double(set.entryCount) * _animator.phaseX)
+            if entryIndex > Int(Double(set.count) * _animator.phaseX)
             {
                 continue
             }

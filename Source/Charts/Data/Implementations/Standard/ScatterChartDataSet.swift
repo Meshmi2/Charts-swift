@@ -12,11 +12,31 @@
 import Foundation
 import CoreGraphics
 
-open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterChartDataSet
+//public protocol IScatterChartDataSet: ILineScatterCandleRadarChartDataSet
+//{
+//    // MARK: - Data functions and accessors
+//
+//    // MARK: - Styling functions and accessors
+//
+//    /// - returns: The size the scatter shape will have
+//    var scatterShapeSize: CGFloat { get }
+//
+//    /// - returns: The radius of the hole in the shape (applies to Square, Circle and Triangle)
+//    /// Set this to <= 0 to remove holes.
+//    /// **default**: 0.0
+//    var scatterShapeHoleRadius: CGFloat { get }
+//
+//    /// - returns: Color for the hole in the shape. Setting to `nil` will behave as transparent.
+//    /// **default**: nil
+//    var scatterShapeHoleColor: Color? { get }
+//
+//    /// - returns: The IShapeRenderer responsible for rendering this DataSet.
+//    var shapeRenderer: ShapeRenderer? { get }
+//}
+
+open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet
 {
-    
-    public enum Shape
-    {
+    public enum Shape {
         case square
         case circle
         case triangle
@@ -24,6 +44,18 @@ open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterChar
         case x
         case chevronUp
         case chevronDown
+    }
+    
+    public required init() {
+        super.init()
+    }
+    
+    public required init(arrayLiteral elements: ChartDataEntry...) {
+        super.init(values: elements)
+    }
+    
+    public override init(values: [ChartDataEntry], label: String) {
+        super.init(values: values, label: label)
     }
     
     /// The size the scatter shape will have

@@ -20,7 +20,7 @@ import CoreGraphics
 public struct DefaultFillFormatter: FillFormatter
 {
     public typealias Block = (
-        _ dataSet: ILineChartDataSet,
+        _ dataSet: LineChartDataSet,
         _ dataProvider: LineChartDataProvider) -> CGFloat
     
     public var block: Block?
@@ -32,7 +32,7 @@ public struct DefaultFillFormatter: FillFormatter
     }
     
     public func getFillLinePosition(
-        dataSet: ILineChartDataSet,
+        dataSet: LineChartDataSet,
         dataProvider: LineChartDataProvider) -> CGFloat
     {
         if block != nil

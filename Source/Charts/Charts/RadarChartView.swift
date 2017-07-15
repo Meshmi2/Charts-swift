@@ -75,7 +75,7 @@ open class RadarChartView: PieRadarChartViewBase
         guard let data = _data else { return }
         
         _yAxis.calculate(min: data.getYMin(axis: .left), max: data.getYMax(axis: .left))
-        _xAxis.calculate(min: 0.0, max: Double(data.maxEntryCountSet?.entryCount ?? 0))
+        _xAxis.calculate(min: 0.0, max: Double(data.maxEntryCountSet?.count ?? 0))
     }
     
     open override func notifyDataSetChanged()
@@ -159,7 +159,7 @@ open class RadarChartView: PieRadarChartViewBase
     /// - returns: The angle that each slice in the radar chart occupies.
     open var sliceAngle: CGFloat
     {
-        return 360.0 / CGFloat(_data?.maxEntryCountSet?.entryCount ?? 0)
+        return 360.0 / CGFloat(_data?.maxEntryCountSet?.count ?? 0)
     }
 
     open override func indexForAngle(_ angle: CGFloat) -> Int
@@ -169,7 +169,7 @@ open class RadarChartView: PieRadarChartViewBase
         
         let sliceAngle = self.sliceAngle
         
-        let max = _data?.maxEntryCountSet?.entryCount ?? 0
+        let max = _data?.maxEntryCountSet?.count ?? 0
         
         var index = 0
         

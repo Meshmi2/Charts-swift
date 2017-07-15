@@ -10,7 +10,7 @@ import UIKit
 import Charts
 
 private class CubicLineSampleFillFormatter: FillFormatter {
-    func getFillLinePosition(dataSet: ILineChartDataSet, dataProvider: LineChartDataProvider) -> CGFloat {
+    func getFillLinePosition(dataSet: LineChartDataSet, dataProvider: LineChartDataProvider) -> CGFloat {
         return -10
     }
 }
@@ -57,7 +57,7 @@ class CubicLineChartViewController: DemoBaseViewController {
         
         chartView.xAxis.isEnabled = false
         
-        var yAxis = chartView.leftAxis
+        let yAxis = chartView.leftAxis
         yAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size:12)!
         yAxis.setLabelCount(6, force: false)
         yAxis.labelTextColor = .white

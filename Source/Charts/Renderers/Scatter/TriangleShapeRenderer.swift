@@ -14,7 +14,7 @@ open class TriangleShapeRenderer : ShapeRenderer
 {
     open func renderShape(
         context: CGContext,
-        dataSet: IScatterChartDataSet,
+        dataSet: ScatterChartDataSet,
         point: CGPoint,
         color: Color)
     {

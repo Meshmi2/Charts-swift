@@ -42,13 +42,11 @@ open class LegendRenderer: Renderer
                 guard let dataSet = data.getDataSetByIndex(i) else { continue }
                 
                 var clrs: [Color] = dataSet.colors
-                let entryCount = dataSet.entryCount
+                let entryCount = dataSet.count
                 
                 // if we have a barchart with stacked bars
-                if dataSet is IBarChartDataSet &&
-                    (dataSet as! IBarChartDataSet).isStacked
+                if let bds = dataSet as? BarChartDataSet, bds.isStacked
                 {
-                    let bds = dataSet as! IBarChartDataSet
                     var sLabels = bds.stackLabels
                     
                     for j in 0..<min(clrs.count, bds.stackSize)
@@ -83,15 +81,13 @@ open class LegendRenderer: Renderer
                         )
                     }
                 }
-                else if dataSet is IPieChartDataSet
+                else if let pds = dataSet as? PieChartDataSet
                 {
-                    let pds = dataSet as! IPieChartDataSet
-                    
                     for j in 0..<min(clrs.count, entryCount)
                     {
                         entries.append(
                             LegendEntry(
-                                label: (pds.entryForIndex(j) as? PieChartDataEntry)?.label,
+                                label: (pds[j] as? PieChartDataEntry)?.label,
                                 form: dataSet.form,
                                 formSize: dataSet.formSize,
                                 formLineWidth: dataSet.formLineWidth,
@@ -119,11 +115,9 @@ open class LegendRenderer: Renderer
                         )
                     }
                 }
-                else if dataSet is ICandleChartDataSet &&
-                    (dataSet as! ICandleChartDataSet).decreasingColor != nil
+                else if let candleDataSet = dataSet as? CandleChartDataSet,
+                    candleDataSet.decreasingColor != nil
                 {
-                    let candleDataSet = dataSet as! ICandleChartDataSet
-                    
                     entries.append(
                         LegendEntry(
                             label: nil,

@@ -23,7 +23,7 @@ public protocol ShapeRenderer
     /// - parameter color:           Color to draw the shape
     func renderShape(
         context: CGContext,
-        dataSet: IScatterChartDataSet,
+        dataSet: ScatterChartDataSet,
         point: CGPoint,
         color: Color)
 }
