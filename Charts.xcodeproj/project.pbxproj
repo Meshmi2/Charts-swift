@@ -75,7 +75,7 @@
 		06B1208C1D811B8900D14B02 /* CombinedHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120031D811B8900D14B02 /* CombinedHighlighter.swift */; };
 		06B1208D1D811B8900D14B02 /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120041D811B8900D14B02 /* Highlight.swift */; };
 		06B1208E1D811B8900D14B02 /* HorizontalBarHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120051D811B8900D14B02 /* HorizontalBarHighlighter.swift */; };
-		06B1208F1D811B8900D14B02 /* IHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120061D811B8900D14B02 /* IHighlighter.swift */; };
+		06B1208F1D811B8900D14B02 /* Highlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120061D811B8900D14B02 /* Highlighter.swift */; };
 		06B120901D811B8900D14B02 /* PieHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120071D811B8900D14B02 /* PieHighlighter.swift */; };
 		06B120911D811B8900D14B02 /* PieRadarHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120081D811B8900D14B02 /* PieRadarHighlighter.swift */; };
 		06B120921D811B8900D14B02 /* RadarHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B120091D811B8900D14B02 /* RadarHighlighter.swift */; };
@@ -216,7 +216,7 @@
 		06B120031D811B8900D14B02 /* CombinedHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedHighlighter.swift; sourceTree = "<group>"; };
 		06B120041D811B8900D14B02 /* Highlight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Highlight.swift; sourceTree = "<group>"; };
 		06B120051D811B8900D14B02 /* HorizontalBarHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalBarHighlighter.swift; sourceTree = "<group>"; };
-		06B120061D811B8900D14B02 /* IHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IHighlighter.swift; sourceTree = "<group>"; };
+		06B120061D811B8900D14B02 /* Highlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Highlighter.swift; sourceTree = "<group>"; };
 		06B120071D811B8900D14B02 /* PieHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieHighlighter.swift; sourceTree = "<group>"; };
 		06B120081D811B8900D14B02 /* PieRadarHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieRadarHighlighter.swift; sourceTree = "<group>"; };
 		06B120091D811B8900D14B02 /* RadarHighlighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadarHighlighter.swift; sourceTree = "<group>"; };
@@ -342,7 +342,7 @@
 				06B11FF71D811B8900D14B02 /* Filters */,
 				06B11FF91D811B8900D14B02 /* Formatters */,
 				06B120001D811B8900D14B02 /* Highlight */,
-				06B1200B1D811B8900D14B02 /* Interfaces */,
+				06B1200B1D811B8900D14B02 /* DataProviders */,
 				06B120141D811B8900D14B02 /* Jobs */,
 				06B1201B1D811B8900D14B02 /* Renderers */,
 				06B1203B1D811B8900D14B02 /* Utils */,
@@ -392,15 +392,15 @@
 		06B11FC01D811B8900D14B02 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				06B11FC11D811B8900D14B02 /* AxisBase.swift */,
-				06B11FC21D811B8900D14B02 /* ChartLimitLine.swift */,
 				06B11FC31D811B8900D14B02 /* ComponentBase.swift */,
+				06B11FC21D811B8900D14B02 /* ChartLimitLine.swift */,
 				5B56A9CC1D905EB300F58178 /* Description.swift */,
 				06B11FC51D811B8900D14B02 /* Legend.swift */,
 				06B11FC61D811B8900D14B02 /* LegendEntry.swift */,
 				06B11FC41D811B8900D14B02 /* Marker.swift */,
 				06B11FC71D811B8900D14B02 /* MarkerImage.swift */,
 				06B11FC81D811B8900D14B02 /* MarkerView.swift */,
+				06B11FC11D811B8900D14B02 /* AxisBase.swift */,
 				06B11FC91D811B8900D14B02 /* XAxis.swift */,
 				06B11FCA1D811B8900D14B02 /* YAxis.swift */,
 			);
@@ -496,12 +496,12 @@
 		06B120001D811B8900D14B02 /* Highlight */ = {
 			isa = PBXGroup;
 			children = (
-				06B120011D811B8900D14B02 /* BarHighlighter.swift */,
-				06B120021D811B8900D14B02 /* ChartHighlighter.swift */,
-				06B120031D811B8900D14B02 /* CombinedHighlighter.swift */,
 				06B120041D811B8900D14B02 /* Highlight.swift */,
+				06B120061D811B8900D14B02 /* Highlighter.swift */,
+				06B120021D811B8900D14B02 /* ChartHighlighter.swift */,
+				06B120011D811B8900D14B02 /* BarHighlighter.swift */,
+				06B120031D811B8900D14B02 /* CombinedHighlighter.swift */,
 				06B120051D811B8900D14B02 /* HorizontalBarHighlighter.swift */,
-				06B120061D811B8900D14B02 /* IHighlighter.swift */,
 				06B120071D811B8900D14B02 /* PieHighlighter.swift */,
 				06B120081D811B8900D14B02 /* PieRadarHighlighter.swift */,
 				06B120091D811B8900D14B02 /* RadarHighlighter.swift */,
@@ -510,30 +510,30 @@
 			path = Source/Charts/Highlight;
 			sourceTree = "<group>";
 		};
-		06B1200B1D811B8900D14B02 /* Interfaces */ = {
+		06B1200B1D811B8900D14B02 /* DataProviders */ = {
 			isa = PBXGroup;
 			children = (
-				06B1200C1D811B8900D14B02 /* BarChartDataProvider.swift */,
+				06B120101D811B8900D14B02 /* ChartDataProvider.swift */,
 				06B1200D1D811B8900D14B02 /* BarLineScatterCandleBubbleChartDataProvider.swift */,
+				06B1200C1D811B8900D14B02 /* BarChartDataProvider.swift */,
 				06B1200E1D811B8900D14B02 /* BubbleChartDataProvider.swift */,
 				06B1200F1D811B8900D14B02 /* CandleChartDataProvider.swift */,
-				06B120101D811B8900D14B02 /* ChartDataProvider.swift */,
 				06B120111D811B8900D14B02 /* CombinedChartDataProvider.swift */,
 				06B120121D811B8900D14B02 /* LineChartDataProvider.swift */,
 				06B120131D811B8900D14B02 /* ScatterChartDataProvider.swift */,
 			);
-			name = Interfaces;
-			path = Source/Charts/Interfaces;
+			name = DataProviders;
+			path = Source/Charts/DataProviders;
 			sourceTree = "<group>";
 		};
 		06B120141D811B8900D14B02 /* Jobs */ = {
 			isa = PBXGroup;
 			children = (
-				06B120151D811B8900D14B02 /* AnimatedMoveViewJob.swift */,
+				06B120191D811B8900D14B02 /* ViewPortJob.swift */,
 				06B120161D811B8900D14B02 /* AnimatedViewPortJob.swift */,
+				06B120151D811B8900D14B02 /* AnimatedMoveViewJob.swift */,
 				06B120171D811B8900D14B02 /* AnimatedZoomViewJob.swift */,
 				06B120181D811B8900D14B02 /* MoveViewJob.swift */,
-				06B120191D811B8900D14B02 /* ViewPortJob.swift */,
 				06B1201A1D811B8900D14B02 /* ZoomViewJob.swift */,
 			);
 			name = Jobs;
@@ -733,7 +733,7 @@
 				06B120571D811B8900D14B02 /* MarkerImage.swift in Sources */,
 				06B120C41D811B8900D14B02 /* Transformer.swift in Sources */,
 				06B1206C1D811B8900D14B02 /* LineChartData.swift in Sources */,
-				06B1208F1D811B8900D14B02 /* IHighlighter.swift in Sources */,
+				06B1208F1D811B8900D14B02 /* Highlighter.swift in Sources */,
 				5B56A9CD1D905EB300F58178 /* Description.swift in Sources */,
 				06B120921D811B8900D14B02 /* RadarHighlighter.swift in Sources */,
 				06B120771D811B8900D14B02 /* ScatterChartDataSet.swift in Sources */,

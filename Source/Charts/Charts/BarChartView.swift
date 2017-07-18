@@ -57,7 +57,7 @@ public class BarChartView: BarLineChartViewBase, BarChartDataProvider {
     
     /// - returns: The Highlight object (contains x-index and DataSet index) of the selected value at the given touch point inside the BarChart.
     public override func getHighlightByTouchPoint(_ pt: CGPoint) -> Highlight? {
-        if _data === nil {
+        guard _data != nil else {
             print("Can't select by touch. No data set.")
             return nil
         }

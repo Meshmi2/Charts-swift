@@ -20,9 +20,9 @@ public class ComponentBase {
     
     /// The offset this component has on the x-axis
     /// **default**: 5.0
-    public var xOffset = CGFloat(5.0)
+    public var xOffset: CGFloat = 5
     
     /// The offset this component has on the x-axis
     /// **default**: 5.0 (or 0.0 on ChartYAxis)
-    public var yOffset = CGFloat(5.0)
+    public var yOffset: CGFloat = 5
 }

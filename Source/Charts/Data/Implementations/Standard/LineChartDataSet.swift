@@ -109,7 +109,7 @@ public class LineChartDataSet: LineRadarChartDataSet {
     /// The drawing mode for this line dataset
     ///
     /// **default**: Linear
-    public var mode: Mode = Mode.linear
+    public var mode: Mode = .linear
     
     private var _cubicIntensity = CGFloat(0.2)
     

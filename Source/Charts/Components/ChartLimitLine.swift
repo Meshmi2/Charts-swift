@@ -36,7 +36,7 @@ public class ChartLimitLine: ComponentBase {
     
     public var drawLabelEnabled = true
     public var label = ""
-    public var labelPosition = LabelPosition.rightTop
+    public var labelPosition: LabelPosition = .rightTop
     
     public override init() {
         super.init()

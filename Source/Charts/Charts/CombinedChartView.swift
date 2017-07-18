@@ -96,31 +96,31 @@ public class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider 
     // MARK: - LineChartDataProvider
     
     public var lineData: LineChartData? {
-        return (_data as? CombinedChartData)?.lineData
+        return combinedData?.lineData
     }
     
     // MARK: - BarChartDataProvider
     
     public var barData: BarChartData? {
-        return (_data as? CombinedChartData)?.barData
+        return combinedData?.barData
     }
     
     // MARK: - ScatterChartDataProvider
     
     public var scatterData: ScatterChartData? {
-        return (_data as? CombinedChartData)?.scatterData
+        return combinedData?.scatterData
     }
     
     // MARK: - CandleChartDataProvider
     
     public var candleData: CandleChartData? {
-        return (_data as? CombinedChartData)?.candleData
+        return combinedData?.candleData
     }
     
     // MARK: - BubbleChartDataProvider
     
     public var bubbleData: BubbleChartData? {
-        return (_data as? CombinedChartData)?.bubbleData
+        return combinedData?.bubbleData
     }
     
     // MARK: - Accessors

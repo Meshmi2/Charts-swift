@@ -87,7 +87,7 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate {
     /// object responsible for rendering the data
     var renderer: DataRenderer?
     
-    public var highlighter: IHighlighter?
+    public var highlighter: Highlighter?
     
     /// object that manages the bounds and drawing constraints of the chart
     /// - returns: The ViewPortHandler of the chart that is responsible for the
@@ -689,7 +689,7 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate {
             else { return false }
         
         var imageData: Data!
-        switch (format) {
+        switch format {
         case .png:
             imageData = NSUIImagePNGRepresentation(image)
             break

@@ -21,19 +21,19 @@ public class AxisBase: ComponentBase {
     /// Custom formatter that is used instead of the auto-formatter if set
     private var _axisValueFormatter: AxisValueFormatter?
     
-    public var labelFont = Font.systemFont(ofSize: 10.0, weight: .light)
-    public var labelTextColor = Color.black
+    public var labelFont: Font = .systemFont(ofSize: 10.0, weight: .light)
+    public var labelTextColor: Color = .black
     
-    public var axisLineColor = Color.gray
-    public var axisLineWidth = CGFloat(0.5)
-    public var axisLineDashPhase = CGFloat(0.0)
+    public var axisLineColor: Color = .gray
+    public var axisLineWidth: CGFloat = 0.5
+    public var axisLineDashPhase: CGFloat = 0
     public var axisLineDashLengths: [CGFloat]!
     
-    public var gridColor = Color.gray.withAlphaComponent(0.9)
-    public var gridLineWidth = CGFloat(0.5)
-    public var gridLineDashPhase = CGFloat(0.0)
+    public var gridColor: Color = Color.gray.withAlphaComponent(0.9)
+    public var gridLineWidth: CGFloat = 0.5
+    public var gridLineDashPhase: CGFloat = 0.0
     public var gridLineDashLengths: [CGFloat]!
-    public var gridLineCap = CGLineCap.butt
+    public var gridLineCap: CGLineCap = .butt
     
     public var isDrawGridLinesEnabled = false
     public var isDrawAxisLineEnabled = true
@@ -85,7 +85,7 @@ public class AxisBase: ComponentBase {
     /// The minimum interval between axis values.
     public var isGranularityEnabled = false
     
-    private var _granularity = Double(1.0)
+    private var _granularity = 1.0
     
     /// The minimum interval between axis values.
     /// This can be used to avoid label duplicating when zooming in.
@@ -160,15 +160,15 @@ public class AxisBase: ComponentBase {
     /// Do not touch this directly, instead, use axisMinimum.
     /// This is automatically calculated to represent the real min value,
     /// and is used when calculating the effective minimum.
-    var _axisMinimum = Double(0)
+    var _axisMinimum = 0.0
     
     /// Do not touch this directly, instead, use axisMaximum.
     /// This is automatically calculated to represent the real max value,
     /// and is used when calculating the effective maximum.
-    var _axisMaximum = Double(0)
+    var _axisMaximum = 0.0
     
     /// the total range of values this axis covers
-    public var axisRange = Double(0)
+    public var axisRange = 0.0
     
     /// the number of label entries the axis should have
     /// max = 25,
@@ -180,13 +180,10 @@ public class AxisBase: ComponentBase {
             return _labelCount
         }
         set {
-            _labelCount = newValue
-            
-            if _labelCount > 25 {
-                _labelCount = 25
-            }
-            if _labelCount < 2 {
-                _labelCount = 2
+            switch newValue {
+            case ...2: _labelCount = 2
+            case 25...: _labelCount = 25
+            default: _labelCount = newValue
             }
             
             isForceLabelsEnabled = false

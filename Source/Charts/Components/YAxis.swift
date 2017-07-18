@@ -32,7 +32,6 @@ public class YAxis: AxisBase {
         case right
     }
     
-    
     /// indicates if the bottom y-label entry is drawn or not
     public var isDrawBottomYLabelEntryEnabled = true
     
@@ -52,7 +51,7 @@ public class YAxis: AxisBase {
     public var zeroLineWidth: CGFloat = 1.0
     
     /// This is how much (in pixels) into the dash pattern are we starting from.
-    public var zeroLineDashPhase = CGFloat(0.0)
+    public var zeroLineDashPhase: CGFloat = 0
     
     /// This is the actual dash pattern.
     /// I.e. [2, 3] will paint [--   --   ]
@@ -60,27 +59,27 @@ public class YAxis: AxisBase {
     public var zeroLineDashLengths: [CGFloat]?
 
     /// axis space from the largest value to the top in percent of the total axis range
-    public var spaceTop = CGFloat(0.1)
+    public var spaceTop: CGFloat = 0.1
 
     /// axis space from the smallest value to the bottom in percent of the total axis range
-    public var spaceBottom = CGFloat(0.1)
+    public var spaceBottom: CGFloat = 0.1
     
     /// the position of the y-labels relative to the chart
-    public var labelPosition = LabelPosition.outsideChart
+    public var labelPosition: LabelPosition = .outsideChart
     
     /// the side this axis object represents
-    private var _axisDependency = AxisDependency.left
+    private var _axisDependency: AxisDependency = .left
     
     /// the minimum width that the axis should take
     /// 
     /// **default**: 0.0
-    public var minWidth = CGFloat(0)
+    public var minWidth: CGFloat = 0
     
     /// the maximum width that the axis can take.
     /// use Infinity for disabling the maximum.
     /// 
     /// **default**: CGFloat.infinity
-    public var maxWidth = CGFloat.infinity
+    public var maxWidth: CGFloat = .infinity
     
     public override init() {
         super.init()
@@ -115,12 +114,9 @@ public class YAxis: AxisBase {
     
     /// - returns: `true` if this axis needs horizontal offset, `false` ifno offset is needed.
     public var needsOffset: Bool {
-        if isEnabled && isDrawLabelsEnabled && labelPosition == .outsideChart {
-            return true
-        }
-        else {
-            return false
-        }
+        return isEnabled
+            && isDrawLabelsEnabled
+            && labelPosition == .outsideChart
     }
         
     public override func calculate(min dataMin: Double, max dataMax: Double) {

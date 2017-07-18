@@ -17,10 +17,6 @@ import CoreGraphics
 #endif
 
 public struct LegendEntry {
-    // TODO: Revaluate need for this initializer
-    public init() {
-        
-    }
     /// - parameter label:                  The legend entry text.
     ///                                     A `nil` label will start a group.
     /// - parameter form:                   The form to draw for this entry.
@@ -59,12 +55,12 @@ public struct LegendEntry {
     /// Form size will be considered except for when .None is used
     ///
     /// Set as NaN to use the legend's default
-    public var formSize: CGFloat = CGFloat.nan
+    public var formSize: CGFloat = .nan
     
     /// Line width used for shapes that consist of lines.
     ///
     /// Set to NaN to use the legend's default.
-    public var formLineWidth: CGFloat = CGFloat.nan
+    public var formLineWidth: CGFloat = .nan
     
     /// Line dash configuration for shapes that consist of lines.
     ///
