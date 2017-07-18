@@ -21,7 +21,7 @@ public class ViewPortJob {
     internal weak var transformer: Transformer?
     internal weak var view: ChartViewBase?
     
-    public init(
+    init(
         viewPortHandler: ViewPortHandler,
         xValue: Double,
         yValue: Double,

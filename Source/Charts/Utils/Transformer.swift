@@ -22,7 +22,7 @@ public class Transformer {
 
     let _viewPortHandler: ViewPortHandler
 
-    public init(viewPortHandler: ViewPortHandler) {
+    init(viewPortHandler: ViewPortHandler) {
         _viewPortHandler = viewPortHandler
     }
 
@@ -51,7 +51,7 @@ public class Transformer {
         }
         else {
             _matrixOffset = CGAffineTransform(scaleX: 1.0, y: -1.0)
-            _matrixOffset = _matrixOffset.translatedBy(x: _viewPortHandler.offsetLeft, y: -_viewPortHandler.offsetTop)
+                .translatedBy(x: _viewPortHandler.offsetLeft, y: -_viewPortHandler.offsetTop)
         }
     }
 
@@ -80,8 +80,8 @@ public class Transformer {
     /// Transform a rectangle with all matrices with potential animation phases.
     public func rectValueToPixel(_ r: inout CGRect, phaseY: Double) {
         // multiply the height of the rect with the phase
-        var bottom = r.origin.y + r.size.height
-        bottom *= CGFloat(phaseY)
+        let bottom = (r.origin.y + r.size.height)
+            * CGFloat(phaseY)
         let top = r.origin.y * CGFloat(phaseY)
         r.size.height = bottom - top
         r.origin.y = top

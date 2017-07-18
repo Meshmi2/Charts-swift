@@ -17,7 +17,7 @@ import CoreGraphics
 #endif
 
 public class AnimatedMoveViewJob: AnimatedViewPortJob {
-    public override init(
+    override init(
         viewPortHandler: ViewPortHandler,
         xValue: Double,
         yValue: Double,

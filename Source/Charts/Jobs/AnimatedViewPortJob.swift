@@ -28,7 +28,7 @@ public class AnimatedViewPortJob: ViewPortJob {
     
     private var _easing: ChartEasingOption
     
-    public init(
+    init(
         viewPortHandler: ViewPortHandler,
         xValue: Double,
         yValue: Double,

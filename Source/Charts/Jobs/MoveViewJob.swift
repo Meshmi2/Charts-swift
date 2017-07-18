@@ -17,7 +17,7 @@ import CoreGraphics
 #endif
 
 public class MoveViewJob: ViewPortJob {
-    public override init(
+    override init(
         viewPortHandler: ViewPortHandler,
         xValue: Double,
         yValue: Double,

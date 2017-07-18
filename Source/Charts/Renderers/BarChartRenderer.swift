@@ -314,8 +314,6 @@ class BarChartRenderer: BarLineScatterCandleBubbleRenderer {
                 let animator = animator
                 else { return }
             
-            var dataSets = barData.dataSets
-
             let valueOffsetPlus: CGFloat = 4.5
             var posOffset: CGFloat
             var negOffset: CGFloat

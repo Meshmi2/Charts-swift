@@ -197,7 +197,7 @@ public struct Legend {
     /// **default**: 0.95 (95%)
     public var maxSizePercent: CGFloat = 0.95
     
-    public mutating func calculateDimensions(labelFont: Font, viewPortHandler: ViewPortHandler) {
+    mutating func calculateDimensions(labelFont: Font, viewPortHandler: ViewPortHandler) {
         let maxEntrySize = getMaximumEntrySize(withFont: labelFont)
         let defaultFormSize = self.formSize
         let stackSpace = self.stackSpace

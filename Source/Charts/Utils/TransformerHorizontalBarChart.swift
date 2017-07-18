@@ -20,8 +20,8 @@ public class TransformerHorizontalBarChart: Transformer {
         }
         else {
             _matrixOffset = CGAffineTransform(scaleX: -1.0, y: 1.0)
-            _matrixOffset = _matrixOffset.translatedBy(x: -(_viewPortHandler.chartWidth - _viewPortHandler.offsetRight),
-                y: _viewPortHandler.chartHeight - _viewPortHandler.offsetBottom)
+                .translatedBy(x: -(_viewPortHandler.chartWidth - _viewPortHandler.offsetRight),
+                              y: _viewPortHandler.chartHeight - _viewPortHandler.offsetBottom)
         }
     }
 }

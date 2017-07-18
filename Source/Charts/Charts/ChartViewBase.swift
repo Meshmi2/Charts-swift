@@ -92,7 +92,7 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate {
     /// object that manages the bounds and drawing constraints of the chart
     /// - returns: The ViewPortHandler of the chart that is responsible for the
     /// content area of the chart and its offsets and dimensions.
-    open let viewPortHandler: ViewPortHandler = ViewPortHandler()
+    let viewPortHandler: ViewPortHandler = ViewPortHandler()
     
     //FIXME: ----
     /// object responsible for animations
