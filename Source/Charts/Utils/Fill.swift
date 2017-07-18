@@ -13,68 +13,38 @@ import Foundation
 import CoreGraphics
 
 // TODO: - Reevaluate if we should keep `case: empty` or use optionality
-public struct Fill {
-    public enum FillType {
-        case empty
-        case color(CGColor)
-        case linearGradient(CGGradient, angle: CGFloat)
-        case radialGradient(CGGradient,
-            startOffsetPercent: CGPoint,
-            startRadiusPercent: CGFloat,
-            endOffsetPercent: CGPoint,
-            endRadiusPercent: CGFloat)
-        case image(CGImage)
-        case tiledImage(CGImage)
-        case layer(CGLayer)
-    }
-    
-    // MARK: Properties
-    let type: FillType //= .empty
+public enum Fill {
+    case empty
+    case color(CGColor)
+    case linearGradient(CGGradient, angle: CGFloat)
+    case radialGradient(CGGradient,
+    startOffsetPercent: CGPoint,
+    startRadiusPercent: CGFloat,
+    endOffsetPercent: CGPoint,
+    endRadiusPercent: CGFloat)
+    case image(CGImage)
+    case tiledImage(CGImage)
+    case layer(CGLayer)
     
     // MARK: Constructors
-    public init(color: CGColor) {
-        type = .color(color)
-    }
-    
     public init(color: Color) {
-        self.init(color: color.cgColor)
-    }
-    
-    public init(linearGradient: CGGradient, angle: CGFloat) {
-        type = .linearGradient(linearGradient, angle: angle)
-    }
-    
-    public init(
-        radialGradient: CGGradient,
-        startOffsetPercent: CGPoint,
-        startRadiusPercent: CGFloat,
-        endOffsetPercent: CGPoint,
-        endRadiusPercent: CGFloat) {
-        type = .radialGradient(radialGradient,
-                               startOffsetPercent: startOffsetPercent,
-                               startRadiusPercent: startRadiusPercent,
-                               endOffsetPercent: endOffsetPercent,
-                               endRadiusPercent: endRadiusPercent)
+        self = .color(color.cgColor)
     }
     
     public init(radialGradient: CGGradient) {
-        self.init(radialGradient: radialGradient,
-                  startOffsetPercent: CGPoint(x: 0.0, y: 0.0),
-                  startRadiusPercent: 0.0,
-                  endOffsetPercent: CGPoint(x: 0.0, y: 0.0),
-                  endRadiusPercent: 1.0)
+        self = .radialGradient(radialGradient,
+                               startOffsetPercent: CGPoint(x: 0.0, y: 0.0),
+                               startRadiusPercent: 0.0,
+                               endOffsetPercent: CGPoint(x: 0.0, y: 0.0),
+                               endRadiusPercent: 1.0)
     }
     
     public init(image: CGImage, tiled: Bool = false) {
-        type = tiled ? .tiledImage(image) : .image(image)
+        self = tiled ? .tiledImage(image) : .image(image)
     }
     
     public init(image: Image, tiled: Bool = false) {
         self.init(image: image.cgImage!, tiled: tiled)
-    }
-    
-    public init(layer: CGLayer) {
-        type = .layer(layer)
     }
     
     // MARK: Drawing code
@@ -83,7 +53,7 @@ public struct Fill {
     func fillPath(context: CGContext, rect: CGRect) {
         context.saveGState()
         
-        switch type {
+        switch self {
         case .empty:
             break
 
