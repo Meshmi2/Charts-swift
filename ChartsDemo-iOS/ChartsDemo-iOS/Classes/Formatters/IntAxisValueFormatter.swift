@@ -9,7 +9,7 @@
 import Foundation
 import Charts
 
-open class IntAxisValueFormatter: AxisValueFormatter {
+public class IntAxisValueFormatter: AxisValueFormatter {
     public func stringForValue(_ value: Double, axis: AxisBase) -> String {
         return "\(Int(value))"
     }

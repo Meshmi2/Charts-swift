@@ -26,8 +26,7 @@ import CoreGraphics
 //}
 
 
-open class BubbleChartDataSet: BarLineScatterCandleBubbleChartDataSet
-{
+public class BubbleChartDataSet: BarLineScatterCandleBubbleChartDataSet {
     // MARK: - Data functions and accessors
     public required init(arrayLiteral elements: ChartDataEntry...) {
         super.init(values: elements)
@@ -41,13 +40,13 @@ open class BubbleChartDataSet: BarLineScatterCandleBubbleChartDataSet
         super.init(values: values, label: label)
     }
     
-    internal var _maxSize = CGFloat(0.0)
+    var _maxSize = CGFloat(0.0)
     
-    open var maxSize: CGFloat { return _maxSize }
-    open var normalizeSizeEnabled: Bool = true
-    open var isNormalizeSizeEnabled: Bool { return normalizeSizeEnabled }
+    public var maxSize: CGFloat { return _maxSize }
+    public var normalizeSizeEnabled: Bool = true
+    public var isNormalizeSizeEnabled: Bool { return normalizeSizeEnabled }
     
-    open func calcMinMax(entry e: ChartDataEntry) {
+    public func calcMinMax(entry e: ChartDataEntry) {
         guard let e = e as? BubbleChartDataEntry
             else { return }
         
@@ -55,8 +54,7 @@ open class BubbleChartDataSet: BarLineScatterCandleBubbleChartDataSet
         
         let size = e.size
         
-        if size > _maxSize
-        {
+        if size > _maxSize {
             _maxSize = size
         }
     }
@@ -64,5 +62,5 @@ open class BubbleChartDataSet: BarLineScatterCandleBubbleChartDataSet
     // MARK: - Styling functions and accessors
     
     /// Sets/gets the width of the circle that surrounds the bubble when highlighted
-    open var highlightCircleWidth: CGFloat = 2.5
+    public var highlightCircleWidth: CGFloat = 2.5
 }

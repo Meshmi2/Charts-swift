@@ -16,26 +16,22 @@ import CoreGraphics
     import UIKit
 #endif
 
-open class XAxisRendererRadarChart: XAxisRenderer
-{
+class XAxisRendererRadarChart: XAxisRenderer {
     open weak var chart: RadarChartView?
     
-    public init(viewPortHandler: ViewPortHandler, xAxis: XAxis, chart: RadarChartView?)
-    {
+    public init(viewPortHandler: ViewPortHandler, xAxis: XAxis, chart: RadarChartView?) {
         super.init(viewPortHandler: viewPortHandler, xAxis: xAxis, transformer: nil)
         
         self.chart = chart
     }
     
-    open override func renderAxisLabels(context: CGContext)
-    {
+    public override func renderAxisLabels(context: CGContext) {
         guard let
             xAxis = axis as? XAxis,
             let chart = chart
             else { return }
         
-        if !xAxis.isEnabled || !xAxis.isDrawLabelsEnabled
-        {
+        if !xAxis.isEnabled || !xAxis.isDrawLabelsEnabled {
             return
         }
         
@@ -51,8 +47,7 @@ open class XAxisRendererRadarChart: XAxisRenderer
         
         let center = chart.centerOffsets
         
-        for i in stride(from: 0, to: chart.data?.maxEntryCountSet?.count ?? 0, by: 1)
-        {
+        for i in stride(from: 0, to: chart.data?.maxEntryCountSet?.count ?? 0, by: 1) {
             
             let label = xAxis.valueFormatter?.stringForValue(Double(i), axis: xAxis) ?? ""
             
@@ -71,15 +66,14 @@ open class XAxisRendererRadarChart: XAxisRenderer
         }
     }
     
-    open func drawLabel(
+    public func drawLabel(
         context: CGContext,
         formattedLabel: String,
         x: CGFloat,
         y: CGFloat,
         attributes: [NSAttributedStringKey : AnyObject],
         anchor: CGPoint,
-        angleRadians: CGFloat)
-    {
+        angleRadians: CGFloat) {
         ChartUtils.drawText(
             context: context,
             text: formattedLabel,
@@ -89,8 +83,7 @@ open class XAxisRendererRadarChart: XAxisRenderer
             angleRadians: angleRadians)
     }
     
-    open override func renderLimitLines(context: CGContext)
-    {
+    public override func renderLimitLines(context: CGContext) {
         /// XAxis LimitLines on RadarChart not yet supported.
     }
 }

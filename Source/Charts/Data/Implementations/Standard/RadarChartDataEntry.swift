@@ -12,25 +12,21 @@
 import Foundation
 import CoreGraphics
 
-open class RadarChartDataEntry: ChartDataEntry
-{    
+public class RadarChartDataEntry: ChartDataEntry {    
     /// - parameter value: The value on the y-axis.
     /// - parameter data: Spot for additional data this Entry represents.
-    public init(value: Double, data: Any?)
-    {
+    public init(value: Double, data: Any?) {
         super.init(x: 0.0, y: value, data: data)
     }
     
     /// - parameter value: The value on the y-axis.
-    public convenience init(value: Double)
-    {
+    public convenience init(value: Double) {
         self.init(value: value, data: nil)
     }
     
     // MARK: Data property accessors
     
-    open var value: Double
-    {
+    public var value: Double {
         get { return y }
         set { y = value }
     }

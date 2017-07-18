@@ -17,31 +17,33 @@ import CoreGraphics
 #endif
 
 
-open class RadarChartRenderer: LineRadarRenderer
-{
-    open weak var chart: RadarChartView?
-
-    public init(chart: RadarChartView?, animator: Animator?, viewPortHandler: ViewPortHandler)
-    {
-        super.init(animator: animator, viewPortHandler: viewPortHandler)
+final class RadarChartRenderer: LineRadarRenderer {
+    var _xBounds: XBounds = XBounds()
         
+    var animator: Animator?
+    
+    var viewPortHandler: ViewPortHandler
+    
+    weak var chart: RadarChartView?
+
+    init(chart: RadarChartView?, animator: Animator?, viewPortHandler: ViewPortHandler) {
+        self.animator = animator
+        self.viewPortHandler = viewPortHandler
         self.chart = chart
     }
     
-    open override func drawData(context: CGContext)
-    {
+    func initBuffers() { }
+
+    func drawData(context: CGContext) {
         guard let chart = chart else { return }
         
         let radarData = chart.data
         
-        if radarData != nil
-        {
+        if radarData != nil {
             let mostEntries = radarData?.maxEntryCountSet?.count ?? 0
             
-            for set in radarData!.dataSets as! [RadarChartDataSet]
-            {
-                if set.isVisible
-                {
+            for set in radarData!.dataSets as! [RadarChartDataSet] {
+                if set.isVisible {
                     drawDataSet(context: context, dataSet: set, mostEntries: mostEntries)
                 }
             }
@@ -53,8 +55,7 @@ open class RadarChartRenderer: LineRadarRenderer
     /// - parameter context:
     /// - parameter dataSet:
     /// - parameter mostEntries: the entry count of the dataset with the most entries
-    internal func drawDataSet(context: CGContext, dataSet: RadarChartDataSet, mostEntries: Int)
-    {
+    func drawDataSet(context: CGContext, dataSet: RadarChartDataSet, mostEntries: Int) {
         guard let
             chart = chart,
             let animator = animator
@@ -75,8 +76,7 @@ open class RadarChartRenderer: LineRadarRenderer
         let path = CGMutablePath()
         var hasMovedToPoint = false
         
-        for j in 0 ..< entryCount
-        {
+        for j in 0 ..< entryCount {
             let e = dataSet[j]
             
             let p = ChartUtils.getPosition(
@@ -84,25 +84,21 @@ open class RadarChartRenderer: LineRadarRenderer
                 dist: CGFloat((e.y - chart.chartYMin) * Double(factor) * phaseY),
                 angle: sliceangle * CGFloat(j) * CGFloat(phaseX) + chart.rotationAngle)
             
-            if p.x.isNaN
-            {
+            if p.x.isNaN {
                 continue
             }
             
-            if !hasMovedToPoint
-            {
+            if !hasMovedToPoint {
                 path.move(to: p)
                 hasMovedToPoint = true
             }
-            else
-            {
+            else {
                 path.addLine(to: p)
             }
         }
         
         // if this is the largest set, close it
-        if dataSet.count < mostEntries
-        {
+        if dataSet.count < mostEntries {
             // if this is not the largest set, draw a line to the center before closing
             path.addLine(to: center)
         }
@@ -110,21 +106,17 @@ open class RadarChartRenderer: LineRadarRenderer
         path.closeSubpath()
         
         // draw filled
-        if dataSet.isDrawFilledEnabled
-        {
-            if dataSet.fill != nil
-            {
+        if dataSet.isDrawFilledEnabled {
+            if dataSet.fill != nil {
                 drawFilledPath(context: context, path: path, fill: dataSet.fill!, fillAlpha: dataSet.fillAlpha)
             }
-            else
-            {
+            else {
                 drawFilledPath(context: context, path: path, fillColor: dataSet.fillColor, fillAlpha: dataSet.fillAlpha)
             }
         }
         
         // draw the line (only if filled is disabled or alpha is below 255)
-        if !dataSet.isDrawFilledEnabled || dataSet.fillAlpha < 1.0
-        {
+        if !dataSet.isDrawFilledEnabled || dataSet.fillAlpha < 1.0 {
             context.setStrokeColor(dataSet.color(atIndex: 0).cgColor)
             context.setLineWidth(dataSet.lineWidth)
             context.setAlpha(1.0)
@@ -137,8 +129,7 @@ open class RadarChartRenderer: LineRadarRenderer
         context.restoreGState()
     }
     
-    open override func drawValues(context: CGContext)
-    {
+    func drawValues(context: CGContext) {
         guard
             let chart = chart,
             let data = chart.data,
@@ -157,8 +148,7 @@ open class RadarChartRenderer: LineRadarRenderer
         
         let yoffset = CGFloat(5.0)
         
-        for (i,dataSet) in (data.dataSets as! [RadarChartDataSet]).enumerated()
-        {
+        for (i,dataSet) in (data.dataSets as! [RadarChartDataSet]).enumerated() {
             guard shouldDrawValues(forDataSet: dataSet) else {
                 continue
             }
@@ -175,8 +165,7 @@ open class RadarChartRenderer: LineRadarRenderer
                 
                 guard let formatter = dataSet.valueFormatter else { continue }
                 
-                if dataSet.isDrawValuesEnabled
-                {
+                if dataSet.isDrawValuesEnabled {
                     ChartUtils.drawText(
                         context: context,
                         text: formatter.stringForValue(
@@ -191,8 +180,7 @@ open class RadarChartRenderer: LineRadarRenderer
                     )
                 }
                 
-                if let icon = e.icon, dataSet.isDrawIconsEnabled
-                {
+                if let icon = e.icon, dataSet.isDrawIconsEnabled {
                     var pIcon = ChartUtils.getPosition(
                         center: center,
                         dist: CGFloat(e.y) * factor * CGFloat(phaseY) + iconsOffset.y,
@@ -209,15 +197,13 @@ open class RadarChartRenderer: LineRadarRenderer
         }
     }
     
-    open override func drawExtras(context: CGContext)
-    {
+    func drawExtras(context: CGContext) {
         drawWeb(context: context)
     }
     
-    fileprivate var _webLineSegmentsBuffer = [CGPoint](repeating: CGPoint(), count: 2)
+    private var _webLineSegmentsBuffer = [CGPoint](repeating: CGPoint(), count: 2)
     
-    open func drawWeb(context: CGContext)
-    {
+    func drawWeb(context: CGContext) {
         guard
             let chart = chart,
             let data = chart.data
@@ -242,8 +228,7 @@ open class RadarChartRenderer: LineRadarRenderer
         let xIncrements = 1 + chart.skipWebLineCount
         let maxEntryCount = chart.data?.maxEntryCountSet?.count ?? 0
 
-        for i in stride(from: 0, to: maxEntryCount, by: xIncrements)
-        {
+        for i in stride(from: 0, to: maxEntryCount, by: xIncrements) {
             let p = ChartUtils.getPosition(
                 center: center,
                 dist: CGFloat(chart.yRange) * factor,
@@ -264,10 +249,8 @@ open class RadarChartRenderer: LineRadarRenderer
         
         let labelCount = chart.yAxis.entryCount
         
-        for j in 0 ..< labelCount
-        {
-            for i in 0 ..< data.entryCount
-            {
+        for j in 0 ..< labelCount {
+            for i in 0 ..< data.entryCount {
                 let r = CGFloat(chart.yAxis.entries[j] - chart.chartYMin) * factor
 
                 let p1 = ChartUtils.getPosition(center: center, dist: r, angle: sliceangle * CGFloat(i) + rotationangle)
@@ -285,10 +268,9 @@ open class RadarChartRenderer: LineRadarRenderer
         context.restoreGState()
     }
     
-    fileprivate var _highlightPointBuffer = CGPoint()
+    private var _highlightPointBuffer = CGPoint()
 
-    open override func drawHighlighted(context: CGContext, indices: [Highlight])
-    {
+    func drawHighlighted(context: CGContext, indices: [Highlight]) {
         guard
             let chart = chart,
             let radarData = chart.data as? RadarChartData,
@@ -304,8 +286,7 @@ open class RadarChartRenderer: LineRadarRenderer
         
         let center = chart.centerOffsets
         
-        for high in indices
-        {
+        for high in indices {
             guard
                 let set = chart.data?.getDataSetByIndex(high.dataSetIndex) as? RadarChartDataSet,
                 set.isHighlightEnabled
@@ -314,18 +295,15 @@ open class RadarChartRenderer: LineRadarRenderer
             guard let e = set[Int(high.x)] as? RadarChartDataEntry
                 else { continue }
             
-            if !isInBoundsX(entry: e, dataSet: set)
-            {
+            if !isInBoundsX(entry: e, dataSet: set) {
                 continue
             }
             
             context.setLineWidth(radarData.highlightLineWidth)
-            if radarData.highlightLineDashLengths != nil
-            {
+            if radarData.highlightLineDashLengths != nil {
                 context.setLineDash(phase: radarData.highlightLineDashPhase, lengths: radarData.highlightLineDashLengths!)
             }
-            else
-            {
+            else {
                 context.setLineDash(phase: 0.0, lengths: [])
             }
             
@@ -343,17 +321,13 @@ open class RadarChartRenderer: LineRadarRenderer
             // draw the lines
             drawHighlightLines(context: context, point: _highlightPointBuffer, set: set)
             
-            if set.isDrawHighlightCircleEnabled
-            {
-                if !_highlightPointBuffer.x.isNaN && !_highlightPointBuffer.y.isNaN
-                {
+            if set.isDrawHighlightCircleEnabled {
+                if !_highlightPointBuffer.x.isNaN && !_highlightPointBuffer.y.isNaN {
                     var strokeColor = set.highlightCircleStrokeColor
-                    if strokeColor == nil
-                    {
+                    if strokeColor == nil {
                         strokeColor = set.color(atIndex: 0)
                     }
-                    if set.highlightCircleStrokeAlpha < 1.0
-                    {
+                    if set.highlightCircleStrokeAlpha < 1.0 {
                         strokeColor = strokeColor?.withAlphaComponent(set.highlightCircleStrokeAlpha)
                     }
                     
@@ -372,23 +346,20 @@ open class RadarChartRenderer: LineRadarRenderer
         context.restoreGState()
     }
     
-    internal func drawHighlightCircle(
+    func drawHighlightCircle(
         context: CGContext,
         atPoint point: CGPoint,
         innerRadius: CGFloat,
         outerRadius: CGFloat,
         fillColor: Color?,
         strokeColor: Color?,
-        strokeWidth: CGFloat)
-    {
+        strokeWidth: CGFloat) {
         context.saveGState()
         
-        if let fillColor = fillColor
-        {
+        if let fillColor = fillColor {
             context.beginPath()
             context.addEllipse(in: CGRect(x: point.x - outerRadius, y: point.y - outerRadius, width: outerRadius * 2.0, height: outerRadius * 2.0))
-            if innerRadius > 0.0
-            {
+            if innerRadius > 0.0 {
                 context.addEllipse(in: CGRect(x: point.x - innerRadius, y: point.y - innerRadius, width: innerRadius * 2.0, height: innerRadius * 2.0))
             }
             
@@ -396,8 +367,7 @@ open class RadarChartRenderer: LineRadarRenderer
             context.fillPath(using: .evenOdd)
         }
             
-        if let strokeColor = strokeColor
-        {
+        if let strokeColor = strokeColor {
             context.beginPath()
             context.addEllipse(in: CGRect(x: point.x - outerRadius, y: point.y - outerRadius, width: outerRadius * 2.0, height: outerRadius * 2.0))
             context.setStrokeColor(strokeColor.cgColor)

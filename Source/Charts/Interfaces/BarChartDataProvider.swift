@@ -13,8 +13,7 @@ import Foundation
 import CoreGraphics
 
 
-public protocol BarChartDataProvider: BarLineScatterCandleBubbleChartDataProvider
-{
+public protocol BarChartDataProvider: BarLineScatterCandleBubbleChartDataProvider {
     var barData: BarChartData? { get }
     
     var isDrawBarShadowEnabled: Bool { get }

@@ -9,15 +9,15 @@ import Charts
 
 private let MAX_LENGTH = 5
 
-open class LargeValueFormatter: ValueFormatter, AxisValueFormatter {
+public class LargeValueFormatter: ValueFormatter, AxisValueFormatter {
     
     /// Suffix to be appended after the values.
     ///
     /// **default**: suffix: ["", "k", "m", "b", "t"]
-    open var suffix = ["", "k", "m", "b", "t"]
+    public var suffix = ["", "k", "m", "b", "t"]
     
     /// An appendix text to be added at the end of the formatted value.
-    open var appendix: String?
+    public var appendix: String?
     
     public init(appendix: String? = nil) {
         self.appendix = appendix
@@ -42,11 +42,11 @@ open class LargeValueFormatter: ValueFormatter, AxisValueFormatter {
         return r
     }
     
-    open func stringForValue(_ value: Double, axis: AxisBase) -> String {
+    public func stringForValue(_ value: Double, axis: AxisBase) -> String {
         return format(value: value)
     }
     
-    open func stringForValue(
+    public func stringForValue(
         _ value: Double,
         entry: ChartDataEntry,
         dataSetIndex: Int,

@@ -12,8 +12,7 @@
 import Foundation
 
 
-public protocol ShapeRenderer
-{
+public protocol ShapeRenderer {
     /// Renders the provided ScatterDataSet with a shape.
     ///
     /// - parameter context:         CGContext for drawing on

@@ -16,8 +16,7 @@ import CoreGraphics
     import UIKit
 #endif
 
-open class AnimatedMoveViewJob: AnimatedViewPortJob
-{
+public class AnimatedMoveViewJob: AnimatedViewPortJob {
     public override init(
         viewPortHandler: ViewPortHandler,
         xValue: Double,
@@ -27,8 +26,7 @@ open class AnimatedMoveViewJob: AnimatedViewPortJob
         xOrigin: CGFloat,
         yOrigin: CGFloat,
         duration: TimeInterval,
-        easingOption: ChartEasingOption)
-    {
+        easingOption: ChartEasingOption) {
         super.init(viewPortHandler: viewPortHandler,
             xValue: xValue,
             yValue: yValue,
@@ -40,8 +38,7 @@ open class AnimatedMoveViewJob: AnimatedViewPortJob
             easingOption: easingOption)
     }
     
-    internal override func animationUpdate()
-    {
+    override func animationUpdate() {
         guard
             let viewPortHandler = viewPortHandler,
             let transformer = transformer,

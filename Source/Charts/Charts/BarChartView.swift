@@ -13,21 +13,20 @@ import Foundation
 import CoreGraphics
 
 /// Chart that draws bars.
-open class BarChartView: BarLineChartViewBase, BarChartDataProvider
-{
+public class BarChartView: BarLineChartViewBase, BarChartDataProvider {
     /// if set to true, all values are drawn above their bars, instead of below their top
     /// - returns: `true` if drawing values above bars is enabled, `false` ifnot
-    open var isDrawValueAboveBarEnabled = true {
+    public var isDrawValueAboveBarEnabled = true {
         didSet { setNeedsDisplay() }
     }
 
     /// if set to true, a grey area is drawn behind each bar that indicates the maximum value
     /// - returns: `true` if drawing shadows (maxvalue) for each bar is enabled, `false` ifnot
-    open var isDrawBarShadowEnabled = false {
+    public var isDrawBarShadowEnabled = false {
         didSet { setNeedsDisplay() }
     }
     
-    internal override func initialize() {
+    override func initialize() {
         super.initialize()
         
         renderer = BarChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: viewPortHandler)
@@ -38,7 +37,7 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
         self.xAxis.spaceMax = 0.5
     }
     
-    internal override func calcMinMax() {
+    override func calcMinMax() {
         guard let data = self.data as? BarChartData else { return }
         
         if fitBars {
@@ -57,8 +56,7 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
     }
     
     /// - returns: The Highlight object (contains x-index and DataSet index) of the selected value at the given touch point inside the BarChart.
-    open override func getHighlightByTouchPoint(_ pt: CGPoint) -> Highlight?
-    {
+    public override func getHighlightByTouchPoint(_ pt: CGPoint) -> Highlight? {
         if _data === nil {
             print("Can't select by touch. No data set.")
             return nil
@@ -80,8 +78,7 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
     }
         
     /// - returns: The bounding box of the specified Entry in the specified DataSet. Returns null if the Entry could not be found in the charts data.
-    open func getBarBounds(entry e: BarChartDataEntry) -> CGRect
-    {
+    public func getBarBounds(entry e: BarChartDataEntry) -> CGRect {
         guard let
             data = _data as? BarChartData,
             let set = data.getDataSetForEntry(e) as? BarChartDataSet
@@ -111,11 +108,9 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
     /// - parameter fromX: the starting point on the x-axis where the grouping should begin
     /// - parameter groupSpace: the space between groups of bars in values (not pixels) e.g. 0.8f for bar width 1f
     /// - parameter barSpace: the space between individual bars in values (not pixels) e.g. 0.1f for bar width 1f
-    open func groupBars(fromX: Double, groupSpace: Double, barSpace: Double)
-    {
+    public func groupBars(fromX: Double, groupSpace: Double, barSpace: Double) {
         guard let barData = self.barData
-            else
-        {
+            else {
             Swift.print("You need to set data for the chart before grouping bars.", terminator: "\n")
             return
         }
@@ -128,8 +123,7 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
     /// - parameter x:
     /// - parameter dataSetIndex:
     /// - parameter stackIndex: the index inside the stack - only relevant for stacked entries
-    open func highlightValue(x: Double, dataSetIndex: Int, stackIndex: Int)
-    {
+    public func highlightValue(x: Double, dataSetIndex: Int, stackIndex: Int) {
         highlightValue(Highlight(x: x, dataSetIndex: dataSetIndex, stackIndex: stackIndex))
     }
 
@@ -137,14 +131,14 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
     
     /// Adds half of the bar width to each side of the x-axis range in order to allow the bars of the barchart to be fully displayed.
     /// **default**: false
-    open var fitBars = false
+    public var fitBars = false
     
     /// Set this to `true` to make the highlight operation full-bar oriented, `false` to make it highlight single values (relevant only for stacked).
     /// If enabled, highlighting operations will highlight the whole bar, even if only a single stack entry was tapped.
     /// - returns: `true` the highlight is be full-bar oriented, `false` ifsingle-value
-    open var isHighlightFullBarEnabled: Bool = false
+    public var isHighlightFullBarEnabled: Bool = false
     
     // MARK: - BarChartDataProvider
     
-    open var barData: BarChartData? { return _data as? BarChartData }
+    public var barData: BarChartData? { return _data as? BarChartData }
 }

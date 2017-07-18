@@ -9,7 +9,7 @@
 import Foundation
 import Charts
 
-open class DateValueFormatter: AxisValueFormatter {
+public class DateValueFormatter: AxisValueFormatter {
     private let dateFormatter = DateFormatter()
     
     init() {

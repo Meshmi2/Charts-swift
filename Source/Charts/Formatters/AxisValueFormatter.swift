@@ -12,8 +12,7 @@
 import Foundation
 
 /// An interface for providing custom axis Strings.
-public protocol AxisValueFormatter
-{
+public protocol AxisValueFormatter {
     
     /// Called when a value from an axis is formatted before being drawn.
     ///

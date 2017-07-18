@@ -12,8 +12,7 @@
 import Foundation
 import CoreGraphics
 
-public enum FillType
-{
+public enum FillType {
     case empty
     case color
     case linearGradient
@@ -23,85 +22,71 @@ public enum FillType
     case layer
 }
 
-open class Fill
-{
-    fileprivate var _type: FillType = FillType.empty
-    fileprivate var _color: CGColor?
-    fileprivate var _gradient: CGGradient?
-    fileprivate var _gradientAngle: CGFloat = 0.0
-    fileprivate var _gradientStartOffsetPercent: CGPoint = CGPoint()
-    fileprivate var _gradientStartRadiusPercent: CGFloat = 0.0
-    fileprivate var _gradientEndOffsetPercent: CGPoint = CGPoint()
-    fileprivate var _gradientEndRadiusPercent: CGFloat = 0.0
-    fileprivate var _image: CGImage?
-    fileprivate var _layer: CGLayer?
+public class Fill {
+    private var _type: FillType = FillType.empty
+    private var _color: CGColor?
+    private var _gradient: CGGradient?
+    private var _gradientAngle: CGFloat = 0.0
+    private var _gradientStartOffsetPercent: CGPoint = CGPoint()
+    private var _gradientStartRadiusPercent: CGFloat = 0.0
+    private var _gradientEndOffsetPercent: CGPoint = CGPoint()
+    private var _gradientEndRadiusPercent: CGFloat = 0.0
+    private var _image: CGImage?
+    private var _layer: CGLayer?
     
     // MARK: Properties
     
-    open var type: FillType
-    {
+    public var type: FillType {
         return _type
     }
     
-    open var color: CGColor?
-    {
+    public var color: CGColor? {
         return _color
     }
     
-    open var gradient: CGGradient?
-    {
+    public var gradient: CGGradient? {
         return _gradient
     }
     
-    open var gradientAngle: CGFloat
-    {
+    public var gradientAngle: CGFloat {
         return _gradientAngle
     }
     
-    open var gradientStartOffsetPercent: CGPoint
-    {
+    public var gradientStartOffsetPercent: CGPoint {
         return _gradientStartOffsetPercent
     }
     
-    open var gradientStartRadiusPercent: CGFloat
-    {
+    public var gradientStartRadiusPercent: CGFloat {
         return _gradientStartRadiusPercent
     }
     
-    open var gradientEndOffsetPercent: CGPoint
-    {
+    public var gradientEndOffsetPercent: CGPoint {
         return _gradientEndOffsetPercent
     }
     
-    open var gradientEndRadiusPercent: CGFloat
-    {
+    public var gradientEndRadiusPercent: CGFloat {
         return _gradientEndRadiusPercent
     }
     
-    open var image: CGImage?
-    {
+    public var image: CGImage? {
         return _image
     }
     
-    open var layer: CGLayer?
-    {
+    public var layer: CGLayer? {
         return _layer
     }
     
     // MARK: Constructors
-    public init(CGColor: CGColor)
-    {
+    public init(CGColor: CGColor) {
         _type = .color
         _color = CGColor
     }
     
-    public convenience init(color: Color)
-    {
+    public convenience init(color: Color) {
         self.init(CGColor: color.cgColor)
     }
     
-    public init(linearGradient: CGGradient, angle: CGFloat)
-    {
+    public init(linearGradient: CGGradient, angle: CGFloat) {
         _type = .linearGradient
         _gradient = linearGradient
         _gradientAngle = angle
@@ -113,8 +98,7 @@ open class Fill
         startRadiusPercent: CGFloat,
         endOffsetPercent: CGPoint,
         endRadiusPercent: CGFloat
-        )
-    {
+        ) {
         _type = .radialGradient
         _gradient = radialGradient
         _gradientStartOffsetPercent = startOffsetPercent
@@ -123,8 +107,7 @@ open class Fill
         _gradientEndRadiusPercent = endRadiusPercent
     }
     
-    public convenience init(radialGradient: CGGradient)
-    {
+    public convenience init(radialGradient: CGGradient) {
         self.init(
             radialGradient: radialGradient,
             startOffsetPercent: CGPoint(x: 0.0, y: 0.0),
@@ -134,60 +117,51 @@ open class Fill
         )
     }
     
-    public init(CGImage: CGImage, tiled: Bool)
-    {
+    public init(CGImage: CGImage, tiled: Bool) {
         _type = tiled ? .tiledImage : .image
         _image = CGImage
     }
     
-    public convenience init(image: Image, tiled: Bool)
-    {
+    public convenience init(image: Image, tiled: Bool) {
         self.init(CGImage: image.cgImage!, tiled: tiled)
     }
     
-    public convenience init(CGImage: CGImage)
-    {
+    public convenience init(CGImage: CGImage) {
         self.init(CGImage: CGImage, tiled: false)
     }
     
-    public convenience init(image: Image)
-    {
+    public convenience init(image: Image) {
         self.init(image: image, tiled: false)
     }
     
-    public init(CGLayer: CGLayer)
-    {
+    public init(CGLayer: CGLayer) {
         _type = .layer
         _layer = CGLayer
     }
     
     // MARK: Constructors
     
-    open class func fillWithCGColor(_ CGColor: CGColor) -> Fill
-    {
+    public class func fillWithCGColor(_ CGColor: CGColor) -> Fill {
         return Fill(CGColor: CGColor)
     }
     
-    open class func fillWithColor(_ color: Color) -> Fill
-    {
+    public class func fillWithColor(_ color: Color) -> Fill {
         return Fill(color: color)
     }
     
-    open class func fillWithLinearGradient(
+    public class func fillWithLinearGradient(
         _ linearGradient: CGGradient,
-        angle: CGFloat) -> Fill
-    {
+        angle: CGFloat) -> Fill {
         return Fill(linearGradient: linearGradient, angle: angle)
     }
     
-    open class func fillWithRadialGradient(
+    public class func fillWithRadialGradient(
         _ radialGradient: CGGradient,
         startOffsetPercent: CGPoint,
         startRadiusPercent: CGFloat,
         endOffsetPercent: CGPoint,
         endRadiusPercent: CGFloat
-        ) -> Fill
-    {
+        ) -> Fill {
         return Fill(
             radialGradient: radialGradient,
             startOffsetPercent: startOffsetPercent,
@@ -197,53 +171,44 @@ open class Fill
         )
     }
     
-    open class func fillWithRadialGradient(_ radialGradient: CGGradient) -> Fill
-    {
+    public class func fillWithRadialGradient(_ radialGradient: CGGradient) -> Fill {
         return Fill(radialGradient: radialGradient)
     }
     
-    open class func fillWithCGImage(_ CGImage: CGImage, tiled: Bool) -> Fill
-    {
+    public class func fillWithCGImage(_ CGImage: CGImage, tiled: Bool) -> Fill {
         return Fill(CGImage: CGImage, tiled: tiled)
     }
     
-    open class func fillWithImage(_ image: Image, tiled: Bool) -> Fill
-    {
+    public class func fillWithImage(_ image: Image, tiled: Bool) -> Fill {
         return Fill(image: image, tiled: tiled)
     }
     
-    open class func fillWithCGImage(_ CGImage: CGImage) -> Fill
-    {
+    public class func fillWithCGImage(_ CGImage: CGImage) -> Fill {
         return Fill(CGImage: CGImage)
     }
     
-    open class func fillWithImage(_ image: Image) -> Fill
-    {
+    public class func fillWithImage(_ image: Image) -> Fill {
         return Fill(image: image)
     }
     
-    open class func fillWithCGLayer(_ CGLayer: CGLayer) -> Fill
-    {
+    public class func fillWithCGLayer(_ CGLayer: CGLayer) -> Fill {
         return Fill(CGLayer: CGLayer)
     }
     
     // MARK: Drawing code
     
     /// Draws the provided path in filled mode with the provided area
-    open func fillPath(
+    public func fillPath(
         context: CGContext,
-        rect: CGRect)
-    {
+        rect: CGRect) {
         let fillType = _type
-        if fillType == .empty
-        {
+        if fillType == .empty {
             return
         }
         
         context.saveGState()
         
-        switch fillType
-        {
+        switch fillType {
         case .color:
             
             context.setFillColor(_color!)

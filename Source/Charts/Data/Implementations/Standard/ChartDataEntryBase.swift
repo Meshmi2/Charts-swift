@@ -11,29 +11,26 @@
 
 import Foundation
 
-open class ChartDataEntryBase
-{
+public class ChartDataEntryBase {
     /// the y value
-     open var y = Double(0.0)
+     public var y = Double(0.0)
     
     /// optional spot for additional data this Entry represents
-     open var data: Any?
+     public var data: Any?
     
     /// optional icon image
-    open var icon: Image?
+    public var icon: Image?
     
     /// An Entry represents one single entry in the chart.
     /// - parameter y: the y value (the actual value of the entry)
-    public init(y: Double)
-    {
+    public init(y: Double) {
         self.y = y
     }
     
     /// - parameter y: the y value (the actual value of the entry)
     /// - parameter data: Space for additional data this Entry represents.
     
-    public init(y: Double, data: Any?)
-    {
+    public init(y: Double, data: Any?) {
         self.y = y
         self.data = data
     }
@@ -41,8 +38,7 @@ open class ChartDataEntryBase
     /// - parameter y: the y value (the actual value of the entry)
     /// - parameter icon: icon image
     
-    public init(y: Double, icon: Image?)
-    {
+    public init(y: Double, icon: Image?) {
         self.y = y
         self.icon = icon
     }
@@ -51,30 +47,26 @@ open class ChartDataEntryBase
     /// - parameter icon: icon image
     /// - parameter data: Space for additional data this Entry represents.
     
-    public init(y: Double, icon: Image?, data: Any?)
-    {
+    public init(y: Double, icon: Image?, data: Any?) {
         self.y = y
         self.icon = icon
         self.data = data
     }
     
     // TODO: Move to extension when it can be overriden
-    open var description: String
-    {
+    public var description: String {
         return "ChartDataEntryBase, y \(y)"
     }
     
     // TODO: Move to extension when it can be overriden
-    open static func ==(lhs: ChartDataEntryBase, rhs: ChartDataEntryBase) -> Bool
-    {
+    open static func ==(lhs: ChartDataEntryBase, rhs: ChartDataEntryBase) -> Bool {
         // TODO: Make this equatable somehow
 //        if lhs.data !== rhs.data
 //        {
 //            return false
 //        }
         
-        if fabs(lhs.y - rhs.y) > Double.ulpOfOne
-        {
+        if fabs(lhs.y - rhs.y) > Double.ulpOfOne {
             return false
         }
         

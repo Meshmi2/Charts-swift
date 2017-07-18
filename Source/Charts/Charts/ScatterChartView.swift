@@ -13,10 +13,8 @@ import Foundation
 import CoreGraphics
 
 /// The ScatterChart. Draws dots, triangles, squares and custom shapes into the chartview.
-open class ScatterChartView: BarLineChartViewBase, ScatterChartDataProvider
-{
-    open override func initialize()
-    {
+public class ScatterChartView: BarLineChartViewBase, ScatterChartDataProvider {
+    public override func initialize() {
         super.initialize()
         
         renderer = ScatterChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: viewPortHandler)
@@ -27,5 +25,5 @@ open class ScatterChartView: BarLineChartViewBase, ScatterChartDataProvider
     
     // MARK: - ScatterChartDataProbider
     
-    open var scatterData: ScatterChartData? { return _data as? ScatterChartData }
+    public var scatterData: ScatterChartData? { return _data as? ScatterChartData }
 }

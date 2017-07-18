@@ -10,14 +10,12 @@
 //
 import Foundation
 
-open class XShapeRenderer : ShapeRenderer
-{
-    open func renderShape(
+struct XShapeRenderer : ShapeRenderer {
+    func renderShape(
         context: CGContext,
         dataSet: ScatterChartDataSet,
         point: CGPoint,
-        color: Color)
-    {
+        color: Color) {
         let shapeSize = dataSet.scatterShapeSize
         let shapeHalf = shapeSize / 2.0
         

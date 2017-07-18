@@ -12,25 +12,20 @@
 import Foundation
 import CoreGraphics
 
-open class BarHighlighter: ChartHighlighter
-{
-    open override func getHighlight(x: CGFloat, y: CGFloat) -> Highlight?
-    {
+public class BarHighlighter: ChartHighlighter {
+    public override func getHighlight(x: CGFloat, y: CGFloat) -> Highlight? {
         let high = super.getHighlight(x: x, y: y)
         
-        if high == nil
-        {
+        if high == nil {
             return nil
         }
         
-        if let barData = (self.chart as? BarChartDataProvider)?.barData
-        {
+        if let barData = (self.chart as? BarChartDataProvider)?.barData {
             let pos = getValsForTouch(x: x, y: y)
             
             if
                 let set = barData.getDataSetByIndex(high!.dataSetIndex) as? BarChartDataSet,
-                set.isStacked
-            {
+                set.isStacked {
                 return getStackedHighlight(high: high!,
                                            set: set,
                                            xValue: Double(pos.x),
@@ -42,13 +37,11 @@ open class BarHighlighter: ChartHighlighter
         return nil
     }
     
-    internal override func getDistance(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat) -> CGFloat
-    {
+    override func getDistance(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat) -> CGFloat {
         return abs(x1 - x2)
     }
     
-    internal override var data: ChartData?
-    {
+    override var data: ChartData? {
         return (chart as? BarChartDataProvider)?.barData
     }
     
@@ -58,25 +51,22 @@ open class BarHighlighter: ChartHighlighter
     /// - parameter xIndex:
     /// - parameter yValue:
     /// - returns:
-    open func getStackedHighlight(high: Highlight,
+    public func getStackedHighlight(high: Highlight,
                                   set: BarChartDataSet,
                                   xValue: Double,
-                                  yValue: Double) -> Highlight?
-    {
+                                  yValue: Double) -> Highlight? {
         guard
             let chart = self.chart as? BarLineScatterCandleBubbleChartDataProvider,
             let entry = set.entryForXValue(xValue, closestToY: yValue) as? BarChartDataEntry
             else { return nil }
         
         // Not stacked
-        if entry.yValues == nil
-        {
+        if entry.yValues == nil {
             return high
         }
         
         if let ranges = entry.ranges,
-            ranges.count > 0
-        {
+            ranges.count > 0 {
             let stackIndex = getClosestStackIndex(ranges: ranges, value: yValue)
             
             let pixel = chart
@@ -99,23 +89,18 @@ open class BarHighlighter: ChartHighlighter
     /// - parameter entry:
     /// - parameter value:
     /// - returns:
-    open func getClosestStackIndex(ranges: [ClosedRange<Double>]?, value: Double) -> Int
-    {
-        if ranges == nil
-        {
+    public func getClosestStackIndex(ranges: [ClosedRange<Double>]?, value: Double) -> Int {
+        if ranges == nil {
             return 0
         }
         
         var stackIndex = 0
         
-        for range in ranges!
-        {
-            if range.contains(value)
-            {
+        for range in ranges! {
+            if range.contains(value) {
                 return stackIndex
             }
-            else
-            {
+            else {
                 stackIndex += 1
             }
         }

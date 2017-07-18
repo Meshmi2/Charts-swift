@@ -34,8 +34,7 @@ import CoreGraphics
 //    var shapeRenderer: ShapeRenderer? { get }
 //}
 
-open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet
-{
+public class ScatterChartDataSet: LineScatterCandleRadarChartDataSet {
     public enum Shape {
         case square
         case circle
@@ -59,32 +58,29 @@ open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet
     }
     
     /// The size the scatter shape will have
-    open var scatterShapeSize = CGFloat(10.0)
+    public var scatterShapeSize = CGFloat(10.0)
     
     /// The radius of the hole in the shape (applies to Square, Circle and Triangle)
     /// **default**: 0.0
-    open var scatterShapeHoleRadius: CGFloat = 0.0
+    public var scatterShapeHoleRadius: CGFloat = 0.0
     
     /// Color for the hole in the shape. Setting to `nil` will behave as transparent.
     /// **default**: nil
-    open var scatterShapeHoleColor: Color? = nil
+    public var scatterShapeHoleColor: Color? = nil
     
     /// Sets the ScatterShape this DataSet should be drawn with.
     /// This will search for an available ShapeRenderer and set this renderer for the DataSet
-    open func setScatterShape(_ shape: Shape)
-    {
+    public func setScatterShape(_ shape: Shape) {
         self.shapeRenderer = ScatterChartDataSet.renderer(forShape: shape)
     }
     
     /// The IShapeRenderer responsible for rendering this DataSet.
     /// This can also be used to set a custom IShapeRenderer aside from the default ones.
     /// **default**: `SquareShapeRenderer`
-    open var shapeRenderer: ShapeRenderer? = SquareShapeRenderer()
+    public var shapeRenderer: ShapeRenderer? = SquareShapeRenderer()
     
-    open class func renderer(forShape shape: Shape) -> ShapeRenderer
-    {
-        switch shape
-        {
+    public class func renderer(forShape shape: Shape) -> ShapeRenderer {
+        switch shape {
         case .square: return SquareShapeRenderer()
         case .circle: return CircleShapeRenderer()
         case .triangle: return TriangleShapeRenderer()

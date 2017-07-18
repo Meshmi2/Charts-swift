@@ -64,16 +64,13 @@ import CoreGraphics
 //    var isDecreasingFilled: Bool { get }
 //}
 
-open class CandleChartDataSet: LineScatterCandleRadarChartDataSet
-{
+public class CandleChartDataSet: LineScatterCandleRadarChartDataSet {
     
-    public required init()
-    {
+    public required init() {
         super.init()
     }
     
-    public override init(values: [ChartDataEntry], label: String = "Data Set")
-    {
+    public override init(values: [ChartDataEntry], label: String = "Data Set") {
         super.init(values: values, label: label)
     }
     
@@ -83,42 +80,36 @@ open class CandleChartDataSet: LineScatterCandleRadarChartDataSet
     
     // MARK: - Data functions and accessors
     
-    open func calcMinMax(entry e: ChartDataEntry) {
+    public func calcMinMax(entry e: ChartDataEntry) {
         guard let e = e as? CandleChartDataEntry
             else { return }
         
-        if e.low < yMin
-        {
+        if e.low < yMin {
             yMin = e.low
         }
         
-        if e.high > yMax
-        {
+        if e.high > yMax {
             yMax = e.high
         }
         
         calcMinMaxX(entry: e)
     }
     
-    open func calcMinMaxY(entry e: ChartDataEntry) {
+    public func calcMinMaxY(entry e: ChartDataEntry) {
         guard let e = e as? CandleChartDataEntry
             else { return }
         
-        if e.high < yMin
-        {
+        if e.high < yMin {
             yMin = e.high
         }
-        if e.high > yMax
-        {
+        if e.high > yMax {
             yMax = e.high
         }
         
-        if e.low < yMin
-        {
+        if e.low < yMin {
             yMin = e.low
         }
-        if e.low > yMax
-        {
+        if e.low > yMax {
             yMax = e.low
         }
     }
@@ -128,29 +119,23 @@ open class CandleChartDataSet: LineScatterCandleRadarChartDataSet
     /// the space between the candle entries
     ///
     /// **default**: 0.1 (10%)
-    fileprivate var _barSpace = CGFloat(0.1)
+    private var _barSpace = CGFloat(0.1)
     
     /// the space that is left out on the left and right side of each candle,
     /// **default**: 0.1 (10%), max 0.45, min 0.0
-    open var barSpace: CGFloat
-    {
-        set
-        {
-            if newValue < 0.0
-            {
+    public var barSpace: CGFloat {
+        set {
+            if newValue < 0.0 {
                 _barSpace = 0.0
             }
-            else if newValue > 0.45
-            {
+            else if newValue > 0.45 {
                 _barSpace = 0.45
             }
-            else
-            {
+            else {
                 _barSpace = newValue
             }
         }
-        get
-        {
+        get {
             return _barSpace
         }
     }
@@ -159,42 +144,42 @@ open class CandleChartDataSet: LineScatterCandleRadarChartDataSet
     /// when false, only "ticks" will show
     ///
     /// **default**: true
-    open var showCandleBar: Bool = true
+    public var showCandleBar: Bool = true
     
     /// the width of the candle-shadow-line in pixels.
     ///
     /// **default**: 1.5
-    open var shadowWidth = CGFloat(1.5)
+    public var shadowWidth = CGFloat(1.5)
     
     /// the color of the shadow line
-    open var shadowColor: Color?
+    public var shadowColor: Color?
     
     /// use candle color for the shadow
-    open var shadowColorSameAsCandle = false
+    public var shadowColorSameAsCandle = false
     
     /// Is the shadow color same as the candle color?
-    open var isShadowColorSameAsCandle: Bool { return shadowColorSameAsCandle }
+    public var isShadowColorSameAsCandle: Bool { return shadowColorSameAsCandle }
     
     /// color for open == close
-    open var neutralColor: Color?
+    public var neutralColor: Color?
     
     /// color for open > close
-    open var increasingColor: Color?
+    public var increasingColor: Color?
     
     /// color for open < close
-    open var decreasingColor: Color?
+    public var decreasingColor: Color?
     
     /// Are increasing values drawn as filled?
     /// increasing candlesticks are traditionally hollow
-    open var increasingFilled = false
+    public var increasingFilled = false
     
     /// Are increasing values drawn as filled?
-    open var isIncreasingFilled: Bool { return increasingFilled }
+    public var isIncreasingFilled: Bool { return increasingFilled }
     
     /// Are decreasing values drawn as filled?
     /// descreasing candlesticks are traditionally filled
-    open var decreasingFilled = true
+    public var decreasingFilled = true
     
     /// Are decreasing values drawn as filled?
-    open var isDecreasingFilled: Bool { return decreasingFilled }
+    public var isDecreasingFilled: Bool { return decreasingFilled }
 }

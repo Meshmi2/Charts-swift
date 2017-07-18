@@ -12,16 +12,14 @@
 import Foundation
 import CoreGraphics
 
-open class BubbleChartDataEntry: ChartDataEntry
-{
+public class BubbleChartDataEntry: ChartDataEntry {
     /// The size of the bubble.
-    open var size = CGFloat(0.0)
+    public var size = CGFloat(0.0)
     
     /// - parameter x: The index on the x-axis.
     /// - parameter y: The value on the y-axis.
     /// - parameter size: The size of the bubble.
-    public init(x: Double, y: Double, size: CGFloat)
-    {
+    public init(x: Double, y: Double, size: CGFloat) {
         super.init(x: x, y: y)
         
         self.size = size
@@ -31,8 +29,7 @@ open class BubbleChartDataEntry: ChartDataEntry
     /// - parameter y: The value on the y-axis.
     /// - parameter size: The size of the bubble.
     /// - parameter data: Spot for additional data this Entry represents.
-    public init(x: Double, y: Double, size: CGFloat, data: Any?)
-    {
+    public init(x: Double, y: Double, size: CGFloat, data: Any?) {
         super.init(x: x, y: y, data: data)
         
         self.size = size
@@ -42,8 +39,7 @@ open class BubbleChartDataEntry: ChartDataEntry
     /// - parameter y: The value on the y-axis.
     /// - parameter size: The size of the bubble.
     /// - parameter icon: icon image
-    public init(x: Double, y: Double, size: CGFloat, icon: Image?)
-    {
+    public init(x: Double, y: Double, size: CGFloat, icon: Image?) {
         super.init(x: x, y: y, icon: icon)
         
         self.size = size
@@ -54,8 +50,7 @@ open class BubbleChartDataEntry: ChartDataEntry
     /// - parameter size: The size of the bubble.
     /// - parameter icon: icon image
     /// - parameter data: Spot for additional data this Entry represents.
-    public init(x: Double, y: Double, size: CGFloat, icon: Image?, data: Any?)
-    {
+    public init(x: Double, y: Double, size: CGFloat, icon: Image?, data: Any?) {
         super.init(x: x, y: y, icon: icon, data: data)
         
         self.size = size

@@ -10,14 +10,12 @@
 //
 import Foundation
 
-open class TriangleShapeRenderer : ShapeRenderer
-{
-    open func renderShape(
+struct TriangleShapeRenderer : ShapeRenderer {
+    func renderShape(
         context: CGContext,
         dataSet: ScatterChartDataSet,
         point: CGPoint,
-        color: Color)
-    {
+        color: Color) {
         let shapeSize = dataSet.scatterShapeSize
         let shapeHalf = shapeSize / 2.0
         let shapeHoleSizeHalf = dataSet.scatterShapeHoleRadius
@@ -33,8 +31,7 @@ open class TriangleShapeRenderer : ShapeRenderer
         context.addLine(to: CGPoint(x: point.x + shapeHalf, y: point.y + shapeHalf))
         context.addLine(to: CGPoint(x: point.x - shapeHalf, y: point.y + shapeHalf))
         
-        if shapeHoleSize > 0.0
-        {
+        if shapeHoleSize > 0.0 {
             context.addLine(to: CGPoint(x: point.x, y: point.y - shapeHalf))
             
             context.move(to: CGPoint(x: point.x - shapeHalf + shapeStrokeSize, y: point.y + shapeHalf - shapeStrokeSize))
@@ -47,8 +44,7 @@ open class TriangleShapeRenderer : ShapeRenderer
         
         context.fillPath()
         
-        if shapeHoleSize > 0.0 && shapeHoleColor != nil
-        {
+        if shapeHoleSize > 0.0 && shapeHoleColor != nil {
             context.setFillColor(shapeHoleColor!.cgColor)
             
             // create a triangle path

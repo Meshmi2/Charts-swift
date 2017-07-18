@@ -25,44 +25,34 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 
 	public typealias NSUIDisplayLink = CADisplayLink
     
-    extension NSUITapGestureRecognizer
-    {
-        final func nsuiNumberOfTouches() -> Int
-        {
+    extension NSUITapGestureRecognizer {
+        final func nsuiNumberOfTouches() -> Int {
             return numberOfTouches
         }
         
-        final var nsuiNumberOfTapsRequired: Int
-        {
-            get
-            {
+        final var nsuiNumberOfTapsRequired: Int {
+            get {
                 return self.numberOfTapsRequired
             }
-            set
-            {
+            set {
                 self.numberOfTapsRequired = newValue
             }
         }
     }
     
-    extension NSUIPanGestureRecognizer
-    {
-        final func nsuiNumberOfTouches() -> Int
-        {
+    extension NSUIPanGestureRecognizer {
+        final func nsuiNumberOfTouches() -> Int {
             return numberOfTouches
         }
         
-        final func nsuiLocationOfTouch(_ touch: Int, inView: UIView?) -> CGPoint
-        {
+        final func nsuiLocationOfTouch(_ touch: Int, inView: UIView?) -> CGPoint {
             return super.location(ofTouch: touch, in: inView)
         }
     }
     
 #if !os(tvOS)
-    extension NSUIRotationGestureRecognizer
-    {
-        final var nsuiRotation: CGFloat
-        {
+    extension NSUIRotationGestureRecognizer {
+        final var nsuiRotation: CGFloat {
             get { return rotation }
             set { rotation = newValue }
         }
@@ -70,142 +60,112 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 #endif
     
 #if !os(tvOS)
-    extension NSUIPinchGestureRecognizer
-    {
-        final var nsuiScale: CGFloat
-        {
-            get
-            {
+    extension NSUIPinchGestureRecognizer {
+        final var nsuiScale: CGFloat {
+            get {
                 return scale
             }
-            set
-            {
+            set {
                 scale = newValue
             }
         }
         
-        final func nsuiLocationOfTouch(_ touch: Int, inView: UIView?) -> CGPoint
-        {
+        final func nsuiLocationOfTouch(_ touch: Int, inView: UIView?) -> CGPoint {
             return super.location(ofTouch: touch, in: inView)
         }
     }
 #endif
 
-	open class NSUIView: UIView
-    {
-		public final override func touchesBegan(_ touches: Set<NSUITouch>, with event: NSUIEvent?)
-        {
+	open class NSUIView: UIView {
+		public final override func touchesBegan(_ touches: Set<NSUITouch>, with event: NSUIEvent?) {
 			self.nsuiTouchesBegan(touches, withEvent: event)
 		}
 
-		public final override func touchesMoved(_ touches: Set<NSUITouch>, with event: NSUIEvent?)
-        {
+		public final override func touchesMoved(_ touches: Set<NSUITouch>, with event: NSUIEvent?) {
 			self.nsuiTouchesMoved(touches, withEvent: event)
 		}
 
-		public final override func touchesEnded(_ touches: Set<NSUITouch>, with event: NSUIEvent?)
-        {
+		public final override func touchesEnded(_ touches: Set<NSUITouch>, with event: NSUIEvent?) {
 			self.nsuiTouchesEnded(touches, withEvent: event)
 		}
 
-		public final override func touchesCancelled(_ touches: Set<NSUITouch>, with event: NSUIEvent?)
-        {
+		public final override func touchesCancelled(_ touches: Set<NSUITouch>, with event: NSUIEvent?) {
 			self.nsuiTouchesCancelled(touches, withEvent: event)
 		}
 
-		open func nsuiTouchesBegan(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
-        {
+		public func nsuiTouchesBegan(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?) {
 			super.touchesBegan(touches, with: event!)
 		}
 
-		open func nsuiTouchesMoved(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
-        {
+		public func nsuiTouchesMoved(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?) {
 			super.touchesMoved(touches, with: event!)
 		}
 
-		open func nsuiTouchesEnded(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
-        {
+		public func nsuiTouchesEnded(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?) {
 			super.touchesEnded(touches, with: event!)
 		}
 
-		open func nsuiTouchesCancelled(_ touches: Set<NSUITouch>?, withEvent event: NSUIEvent?)
-        {
+		public func nsuiTouchesCancelled(_ touches: Set<NSUITouch>?, withEvent event: NSUIEvent?) {
 			super.touchesCancelled(touches!, with: event!)
 		}
 
-		var nsuiLayer: CALayer?
-        {
+		var nsuiLayer: CALayer? {
 			return self.layer
 		}
 	}
 
-	extension UIView
-    {
-		final var nsuiGestureRecognizers: [NSUIGestureRecognizer]?
-        {
+	extension UIView {
+		final var nsuiGestureRecognizers: [NSUIGestureRecognizer]? {
 			return self.gestureRecognizers
 		}
     }
     
-    extension UIScrollView
-    {
-        var nsuiIsScrollEnabled: Bool
-        {
+    extension UIScrollView {
+        var nsuiIsScrollEnabled: Bool {
             get { return isScrollEnabled }
             set { isScrollEnabled = newValue }
         }
     }
     
-    extension UIScreen
-    {
-        final var nsuiScale: CGFloat
-        {
+    extension UIScreen {
+        final var nsuiScale: CGFloat {
             return self.scale
         }
     }
 
-    func NSUIGraphicsGetCurrentContext() -> CGContext?
-    {
+    func NSUIGraphicsGetCurrentContext() -> CGContext? {
 		return UIGraphicsGetCurrentContext()
 	}
 
-    func NSUIGraphicsGetImageFromCurrentImageContext() -> Image!
-    {
+    func NSUIGraphicsGetImageFromCurrentImageContext() -> Image! {
 		return UIGraphicsGetImageFromCurrentImageContext()
 	}
 
-	func NSUIGraphicsPushContext(_ context: CGContext)
-    {
+	func NSUIGraphicsPushContext(_ context: CGContext) {
 		UIGraphicsPushContext(context)
 	}
 
-	func NSUIGraphicsPopContext()
-    {
+	func NSUIGraphicsPopContext() {
 		UIGraphicsPopContext()
 	}
 
-	func NSUIGraphicsEndImageContext()
-    {
+	func NSUIGraphicsEndImageContext() {
 		UIGraphicsEndImageContext()
 	}
 
-	func NSUIImagePNGRepresentation(_ image: Image) -> Data?
-    {
+	func NSUIImagePNGRepresentation(_ image: Image) -> Data? {
 		return UIImagePNGRepresentation(image)
 	}
 
-	func NSUIImageJPEGRepresentation(_ image: Image, _ quality: CGFloat = 0.8) -> Data?
-    {
+	func NSUIImageJPEGRepresentation(_ image: Image, _ quality: CGFloat = 0.8) -> Data? {
 		return UIImageJPEGRepresentation(image, quality)
 	}
 
-	func NSUIMainScreen() -> NSUIScreen?
-    {
+	func NSUIMainScreen() -> NSUIScreen? {
 		return NSUIScreen.main
 	}
 
-	func NSUIGraphicsBeginImageContextWithOptions(_ size: CGSize, _ opaque: Bool, _ scale: CGFloat)
-    {
+	func NSUIGraphicsBeginImageContextWithOptions(_ size: CGSize, _ opaque: Bool, _ scale: CGFloat) {
 		UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
 	}
 
@@ -231,8 +191,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 	public typealias NSUIScreen = NSScreen
 
 	/** On OS X there is no CADisplayLink. Use a 60 fps timer to render the animations. */
-	public class NSUIDisplayLink
-    {
+	public class NSUIDisplayLink {
         private var timer: Timer?
         private var displayLink: CVDisplayLink?
         private var _timestamp: CFTimeInterval = 0.0
@@ -240,18 +199,15 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
         private weak var _target: AnyObject?
         private var _selector: Selector
         
-        public var timestamp: CFTimeInterval
-        {
+        public var timestamp: CFTimeInterval {
             return _timestamp
         }
 
-		init(target: AnyObject, selector: Selector)
-        {
+		init(target: AnyObject, selector: Selector) {
             _target = target
             _selector = selector
             
-            if CVDisplayLinkCreateWithActiveCGDisplays(&displayLink) == kCVReturnSuccess
-            {
+            if CVDisplayLinkCreateWithActiveCGDisplays(&displayLink) == kCVReturnSuccess {
                 
                 CVDisplayLinkSetOutputCallback(displayLink!, { (displayLink, inNow, inOutputTime, flagsIn, flagsOut, userData) -> CVReturn in
                     
@@ -263,247 +219,194 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
                     return kCVReturnSuccess
                     }, Unmanaged.passUnretained(self).toOpaque())
             }
-            else
-            {
+            else {
                 timer = Timer(timeInterval: 1.0 / 60.0, target: target, selector: selector, userInfo: nil, repeats: true)
             }
 		}
         
-        deinit
-        {
+        deinit {
             stop()
         }
 
-		open func add(to runloop: RunLoop, forMode mode: RunLoopMode)
-        {
-            if displayLink != nil
-            {
+		public func add(to runloop: RunLoop, forMode mode: RunLoopMode) {
+            if displayLink != nil {
                 CVDisplayLinkStart(displayLink!)
             }
-            else if timer != nil
-            {
+            else if timer != nil {
                 runloop.add(timer!, forMode: mode)
             }
 		}
 
-		open func remove(from: RunLoop, forMode: RunLoopMode)
-        {
+		public func remove(from: RunLoop, forMode: RunLoopMode) {
             stop()
 		}
         
-        private func stop()
-        {
-            if displayLink != nil
-            {
+        private func stop() {
+            if displayLink != nil {
                 CVDisplayLinkStop(displayLink!)
             }
-            if timer != nil
-            {
+            if timer != nil {
                 timer?.invalidate()
             }
         }
 	}
 
 	/** The 'tap' gesture is mapped to clicks. */
-	extension NSUITapGestureRecognizer
-    {
-		final func nsuiNumberOfTouches() -> Int
-        {
+	extension NSUITapGestureRecognizer {
+		final func nsuiNumberOfTouches() -> Int {
 			return 1
 		}
         
-		final var nsuiNumberOfTapsRequired: Int
-        {
-			get
-            {
+		final var nsuiNumberOfTapsRequired: Int {
+			get {
 				return self.numberOfClicksRequired
 			}
-			set
-            {
+			set {
 				self.numberOfClicksRequired = newValue
 			}
 		}
 	}
 
-	extension NSUIPanGestureRecognizer
-    {
-		final func nsuiNumberOfTouches() -> Int
-        {
+	extension NSUIPanGestureRecognizer {
+		final func nsuiNumberOfTouches() -> Int {
 			return 1
 		}
         
         /// FIXME: Currently there are no more than 1 touch in OSX gestures, and not way to create custom touch gestures.
-		final func nsuiLocationOfTouch(_ touch: Int, inView: NSView?) -> NSPoint
-        {
+		final func nsuiLocationOfTouch(_ touch: Int, inView: NSView?) -> NSPoint {
 			return super.location(in: inView)
 		}
     }
     
-    extension NSUIRotationGestureRecognizer
-    {
+    extension NSUIRotationGestureRecognizer {
         /// FIXME: Currently there are no velocities in OSX gestures, and not way to create custom touch gestures.
-        final var velocity: CGFloat
-        {
+        final var velocity: CGFloat {
             return 0.1
         }
         
-        final var nsuiRotation: CGFloat
-        {
+        final var nsuiRotation: CGFloat {
             get { return -rotation }
             set { rotation = -newValue }
         }
     }
     
-    extension NSUIPinchGestureRecognizer
-    {
-        final var nsuiScale: CGFloat
-        {
-            get
-            {
+    extension NSUIPinchGestureRecognizer {
+        final var nsuiScale: CGFloat {
+            get {
                 return magnification + 1.0
             }
-            set
-            {
+            set {
                 magnification = newValue - 1.0
             }
         }
         
         /// FIXME: Currently there are no more than 1 touch in OSX gestures, and not way to create custom touch gestures.
-        final func nsuiLocationOfTouch(_ touch: Int, inView view: NSView?) -> NSPoint
-        {
+        final func nsuiLocationOfTouch(_ touch: Int, inView view: NSView?) -> NSPoint {
             return super.location(in: view)
         }
     }
 
-	extension NSView
-    {
-		final var nsuiGestureRecognizers: [NSGestureRecognizer]?
-        {
+	extension NSView {
+		final var nsuiGestureRecognizers: [NSGestureRecognizer]? {
 			return self.gestureRecognizers
 		}
 	}
 
-    extension NSScrollView
-    {
-        var nsuiIsScrollEnabled: Bool
-        {
+    extension NSScrollView {
+        var nsuiIsScrollEnabled: Bool {
             get { return scrollEnabled }
             set { scrollEnabled = newValue }
         }
     }
     
-	open class NSUIView: NSView
-    {
-		public final override var isFlipped: Bool
-        {
+	open class NSUIView: NSView {
+		public final override var isFlipped: Bool {
 			return true
 		}
 
-		func setNeedsDisplay()
-        {
+		func setNeedsDisplay() {
 			self.setNeedsDisplay(self.bounds)
 		}
 
         
-		public final override func touchesBegan(with event: NSEvent)
-        {
+		public final override func touchesBegan(with event: NSEvent) {
 			self.nsuiTouchesBegan(event.touches(matching: .any, in: self), withEvent: event)
 		}
 
-		public final override func touchesEnded(with event: NSEvent)
-        {
+		public final override func touchesEnded(with event: NSEvent) {
 			self.nsuiTouchesEnded(event.touches(matching: .any, in: self), withEvent: event)
 		}
 
-		public final override func touchesMoved(with event: NSEvent)
-        {
+		public final override func touchesMoved(with event: NSEvent) {
 			self.nsuiTouchesMoved(event.touches(matching: .any, in: self), withEvent: event)
 		}
 
-		open override func touchesCancelled(with event: NSEvent)
-        {
+		public override func touchesCancelled(with event: NSEvent) {
 			self.nsuiTouchesCancelled(event.touches(matching: .any, in: self), withEvent: event)
 		}
 
-		open func nsuiTouchesBegan(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
-        {
+		public func nsuiTouchesBegan(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?) {
 			super.touchesBegan(with: event!)
 		}
 
-		open func nsuiTouchesMoved(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
-        {
+		public func nsuiTouchesMoved(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?) {
 			super.touchesMoved(with: event!)
 		}
 
-		open func nsuiTouchesEnded(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
-        {
+		public func nsuiTouchesEnded(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?) {
 			super.touchesEnded(with: event!)
 		}
 
-		open func nsuiTouchesCancelled(_ touches: Set<NSUITouch>?, withEvent event: NSUIEvent?)
-        {
+		public func nsuiTouchesCancelled(_ touches: Set<NSUITouch>?, withEvent event: NSUIEvent?) {
 			super.touchesCancelled(with: event!)
         }
         
-		open var backgroundColor: Color?
-        {
-            get
-            {
+		public var backgroundColor: Color? {
+            get {
                 return self.layer?.backgroundColor == nil
                     ? nil
                     : NSColor(cgColor: self.layer!.backgroundColor!)
             }
-            set
-            {
+            set {
                 self.wantsLayer = true
                 self.layer?.backgroundColor = newValue == nil ? nil : newValue!.cgColor
             }
         }
 
-		final var nsuiLayer: CALayer?
-        {
+		final var nsuiLayer: CALayer? {
 			return self.layer
 		}
 	}
 
-	extension NSFont
-    {
-		var lineHeight: CGFloat
-        {
+	extension NSFont {
+		var lineHeight: CGFloat {
 			// Not sure if this is right, but it looks okay
 			return self.boundingRectForFont.size.height
 		}
 	}
 
-	extension NSScreen
-    {
-		final var nsuiScale: CGFloat
-        {
+	extension NSScreen {
+		final var nsuiScale: CGFloat {
 			return self.backingScaleFactor
 		}
 	}
 
-	extension NSImage
-    {
-		var cgImage: CGImage?
-        {
+	extension NSImage {
+		var cgImage: CGImage? {
             return self.cgImage(forProposedRect: nil, context: nil, hints: nil)
 		}
 	}
 
-	extension NSTouch
-    {
+	extension NSTouch {
 		/** Touch locations on OS X are relative to the trackpad, whereas on iOS they are actually *on* the view. */
-		func locationInView(view: NSView) -> NSPoint
-        {
+		func locationInView(view: NSView) -> NSPoint {
 			let n = self.normalizedPosition
 			let b = view.bounds
 			return NSPoint(x: b.origin.x + b.size.width * n.x, y: b.origin.y + b.size.height * n.y)
 		}
 	}
 
-	extension NSScrollView
-    {
+	extension NSScrollView {
 		var scrollEnabled: Bool {
             get {
                 return true
@@ -515,8 +418,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
     }
     
     // FIXME:
-    extension NSString
-    {
+    extension NSString {
         // iOS: size(attributes: ...), OSX: size(withAttributes: ...)
         // Both are translated into sizeWithAttributes: on ObjC. So conflict...
 //        func size(attributes attrs: [NSAttributedStringKey : Any]? = nil) -> NSSize
@@ -525,33 +427,28 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 //        }
     }
 
-	func NSUIGraphicsGetCurrentContext() -> CGContext?
-    {
+	func NSUIGraphicsGetCurrentContext() -> CGContext? {
         return NSGraphicsContext.current?.cgContext
 	}
 
-	func NSUIGraphicsPushContext(_ context: CGContext)
-    {
+	func NSUIGraphicsPushContext(_ context: CGContext) {
         let cx = NSGraphicsContext(cgContext: context, flipped: true)
 		NSGraphicsContext.saveGraphicsState()
         NSGraphicsContext.current = cx
 	}
 
-	func NSUIGraphicsPopContext()
-    {
+	func NSUIGraphicsPopContext() {
 		NSGraphicsContext.restoreGraphicsState()
 	}
 
-	func NSUIImagePNGRepresentation(_ image: Image) -> Data?
-    {
+	func NSUIImagePNGRepresentation(_ image: Image) -> Data? {
 		image.lockFocus()
 		let rep = NSBitmapImageRep(focusedViewRect: NSMakeRect(0, 0, image.size.width, image.size.height))
 		image.unlockFocus()
 		return rep?.representation(using: .png, properties: [:])
 	}
 
-	func NSUIImageJPEGRepresentation(_ image: Image, _ quality: CGFloat = 0.9) -> Data?
-    {
+	func NSUIImageJPEGRepresentation(_ image: Image, _ quality: CGFloat = 0.9) -> Data? {
 		image.lockFocus()
 		let rep = NSBitmapImageRep(focusedViewRect: NSMakeRect(0, 0, image.size.width, image.size.height))
 		image.unlockFocus()
@@ -560,19 +457,16 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 
 	private var imageContextStack: [CGFloat] = []
 
-	func NSUIGraphicsBeginImageContextWithOptions(_ size: CGSize, _ opaque: Bool, _ scale: CGFloat)
-    {
+	func NSUIGraphicsBeginImageContextWithOptions(_ size: CGSize, _ opaque: Bool, _ scale: CGFloat) {
 		var scale = scale
-		if scale == 0.0
-        {
+		if scale == 0.0 {
 			scale = NSScreen.main?.backingScaleFactor ?? 1.0
 		}
 
 		let width = Int(size.width * scale)
 		let height = Int(size.height * scale)
 
-		if width > 0 && height > 0
-        {
+		if width > 0 && height > 0 {
 			imageContextStack.append(scale)
 
 			let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -586,16 +480,13 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 		}
 	}
 
-	func NSUIGraphicsGetImageFromCurrentImageContext() -> Image?
-    {
-		if !imageContextStack.isEmpty
-        {
+	func NSUIGraphicsGetImageFromCurrentImageContext() -> Image? {
+		if !imageContextStack.isEmpty {
 			guard let ctx = NSUIGraphicsGetCurrentContext()
                 else { return nil }
             
 			let scale = imageContextStack.last!
-			if let theCGImage = ctx.makeImage()
-            {
+			if let theCGImage = ctx.makeImage() {
                 let size = CGSize(width: CGFloat(ctx.width) / scale, height: CGFloat(ctx.height) / scale)
 				let image = NSImage(cgImage: theCGImage, size: size)
 				return image
@@ -604,17 +495,14 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 		return nil
 	}
 
-	func NSUIGraphicsEndImageContext()
-    {
-		if imageContextStack.last != nil
-        {
+	func NSUIGraphicsEndImageContext() {
+		if imageContextStack.last != nil {
 			imageContextStack.removeLast()
 			NSUIGraphicsPopContext()
 		}
 	}
 
-	func NSUIMainScreen() -> NSUIScreen?
-    {
+	func NSUIMainScreen() -> NSUIScreen? {
 		return NSUIScreen.main
 	}
     

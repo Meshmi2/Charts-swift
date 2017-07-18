@@ -11,39 +11,33 @@
 
 import Foundation
 
-open class DefaultValueFormatter: ValueFormatter
-{
+public class DefaultValueFormatter: ValueFormatter {
     public typealias Block = (
         _ value: Double,
         _ entry: ChartDataEntry,
         _ dataSetIndex: Int,
         _ viewPortHandler: ViewPortHandler?) -> String
     
-    open var block: Block?
+    public var block: Block?
     
-    open var hasAutoDecimals: Bool = false
+    public var hasAutoDecimals: Bool = false
     
-    fileprivate var _formatter: NumberFormatter?
-    open var formatter: NumberFormatter?
-    {
+    private var _formatter: NumberFormatter?
+    public var formatter: NumberFormatter? {
         get { return _formatter }
-        set
-        {
+        set {
             hasAutoDecimals = false
             _formatter = newValue
         }
     }
     
-    fileprivate var _decimals: Int?
-    open var decimals: Int?
-    {
+    private var _decimals: Int?
+    public var decimals: Int? {
         get { return _decimals }
-        set
-        {
+        set {
             _decimals = newValue
             
-            if let digits = newValue
-            {
+            if let digits = newValue {
                 self.formatter?.minimumFractionDigits = digits
                 self.formatter?.maximumFractionDigits = digits
                 self.formatter?.usesGroupingSeparator = true
@@ -51,46 +45,38 @@ open class DefaultValueFormatter: ValueFormatter
         }
     }
     
-    public init()
-    {
+    public init() {
         self.formatter = NumberFormatter()
         hasAutoDecimals = true
     }
     
-    public init(formatter: NumberFormatter)
-    {
+    public init(formatter: NumberFormatter) {
         self.formatter = formatter
     }
     
-    public init(decimals: Int)
-    {
+    public init(decimals: Int) {
         self.formatter = NumberFormatter()
         self.formatter?.usesGroupingSeparator = true
         self.decimals = decimals
         hasAutoDecimals = true
     }
     
-    public init(block: @escaping Block)
-    {        
+    public init(block: @escaping Block) {        
         self.block = block
     }
     
-    public static func with(block: @escaping Block) -> DefaultValueFormatter?
-    {
+    public static func with(block: @escaping Block) -> DefaultValueFormatter? {
         return DefaultValueFormatter(block: block)
     }
     
-    open func stringForValue(_ value: Double,
+    public func stringForValue(_ value: Double,
                              entry: ChartDataEntry,
                              dataSetIndex: Int,
-                             viewPortHandler: ViewPortHandler?) -> String
-    {
-        if block != nil
-        {
+                             viewPortHandler: ViewPortHandler?) -> String {
+        if block != nil {
             return block!(value, entry, dataSetIndex, viewPortHandler)
         }
-        else
-        {
+        else {
             return formatter?.string(from: NSNumber(floatLiteral: value)) ?? ""
         }
     }

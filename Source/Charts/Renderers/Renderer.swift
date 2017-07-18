@@ -9,8 +9,7 @@
 //  https://github.com/danielgindi/Charts
 //
 
-public protocol Renderer: class
-{
+protocol Renderer: class {
     /// the component that handles the drawing area of the chart and it's offsets
     var viewPortHandler: ViewPortHandler { get }
 }

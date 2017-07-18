@@ -12,16 +12,15 @@
 import Foundation
 import CoreGraphics
 
-open class AnimatedZoomViewJob: AnimatedViewPortJob
-{
-    internal var yAxis: YAxis?
-    internal var xAxisRange: Double = 0.0
-    internal var scaleX: CGFloat = 0.0
-    internal var scaleY: CGFloat = 0.0
-    internal var zoomOriginX: CGFloat = 0.0
-    internal var zoomOriginY: CGFloat = 0.0
-    internal var zoomCenterX: CGFloat = 0.0
-    internal var zoomCenterY: CGFloat = 0.0
+public class AnimatedZoomViewJob: AnimatedViewPortJob {
+    var yAxis: YAxis?
+    var xAxisRange: Double = 0.0
+    var scaleX: CGFloat = 0.0
+    var scaleY: CGFloat = 0.0
+    var zoomOriginX: CGFloat = 0.0
+    var zoomOriginY: CGFloat = 0.0
+    var zoomCenterX: CGFloat = 0.0
+    var zoomCenterY: CGFloat = 0.0
 
     public init(
         viewPortHandler: ViewPortHandler,
@@ -38,8 +37,7 @@ open class AnimatedZoomViewJob: AnimatedViewPortJob
         zoomOriginX: CGFloat,
         zoomOriginY: CGFloat,
         duration: TimeInterval,
-        easingOption: ChartEasingOption)
-    {
+        easingOption: ChartEasingOption) {
         super.init(viewPortHandler: viewPortHandler,
             xValue: 0.0,
             yValue: 0.0,
@@ -60,8 +58,7 @@ open class AnimatedZoomViewJob: AnimatedViewPortJob
         self.zoomOriginY = zoomOriginY
     }
     
-    internal override func animationUpdate()
-    {
+    override func animationUpdate() {
         guard
             let viewPortHandler = viewPortHandler,
             let transformer = transformer,
@@ -88,8 +85,7 @@ open class AnimatedZoomViewJob: AnimatedViewPortJob
         let _ = viewPortHandler.refresh(newMatrix: matrix, chart: view, invalidate: true)
     }
     
-    internal override func animationEnd()
-    {
+    override func animationEnd() {
         (view as? BarLineChartViewBase)?.calculateOffsets()
         view?.setNeedsDisplay()
     }

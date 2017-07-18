@@ -13,8 +13,7 @@ import Foundation
 import CoreGraphics
 
 public struct Description {
-    public init()
-    {
+    public init() {
         #if os(tvOS)
             // 23 is the smallest recommended font size on the TV
             font = Font.systemFont(ofSize: 23)

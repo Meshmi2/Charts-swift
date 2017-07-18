@@ -10,14 +10,12 @@
 //
 import Foundation
 
-open class ChevronDownShapeRenderer : ShapeRenderer
-{
-    open func renderShape(
+struct ChevronDownShapeRenderer : ShapeRenderer {
+    func renderShape(
         context: CGContext,
                 dataSet: ScatterChartDataSet,
                 point: CGPoint,
-                color: Color)
-    {
+                color: Color) {
         let shapeSize = dataSet.scatterShapeSize
         let shapeHalf = shapeSize / 2.0
         

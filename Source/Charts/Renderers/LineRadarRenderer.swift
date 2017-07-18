@@ -12,16 +12,10 @@
 import Foundation
 import CoreGraphics
 
-open class LineRadarRenderer: LineScatterCandleRadarRenderer
-{
-    public override init(animator: Animator?, viewPortHandler: ViewPortHandler)
-    {
-        super.init(animator: animator, viewPortHandler: viewPortHandler)
-    }
-    
+protocol LineRadarRenderer: LineScatterCandleRadarRenderer {}
+extension LineRadarRenderer {
     /// Draws the provided path in filled mode with the provided drawable.
-    open func drawFilledPath(context: CGContext, path: CGPath, fill: Fill, fillAlpha: CGFloat)
-    {
+    func drawFilledPath(context: CGContext, path: CGPath, fill: Fill, fillAlpha: CGFloat) {
         context.saveGState()
         context.beginPath()
         context.addPath(path)
@@ -35,8 +29,7 @@ open class LineRadarRenderer: LineScatterCandleRadarRenderer
     }
     
     /// Draws the provided path in filled mode with the provided color and alpha.
-    open func drawFilledPath(context: CGContext, path: CGPath, fillColor: Color, fillAlpha: CGFloat)
-    {
+    func drawFilledPath(context: CGContext, path: CGPath, fillColor: Color, fillAlpha: CGFloat) {
         context.saveGState()
         context.beginPath()
         context.addPath(path)

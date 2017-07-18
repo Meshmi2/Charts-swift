@@ -16,19 +16,16 @@ import CoreGraphics
     import UIKit
 #endif
 
-open class YAxisRendererRadarChart: YAxisRenderer
-{
-    fileprivate weak var chart: RadarChartView?
+class YAxisRendererRadarChart: YAxisRenderer {
+    private weak var chart: RadarChartView?
     
-    public init(viewPortHandler: ViewPortHandler, yAxis: YAxis, chart: RadarChartView?)
-    {
+    init(viewPortHandler: ViewPortHandler, yAxis: YAxis, chart: RadarChartView?) {
         super.init(viewPortHandler: viewPortHandler, yAxis: yAxis, transformer: nil)
         
         self.chart = chart
     }
     
-    open override func computeAxisValues(min yMin: Double, max yMax: Double)
-    {
+    override func computeAxisValues(min yMin: Double, max yMax: Double) {
         guard let
             axis = axis as? YAxis
             else { return }
@@ -36,8 +33,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
         let labelCount = axis.labelCount
         let range = abs(yMax - yMin)
         
-        if labelCount == 0 || range <= 0 || range.isInfinite
-        {
+        if labelCount == 0 || range <= 0 || range.isInfinite {
             axis.entries = [Double]()
             axis.centeredEntries = [Double]()
             return
@@ -49,8 +45,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
         
         // If granularity is enabled, then do not allow the interval to go below specified granularity.
         // This is used to avoid repeated values when rounding values for display.
-        if axis.isGranularityEnabled
-        {
+        if axis.isGranularityEnabled {
             interval = interval < axis.granularity ? axis.granularity : interval
         }
         
@@ -58,8 +53,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
         let intervalMagnitude = ChartUtils.roundToNextSignificant(number: pow(10.0, floor(log10(interval))))
         let intervalSigDigit = Int(interval / intervalMagnitude)
         
-        if intervalSigDigit > 5
-        {
+        if intervalSigDigit > 5 {
             // Use one order of magnitude higher, to avoid intervals like 0.9 or
             // 90
             interval = floor(10 * intervalMagnitude)
@@ -69,8 +63,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
         var n = centeringEnabled ? 1 : 0
 
         // force label count
-        if axis.isForceLabelsEnabled
-        {
+        if axis.isForceLabelsEnabled {
             let step = Double(range) / Double(labelCount - 1)
             
             // Ensure stops contains at least n elements.
@@ -79,31 +72,26 @@ open class YAxisRendererRadarChart: YAxisRenderer
             
             var v = yMin
             
-            for _ in 0 ..< labelCount
-            {
+            for _ in 0 ..< labelCount {
                 axis.entries.append(v)
                 v += step
             }
             
             n = labelCount
         }
-        else
-        {
+        else {
             // no forced count
             
             var first = interval == 0.0 ? 0.0 : ceil(yMin / interval) * interval
             
-            if centeringEnabled
-            {
+            if centeringEnabled {
                 first -= interval
             }
 
             let last = interval == 0.0 ? 0.0 : ChartUtils.nextUp(floor(yMax / interval) * interval)
             
-            if interval != 0.0
-            {
-                for _ in stride(from: first, through: last, by: interval)
-                {
+            if interval != 0.0 {
+                for _ in stride(from: first, through: last, by: interval) {
                     n += 1
                 }
             }
@@ -116,10 +104,8 @@ open class YAxisRendererRadarChart: YAxisRenderer
             
             var f = first
             var i = 0
-            while i < n
-            {
-                if f == 0.0
-                {
+            while i < n {
+                if f == 0.0 {
                     // Fix for IEEE negative zero case (Where value == -0.0, and 0.0 == -0.0)
                     f = 0.0
                 }
@@ -132,24 +118,20 @@ open class YAxisRendererRadarChart: YAxisRenderer
         }
         
         // set decimals
-        if interval < 1
-        {
+        if interval < 1 {
             axis.decimals = Int(ceil(-log10(interval)))
         }
-        else
-        {
+        else {
             axis.decimals = 0
         }
         
-        if centeringEnabled
-        {
+        if centeringEnabled {
             axis.centeredEntries.reserveCapacity(n)
             axis.centeredEntries.removeAll()
             
             let offset = (axis.entries[1] - axis.entries[0]) / 2.0
             
-            for i in 0 ..< n
-            {
+            for i in 0 ..< n {
                 axis.centeredEntries.append(axis.entries[i] + offset)
             }
         }
@@ -159,15 +141,13 @@ open class YAxisRendererRadarChart: YAxisRenderer
         axis.axisRange = abs(axis._axisMaximum - axis._axisMinimum)
     }
     
-    open override func renderAxisLabels(context: CGContext)
-    {
+    override func renderAxisLabels(context: CGContext) {
         guard let
             yAxis = axis as? YAxis,
             let chart = chart
             else { return }
         
-        if !yAxis.isEnabled || !yAxis.isDrawLabelsEnabled
-        {
+        if !yAxis.isEnabled || !yAxis.isDrawLabelsEnabled {
             return
         }
         
@@ -182,8 +162,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
         let from = yAxis.isDrawBottomYLabelEntryEnabled ? 0 : 1
         let to = yAxis.isDrawTopYLabelEntryEnabled ? yAxis.entryCount : (yAxis.entryCount - 1)
         
-        for j in stride(from: from, to: to, by: 1)
-        {
+        for j in stride(from: from, to: to, by: 1) {
             let r = CGFloat(yAxis.entries[j] - yAxis._axisMinimum) * factor
             
             let p = ChartUtils.getPosition(center: center, dist: r, angle: chart.rotationAngle)
@@ -202,8 +181,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
         }
     }
     
-    open override func renderLimitLines(context: CGContext)
-    {
+    override func renderLimitLines(context: CGContext) {
         guard
             let yAxis = axis as? YAxis,
             let chart = chart,
@@ -212,8 +190,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
         
         var limitLines = yAxis.limitLines
         
-        if limitLines.count == 0
-        {
+        if limitLines.count == 0 {
             return
         }
         
@@ -226,23 +203,19 @@ open class YAxisRendererRadarChart: YAxisRenderer
         
         let center = chart.centerOffsets
         
-        for i in 0 ..< limitLines.count
-        {
+        for i in 0 ..< limitLines.count {
             let l = limitLines[i]
             
-            if !l.isEnabled
-            {
+            if !l.isEnabled {
                 continue
             }
             
             context.setStrokeColor(l.lineColor.cgColor)
             context.setLineWidth(l.lineWidth)
-            if l.lineDashLengths != nil
-            {
+            if l.lineDashLengths != nil {
                 context.setLineDash(phase: l.lineDashPhase, lengths: l.lineDashLengths!)
             }
-            else
-            {
+            else {
                 context.setLineDash(phase: 0.0, lengths: [])
             }
             
@@ -250,16 +223,13 @@ open class YAxisRendererRadarChart: YAxisRenderer
             
             context.beginPath()
             
-            for j in 0 ..< (data.maxEntryCountSet?.count ?? 0)
-            {
+            for j in 0 ..< (data.maxEntryCountSet?.count ?? 0) {
                 let p = ChartUtils.getPosition(center: center, dist: r, angle: sliceangle * CGFloat(j) + chart.rotationAngle)
                 
-                if j == 0
-                {
+                if j == 0 {
                     context.move(to: CGPoint(x: p.x, y: p.y))
                 }
-                else
-                {
+                else {
                     context.addLine(to: CGPoint(x: p.x, y: p.y))
                 }
             }

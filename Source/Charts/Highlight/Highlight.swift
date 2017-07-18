@@ -11,39 +11,38 @@
 
 import Foundation
 
-open class Highlight
-{
+public class Highlight {
     /// the x-value of the highlighted value
-    fileprivate var _x = Double.nan
+    private var _x = Double.nan
     
     /// the y-value of the highlighted value
-    fileprivate var _y = Double.nan
+    private var _y = Double.nan
     
     /// the x-pixel of the highlight
-    fileprivate var _xPx = CGFloat.nan
+    private var _xPx = CGFloat.nan
     
     /// the y-pixel of the highlight
-    fileprivate var _yPx = CGFloat.nan
+    private var _yPx = CGFloat.nan
     
     /// the index of the data object - in case it refers to more than one
-    open var dataIndex = Int(-1)
+    public var dataIndex = Int(-1)
     
     /// the index of the dataset the highlighted value is in
-    fileprivate var _dataSetIndex = Int(0)
+    private var _dataSetIndex = Int(0)
     
     /// index which value of a stacked bar entry is highlighted
     /// 
     /// **default**: -1
-    fileprivate var _stackIndex = Int(-1)
+    private var _stackIndex = Int(-1)
     
     /// the axis the highlighted value belongs to
-    fileprivate var _axis: YAxis.AxisDependency = .left
+    private var _axis: YAxis.AxisDependency = .left
     
     /// the x-position (pixels) on which this highlight object was last drawn
-    open var drawX: CGFloat = 0.0
+    public var drawX: CGFloat = 0.0
     
     /// the y-position (pixels) on which this highlight object was last drawn
-    open var drawY: CGFloat = 0.0
+    public var drawY: CGFloat = 0.0
     
     /// - parameter x: the x-value of the highlighted value
     /// - parameter y: the y-value of the highlighted value
@@ -59,8 +58,7 @@ open class Highlight
         dataIndex: Int,
         dataSetIndex: Int,
         stackIndex: Int,
-        axis: YAxis.AxisDependency)
-    {
+        axis: YAxis.AxisDependency) {
         _x = x
         _y = y
         _xPx = xPx
@@ -83,8 +81,7 @@ open class Highlight
         xPx: CGFloat, yPx: CGFloat,
         dataSetIndex: Int,
         stackIndex: Int,
-        axis: YAxis.AxisDependency)
-    {
+        axis: YAxis.AxisDependency) {
         self.init(x: x, y: y, xPx: xPx, yPx: yPx,
                   dataIndex: 0,
                   dataSetIndex: dataSetIndex,
@@ -104,8 +101,7 @@ open class Highlight
         x: Double, y: Double,
         xPx: CGFloat, yPx: CGFloat,
         dataSetIndex: Int,
-        axis: YAxis.AxisDependency)
-    {
+        axis: YAxis.AxisDependency) {
         _x = x
         _y = y
         _xPx = xPx
@@ -117,8 +113,7 @@ open class Highlight
     /// - parameter x: the x-value of the highlighted value
     /// - parameter y: the y-value of the highlighted value
     /// - parameter dataSetIndex: the index of the DataSet the highlighted value belongs to
-    public init(x: Double, y: Double, dataSetIndex: Int)
-    {
+    public init(x: Double, y: Double, dataSetIndex: Int) {
         _x = x
         _y = y
         _dataSetIndex = dataSetIndex
@@ -127,48 +122,43 @@ open class Highlight
     /// - parameter x: the x-value of the highlighted value
     /// - parameter dataSetIndex: the index of the DataSet the highlighted value belongs to
     /// - parameter stackIndex: references which value of a stacked-bar entry has been selected
-    public convenience init(x: Double, dataSetIndex: Int, stackIndex: Int)
-    {
+    public convenience init(x: Double, dataSetIndex: Int, stackIndex: Int) {
         self.init(x: x, y: Double.nan, dataSetIndex: dataSetIndex)
         _stackIndex = stackIndex
     }
     
-    open var x: Double { return _x }
-    open var y: Double { return _y }
-    open var xPx: CGFloat { return _xPx }
-    open var yPx: CGFloat { return _yPx }
-    open var dataSetIndex: Int { return _dataSetIndex }
-    open var stackIndex: Int { return _stackIndex }
-    open var axis: YAxis.AxisDependency { return _axis }
+    public var x: Double { return _x }
+    public var y: Double { return _y }
+    public var xPx: CGFloat { return _xPx }
+    public var yPx: CGFloat { return _yPx }
+    public var dataSetIndex: Int { return _dataSetIndex }
+    public var stackIndex: Int { return _stackIndex }
+    public var axis: YAxis.AxisDependency { return _axis }
     
-    open var isStacked: Bool { return _stackIndex >= 0 }
+    public var isStacked: Bool { return _stackIndex >= 0 }
     
     /// Sets the x- and y-position (pixels) where this highlight was last drawn.
-    open func setDraw(x: CGFloat, y: CGFloat)
-    {
+    public func setDraw(x: CGFloat, y: CGFloat) {
         self.drawX = x
         self.drawY = y
     }
     
     /// Sets the x- and y-position (pixels) where this highlight was last drawn.
-    open func setDraw(pt: CGPoint)
-    {
+    public func setDraw(pt: CGPoint) {
         self.drawX = pt.x
         self.drawY = pt.y
     }
     
     // MARK
     
-    open var description: String
-    {
+    public var description: String {
         return "Highlight, x: \(_x), y: \(_y), dataIndex (combined charts): \(dataIndex), dataSetIndex: \(_dataSetIndex), stackIndex (only stacked barentry): \(_stackIndex)"
     }
     
 }
 
 extension Highlight: Equatable {
-    open static func ==(lhs: Highlight, rhs: Highlight) -> Bool
-    {
+    open static func ==(lhs: Highlight, rhs: Highlight) -> Bool {
         return lhs._x == rhs._x
             && lhs._y == rhs._y
             && lhs.dataIndex == rhs.dataIndex

@@ -12,8 +12,7 @@
 import Foundation
 import CoreGraphics
 
-public protocol IHighlighter
-{
+public protocol IHighlighter {
     /// - returns: A Highlight object corresponding to the given x- and y- touch positions in pixels.
     /// - parameter x:
     /// - parameter y:

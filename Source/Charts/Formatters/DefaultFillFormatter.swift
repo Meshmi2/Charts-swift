@@ -17,8 +17,7 @@ import CoreGraphics
 #endif
 
 /// Default formatter that calculates the position of the filled line.
-public struct DefaultFillFormatter: FillFormatter
-{
+public struct DefaultFillFormatter: FillFormatter {
     public typealias Block = (
         _ dataSet: LineChartDataSet,
         _ dataProvider: LineChartDataProvider) -> CGFloat
@@ -33,41 +32,31 @@ public struct DefaultFillFormatter: FillFormatter
     
     public func getFillLinePosition(
         dataSet: LineChartDataSet,
-        dataProvider: LineChartDataProvider) -> CGFloat
-    {
-        if block != nil
-        {
+        dataProvider: LineChartDataProvider) -> CGFloat {
+        if block != nil {
             return block!(dataSet, dataProvider)
         }
-        else
-        {
+        else {
             var fillMin = CGFloat(0.0)
             
-            if dataSet.yMax > 0.0 && dataSet.yMin < 0.0
-            {
+            if dataSet.yMax > 0.0 && dataSet.yMin < 0.0 {
                 fillMin = 0.0
             }
-            else
-            {
-                if let data = dataProvider.data
-                {
+            else {
+                if let data = dataProvider.data {
                     var max: Double, min: Double
                     
-                    if data.yMax > 0.0
-                    {
+                    if data.yMax > 0.0 {
                         max = 0.0
                     }
-                    else
-                    {
+                    else {
                         max = dataProvider.chartYMax
                     }
                     
-                    if data.yMin < 0.0
-                    {
+                    if data.yMin < 0.0 {
                         min = 0.0
                     }
-                    else
-                    {
+                    else {
                         min = dataProvider.chartYMin
                     }
                     

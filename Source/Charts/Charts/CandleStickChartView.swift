@@ -13,10 +13,8 @@ import Foundation
 import CoreGraphics
 
 /// Financial chart type that draws candle-sticks.
-open class CandleStickChartView: BarLineChartViewBase, CandleChartDataProvider
-{
-    internal override func initialize()
-    {
+public class CandleStickChartView: BarLineChartViewBase, CandleChartDataProvider {
+    override func initialize() {
         super.initialize()
         
         renderer = CandleStickChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: viewPortHandler)
@@ -27,8 +25,7 @@ open class CandleStickChartView: BarLineChartViewBase, CandleChartDataProvider
     
     // MARK: - CandleChartDataProvider
     
-    open var candleData: CandleChartData?
-    {
+    public var candleData: CandleChartData? {
         return _data as? CandleChartData
     }
 }

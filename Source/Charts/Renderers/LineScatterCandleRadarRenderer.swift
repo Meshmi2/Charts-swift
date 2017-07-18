@@ -12,18 +12,16 @@
 import Foundation
 import CoreGraphics
 
-open class LineScatterCandleRadarRenderer: BarLineScatterCandleBubbleRenderer
-{    
+protocol LineScatterCandleRadarRenderer: BarLineScatterCandleBubbleRenderer {}
+extension LineScatterCandleRadarRenderer {
     /// Draws vertical & horizontal highlight-lines if enabled.
     /// :param: context
     /// :param: points
     /// :param: horizontal
     /// :param: vertical
-    open func drawHighlightLines(context: CGContext, point: CGPoint, set: LineScatterCandleRadarChartDataSet)
-    {
+    func drawHighlightLines(context: CGContext, point: CGPoint, set: LineScatterCandleRadarChartDataSet) {
         // draw vertical highlight lines
-        if set.isVerticalHighlightIndicatorEnabled
-        {
+        if set.isVerticalHighlightIndicatorEnabled {
             context.beginPath()
             context.move(to: CGPoint(x: point.x, y: viewPortHandler.contentTop))
             context.addLine(to: CGPoint(x: point.x, y: viewPortHandler.contentBottom))
@@ -31,8 +29,7 @@ open class LineScatterCandleRadarRenderer: BarLineScatterCandleBubbleRenderer
         }
         
         // draw horizontal highlight lines
-        if set.isHorizontalHighlightIndicatorEnabled
-        {
+        if set.isHorizontalHighlightIndicatorEnabled {
             context.beginPath()
             context.move(to: CGPoint(x: viewPortHandler.contentLeft, y: point.y))
             context.addLine(to: CGPoint(x: viewPortHandler.contentRight, y: point.y))

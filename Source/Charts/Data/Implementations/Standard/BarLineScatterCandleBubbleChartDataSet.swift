@@ -24,8 +24,7 @@ import CoreGraphics
 //    var highlightLineDashLengths: [CGFloat]? { get set }
 //}
 
-open class BarLineScatterCandleBubbleChartDataSet: ChartDataSet
-{
+public class BarLineScatterCandleBubbleChartDataSet: ChartDataSet {
     // MARK: - Data functions and accessors
     public required init(arrayLiteral elements: ChartDataEntry...) {
         super.init(values: elements)
@@ -41,8 +40,8 @@ open class BarLineScatterCandleBubbleChartDataSet: ChartDataSet
     
     // MARK: - Styling functions and accessors
     
-    open var highlightColor = Color(red: 255.0/255.0, green: 187.0/255.0, blue: 115.0/255.0, alpha: 1.0)
-    open var highlightLineWidth = CGFloat(0.5)
-    open var highlightLineDashPhase = CGFloat(0.0)
-    open var highlightLineDashLengths: [CGFloat]?
+    public var highlightColor = Color(red: 255.0/255.0, green: 187.0/255.0, blue: 115.0/255.0, alpha: 1.0)
+    public var highlightLineWidth = CGFloat(0.5)
+    public var highlightLineDashPhase = CGFloat(0.0)
+    public var highlightLineDashLengths: [CGFloat]?
 }

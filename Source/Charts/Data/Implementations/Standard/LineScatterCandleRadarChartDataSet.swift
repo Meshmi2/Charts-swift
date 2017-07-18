@@ -32,8 +32,7 @@ import Foundation
 //    func setDrawHighlightIndicators(_ enabled: Bool)
 //}
 
-open class LineScatterCandleRadarChartDataSet: BarLineScatterCandleBubbleChartDataSet
-{
+public class LineScatterCandleRadarChartDataSet: BarLineScatterCandleBubbleChartDataSet {
     public required init(arrayLiteral elements: ChartDataEntry...) {
         super.init(values: elements)
     }
@@ -52,16 +51,15 @@ open class LineScatterCandleRadarChartDataSet: BarLineScatterCandleBubbleChartDa
     
     /// Enables / disables the horizontal highlight-indicator. If disabled, the indicator is not drawn.
     /// - returns: `true` if horizontal highlight indicator lines are enabled (drawn)
-    open var isHorizontalHighlightIndicatorEnabled = true
+    public var isHorizontalHighlightIndicatorEnabled = true
     
     /// Enables / disables the vertical highlight-indicator. If disabled, the indicator is not drawn.
     /// - returns: `true` if vertical highlight indicator lines are enabled (drawn)
-    open var isVerticalHighlightIndicatorEnabled = true
+    public var isVerticalHighlightIndicatorEnabled = true
     
     /// Enables / disables both vertical and horizontal highlight-indicators.
     /// :param: enabled
-    open func setDrawHighlightIndicators(_ enabled: Bool)
-    {
+    public func setDrawHighlightIndicators(_ enabled: Bool) {
         isHorizontalHighlightIndicatorEnabled = enabled
         isVerticalHighlightIndicatorEnabled = enabled
     }

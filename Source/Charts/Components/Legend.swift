@@ -16,10 +16,8 @@ import CoreGraphics
     import UIKit
 #endif
 
-public struct Legend
-{
-    public enum Position
-    {
+public struct Legend {
+    public enum Position {
         case rightOfChart
         case rightOfChartCenter
         case rightOfChartInside
@@ -35,8 +33,7 @@ public struct Legend
         case piechartCenter
     }
     
-    public enum Form
-    {
+    public enum Form {
         /// Avoid drawing a form
         case none
         
@@ -56,28 +53,24 @@ public struct Legend
         case line
     }
     
-    public enum HorizontalAlignment
-    {
+    public enum HorizontalAlignment {
         case left
         case center
         case right
     }
     
-    public enum VerticalAlignment
-    {
+    public enum VerticalAlignment {
         case top
         case center
         case bottom
     }
     
-    public enum Orientation
-    {
+    public enum Orientation {
         case horizontal
         case vertical
     }
     
-    public enum Direction
-    {
+    public enum Direction {
         case leftToRight
         case rightToLeft
     }
@@ -151,18 +144,15 @@ public struct Legend
         self.entries = entries
     }
     
-    public func getMaximumEntrySize(withFont font: Font) -> CGSize
-    {
+    public func getMaximumEntrySize(withFont font: Font) -> CGSize {
         var maxW = CGFloat(0.0)
         var maxH = CGFloat(0.0)
         
         var maxFormSize: CGFloat = 0.0
 
-        for entry in entries
-        {
+        for entry in entries {
             let formSize = entry.formSize.isNaN ? self.formSize : entry.formSize
-            if formSize > maxFormSize
-            {
+            if formSize > maxFormSize {
                 maxFormSize = formSize
             }
             
@@ -171,12 +161,10 @@ public struct Legend
             
             let size = (label as NSString!).size(withAttributes: [NSAttributedStringKey.font: font])
             
-            if size.width > maxW
-            {
+            if size.width > maxW {
                 maxW = size.width
             }
-            if size.height > maxH
-            {
+            if size.height > maxH {
                 maxH = size.height
             }
         }
@@ -209,8 +197,7 @@ public struct Legend
     /// **default**: 0.95 (95%)
     public var maxSizePercent: CGFloat = 0.95
     
-    public mutating func calculateDimensions(labelFont: Font, viewPortHandler: ViewPortHandler)
-    {
+    public mutating func calculateDimensions(labelFont: Font, viewPortHandler: ViewPortHandler) {
         let maxEntrySize = getMaximumEntrySize(withFont: labelFont)
         let defaultFormSize = self.formSize
         let stackSpace = self.stackSpace
@@ -224,8 +211,7 @@ public struct Legend
         textWidthMax = maxEntrySize.width
         textHeightMax = maxEntrySize.height
         
-        switch orientation
-        {
+        switch orientation {
         case .vertical:
             
             var maxWidth = CGFloat(0.0)
@@ -235,36 +221,29 @@ public struct Legend
             
             var wasStacked = false
             
-            for (i,e) in entries.enumerated()
-            {
+            for (i,e) in entries.enumerated() {
                 let drawingForm = e.form != .none
                 let formSize = e.formSize.isNaN ? defaultFormSize : e.formSize
                 let label = e.label
                 
-                if !wasStacked
-                {
+                if !wasStacked {
                     width = 0.0
                 }
                 
-                if drawingForm
-                {
-                    if wasStacked
-                    {
+                if drawingForm {
+                    if wasStacked {
                         width += stackSpace
                     }
                     width += formSize
                 }
                 
-                if let label = label as NSString?
-                {
+                if let label = label as NSString? {
                     let size = label.size(withAttributes: [NSAttributedStringKey.font: labelFont])
                     
-                    if drawingForm && !wasStacked
-                    {
+                    if drawingForm && !wasStacked {
                         width += formToTextSpace
                     }
-                    else if wasStacked
-                    {
+                    else if wasStacked {
                         maxWidth = max(maxWidth, width)
                         maxHeight += labelLineHeight + yEntrySpace
                         width = 0.0
@@ -273,18 +252,15 @@ public struct Legend
                     
                     width += size.width
                     
-                    if i < entryCount - 1
-                    {
+                    if i < entryCount - 1 {
                         maxHeight += labelLineHeight + yEntrySpace
                     }
                 }
-                else
-                {
+                else {
                     wasStacked = true
                     width += formSize
                     
-                    if i < entryCount - 1
-                    {
+                    if i < entryCount - 1 {
                         width += stackSpace
                     }
                 }
@@ -302,13 +278,11 @@ public struct Legend
             let contentWidth: CGFloat = viewPortHandler.contentWidth * maxSizePercent
             
             // Prepare arrays for calculated layout
-            if calculatedLabelSizes.count != entryCount
-            {
+            if calculatedLabelSizes.count != entryCount {
                 calculatedLabelSizes = [CGSize](repeating: CGSize(), count: entryCount)
             }
             
-            if calculatedLabelBreakPoints.count != entryCount
-            {
+            if calculatedLabelBreakPoints.count != entryCount {
                 calculatedLabelBreakPoints = [Bool](repeating: false, count: entryCount)
             }
             
@@ -322,46 +296,38 @@ public struct Legend
             var requiredWidth: CGFloat = 0.0
             var stackedStartIndex: Int = -1
             
-            for i in 0 ..< entryCount
-            {
-                let e = entries[i]
+            for (i,e) in entries.enumerated() {
                 let drawingForm = e.form != .none
                 let label = e.label
                 
                 calculatedLabelBreakPoints[i] = false
                 
-                if stackedStartIndex == -1
-                {
+                if stackedStartIndex == -1 {
                     // we are not stacking, so required width is for this label only
                     requiredWidth = 0.0
                 }
-                else
-                {
+                else {
                     // add the spacing appropriate for stacked labels/forms
                     requiredWidth += stackSpace
                 }
                 
                 // grouped forms have null labels
-                if label != nil
-                {
+                if label != nil {
                     calculatedLabelSizes[i] = (label as NSString!).size(withAttributes: labelAttrs)
                     requiredWidth += drawingForm ? formToTextSpace + formSize : 0.0
                     requiredWidth += calculatedLabelSizes[i].width
                 }
-                else
-                {
+                else {
                     calculatedLabelSizes[i] = CGSize()
                     requiredWidth += drawingForm ? formSize : 0.0
                     
-                    if stackedStartIndex == -1
-                    {
+                    if stackedStartIndex == -1 {
                         // mark this index as we might want to break here later
                         stackedStartIndex = i
                     }
                 }
                 
-                if label != nil || i == entryCount - 1
-                {
+                if label != nil || i == entryCount - 1 {
                     let requiredSpacing = currentLineWidth == 0.0 ? 0.0 : xEntrySpace
                     
                     if (!wordWrapEnabled || // No word wrapping, it must fit.
@@ -371,8 +337,7 @@ public struct Legend
                         // Expand current line
                         currentLineWidth += requiredSpacing + requiredWidth
                     }
-                    else
-                    { // It doesn't fit, we need to wrap a line
+                    else { // It doesn't fit, we need to wrap a line
                         
                         // Add current line size to array
                         calculatedLineSizes.append(CGSize(width: currentLineWidth, height: labelLineHeight))
@@ -383,8 +348,7 @@ public struct Legend
                         currentLineWidth = requiredWidth
                     }
                     
-                    if i == entryCount - 1
-                    { // Add last line size to array
+                    if i == entryCount - 1 { // Add last line size to array
                         calculatedLineSizes.append(CGSize(width: currentLineWidth, height: labelLineHeight))
                         maxLineWidth = max(maxLineWidth, currentLineWidth)
                     }
@@ -408,15 +372,13 @@ public struct Legend
     /// * A nil label will start a group.
     /// This will disable the feature that automatically calculates the legend entries from the datasets.
     /// Call `resetCustom(...)` to re-enable automatic calculation (and then `notifyDataSetChanged()` is needed).
-    public mutating func setCustom(entries: [LegendEntry])
-    {
+    public mutating func setCustom(entries: [LegendEntry]) {
         self.entries = entries
         isLegendCustom = true
     }
     
     /// Calling this will disable the custom legend entries (set by `setLegend(...)`). Instead, the entries will again be calculated automatically (after `notifyDataSetChanged()` is called).
-    public mutating func resetCustom()
-    {
+    public mutating func resetCustom() {
         isLegendCustom = false
     }
     

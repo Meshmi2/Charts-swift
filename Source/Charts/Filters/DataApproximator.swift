@@ -13,11 +13,9 @@ import Foundation
 
 public struct DataApproximator {
     /// uses the douglas peuker algorithm to reduce the given arraylist of entries
-    public static func reduceWithDouglasPeuker(_ points: [CGPoint], tolerance: CGFloat) -> [CGPoint]
-    {
+    public static func reduceWithDouglasPeuker(_ points: [CGPoint], tolerance: CGFloat) -> [CGPoint] {
         // if a shape has 2 or less points it cannot be reduced
-        if tolerance <= 0 || points.count < 3
-        {
+        if tolerance <= 0 || points.count < 3 {
             return points
         }
         
@@ -36,10 +34,8 @@ public struct DataApproximator {
         
         // create a new array with series, only take the kept ones
         var reducedEntries = [CGPoint]()
-        for i in 0 ..< points.count
-        {
-            if keep[i]
-            {
+        for i in 0 ..< points.count {
+            if keep[i] {
                 reducedEntries.append(points[i])
             }
         }
@@ -58,10 +54,8 @@ public struct DataApproximator {
         tolerance: CGFloat,
         start: Int,
         end: Int,
-        keep: inout [Bool])
-    {
-        if end <= start + 1
-        {
+        keep: inout [Bool]) {
+        if end <= start + 1 {
             // recursion finished
             return
         }
@@ -71,19 +65,16 @@ public struct DataApproximator {
         
         let line = Line(pt1: points[start], pt2: points[end])
         
-        for i in start + 1 ..< end
-        {
+        for i in start + 1 ..< end {
             let distance = line.distance(toPoint: points[i])
             
-            if distance > greatestDistance
-            {
+            if distance > greatestDistance {
                 greatestDistance = distance
                 greatestIndex = i
             }
         }
         
-        if greatestDistance > tolerance
-        {
+        if greatestDistance > tolerance {
             // keep max dist point
             keep[greatestIndex] = true
             
@@ -93,8 +84,7 @@ public struct DataApproximator {
         } // else don't keep the point...
     }
     
-    private struct Line
-    {
+    private struct Line {
         var sxey: CGFloat
         var exsy: CGFloat
         
@@ -103,8 +93,7 @@ public struct DataApproximator {
         
         var length: CGFloat
         
-        init(pt1: CGPoint, pt2: CGPoint)
-        {
+        init(pt1: CGPoint, pt2: CGPoint) {
             dx = pt1.x - pt2.x
             dy = pt1.y - pt2.y
             sxey = pt1.x * pt2.y
@@ -112,8 +101,7 @@ public struct DataApproximator {
             length = sqrt(dx * dx + dy * dy)
         }
         
-        func distance(toPoint pt: CGPoint) -> CGFloat
-        {
+        func distance(toPoint pt: CGPoint) -> CGFloat {
             return abs(dy * pt.x - dx * pt.y + sxey - exsy) / length
         }
     }

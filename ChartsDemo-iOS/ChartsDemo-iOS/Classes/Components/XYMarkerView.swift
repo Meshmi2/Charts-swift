@@ -9,8 +9,8 @@
 import Foundation
 import Charts
 
-open class XYMarkerView: BalloonMarker {
-    open var xAxisValueFormatter: AxisValueFormatter
+public class XYMarkerView: BalloonMarker {
+    public var xAxisValueFormatter: AxisValueFormatter
     fileprivate var yFormatter = NumberFormatter()
     
     public init(color: UIColor, font: UIFont, textColor: UIColor, insets: UIEdgeInsets,
@@ -21,7 +21,7 @@ open class XYMarkerView: BalloonMarker {
         super.init(color: color, font: font, textColor: textColor, insets: insets)
     }
     
-    open override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
+    public override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         let string = "x: "
             + xAxisValueFormatter.stringForValue(entry.x, axis: XAxis())
             + ", y: "

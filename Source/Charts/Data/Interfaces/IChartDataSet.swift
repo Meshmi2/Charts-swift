@@ -18,8 +18,7 @@ public enum RoundingMode {
     case closest
 }
 
-public protocol IChartDataSet: class, MutableCollection, RandomAccessCollection, RangeReplaceableCollection, ExpressibleByArrayLiteral
-{
+public protocol IChartDataSet: class, MutableCollection, RandomAccessCollection, RangeReplaceableCollection, ExpressibleByArrayLiteral {
     associatedtype Base: MutableCollection, RandomAccessCollection, RangeReplaceableCollection, ExpressibleByArrayLiteral where Base.Index == Int, Base.Element: ChartDataEntry
     
     // MARK: - Data functions and accessors
@@ -227,20 +226,16 @@ public extension IChartDataSet {
         calcMinMax()
     }
     
-    public func calcMinMaxX(entry e: Base.Element)
-    {
-        if e.x < xMin
-        {
+    public func calcMinMaxX(entry e: Base.Element) {
+        if e.x < xMin {
             xMin = e.x
         }
-        if e.x > xMax
-        {
+        if e.x > xMax {
             xMax = e.x
         }
     }
     
-    public func calcMinMaxY(entry e: Base.Element)
-    {
+    public func calcMinMaxY(entry e: Base.Element) {
         if e.y < yMin {
             yMin = e.y
         }
@@ -252,8 +247,7 @@ public extension IChartDataSet {
     /// Updates the min and max x and y value of this DataSet based on the given Entry.
     ///
     /// - parameter e:
-    public func calcMinMax(entry e: Base.Element)
-    {
+    public func calcMinMax(entry e: Base.Element) {
         calcMinMaxX(entry: e)
         calcMinMaxY(entry: e)
     }

@@ -37,21 +37,17 @@ import CoreGraphics
 //}
 
 
-open class RadarChartDataSet: LineRadarChartDataSet
-{
-    fileprivate func initialize()
-    {
+public class RadarChartDataSet: LineRadarChartDataSet {
+    private func initialize() {
         self.valueFont = Font.systemFont(ofSize: 13.0)
     }
     
-    public required init()
-    {
+    public required init() {
         super.init()
         initialize()
     }
     
-    public required override init(values: [ChartDataEntry], label: String)
-    {
+    public required override init(values: [ChartDataEntry], label: String) {
         super.init(values: values, label: label)
         initialize()
     }
@@ -68,19 +64,19 @@ open class RadarChartDataSet: LineRadarChartDataSet
     /// flag indicating whether highlight circle should be drawn or not
     /// **default**: false
     /// - returns: `true` if highlight circle should be drawn, `false` ifnot
-    open var isDrawHighlightCircleEnabled: Bool = false
+    public var isDrawHighlightCircleEnabled: Bool = false
         
-    open var highlightCircleFillColor: Color? = Color.white
+    public var highlightCircleFillColor: Color? = Color.white
     
     /// The stroke color for highlight circle.
     /// If `nil`, the color of the dataset is taken.
-    open var highlightCircleStrokeColor: Color?
+    public var highlightCircleStrokeColor: Color?
     
-    open var highlightCircleStrokeAlpha: CGFloat = 0.3
+    public var highlightCircleStrokeAlpha: CGFloat = 0.3
     
-    open var highlightCircleInnerRadius: CGFloat = 3.0
+    public var highlightCircleInnerRadius: CGFloat = 3.0
     
-    open var highlightCircleOuterRadius: CGFloat = 4.0
+    public var highlightCircleOuterRadius: CGFloat = 4.0
     
-    open var highlightCircleStrokeWidth: CGFloat = 2.0
+    public var highlightCircleStrokeWidth: CGFloat = 2.0
 }

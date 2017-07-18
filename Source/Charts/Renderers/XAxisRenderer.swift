@@ -16,33 +16,26 @@ import CoreGraphics
     import UIKit
 #endif
 
-open class XAxisRenderer: AxisRendererBase
-{
-    public init(viewPortHandler: ViewPortHandler, xAxis: XAxis, transformer: Transformer?)
-    {
+class XAxisRenderer: AxisRenderer {
+    public init(viewPortHandler: ViewPortHandler, xAxis: XAxis, transformer: Transformer?) {
         super.init(viewPortHandler: viewPortHandler, transformer: transformer, axis: xAxis)
     }
     
-    open override func computeAxis(min: Double, max: Double, inverted: Bool)
-    {
+    public override func computeAxis(min: Double, max: Double, inverted: Bool) {
         var min = min, max = max
         
-        if let transformer = self.transformer
-        {
+        if let transformer = self.transformer {
             // calculate the starting and entry point of the y-labels (depending on
             // zoom / contentrect bounds)
-            if viewPortHandler.contentWidth > 10 && !viewPortHandler.isFullyZoomedOutX
-            {
+            if viewPortHandler.contentWidth > 10 && !viewPortHandler.isFullyZoomedOutX {
                 let p1 = transformer.valueForTouchPoint(CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop))
                 let p2 = transformer.valueForTouchPoint(CGPoint(x: viewPortHandler.contentRight, y: viewPortHandler.contentTop))
                 
-                if inverted
-                {
+                if inverted {
                     min = Double(p2.x)
                     max = Double(p1.x)
                 }
-                else
-                {
+                else {
                     min = Double(p1.x)
                     max = Double(p2.x)
                 }
@@ -52,15 +45,13 @@ open class XAxisRenderer: AxisRendererBase
         computeAxisValues(min: min, max: max)
     }
     
-    open override func computeAxisValues(min: Double, max: Double)
-    {
+    public override func computeAxisValues(min: Double, max: Double) {
         super.computeAxisValues(min: min, max: max)
         
         computeSize()
     }
     
-    open func computeSize()
-    {
+    public func computeSize() {
         guard let
             xAxis = self.axis as? XAxis
             else { return }
@@ -80,48 +71,39 @@ open class XAxisRenderer: AxisRendererBase
         xAxis.labelRotatedHeight = labelRotatedSize.height
     }
     
-    open override func renderAxisLabels(context: CGContext)
-    {
+    public override func renderAxisLabels(context: CGContext) {
         guard let xAxis = self.axis as? XAxis else { return }
         
-        if !xAxis.isEnabled || !xAxis.isDrawLabelsEnabled
-        {
+        if !xAxis.isEnabled || !xAxis.isDrawLabelsEnabled {
             return
         }
         
         let yOffset = xAxis.yOffset
         
-        if xAxis.labelPosition == .top
-        {
+        if xAxis.labelPosition == .top {
             drawLabels(context: context, pos: viewPortHandler.contentTop - yOffset, anchor: CGPoint(x: 0.5, y: 1.0))
         }
-        else if xAxis.labelPosition == .topInside
-        {
+        else if xAxis.labelPosition == .topInside {
             drawLabels(context: context, pos: viewPortHandler.contentTop + yOffset + xAxis.labelRotatedHeight, anchor: CGPoint(x: 0.5, y: 1.0))
         }
-        else if xAxis.labelPosition == .bottom
-        {
+        else if xAxis.labelPosition == .bottom {
             drawLabels(context: context, pos: viewPortHandler.contentBottom + yOffset, anchor: CGPoint(x: 0.5, y: 0.0))
         }
-        else if xAxis.labelPosition == .bottomInside
-        {
+        else if xAxis.labelPosition == .bottomInside {
             drawLabels(context: context, pos: viewPortHandler.contentBottom - yOffset - xAxis.labelRotatedHeight, anchor: CGPoint(x: 0.5, y: 0.0))
         }
-        else
-        { // BOTH SIDED
+        else { // BOTH SIDED
             drawLabels(context: context, pos: viewPortHandler.contentTop - yOffset, anchor: CGPoint(x: 0.5, y: 1.0))
             drawLabels(context: context, pos: viewPortHandler.contentBottom + yOffset, anchor: CGPoint(x: 0.5, y: 0.0))
         }
     }
     
-    fileprivate var _axisLineSegmentsBuffer = [CGPoint](repeating: CGPoint(), count: 2)
+    private var _axisLineSegmentsBuffer = [CGPoint](repeating: CGPoint(), count: 2)
     
-    open override func renderAxisLine(context: CGContext)
-    {
+    public override func renderAxisLine(context: CGContext) {
         guard let xAxis = self.axis as? XAxis else { return }
         
-        if !xAxis.isEnabled || !xAxis.isDrawAxisLineEnabled
-        {
+        if !xAxis.isEnabled || !xAxis.isDrawAxisLineEnabled {
             return
         }
         
@@ -129,19 +111,16 @@ open class XAxisRenderer: AxisRendererBase
         
         context.setStrokeColor(xAxis.axisLineColor.cgColor)
         context.setLineWidth(xAxis.axisLineWidth)
-        if xAxis.axisLineDashLengths != nil
-        {
+        if xAxis.axisLineDashLengths != nil {
             context.setLineDash(phase: xAxis.axisLineDashPhase, lengths: xAxis.axisLineDashLengths)
         }
-        else
-        {
+        else {
             context.setLineDash(phase: 0.0, lengths: [])
         }
         
         if xAxis.labelPosition == .top
             || xAxis.labelPosition == .topInside
-            || xAxis.labelPosition == .bothSided
-        {
+            || xAxis.labelPosition == .bothSided {
             _axisLineSegmentsBuffer[0].x = viewPortHandler.contentLeft
             _axisLineSegmentsBuffer[0].y = viewPortHandler.contentTop
             _axisLineSegmentsBuffer[1].x = viewPortHandler.contentRight
@@ -151,8 +130,7 @@ open class XAxisRenderer: AxisRendererBase
         
         if xAxis.labelPosition == .bottom
             || xAxis.labelPosition == .bottomInside
-            || xAxis.labelPosition == .bothSided
-        {
+            || xAxis.labelPosition == .bothSided {
             _axisLineSegmentsBuffer[0].x = viewPortHandler.contentLeft
             _axisLineSegmentsBuffer[0].y = viewPortHandler.contentBottom
             _axisLineSegmentsBuffer[1].x = viewPortHandler.contentRight
@@ -164,8 +142,7 @@ open class XAxisRenderer: AxisRendererBase
     }
     
     /// draws the x-labels on the specified y-position
-    open func drawLabels(context: CGContext, pos: CGFloat, anchor: CGPoint)
-    {
+    public func drawLabels(context: CGContext, pos: CGFloat, anchor: CGPoint) {
         guard
             let xAxis = self.axis as? XAxis,
             let transformer = self.transformer
@@ -187,48 +164,39 @@ open class XAxisRenderer: AxisRendererBase
         
         var labelMaxSize = CGSize()
         
-        if xAxis.isWordWrapEnabled
-        {
+        if xAxis.isWordWrapEnabled {
             labelMaxSize.width = xAxis.wordWrapWidthPercent * valueToPixelMatrix.a
         }
         
         let entries = xAxis.entries
         
-        for i in stride(from: 0, to: entries.count, by: 1)
-        {
-            if centeringEnabled
-            {
+        for i in stride(from: 0, to: entries.count, by: 1) {
+            if centeringEnabled {
                 position.x = CGFloat(xAxis.centeredEntries[i])
             }
-            else
-            {
+            else {
                 position.x = CGFloat(entries[i])
             }
             
             position.y = 0.0
             position = position.applying(valueToPixelMatrix)
             
-            if viewPortHandler.isInBoundsX(position.x)
-            {
+            if viewPortHandler.isInBoundsX(position.x) {
                 let label = xAxis.valueFormatter?.stringForValue(xAxis.entries[i], axis: xAxis) ?? ""
 
                 let labelns = label as NSString
                 
-                if xAxis.isAvoidFirstLastClippingEnabled
-                {
+                if xAxis.isAvoidFirstLastClippingEnabled {
                     // avoid clipping of the last
-                    if i == xAxis.entryCount - 1 && xAxis.entryCount > 1
-                    {
+                    if i == xAxis.entryCount - 1 && xAxis.entryCount > 1 {
                         let width = labelns.boundingRect(with: labelMaxSize, options: .usesLineFragmentOrigin, attributes: labelAttrs, context: nil).size.width
                         
                         if width > viewPortHandler.offsetRight * 2.0
-                            && position.x + width > viewPortHandler.chartWidth
-                        {
+                            && position.x + width > viewPortHandler.chartWidth {
                             position.x -= width / 2.0
                         }
                     }
-                    else if i == 0
-                    { // avoid clipping of the first
+                    else if i == 0 { // avoid clipping of the first
                         let width = labelns.boundingRect(with: labelMaxSize, options: .usesLineFragmentOrigin, attributes: labelAttrs, context: nil).size.width
                         position.x += width / 2.0
                     }
@@ -246,7 +214,7 @@ open class XAxisRenderer: AxisRendererBase
         }
     }
     
-    open func drawLabel(
+    public func drawLabel(
         context: CGContext,
         formattedLabel: String,
         x: CGFloat,
@@ -254,8 +222,7 @@ open class XAxisRenderer: AxisRendererBase
         attributes: [NSAttributedStringKey : AnyObject],
         constrainedToSize: CGSize,
         anchor: CGPoint,
-        angleRadians: CGFloat)
-    {
+        angleRadians: CGFloat) {
         ChartUtils.drawMultilineText(
             context: context,
             text: formattedLabel,
@@ -266,15 +233,13 @@ open class XAxisRenderer: AxisRendererBase
             angleRadians: angleRadians)
     }
     
-    open override func renderGridLines(context: CGContext)
-    {
+    public override func renderGridLines(context: CGContext) {
         guard
             let xAxis = self.axis as? XAxis,
             let transformer = self.transformer
             else { return }
         
-        if !xAxis.isDrawGridLinesEnabled || !xAxis.isEnabled
-        {
+        if !xAxis.isDrawGridLinesEnabled || !xAxis.isEnabled {
             return
         }
         
@@ -287,12 +252,10 @@ open class XAxisRenderer: AxisRendererBase
         context.setLineWidth(xAxis.gridLineWidth)
         context.setLineCap(xAxis.gridLineCap)
         
-        if xAxis.gridLineDashLengths != nil
-        {
+        if xAxis.gridLineDashLengths != nil {
             context.setLineDash(phase: xAxis.gridLineDashPhase, lengths: xAxis.gridLineDashLengths)
         }
-        else
-        {
+        else {
             context.setLineDash(phase: 0.0, lengths: [])
         }
         
@@ -302,8 +265,7 @@ open class XAxisRenderer: AxisRendererBase
         
         let entries = xAxis.entries
         
-        for i in stride(from: 0, to: entries.count, by: 1)
-        {
+        for i in stride(from: 0, to: entries.count, by: 1) {
             position.x = CGFloat(entries[i])
             position.y = position.x
             position = position.applying(valueToPixelMatrix)
@@ -312,8 +274,7 @@ open class XAxisRenderer: AxisRendererBase
         }
     }
     
-    open var gridClippingRect: CGRect
-    {
+    public var gridClippingRect: CGRect {
         var contentRect = viewPortHandler.contentRect
         let dx = self.axis.gridLineWidth
         contentRect.origin.x -= dx / 2.0
@@ -321,11 +282,9 @@ open class XAxisRenderer: AxisRendererBase
         return contentRect
     }
     
-    open func drawGridLine(context: CGContext, x: CGFloat, y: CGFloat)
-    {
+    public func drawGridLine(context: CGContext, x: CGFloat, y: CGFloat) {
         if x >= viewPortHandler.offsetLeft
-            && x <= viewPortHandler.chartWidth
-        {
+            && x <= viewPortHandler.chartWidth {
             context.beginPath()
             context.move(to: CGPoint(x: x, y: viewPortHandler.contentTop))
             context.addLine(to: CGPoint(x: x, y: viewPortHandler.contentBottom))
@@ -333,8 +292,7 @@ open class XAxisRenderer: AxisRendererBase
         }
     }
     
-    open override func renderLimitLines(context: CGContext)
-    {
+    public override func renderLimitLines(context: CGContext) {
         guard
             let xAxis = self.axis as? XAxis,
             let transformer = self.transformer
@@ -342,8 +300,7 @@ open class XAxisRenderer: AxisRendererBase
         
         var limitLines = xAxis.limitLines
         
-        if limitLines.count == 0
-        {
+        if limitLines.count == 0 {
             return
         }
         
@@ -351,12 +308,10 @@ open class XAxisRenderer: AxisRendererBase
         
         var position = CGPoint(x: 0.0, y: 0.0)
         
-        for i in 0 ..< limitLines.count
-        {
+        for i in 0 ..< limitLines.count {
             let l = limitLines[i]
             
-            if !l.isEnabled
-            {
+            if !l.isEnabled {
                 continue
             }
             
@@ -377,39 +332,33 @@ open class XAxisRenderer: AxisRendererBase
         }
     }
     
-    open func renderLimitLineLine(context: CGContext, limitLine: ChartLimitLine, position: CGPoint)
-    {
+    public func renderLimitLineLine(context: CGContext, limitLine: ChartLimitLine, position: CGPoint) {
         context.beginPath()
         context.move(to: CGPoint(x: position.x, y: viewPortHandler.contentTop))
         context.addLine(to: CGPoint(x: position.x, y: viewPortHandler.contentBottom))
         
         context.setStrokeColor(limitLine.lineColor.cgColor)
         context.setLineWidth(limitLine.lineWidth)
-        if limitLine.lineDashLengths != nil
-        {
+        if limitLine.lineDashLengths != nil {
             context.setLineDash(phase: limitLine.lineDashPhase, lengths: limitLine.lineDashLengths!)
         }
-        else
-        {
+        else {
             context.setLineDash(phase: 0.0, lengths: [])
         }
         
         context.strokePath()
     }
     
-    open func renderLimitLineLabel(context: CGContext, limitLine: ChartLimitLine, position: CGPoint, yOffset: CGFloat)
-    {        
+    public func renderLimitLineLabel(context: CGContext, limitLine: ChartLimitLine, position: CGPoint, yOffset: CGFloat) {
         let label = limitLine.label
         
         // if drawing the limit-value label is enabled
-        if limitLine.drawLabelEnabled && label.characters.count > 0
-        {
+        if limitLine.drawLabelEnabled && label.characters.count > 0 {
             let labelLineHeight = limitLine.valueFont.lineHeight
             
             let xOffset: CGFloat = limitLine.lineWidth + limitLine.xOffset
             
-            if limitLine.labelPosition == .rightTop
-            {
+            if limitLine.labelPosition == .rightTop {
                 ChartUtils.drawText(context: context,
                     text: label,
                     point: CGPoint(
@@ -419,8 +368,7 @@ open class XAxisRenderer: AxisRendererBase
                     attributes: [.font : limitLine.valueFont,
                                  .foregroundColor : limitLine.valueTextColor])
             }
-            else if limitLine.labelPosition == .rightBottom
-            {
+            else if limitLine.labelPosition == .rightBottom {
                 ChartUtils.drawText(context: context,
                     text: label,
                     point: CGPoint(
@@ -430,8 +378,7 @@ open class XAxisRenderer: AxisRendererBase
                     attributes: [.font: limitLine.valueFont,
                                  .foregroundColor: limitLine.valueTextColor])
             }
-            else if limitLine.labelPosition == .leftTop
-            {
+            else if limitLine.labelPosition == .leftTop {
                 ChartUtils.drawText(context: context,
                     text: label,
                     point: CGPoint(
@@ -441,8 +388,7 @@ open class XAxisRenderer: AxisRendererBase
                     attributes: [.font: limitLine.valueFont,
                                  .foregroundColor: limitLine.valueTextColor])
             }
-            else
-            {
+            else {
                 ChartUtils.drawText(context: context,
                     text: label,
                     point: CGPoint(

@@ -9,13 +9,13 @@
 import Foundation
 import Charts
 
-open class BalloonMarker: MarkerImage {
-    open var color: UIColor
-    open var arrowSize = CGSize(width: 15, height: 11)
-    open var font: UIFont
-    open var textColor: UIColor
-    open var insets: UIEdgeInsets
-    open var minimumSize = CGSize()
+public class BalloonMarker: MarkerImage {
+    public var color: UIColor
+    public var arrowSize = CGSize(width: 15, height: 11)
+    public var font: UIFont
+    public var textColor: UIColor
+    public var insets: UIEdgeInsets
+    public var minimumSize = CGSize()
     
     fileprivate var label: String?
     fileprivate var _labelSize: CGSize = CGSize()
@@ -33,7 +33,7 @@ open class BalloonMarker: MarkerImage {
         super.init()
     }
     
-    open override func offsetForDrawing(atPoint point: CGPoint) -> CGPoint {
+    public override func offsetForDrawing(atPoint point: CGPoint) -> CGPoint {
         let size = self.size
         var point = point
         point.x -= size.width / 2.0
@@ -41,7 +41,7 @@ open class BalloonMarker: MarkerImage {
         return super.offsetForDrawing(atPoint: point)
     }
     
-    open override func draw(context: CGContext, point: CGPoint) {
+    public override func draw(context: CGContext, point: CGPoint) {
         guard let label = label else { return }
         
         let offset = self.offsetForDrawing(atPoint: point)
@@ -97,11 +97,11 @@ open class BalloonMarker: MarkerImage {
         context.restoreGState()
     }
     
-    open override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
+    public override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         setLabel(String(entry.y))
     }
     
-    open func setLabel(_ newLabel: String) {
+    public func setLabel(_ newLabel: String) {
         label = newLabel
         
         _drawAttributes.removeAll()

@@ -274,8 +274,7 @@ class DemoBaseViewController: UIViewController, ChartViewDelegate {
 
 extension DemoBaseViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        if optionsTableView != nil
-        {
+        if optionsTableView != nil {
             return 1
         }
         
@@ -284,8 +283,7 @@ extension DemoBaseViewController: UITableViewDelegate, UITableViewDataSource {
     
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if optionsTableView != nil
-        {
+        if optionsTableView != nil {
             return options.count
         }
         
@@ -294,8 +292,7 @@ extension DemoBaseViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if optionsTableView != nil
-        {
+        if optionsTableView != nil {
             return 40.0;
         }
         
@@ -318,8 +315,7 @@ extension DemoBaseViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if optionsTableView != nil
-        {
+        if optionsTableView != nil {
             tableView.deselectRow(at: indexPath, animated: true)
             
             optionsTableView?.removeFromSuperview()

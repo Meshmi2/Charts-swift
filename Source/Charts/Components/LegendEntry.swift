@@ -16,8 +16,7 @@ import CoreGraphics
     import UIKit
 #endif
 
-public struct LegendEntry
-{
+public struct LegendEntry {
     // TODO: Revaluate need for this initializer
     public init() {
         
@@ -36,8 +35,7 @@ public struct LegendEntry
                 formLineWidth: CGFloat,
                 formLineDashPhase: CGFloat,
                 formLineDashLengths: [CGFloat]?,
-                formColor: Color?)
-    {
+                formColor: Color?) {
         self.label = label
         self.form = form
         self.formSize = formSize

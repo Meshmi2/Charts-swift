@@ -12,15 +12,12 @@
 import Foundation
 import CoreGraphics
 
-open class ScatterChartData: BarLineScatterCandleBubbleChartData
-{
+public class ScatterChartData: BarLineScatterCandleBubbleChartData {
     /// - returns: The maximum shape-size across all DataSets.
-    open func getGreatestShapeSize() -> CGFloat
-    {
+    public func getGreatestShapeSize() -> CGFloat {
         var max = CGFloat(0.0)
         
-        for set in _dataSets
-        {
+        for set in _dataSets {
             guard let scatterDataSet = set as? ScatterChartDataSet else {
                 print("ScatterChartData: Found a DataSet which is not a ScatterChartDataSet", terminator: "\n")
                 return max

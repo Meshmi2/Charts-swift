@@ -12,34 +12,35 @@
 import Foundation
 import CoreGraphics
 
-open class CombinedChartRenderer: DataRenderer
-{
-    open weak var chart: CombinedChartView?
+final class CombinedChartRenderer: DataRenderer {
+    var viewPortHandler: ViewPortHandler
+    
+    var animator: Animator?
+    
+    weak var chart: CombinedChartView?
     
     /// if set to true, all values are drawn above their bars, instead of below their top
     /// - returns: `true` if drawing values above bars is enabled, `false` ifnot
-    open var isDrawValueAboveBarEnabled = true
+    var isDrawValueAboveBarEnabled = true
     
     /// if set to true, a grey area is drawn behind each bar that indicates the maximum value
     /// - returns: `true` if drawing shadows (maxvalue) for each bar is enabled, `false` ifnot
-    open var isDrawBarShadowEnabled = false    
+    var isDrawBarShadowEnabled = false
     
-    internal var _renderers = [DataRenderer]()
+    var _renderers = [DataRenderer]()
     
-    internal var _drawOrder: [CombinedChartView.DrawOrder] = [.bar, .bubble, .line, .candle, .scatter]
+    var _drawOrder: [CombinedChartView.DrawOrder] = [.bar, .bubble, .line, .candle, .scatter]
     
-    public init(chart: CombinedChartView?, animator: Animator, viewPortHandler: ViewPortHandler)
-    {
-        super.init(animator: animator, viewPortHandler: viewPortHandler)
-        
+    init(chart: CombinedChartView?, animator: Animator, viewPortHandler: ViewPortHandler) {
+        self.viewPortHandler = viewPortHandler
+        self.animator = animator
         self.chart = chart
         
         createRenderers()
     }
     
     /// Creates the renderers needed for this combined-renderer in the required order. Also takes the DrawOrder into consideration.
-    internal func createRenderers()
-    {
+    func createRenderers() {
         _renderers = [DataRenderer]()
         
         guard let
@@ -47,41 +48,34 @@ open class CombinedChartRenderer: DataRenderer
             let animator = animator
             else { return }
 
-        for order in drawOrder
-        {
-            switch (order)
-            {
+        for order in drawOrder {
+            switch (order) {
             case .bar:
-                if chart.barData !== nil
-                {
+                if chart.barData !== nil {
                     _renderers.append(BarChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
                 }
                 break
                 
             case .line:
-                if chart.lineData !== nil
-                {
+                if chart.lineData !== nil {
                     _renderers.append(LineChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
                 }
                 break
                 
             case .candle:
-                if chart.candleData !== nil
-                {
+                if chart.candleData !== nil {
                     _renderers.append(CandleStickChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
                 }
                 break
                 
             case .scatter:
-                if chart.scatterData !== nil
-                {
+                if chart.scatterData !== nil {
                     _renderers.append(ScatterChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
                 }
                 break
                 
             case .bubble:
-                if chart.bubbleData !== nil
-                {
+                if chart.bubbleData !== nil {
                     _renderers.append(BubbleChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
                 }
                 break
@@ -90,62 +84,47 @@ open class CombinedChartRenderer: DataRenderer
 
     }
     
-    open override func initBuffers()
-    {
-        for renderer in _renderers
-        {
+    func initBuffers() {
+        for renderer in _renderers {
             renderer.initBuffers()
         }
     }
     
-    open override func drawData(context: CGContext)
-    {
-        for renderer in _renderers
-        {
+    func drawData(context: CGContext) {
+        for renderer in _renderers {
             renderer.drawData(context: context)
         }
     }
     
-    open override func drawValues(context: CGContext)
-    {
-        for renderer in _renderers
-        {
+    func drawValues(context: CGContext) {
+        for renderer in _renderers {
             renderer.drawValues(context: context)
         }
     }
     
-    open override func drawExtras(context: CGContext)
-    {
-        for renderer in _renderers
-        {
+    func drawExtras(context: CGContext) {
+        for renderer in _renderers {
             renderer.drawExtras(context: context)
         }
     }
     
-    open override func drawHighlighted(context: CGContext, indices: [Highlight])
-    {
-        for renderer in _renderers
-        {
+    func drawHighlighted(context: CGContext, indices: [Highlight]) {
+        for renderer in _renderers {
             var data: ChartData?
             
-            if renderer is BarChartRenderer
-            {
+            if renderer is BarChartRenderer {
                 data = (renderer as! BarChartRenderer).dataProvider?.barData
             }
-            else if renderer is LineChartRenderer
-            {
+            else if renderer is LineChartRenderer {
                 data = (renderer as! LineChartRenderer).dataProvider?.lineData
             }
-            else if renderer is CandleStickChartRenderer
-            {
+            else if renderer is CandleStickChartRenderer {
                 data = (renderer as! CandleStickChartRenderer).dataProvider?.candleData
             }
-            else if renderer is ScatterChartRenderer
-            {
+            else if renderer is ScatterChartRenderer {
                 data = (renderer as! ScatterChartRenderer).dataProvider?.scatterData
             }
-            else if renderer is BubbleChartRenderer
-            {
+            else if renderer is BubbleChartRenderer {
                 data = (renderer as! BubbleChartRenderer).dataProvider?.bubbleData
             }
             
@@ -160,21 +139,17 @@ open class CombinedChartRenderer: DataRenderer
     }
 
     /// - returns: The sub-renderer object at the specified index.
-    open func getSubRenderer(index: Int) -> DataRenderer?
-    {
-        if index >= _renderers.count || index < 0
-        {
+    public func getSubRenderer(index: Int) -> DataRenderer? {
+        if index >= _renderers.count || index < 0 {
             return nil
         }
-        else
-        {
+        else {
             return _renderers[index]
         }
     }
 
     /// - returns: All sub-renderers.
-    open var subRenderers: [DataRenderer]
-    {
+    var subRenderers: [DataRenderer] {
         get { return _renderers }
         set { _renderers = newValue }
     }
@@ -184,14 +159,12 @@ open class CombinedChartRenderer: DataRenderer
     /// the order in which the provided data objects should be drawn.
     /// The earlier you place them in the provided array, the further they will be in the background.
     /// e.g. if you provide [DrawOrder.Bar, DrawOrder.Line], the bars will be drawn behind the lines.
-    open var drawOrder: [CombinedChartView.DrawOrder]
-    {
+    var drawOrder: [CombinedChartView.DrawOrder] {
         get {
             return _drawOrder
         }
         set {
-            if newValue.count > 0
-            {
+            if newValue.count > 0 {
                 _drawOrder = newValue
             }
         }

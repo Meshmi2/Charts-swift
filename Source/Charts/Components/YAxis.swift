@@ -20,17 +20,14 @@ import CoreGraphics
 /// Class representing the y-axis labels settings and its entries.
 /// Be aware that not all features the YLabels class provides are suitable for the RadarChart.
 /// Customizations that affect the value range of the axis need to be applied before setting data for the chart.
-open class YAxis: AxisBase
-{
-    public enum LabelPosition
-    {
+public class YAxis: AxisBase {
+    public enum LabelPosition {
         case outsideChart
         case insideChart
     }
     
     ///  Enum that specifies the axis a DataSet should be plotted against, either Left or Right.
-    public enum AxisDependency
-    {
+    public enum AxisDependency {
         case left
         case right
     }
@@ -69,31 +66,29 @@ open class YAxis: AxisBase
     public var spaceBottom = CGFloat(0.1)
     
     /// the position of the y-labels relative to the chart
-    open var labelPosition = LabelPosition.outsideChart
+    public var labelPosition = LabelPosition.outsideChart
     
     /// the side this axis object represents
-    fileprivate var _axisDependency = AxisDependency.left
+    private var _axisDependency = AxisDependency.left
     
     /// the minimum width that the axis should take
     /// 
     /// **default**: 0.0
-    open var minWidth = CGFloat(0)
+    public var minWidth = CGFloat(0)
     
     /// the maximum width that the axis can take.
     /// use Infinity for disabling the maximum.
     /// 
     /// **default**: CGFloat.infinity
-    open var maxWidth = CGFloat.infinity
+    public var maxWidth = CGFloat.infinity
     
-    public override init()
-    {
+    public override init() {
         super.init()
         
         self.yOffset = 0.0
     }
     
-    public init(position: AxisDependency)
-    {
+    public init(position: AxisDependency) {
         super.init()
         
         _axisDependency = position
@@ -101,13 +96,11 @@ open class YAxis: AxisBase
         self.yOffset = 0.0
     }
     
-    open var axisDependency: AxisDependency
-    {
+    public var axisDependency: AxisDependency {
         return _axisDependency
     }
     
-    open func requiredSize() -> CGSize
-    {
+    public func requiredSize() -> CGSize {
         let label = getLongestLabel() as NSString
         var size = label.size(withAttributes: [NSAttributedStringKey.font: labelFont])
         size.width += xOffset * 2.0
@@ -116,26 +109,21 @@ open class YAxis: AxisBase
         return size
     }
     
-    open func getRequiredHeightSpace() -> CGFloat
-    {
+    public func getRequiredHeightSpace() -> CGFloat {
         return requiredSize().height
     }
     
     /// - returns: `true` if this axis needs horizontal offset, `false` ifno offset is needed.
-    open var needsOffset: Bool
-    {
-        if isEnabled && isDrawLabelsEnabled && labelPosition == .outsideChart
-        {
+    public var needsOffset: Bool {
+        if isEnabled && isDrawLabelsEnabled && labelPosition == .outsideChart {
             return true
         }
-        else
-        {
+        else {
             return false
         }
     }
         
-    open override func calculate(min dataMin: Double, max dataMax: Double)
-    {
+    public override func calculate(min dataMin: Double, max dataMax: Double) {
         // if custom, use value as is, else use data value
         var min = _customAxisMin ? _axisMinimum : dataMin
         var max = _customAxisMax ? _axisMaximum : dataMax
@@ -144,22 +132,19 @@ open class YAxis: AxisBase
         let range = abs(max - min)
         
         // in case all values are equal
-        if range == 0.0
-        {
+        if range == 0.0 {
             max = max + 1.0
             min = min - 1.0
         }
         
         // bottom-space only effects non-custom min
-        if !_customAxisMin
-        {
+        if !_customAxisMin {
             let bottomSpace = range * Double(spaceBottom)
             _axisMinimum = (min - bottomSpace)
         }
         
         // top-space only effects non-custom max
-        if !_customAxisMax
-        {
+        if !_customAxisMax {
             let topSpace = range * Double(spaceTop)
             _axisMaximum = (max + topSpace)
         }

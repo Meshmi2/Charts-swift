@@ -11,22 +11,20 @@
 
 import Foundation
 
-open class CandleChartDataEntry: ChartDataEntry
-{
+public class CandleChartDataEntry: ChartDataEntry {
     /// shadow-high value
-    open var high = Double(0.0)
+    public var high = Double(0.0)
     
     /// shadow-low value
-    open var low = Double(0.0)
+    public var low = Double(0.0)
     
     /// close value
-    open var close = Double(0.0)
+    public var close = Double(0.0)
     
     /// open value
-    open var open = Double(0.0)
+    public var open = Double(0.0)
         
-    public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double)
-    {
+    public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double) {
         super.init(x: x, y: (shadowH + shadowL) / 2.0)
         
         self.high = shadowH
@@ -35,8 +33,7 @@ open class CandleChartDataEntry: ChartDataEntry
         self.close = close
     }
     
-    public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double, data: Any?)
-    {
+    public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double, data: Any?) {
         super.init(x: x, y: (shadowH + shadowL) / 2.0, data: data)
         
         self.high = shadowH
@@ -45,8 +42,7 @@ open class CandleChartDataEntry: ChartDataEntry
         self.close = close
     }
     
-    public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double, icon: Image?)
-    {
+    public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double, icon: Image?) {
         super.init(x: x, y: (shadowH + shadowL) / 2.0, icon: icon)
         
         self.high = shadowH
@@ -55,8 +51,7 @@ open class CandleChartDataEntry: ChartDataEntry
         self.close = close
     }
     
-    public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double, icon: Image?, data: Any?)
-    {
+    public init(x: Double, shadowH: Double, shadowL: Double, open: Double, close: Double, icon: Image?, data: Any?) {
         super.init(x: x, y: (shadowH + shadowL) / 2.0, icon: icon, data: data)
         
         self.high = shadowH
@@ -66,26 +61,21 @@ open class CandleChartDataEntry: ChartDataEntry
     }
     
     /// - returns: The overall range (difference) between shadow-high and shadow-low.
-    open var shadowRange: Double
-    {
+    public var shadowRange: Double {
         return abs(high - low)
     }
     
     /// - returns: The body size (difference between open and close).
-    open var bodyRange: Double
-    {
+    public var bodyRange: Double {
         return abs(open - close)
     }
     
     /// the center value of the candle. (Middle value between high and low)
-    open override var y: Double
-    {
-        get
-        {
+    public override var y: Double {
+        get {
             return super.y
         }
-        set
-        {
+        set {
             super.y = (high + low) / 2.0
         }
     }
