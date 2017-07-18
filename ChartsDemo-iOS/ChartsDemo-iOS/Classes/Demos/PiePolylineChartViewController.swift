@@ -138,9 +138,6 @@ class PiePolylineChartViewController: DemoBaseViewController {
     
     // MARK: - Actions
     @IBAction func slidersValueChanged(_ sender: Any?) {
-        let startYear = 1980
-        let endYear = startYear + Int(sliderX.value)
-        
         sliderTextX.text = "\(Int(sliderX.value))"
         sliderTextY.text = "\(Int(sliderY.value))"
         

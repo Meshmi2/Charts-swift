@@ -15,12 +15,12 @@ import CoreGraphics
 /// Transformer class that contains all matrices and is responsible for transforming values into pixels on the screen and backwards.
 public class Transformer {
     /// matrix to map the values to the screen pixels
-    var _matrixValueToPx = CGAffineTransform.identity
+    var _matrixValueToPx: CGAffineTransform = .identity
 
     /// matrix for handling the different offsets of the chart
-    var _matrixOffset = CGAffineTransform.identity
+    var _matrixOffset: CGAffineTransform = .identity
 
-    var _viewPortHandler: ViewPortHandler
+    let _viewPortHandler: ViewPortHandler
 
     public init(viewPortHandler: ViewPortHandler) {
         _viewPortHandler = viewPortHandler
@@ -31,17 +31,17 @@ public class Transformer {
         var scaleX = (_viewPortHandler.contentWidth / deltaX)
         var scaleY = (_viewPortHandler.contentHeight / deltaY)
         
-        if CGFloat.infinity == scaleX {
+        if .infinity ~= scaleX {
             scaleX = 0.0
         }
-        if CGFloat.infinity == scaleY {
+        if .infinity ~= scaleY {
             scaleY = 0.0
         }
 
         // setup all matrices
         _matrixValueToPx = CGAffineTransform.identity
-        _matrixValueToPx = _matrixValueToPx.scaledBy(x: scaleX, y: -scaleY)
-        _matrixValueToPx = _matrixValueToPx.translatedBy(x: CGFloat(-chartXMin), y: CGFloat(-chartYMin))
+            .scaledBy(x: scaleX, y: -scaleY)
+            .translatedBy(x: CGFloat(-chartXMin), y: CGFloat(-chartYMin))
     }
 
     /// Prepares the matrix that contains all offsets.
@@ -144,9 +144,8 @@ public class Transformer {
     
     public var valueToPixelMatrix: CGAffineTransform {
         return
-            _matrixValueToPx.concatenating(_viewPortHandler.touchMatrix
-                ).concatenating(_matrixOffset
-        )
+            _matrixValueToPx.concatenating(_viewPortHandler.touchMatrix)
+                .concatenating(_matrixOffset)
     }
     
     public var pixelToValueMatrix: CGAffineTransform {

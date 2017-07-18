@@ -417,16 +417,6 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
         }
     }
     
-    // FIXME:
-    extension NSString {
-        // iOS: size(attributes: ...), OSX: size(withAttributes: ...)
-        // Both are translated into sizeWithAttributes: on ObjC. So conflict...
-//        func size(attributes attrs: [NSAttributedStringKey : Any]? = nil) -> NSSize
-//        {
-//            return size(withAttributes: attrs)
-//        }
-    }
-
 	func NSUIGraphicsGetCurrentContext() -> CGContext? {
         return NSGraphicsContext.current?.cgContext
 	}
