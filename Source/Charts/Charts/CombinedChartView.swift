@@ -67,7 +67,7 @@ public class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider 
     
     /// - returns: The Highlight object (contains x-index and DataSet index) of the selected value at the given touch point inside the CombinedChart.
     public override func getHighlightByTouchPoint(_ pt: CGPoint) -> Highlight? {
-        if _data === nil {
+        if _data == nil {
             print("Can't select by touch. No data set.")
             return nil
         }

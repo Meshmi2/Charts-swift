@@ -191,12 +191,8 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        if _data === nil {
-            return
-        }
-        
-        let optionalContext = NSUIGraphicsGetCurrentContext()
-        guard let context = optionalContext else { return }
+        guard _data != nil else { return }
+        guard let context = NSUIGraphicsGetCurrentContext() else { return }
 
         // execute all drawing commands
         drawGridBackground(context: context)
@@ -501,16 +497,14 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     private var _decelerationVelocity = CGPoint()
     
     @objc private func tapGestureRecognized(_ recognizer: TapGestureRecognizer) {
-        if _data === nil {
-            return
-        }
+        guard _data != nil else { return }
         
         if recognizer.state == GestureRecognizerState.ended {
             if !self.isHighlightPerTapEnabled { return }
             
             let h = getHighlightByTouchPoint(recognizer.location(in: self))
             
-            if h === nil || h == self.lastHighlighted {
+            if h == nil || h == self.lastHighlighted {
                 self.highlightValue(nil, callDelegate: true)
                 self.lastHighlighted = nil
             }
@@ -522,12 +516,10 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     }
     
     @objc private func doubleTapGestureRecognized(_ recognizer: TapGestureRecognizer) {
-        if _data === nil {
-            return
-        }
-        
+        guard _data != nil else { return }
+
         if recognizer.state == GestureRecognizerState.ended {
-            if _data !== nil && isDoubleTapToZoomEnabled && (data?.entryCount ?? 0) > 0 {
+            if _data != nil && isDoubleTapToZoomEnabled && (data?.entryCount ?? 0) > 0 {
                 var location = recognizer.location(in: self)
                 location.x = location.x - viewPortHandler.offsetLeft
                 
@@ -548,7 +540,7 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         if recognizer.state == GestureRecognizerState.began {
             stopDeceleration()
             
-            if _data !== nil &&
+            if _data != nil &&
                 (isPinchZoomEnabled || isScaleXEnabled || isScaleYEnabled) {
                 _isScaling = true
                 
@@ -608,9 +600,7 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
                     
                     let _ = viewPortHandler.refresh(newMatrix: matrix, chart: self, invalidate: true)
                     
-                    if delegate !== nil {
-                        delegate?.chartScaled(self, scaleX: scaleX, scaleY: scaleY)
-                    }
+                    delegate?.chartScaled(self, scaleX: scaleX, scaleY: scaleY)
                 }
                 
                 recognizer.nsuiScale = 1.0
@@ -623,9 +613,8 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         if recognizer.state == GestureRecognizerState.began && recognizer.nsuiNumberOfTouches() > 0 {
             stopDeceleration()
             
-            if _data === nil { // If we have no data, we have nothing to pan and no data to highlight
-                return
-            }
+            // If we have no data, we have nothing to pan and no data to highlight
+            guard _data != nil else { return }
             
             // If drag is enabled and we are in a position where there's something to drag:
             //  * If we're zoomed in, then obviously we have something to drag.
@@ -641,14 +630,14 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
                 
                 // Check to see if user dragged at all and if so, can the chart be dragged by the given amount
                 if didUserDrag && !performPanChange(translation: translation) {
-                    if _outerScrollView !== nil {
+                    if _outerScrollView != nil {
                         // We can stop dragging right now, and let the scroll view take control
                         _outerScrollView = nil
                         _isDragging = false
                     }
                 }
                 else {
-                    if _outerScrollView !== nil {
+                    if _outerScrollView != nil {
                         // Prevent the parent scroll view from scrolling
                         _outerScrollView?.nsuiIsScrollEnabled = false
                     }
@@ -676,9 +665,9 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
                 
                 let lastHighlighted = self.lastHighlighted
                 
-                if ((h === nil && lastHighlighted !== nil) ||
-                    (h !== nil && lastHighlighted === nil) ||
-                    (h !== nil && lastHighlighted !== nil && h != lastHighlighted)) {
+                if ((h == nil && lastHighlighted != nil) ||
+                    (h != nil && lastHighlighted == nil) ||
+                    (h != nil && lastHighlighted != nil && h != lastHighlighted)) {
                     self.lastHighlighted = h
                     self.highlightValue(h, callDelegate: true)
                 }
@@ -693,16 +682,14 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
                     _decelerationVelocity = recognizer.velocity(in: self)
                     
                     _decelerationDisplayLink = NSUIDisplayLink(target: self, selector: #selector(BarLineChartViewBase.decelerationLoop))
-                    _decelerationDisplayLink.add(to: RunLoop.main, forMode: RunLoopMode.commonModes)
+                    _decelerationDisplayLink.add(to: .main, forMode: .commonModes)
                 }
                 
                 _isDragging = false
             }
             
-            if _outerScrollView !== nil {
-                _outerScrollView?.nsuiIsScrollEnabled = true
-                _outerScrollView = nil
-            }
+            _outerScrollView?.nsuiIsScrollEnabled = true
+            _outerScrollView = nil
         }
     }
     
@@ -725,22 +712,20 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         
         matrix = viewPortHandler.refresh(newMatrix: matrix, chart: self, invalidate: true)
         
-        if delegate !== nil {
-            delegate?.chartTranslated(self, dX: translation.x, dY: translation.y)
-        }
+        delegate?.chartTranslated(self, dX: translation.x, dY: translation.y)
         
         // Did we managed to actually drag or did we reach the edge?
         return matrix.tx != originalMatrix.tx || matrix.ty != originalMatrix.ty
     }
     
     private func isTouchInverted() -> Bool {
-        return isAnyAxisInverted &&
-            _closestDataSetToTouch !== nil &&
-            getAxis(_closestDataSetToTouch.axisDependency).isInverted
+        return isAnyAxisInverted
+            && _closestDataSetToTouch != nil
+            && getAxis(_closestDataSetToTouch.axisDependency).isInverted
     }
     
     public func stopDeceleration() {
-        if _decelerationDisplayLink !== nil {
+        if _decelerationDisplayLink != nil {
             _decelerationDisplayLink.remove(from: RunLoop.main, forMode: RunLoopMode.commonModes)
             _decelerationDisplayLink = nil
         }
@@ -778,7 +763,7 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     
     private func nsuiGestureRecognizerShouldBegin(_ gestureRecognizer: NSUIGestureRecognizer) -> Bool {
         if gestureRecognizer == _panGestureRecognizer {
-            if _data === nil || !isDragEnabled ||
+            if _data == nil || !isDragEnabled ||
                 (self.hasNoDragOffset && self.isFullyZoomedOut && !self.isHighlightPerDragEnabled) {
                 return false
             }
@@ -786,7 +771,7 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         else {
             #if !os(tvOS)
                 if gestureRecognizer == _pinchGestureRecognizer {
-                    if _data === nil || (!isPinchZoomEnabled && !isScaleXEnabled && !isScaleYEnabled) {
+                    if _data == nil || (!isPinchZoomEnabled && !isScaleXEnabled && !isScaleYEnabled) {
                         return false
                     }
                 }
@@ -826,8 +811,9 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
             otherGestureRecognizer.isKind(of: NSUIPanGestureRecognizer.self) && (
                 gestureRecognizer == _panGestureRecognizer
             )) {
+            // FIXME: Reevaluate
             var scrollView = self.superview
-            while (scrollView !== nil && !scrollView!.isKind(of: NSUIScrollView.self)) {
+            while (scrollView != nil && !scrollView!.isKind(of: NSUIScrollView.self)) {
                 scrollView = scrollView?.superview
             }
             
@@ -840,13 +826,13 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
 
             var foundScrollView = scrollView as? NSUIScrollView
             
-            if foundScrollView !== nil && !foundScrollView!.nsuiIsScrollEnabled {
+            if foundScrollView != nil && !foundScrollView!.nsuiIsScrollEnabled {
                 foundScrollView = nil
             }
             
             var scrollViewPanGestureRecognizer: NSUIGestureRecognizer!
             
-            if foundScrollView !== nil {
+            if foundScrollView != nil {
                 for scrollRecognizer in foundScrollView!.nsuiGestureRecognizers! {
                     if scrollRecognizer.isKind(of: NSUIPanGestureRecognizer.self) {
                         scrollViewPanGestureRecognizer = scrollRecognizer as! NSUIPanGestureRecognizer

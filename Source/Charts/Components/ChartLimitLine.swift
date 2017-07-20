@@ -32,7 +32,7 @@ public class ChartLimitLine: ComponentBase {
     public var lineDashLengths: [CGFloat]?
     
     public var valueTextColor = Color.black
-    public var valueFont = Font.systemFont(ofSize: 13.0)
+    public var valueFont: Font = .systemFont(ofSize: 13.0)
     
     public var drawLabelEnabled = true
     public var label = ""

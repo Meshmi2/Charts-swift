@@ -68,9 +68,7 @@ public class PieChartView: PieRadarChartViewBase {
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        if _data === nil {
-            return
-        }
+        guard _data != nil else { return }
         
         let optionalContext = NSUIGraphicsGetCurrentContext()
         guard let context = optionalContext else { return }
@@ -96,9 +94,7 @@ public class PieChartView: PieRadarChartViewBase {
         super.calculateOffsets()
         
         // prevent nullpointer when no data set
-        if _data === nil {
-            return
-        }
+        guard _data != nil else { return }
         
         let radius = diameter / 2.0
         
@@ -223,7 +219,7 @@ public class PieChartView: PieRadarChartViewBase {
         var dataSets = _data?.dataSets ?? []
         
         for i in 0 ..< dataSets.count {
-            if (dataSets[i].entryForXValue(xValue, closestToY: Double.nan) !== nil) {
+            if (dataSets[i].entryForXValue(xValue, closestToY: .nan) != nil) {
                 return i
             }
         }

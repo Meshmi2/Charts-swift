@@ -92,9 +92,7 @@ public class RadarChartView: PieRadarChartViewBase {
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
 
-        if _data === nil {
-            return
-        }
+        guard _data != nil else { return }
         
         let optionalContext = NSUIGraphicsGetCurrentContext()
         guard let context = optionalContext else { return }

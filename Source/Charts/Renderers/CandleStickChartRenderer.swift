@@ -124,7 +124,7 @@ final class CandleStickChartRenderer: LineScatterCandleRadarRenderer {
                     }
                 }
                 
-                if shadowColor === nil {
+                if shadowColor == nil {
                     shadowColor = dataSet.shadowColor ?? dataSet.color(atIndex: j)
                 }
                 

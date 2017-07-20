@@ -637,7 +637,7 @@ public class PieRadarChartViewBase: ChartViewBase {
     }
     
     public func stopDeceleration() {
-        if _decelerationDisplayLink !== nil {
+        if _decelerationDisplayLink != nil {
             _decelerationDisplayLink.remove(from: .main, forMode: .commonModes)
             _decelerationDisplayLink = nil
         }

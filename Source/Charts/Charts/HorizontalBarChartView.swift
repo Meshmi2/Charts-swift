@@ -124,7 +124,7 @@ public class HorizontalBarChartView: BarChartView {
     }
 
     public override func getHighlightByTouchPoint(_ pt: CGPoint) -> Highlight? {
-        if _data === nil {
+        guard _data != nil else {
             Swift.print("Can't select by touch. No data set.", terminator: "\n")
             return nil
         }

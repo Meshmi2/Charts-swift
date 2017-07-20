@@ -60,7 +60,7 @@ public struct ChartUtils {
             return number
         }
         else {
-            return number + Double.ulpOfOne
+            return number + .ulpOfOne
         }
     }
     

@@ -462,7 +462,7 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate {
     /// selected value at the given touch point inside the Line-, Scatter-, or
     /// CandleStick-Chart.
     public func getHighlightByTouchPoint(_ pt: CGPoint) -> Highlight? {
-        if _data === nil {
+        guard _data != nil else {
             Swift.print("Can't select by touch. No data set.")
             return nil
         }

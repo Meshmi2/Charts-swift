@@ -126,20 +126,20 @@ public class CombinedChartData: BarLineScatterCandleBubbleChartData {
     /// - returns: All data objects in row: line-bar-scatter-candle-bubble if not null.
     public var allData: [ChartData] {
         var data = [ChartData]()
-        
-        if lineData !== nil {
+        // TODO:
+        if lineData != nil {
             data.append(lineData)
         }
-        if barData !== nil {
+        if barData != nil {
             data.append(barData)
         }
-        if scatterData !== nil {
+        if scatterData != nil {
             data.append(scatterData)
         }
-        if candleData !== nil {
+        if candleData != nil {
             data.append(candleData)
         }
-        if bubbleData !== nil {
+        if bubbleData != nil {
             data.append(bubbleData)
         }
         
@@ -186,21 +186,11 @@ public class CombinedChartData: BarLineScatterCandleBubbleChartData {
     }
     
     public override func notifyDataChanged() {
-        if _lineData !== nil {
-            _lineData.notifyDataChanged()
-        }
-        if _barData !== nil {
-            _barData.notifyDataChanged()
-        }
-        if _scatterData !== nil {
-            _scatterData.notifyDataChanged()
-        }
-        if _candleData !== nil {
-            _candleData.notifyDataChanged()
-        }
-        if _bubbleData !== nil {
-            _bubbleData.notifyDataChanged()
-        }
+        _lineData?.notifyDataChanged()
+        _barData?.notifyDataChanged()
+        _scatterData?.notifyDataChanged()
+        _candleData?.notifyDataChanged()
+        _bubbleData?.notifyDataChanged()
         
         super.notifyDataChanged() // recalculate everything
     }
@@ -213,25 +203,15 @@ public class CombinedChartData: BarLineScatterCandleBubbleChartData {
     public override func entryForHighlight(_ highlight: Highlight) -> ChartDataEntry? {
         let dataObjects = allData
         
-        if highlight.dataIndex >= dataObjects.count {
-            return nil
-        }
+        guard highlight.dataIndex < dataObjects.endIndex else { return nil }
         
         let data = dataObjects[highlight.dataIndex]
         
-        if highlight.dataSetIndex >= data.dataSetCount {
-            return nil
-        }
-        else {
-            // The value of the highlighted entry could be NaN - if we are not interested in highlighting a specific value.
-            let entries = data.getDataSetByIndex(highlight.dataSetIndex).entriesForXValue(highlight.x)
-            for e in entries {
-                if e.y == highlight.y || highlight.y.isNaN {
-                    return e
-                }
-            }
-            
-            return nil
-        }
+        guard highlight.dataSetIndex < data.dataSetCount else { return nil }
+        
+        // The value of the highlighted entry could be NaN - if we are not interested in highlighting a specific value.
+        return data.getDataSetByIndex(highlight.dataSetIndex)
+            .entriesForXValue(highlight.x)
+            .first { $0.y == highlight.y || highlight.y.isNaN }
     }
 }
