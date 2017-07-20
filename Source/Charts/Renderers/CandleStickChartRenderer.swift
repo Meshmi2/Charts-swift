@@ -44,12 +44,12 @@ final class CandleStickChartRenderer: LineScatterCandleRadarRenderer {
         }
     }
     
-    private var _shadowPoints = [CGPoint](repeating: CGPoint(), count: 4)
-    private var _rangePoints = [CGPoint](repeating: CGPoint(), count: 2)
-    private var _openPoints = [CGPoint](repeating: CGPoint(), count: 2)
-    private var _closePoints = [CGPoint](repeating: CGPoint(), count: 2)
+    private var _shadowPoints = [CGPoint](repeating: .zero, count: 4)
+    private var _rangePoints = [CGPoint](repeating: .zero, count: 2)
+    private var _openPoints = [CGPoint](repeating: .zero, count: 2)
+    private var _closePoints = [CGPoint](repeating: .zero, count: 2)
     private var _bodyRect = CGRect()
-    private var _lineSegments = [CGPoint](repeating: CGPoint(), count: 2)
+    private var _lineSegments = [CGPoint](repeating: .zero, count: 2)
     
     func drawDataSet(context: CGContext, dataSet: CandleChartDataSet) {
         guard let
@@ -59,7 +59,7 @@ final class CandleStickChartRenderer: LineScatterCandleRadarRenderer {
 
         let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
         
-        let phaseY = animator.phaseY
+        let phaseY = CGFloat(animator.phaseY)
         let barSpace = dataSet.barSpace
         let showCandleBar = dataSet.showCandleBar
         
@@ -69,41 +69,41 @@ final class CandleStickChartRenderer: LineScatterCandleRadarRenderer {
         
         context.setLineWidth(dataSet.shadowWidth)
         
-        for j in stride(from: _xBounds.min, through: _xBounds.range + _xBounds.min, by: 1) {
+        for j in _xBounds.min...(_xBounds.range + _xBounds.min) {
             // get the entry
             guard let e = dataSet[j] as? CandleChartDataEntry else { continue }
             
-            let xPos = e.x
+            let xPos = CGFloat(e.x)
             
-            let open = e.open
-            let close = e.close
-            let high = e.high
-            let low = e.low
+            let open = CGFloat(e.open)
+            let close = CGFloat(e.close)
+            let high = CGFloat(e.high)
+            let low = CGFloat(e.low)
             
             if showCandleBar {
                 // calculate the shadow
                 
-                _shadowPoints[0].x = CGFloat(xPos)
-                _shadowPoints[1].x = CGFloat(xPos)
-                _shadowPoints[2].x = CGFloat(xPos)
-                _shadowPoints[3].x = CGFloat(xPos)
+                _shadowPoints[0].x = xPos
+                _shadowPoints[1].x = xPos
+                _shadowPoints[2].x = xPos
+                _shadowPoints[3].x = xPos
                 
                 if open > close {
-                    _shadowPoints[0].y = CGFloat(high * phaseY)
-                    _shadowPoints[1].y = CGFloat(open * phaseY)
-                    _shadowPoints[2].y = CGFloat(low * phaseY)
-                    _shadowPoints[3].y = CGFloat(close * phaseY)
+                    _shadowPoints[0].y = high * phaseY
+                    _shadowPoints[1].y = open * phaseY
+                    _shadowPoints[2].y = low * phaseY
+                    _shadowPoints[3].y = close * phaseY
                 }
                 else if open < close {
-                    _shadowPoints[0].y = CGFloat(high * phaseY)
-                    _shadowPoints[1].y = CGFloat(close * phaseY)
-                    _shadowPoints[2].y = CGFloat(low * phaseY)
-                    _shadowPoints[3].y = CGFloat(open * phaseY)
+                    _shadowPoints[0].y = high * phaseY
+                    _shadowPoints[1].y = close * phaseY
+                    _shadowPoints[2].y = low * phaseY
+                    _shadowPoints[3].y = open * phaseY
                 }
                 else {
-                    _shadowPoints[0].y = CGFloat(high * phaseY)
-                    _shadowPoints[1].y = CGFloat(open * phaseY)
-                    _shadowPoints[2].y = CGFloat(low * phaseY)
+                    _shadowPoints[0].y = high * phaseY
+                    _shadowPoints[1].y = open * phaseY
+                    _shadowPoints[2].y = low * phaseY
                     _shadowPoints[3].y = _shadowPoints[1].y
                 }
                 
@@ -111,7 +111,7 @@ final class CandleStickChartRenderer: LineScatterCandleRadarRenderer {
                 
                 // draw the shadows
                 
-                var shadowColor: Color! = nil
+                let shadowColor: Color
                 if dataSet.shadowColorSameAsCandle {
                     if open > close {
                         shadowColor = dataSet.decreasingColor ?? dataSet.color(atIndex: j)
@@ -122,9 +122,7 @@ final class CandleStickChartRenderer: LineScatterCandleRadarRenderer {
                     else {
                         shadowColor = dataSet.neutralColor ?? dataSet.color(atIndex: j)
                     }
-                }
-                
-                if shadowColor == nil {
+                } else {
                     shadowColor = dataSet.shadowColor ?? dataSet.color(atIndex: j)
                 }
                 
@@ -133,10 +131,10 @@ final class CandleStickChartRenderer: LineScatterCandleRadarRenderer {
                 
                 // calculate the body
                 
-                _bodyRect.origin.x = CGFloat(xPos) - 0.5 + barSpace
-                _bodyRect.origin.y = CGFloat(close * phaseY)
-                _bodyRect.size.width = (CGFloat(xPos) + 0.5 - barSpace) - _bodyRect.origin.x
-                _bodyRect.size.height = CGFloat(open * phaseY) - _bodyRect.origin.y
+                _bodyRect.origin.x = xPos - 0.5 + barSpace
+                _bodyRect.origin.y = close * phaseY
+                _bodyRect.size.width = xPos + 0.5 - barSpace - _bodyRect.origin.x
+                _bodyRect.size.height = (open * phaseY) - _bodyRect.origin.y
                 
                 trans.rectValueToPixel(&_bodyRect)
                 
@@ -174,20 +172,20 @@ final class CandleStickChartRenderer: LineScatterCandleRadarRenderer {
                 }
             }
             else {
-                _rangePoints[0].x = CGFloat(xPos)
-                _rangePoints[0].y = CGFloat(high * phaseY)
-                _rangePoints[1].x = CGFloat(xPos)
-                _rangePoints[1].y = CGFloat(low * phaseY)
+                _rangePoints[0].x = xPos
+                _rangePoints[0].y = high * phaseY
+                _rangePoints[1].x = xPos
+                _rangePoints[1].y = low * phaseY
 
-                _openPoints[0].x = CGFloat(xPos) - 0.5 + barSpace
-                _openPoints[0].y = CGFloat(open * phaseY)
-                _openPoints[1].x = CGFloat(xPos)
-                _openPoints[1].y = CGFloat(open * phaseY)
+                _openPoints[0].x = xPos - 0.5 + barSpace
+                _openPoints[0].y = open * phaseY
+                _openPoints[1].x = xPos
+                _openPoints[1].y = open * phaseY
 
-                _closePoints[0].x = CGFloat(xPos) + 0.5 - barSpace
-                _closePoints[0].y = CGFloat(close * phaseY)
-                _closePoints[1].x = CGFloat(xPos)
-                _closePoints[1].y = CGFloat(close * phaseY)
+                _closePoints[0].x = xPos + 0.5 - barSpace
+                _closePoints[0].y = close * phaseY
+                _closePoints[1].x = xPos
+                _closePoints[1].y = close * phaseY
                 
                 trans.pointValuesToPixel(&_rangePoints)
                 trans.pointValuesToPixel(&_openPoints)
@@ -274,7 +272,7 @@ final class CandleStickChartRenderer: LineScatterCandleRadarRenderer {
                                                                      dataSetIndex: i,
                                                                      viewPortHandler: viewPortHandler),
                                             at: CGPoint(x: pt.x,
-                                                           y: pt.y - yOffset),
+                                                        y: pt.y - yOffset),
                                             align: .center,
                                             attributes: [.font: valueFont,
                                                          .foregroundColor: dataSet.valueTextColorAt(j)],
@@ -328,8 +326,8 @@ final class CandleStickChartRenderer: LineScatterCandleRadarRenderer {
                 context.setLineDash(phase: 0.0, lengths: [])
             }
             
-            let lowValue = e.low * Double(animator.phaseY)
-            let highValue = e.high * Double(animator.phaseY)
+            let lowValue = e.low * animator.phaseY
+            let highValue = e.high * animator.phaseY
             let y = (lowValue + highValue) / 2.0
             
             let pt = trans.pixelForValues(x: e.x, y: y)

@@ -31,7 +31,7 @@ public class PieChartView: PieRadarChartViewBase {
     private var _centerAttributedText: NSAttributedString?
     
     /// the offset on the x- and y-axis the center text has in dp.
-    private var _centerTextOffset: CGPoint = CGPoint()
+    private var _centerTextOffset: CGPoint = .zero
     
     /// indicates the size of the hole in the center of the piechart
     ///

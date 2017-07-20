@@ -63,10 +63,6 @@ public class DefaultAxisValueFormatter: AxisValueFormatter {
         self.block = block
     }
     
-    public static func with(block: @escaping Block) -> DefaultAxisValueFormatter? {
-        return DefaultAxisValueFormatter(block: block)
-    }
-    
     public func stringForValue(_ value: Double, axis: AxisBase) -> String {
         if let block = block {
             return block(value, axis)

@@ -512,39 +512,38 @@ final class PieChartRenderer: DataRenderer {
             let holeRadius = radius * chart.holeRadiusPercent
             let center = chart.centerCircleBox
             
-            if let holeColor = chart.holeColor {
-                if holeColor != Color.clear {
-                    // draw the hole-circle
-                    context.setFillColor(chart.holeColor!.cgColor)
-                    context.fillEllipse(in: CGRect(x: center.x - holeRadius, y: center.y - holeRadius, width: holeRadius * 2.0, height: holeRadius * 2.0))
-                }
+            if let holeColor = chart.holeColor,
+                holeColor != .clear {
+                // draw the hole-circle
+                context.setFillColor(chart.holeColor!.cgColor)
+                context.fillEllipse(in: CGRect(x: center.x - holeRadius,
+                                               y: center.y - holeRadius,
+                                               width: holeRadius * 2.0,
+                                               height: holeRadius * 2.0))
             }
             
             // only draw the circle if it can be seen (not covered by the hole)
-            if let transparentCircleColor = chart.transparentCircleColor {
-                if transparentCircleColor != Color.clear &&
+            if let transparentCircleColor = chart.transparentCircleColor,
+                transparentCircleColor != .clear &&
                     chart.transparentCircleRadiusPercent > chart.holeRadiusPercent {
-                    let alpha = animator.phaseX * animator.phaseY
-                    let secondHoleRadius = radius * chart.transparentCircleRadiusPercent
-                    
-                    // make transparent
-                    context.setAlpha(CGFloat(alpha))
-                    context.setFillColor(transparentCircleColor.cgColor)
-                    
-                    // draw the transparent-circle
-                    context.beginPath()
-                    context.addEllipse(in: CGRect(
-                        x: center.x - secondHoleRadius,
-                        y: center.y - secondHoleRadius,
-                        width: secondHoleRadius * 2.0,
-                        height: secondHoleRadius * 2.0))
-                    context.addEllipse(in: CGRect(
-                        x: center.x - holeRadius,
-                        y: center.y - holeRadius,
-                        width: holeRadius * 2.0,
-                        height: holeRadius * 2.0))
-                    context.fillPath(using: .evenOdd)
-                }
+                let alpha = animator.phaseX * animator.phaseY
+                let secondHoleRadius = radius * chart.transparentCircleRadiusPercent
+                
+                // make transparent
+                context.setAlpha(CGFloat(alpha))
+                context.setFillColor(transparentCircleColor.cgColor)
+                
+                // draw the transparent-circle
+                context.beginPath()
+                context.addEllipse(in: CGRect(x: center.x - secondHoleRadius,
+                                              y: center.y - secondHoleRadius,
+                                              width: secondHoleRadius * 2.0,
+                                              height: secondHoleRadius * 2.0))
+                context.addEllipse(in: CGRect(x: center.x - holeRadius,
+                                              y: center.y - holeRadius,
+                                              width: holeRadius * 2.0,
+                                              height: holeRadius * 2.0))
+                context.fillPath(using: .evenOdd)
             }
             
             context.restoreGState()

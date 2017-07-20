@@ -19,7 +19,7 @@ import CoreGraphics
 class BarChartRenderer: BarLineScatterCandleBubbleRenderer {
     var _xBounds: XBounds = XBounds()
     
-    var viewPortHandler: ViewPortHandler
+    let viewPortHandler: ViewPortHandler
     
     var animator: Animator?
     

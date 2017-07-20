@@ -14,19 +14,18 @@ import CoreGraphics
 
 // This defines a viewport modification job, used for delaying or animating viewport changes
 public class ViewPortJob {
-    var point: CGPoint = CGPoint()
-    internal weak var viewPortHandler: ViewPortHandler?
+    var point: CGPoint = .zero
+    weak var viewPortHandler: ViewPortHandler?
     var xValue: Double = 0.0
     var yValue: Double = 0.0
-    internal weak var transformer: Transformer?
-    internal weak var view: ChartViewBase?
+    weak var transformer: Transformer?
+    weak var view: ChartViewBase?
     
-    init(
-        viewPortHandler: ViewPortHandler,
-        xValue: Double,
-        yValue: Double,
-        transformer: Transformer,
-        view: ChartViewBase) {        
+    init(viewPortHandler: ViewPortHandler,
+         xValue: Double,
+         yValue: Double,
+         transformer: Transformer,
+         view: ChartViewBase) {        
         self.viewPortHandler = viewPortHandler
         self.xValue = xValue
         self.yValue = yValue

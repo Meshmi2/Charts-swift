@@ -128,8 +128,8 @@ class LineChart1ViewController: DemoBaseViewController {
         set1.formLineWidth = 1
         set1.formLineWidth = 15
         
-        let gradientColors = [ChartColorTemplates.colorFromString("#00ff0000").cgColor,
-                              ChartColorTemplates.colorFromString("#ffff0000").cgColor] as CFArray
+        let gradientColors = [Color(string: "#00ff0000").cgColor,
+                              Color(string: "#ffff0000").cgColor] as CFArray
         let gradient = CGGradient(colorsSpace: nil, colors: gradientColors, locations: nil)!
         
         set1.fillAlpha = 1

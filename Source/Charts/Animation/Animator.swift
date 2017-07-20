@@ -57,33 +57,25 @@ class Animator {
     }
     
     func stop() {
-        if _displayLink != nil {
-            _displayLink?.remove(from: .main, forMode: .commonModes)
-            _displayLink = nil
+        guard _displayLink != nil else { return }
+        
+        _displayLink!.remove(from: .main, forMode: .commonModes)
+        _displayLink = nil
+        
+        _enabledX = false
+        _enabledY = false
+        
+        // If we stopped an animation in the middle, we do not want to leave it like this
+        if phaseX != 1.0 || phaseY != 1.0 {
+            phaseX = 1.0
+            phaseY = 1.0
             
-            _enabledX = false
-            _enabledY = false
-            
-            // If we stopped an animation in the middle, we do not want to leave it like this
-            if phaseX != 1.0 || phaseY != 1.0 {
-                phaseX = 1.0
-                phaseY = 1.0
-                
-                if delegate != nil {
-                    delegate!.animatorUpdated(self)
-                }
-                if updateBlock != nil {
-                    updateBlock!()
-                }
-            }
-            
-            if delegate != nil {
-                delegate!.animatorStopped(self)
-            }
-            if stopBlock != nil {
-                stopBlock?()
-            }
+            delegate?.animatorUpdated(self)
+            updateBlock?()
         }
+        
+        delegate?.animatorStopped(self)
+        stopBlock?()
     }
     
     private func updateAnimationPhases(_ currentTime: TimeInterval) {

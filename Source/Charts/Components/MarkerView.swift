@@ -17,7 +17,7 @@ import CoreGraphics
 #endif
 
 open class MarkerView: NSUIView, Marker {
-    public var offset: CGPoint = CGPoint()
+    public var offset: CGPoint = .zero
     
     public weak var chartView: ChartViewBase?
     
@@ -65,10 +65,9 @@ open class MarkerView: NSUIView, Marker {
     
     open class func viewFromXib() -> MarkerView? {
         #if !os(OSX)
-            return Bundle.main.loadNibNamed(
-                String(describing: self),
-                owner: nil,
-                options: nil)?[0] as? MarkerView
+            return Bundle.main.loadNibNamed(String(describing: self),
+                                            owner: nil,
+                                            options: nil)?[0] as? MarkerView
         #else
             
             var loadedObjects = NSArray()

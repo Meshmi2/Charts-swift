@@ -490,11 +490,11 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     private var _panGestureReachedEdge: Bool = false
     private weak var _outerScrollView: NSUIScrollView?
     
-    private var _lastPanPoint = CGPoint() /// This is to prevent using setTranslation which resets velocity
+    private var _lastPanPoint: CGPoint = .zero /// This is to prevent using setTranslation which resets velocity
     
     private var _decelerationLastTime: TimeInterval = 0.0
     private var _decelerationDisplayLink: NSUIDisplayLink!
-    private var _decelerationVelocity = CGPoint()
+    private var _decelerationVelocity: CGPoint = .zero
     
     @objc private func tapGestureRecognized(_ recognizer: TapGestureRecognizer) {
         guard _data != nil else { return }

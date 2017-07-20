@@ -13,7 +13,7 @@ import Foundation
 import CoreGraphics
 
 protocol DataRenderer: Renderer {
-    var viewPortHandler: ViewPortHandler { get set }
+    var viewPortHandler: ViewPortHandler { get }
     
     var animator: Animator? { get set }
     

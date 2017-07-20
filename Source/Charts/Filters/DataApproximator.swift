@@ -49,12 +49,11 @@ public struct DataApproximator {
     /// - parameter tolerance:
     /// - parameter start:
     /// - parameter end:
-    public static func reduceWithDouglasPeuker(
-        points: [CGPoint],
-        tolerance: CGFloat,
-        start: Int,
-        end: Int,
-        keep: inout [Bool]) {
+    public static func reduceWithDouglasPeuker(points: [CGPoint],
+                                               tolerance: CGFloat,
+                                               start: Int,
+                                               end: Int,
+                                               keep: inout [Bool]) {
         if end <= start + 1 {
             // recursion finished
             return

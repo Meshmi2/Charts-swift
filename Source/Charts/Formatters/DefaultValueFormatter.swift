@@ -64,21 +64,14 @@ public class DefaultValueFormatter: ValueFormatter {
     public init(block: @escaping Block) {        
         self.block = block
     }
-    
-    public static func with(block: @escaping Block) -> DefaultValueFormatter? {
-        return DefaultValueFormatter(block: block)
-    }
-    
+        
     public func stringForValue(_ value: Double,
-                             entry: ChartDataEntry,
-                             dataSetIndex: Int,
-                             viewPortHandler: ViewPortHandler?) -> String {
-        if block != nil {
-            return block!(value, entry, dataSetIndex, viewPortHandler)
-        }
-        else {
-            return formatter?.string(from: NSNumber(floatLiteral: value)) ?? ""
-        }
+                               entry: ChartDataEntry,
+                               dataSetIndex: Int,
+                               viewPortHandler: ViewPortHandler?) -> String {
+        return block?(value, entry, dataSetIndex, viewPortHandler)
+            ?? (formatter?.string(from: NSNumber(floatLiteral: value))
+                ?? "")
     }
     
 }

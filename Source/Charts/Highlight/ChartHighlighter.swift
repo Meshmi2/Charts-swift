@@ -31,7 +31,7 @@ public class ChartHighlighter : Highlighter {
     /// - returns:
     public func getValsForTouch(x: CGFloat, y: CGFloat) -> CGPoint {
         guard let chart = self.chart as? BarLineScatterCandleBubbleChartDataProvider
-            else { return CGPoint.zero }
+            else { return .zero }
         
         // take any transformer to determine the values
         return chart.getTransformer(forAxis: YAxis.AxisDependency.left).valueForTouchPoint(x: x, y: y)

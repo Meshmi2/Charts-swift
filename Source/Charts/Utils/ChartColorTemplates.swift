@@ -76,12 +76,14 @@ public struct ChartColorTemplates {
             Color(red: 52/255.0, green: 152/255.0, blue: 219/255.0, alpha: 1.0)
         ]
     }
-    
-    public static func colorFromString(_ colorString: String) -> Color {
+}
+
+extension Color {
+    public convenience init(string: String) {
         let leftParenCharset: CharacterSet = CharacterSet(charactersIn: "( ")
         let commaCharset: CharacterSet = CharacterSet(charactersIn: ", ")
-
-        let colorString = colorString.lowercased()
+        
+        let colorString = string.lowercased()
         
         if colorString.hasPrefix("#") {
             var argb: [UInt] = [255, 0, 0, 0]
@@ -116,7 +118,10 @@ public struct ChartColorTemplates {
                 }
             }
             
-            return Color(red: CGFloat(argb[1]) / 255.0, green: CGFloat(argb[2]) / 255.0, blue: CGFloat(argb[3]) / 255.0, alpha: CGFloat(argb[0]) / 255.0)
+            self.init(red: CGFloat(argb[1]) / 255.0,
+                      green: CGFloat(argb[2]) / 255.0,
+                      blue: CGFloat(argb[3]) / 255.0,
+                      alpha: CGFloat(argb[0]) / 255.0)
         }
         else if colorString.hasPrefix("rgba") {
             var a: Float = 1.0
@@ -133,11 +138,10 @@ public struct ChartColorTemplates {
             scanner.scanInt32(&b)
             scanner.scanCharacters(from: commaCharset, into: nil)
             scanner.scanFloat(&a)
-            return Color(
-                red: CGFloat(r) / 255.0,
-                green: CGFloat(g) / 255.0,
-                blue: CGFloat(b) / 255.0,
-                alpha: CGFloat(a)
+            self.init(red: CGFloat(r) / 255.0,
+                      green: CGFloat(g) / 255.0,
+                      blue: CGFloat(b) / 255.0,
+                      alpha: CGFloat(a)
             )
         }
         else if colorString.hasPrefix("argb") {
@@ -155,11 +159,10 @@ public struct ChartColorTemplates {
             scanner.scanInt32(&g)
             scanner.scanCharacters(from: commaCharset, into: nil)
             scanner.scanInt32(&b)
-            return Color(
-                red: CGFloat(r) / 255.0,
-                green: CGFloat(g) / 255.0,
-                blue: CGFloat(b) / 255.0,
-                alpha: CGFloat(a)
+            self.init(red: CGFloat(r) / 255.0,
+                      green: CGFloat(g) / 255.0,
+                      blue: CGFloat(b) / 255.0,
+                      alpha: CGFloat(a)
             )
         }
         else if colorString.hasPrefix("rgb") {
@@ -174,14 +177,13 @@ public struct ChartColorTemplates {
             scanner.scanInt32(&g)
             scanner.scanCharacters(from: commaCharset, into: nil)
             scanner.scanInt32(&b)
-            return Color(
-                red: CGFloat(r) / 255.0,
-                green: CGFloat(g) / 255.0,
-                blue: CGFloat(b) / 255.0,
-                alpha: 1.0
+            self.init(red: CGFloat(r) / 255.0,
+                      green: CGFloat(g) / 255.0,
+                      blue: CGFloat(b) / 255.0,
+                      alpha: 1.0
             )
+        } else {
+            self.init(white: 0, alpha: 0)
         }
-        
-        return Color.clear
     }
 }

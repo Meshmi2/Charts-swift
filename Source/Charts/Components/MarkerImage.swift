@@ -20,7 +20,7 @@ open class MarkerImage: Marker {
     /// The marker image to render
     public var image: Image?
     
-    public var offset: CGPoint = CGPoint()
+    public var offset: CGPoint = .zero
     
     public weak var chartView: ChartViewBase?
     
