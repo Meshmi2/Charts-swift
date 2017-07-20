@@ -19,18 +19,17 @@ class HalfPieChartViewController: DemoBaseViewController {
         // Do any additional setup after loading the view.
         self.title = "Half Pie Bar Chart"
         
-        self.options = [Option(key: .toggleValues, label: "Toggle Y-Values"),
-                        Option(key: .toggleXValues, label: "Toggle X-Values"),
-                        Option(key: .togglePercent, label: "Toggle Percent"),
-                        Option(key: .toggleHole, label: "Toggle Hole"),
-                        Option(key: .animateX, label: "Animate X"),
-                        Option(key: .animateY, label: "Animate Y"),
-                        Option(key: .animateXY, label: "Animate XY"),
-                        Option(key: .spin, label: "Spin"),
-                        Option(key: .drawCenter, label: "Draw CenterText"),
-                        Option(key: .saveToGallery, label: "Save to Camera Roll"),
-                        Option(key: .toggleData, label: "Toggle Data")
-        ]
+        self.options = [.toggleValues,
+                        .toggleXValues,
+                        .togglePercent,
+                        .toggleHole,
+                        .animateX,
+                        .animateY,
+                        .animateXY,
+                        .spin,
+                        .drawCenter,
+                        .saveToGallery,
+                        .toggleData]
         
         self.setup(pieChartView: chartView)
         
@@ -103,8 +102,8 @@ class HalfPieChartViewController: DemoBaseViewController {
         chartView.setNeedsDisplay()
     }
     
-    override func optionTapped(key: Option.Key) {
-        switch key {
+    override func optionTapped(_ option: Option) {
+        switch option {
         case .toggleXValues:
             chartView.isDrawEntryLabelsEnabled = !chartView.isDrawEntryLabelsEnabled
             chartView.setNeedsDisplay()
@@ -137,7 +136,7 @@ class HalfPieChartViewController: DemoBaseViewController {
                            easingOption: .easeInCubic)
             
         default:
-            handleOption(key: key, forChartView: chartView)
+            handleOption(option, forChartView: chartView)
         }
     }
 }

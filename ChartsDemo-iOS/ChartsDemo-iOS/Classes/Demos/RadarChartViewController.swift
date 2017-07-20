@@ -23,20 +23,19 @@ class RadarChartViewController: DemoBaseViewController {
 
         // Do any additional setup after loading the view.
         self.title = "Radar Bar Chart"
-        self.options = [Option(key: .toggleValues, label: "Toggle Values"),
-                        Option(key: .toggleHighlight, label: "Toggle Highlight"),
-                        Option(key: .toggleHighlightCircle, label: "Toggle highlight circle"),
-                        Option(key: .toggleXLabels, label: "Toggle X-Values"),
-                        Option(key: .toggleYLabels, label: "Toggle Y-Values"),
-                        Option(key: .toggleRotate, label: "Toggle Rotate"),
-                        Option(key: .toggleFilled, label: "Toggle Fill"),
-                        Option(key: .animateX, label: "Animate X"),
-                        Option(key: .animateY, label: "Animate Y"),
-                        Option(key: .animateXY, label: "Animate XY"),
-                        Option(key: .spin, label: "Spin"),
-                        Option(key: .saveToGallery, label: "Save to Camera Roll"),
-                        Option(key: .toggleData, label: "Toggle Data")
-        ]
+        self.options = [.toggleValues,
+                        .toggleHighlight,
+                        .toggleHighlightCircle,
+                        .toggleXLabels,
+                        .toggleYLabels,
+                        .toggleRotate,
+                        .toggleFilled,
+                        .animateX,
+                        .animateY,
+                        .animateXY,
+                        .spin,
+                        .saveToGallery,
+                        .toggleData]
         
         chartView.delegate = self
         
@@ -151,8 +150,8 @@ class RadarChartViewController: DemoBaseViewController {
         chartView.data = data
     }
     
-    override func optionTapped(key: Option.Key) {
-        switch key {
+    override func optionTapped(_ option: Option) {
+        switch option {
         case .toggleXLabels:
             chartView.xAxis.isDrawLabelsEnabled = !chartView.xAxis.isDrawLabelsEnabled
             chartView.data?.notifyDataChanged()
@@ -192,7 +191,7 @@ class RadarChartViewController: DemoBaseViewController {
             chartView.spin(duration: 2, fromAngle: chartView.rotationAngle, toAngle: chartView.rotationAngle + 360, easingOption: .easeInCubic)
             
         default:
-            super.handleOption(key: key, forChartView: chartView)
+            super.handleOption(option, forChartView: chartView)
         }
     }
 }

@@ -21,16 +21,15 @@ class AnotherBarChartViewController: DemoBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.options = [Option(key: .toggleValues, label: "Toggle Values"),
-                        Option(key: .toggleHighlight, label: "Toggle Highlight"),
-                        Option(key: .animateX, label: "Animate X"),
-                        Option(key: .animateY, label: "Animate Y"),
-                        Option(key: .animateXY, label: "Animate XY"),
-                        Option(key: .saveToGallery, label: "Save to Camera Roll"),
-                        Option(key: .togglePinchZoom, label: "Toggle PinchZoom"),
-                        Option(key: .toggleData, label: "Toggle Data"),
-                        Option(key: .toggleBarBorders, label: "Toggle Bar Borders")
-        ]
+        self.options = [.toggleValues,
+                        .toggleHighlight,
+                        .animateX,
+                        .animateY,
+                        .animateXY,
+                        .saveToGallery,
+                        .togglePinchZoom,
+                        .toggleData,
+                        .toggleBarBorders]
         
         chartView.delegate = self
         
@@ -85,8 +84,8 @@ class AnotherBarChartViewController: DemoBaseViewController {
         chartView.setNeedsDisplay()
     }
     
-    override func optionTapped(key: Option.Key) {
-        super.handleOption(key: key, forChartView: chartView)
+    override func optionTapped(_ option: Option) {
+        super.handleOption(option, forChartView: chartView)
     }
     
     // MARK: - Actions

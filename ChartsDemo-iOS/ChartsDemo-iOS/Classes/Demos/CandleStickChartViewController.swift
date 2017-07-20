@@ -22,18 +22,17 @@ class CandleStickChartViewController: DemoBaseViewController {
         
         // Do any additional setup after loading the view.
         self.title = "Bubble Chart"
-        self.options = [Option(key: .toggleValues, label: "Toggle Values"),
-                        Option(key: .toggleIcons, label: "Toggle Icons"),
-                        Option(key: .toggleHighlight, label: "Toggle Highlight"),
-                        Option(key: .animateX, label: "Animate X"),
-                        Option(key: .animateY, label: "Animate Y"),
-                        Option(key: .animateXY, label: "Animate XY"),
-                        Option(key: .saveToGallery, label: "Save to Camera Roll"),
-                        Option(key: .togglePinchZoom, label: "Toggle PinchZoom"),
-                        Option(key: .toggleAutoScaleMinMax, label: "Toggle auto scale min/max"),
-                    Option(key: .toggleShadowColorSameAsCandle, label: "Toggle shadow same color"),
-                        Option(key: .toggleData, label: "Toggle Data")
-        ]
+        self.options = [.toggleValues,
+                        .toggleIcons,
+                        .toggleHighlight,
+                        .animateX,
+                        .animateY,
+                        .animateXY,
+                        .saveToGallery,
+                        .togglePinchZoom,
+                        .toggleAutoScaleMinMax,
+                        .toggleShadowColorSameAsCandle,
+                        .toggleData]
         
         chartView.delegate = self
         
@@ -103,14 +102,14 @@ class CandleStickChartViewController: DemoBaseViewController {
         chartView.data = data
     }
     
-    override func optionTapped(key: Option.Key) {
-        if .toggleShadowColorSameAsCandle ~= key {
+    override func optionTapped(_ option: Option) {
+        if .toggleShadowColorSameAsCandle ~= option {
             for set in chartView.data!.dataSets as! [CandleChartDataSet] {
                 set.shadowColorSameAsCandle = !set.shadowColorSameAsCandle
             }
             chartView.notifyDataSetChanged()
         } else {
-            super.handleOption(key: key, forChartView: chartView)
+            super.handleOption(option, forChartView: chartView)
         }
     }
     

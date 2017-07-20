@@ -9,46 +9,79 @@
 import UIKit
 import Charts
 
-struct Option {
-    let key: Key
-    let label: String
+enum Option {
+    case toggleValues
+    case toggleIcons
+    case toggleHighlight
+    case animateX
+    case animateY
+    case animateXY
+    case saveToGallery
+    case togglePinchZoom
+    case toggleAutoScaleMinMax
+    case toggleData
+    case toggleBarBorders
+    // CandleChart
+    case toggleShadowColorSameAsCandle
+    // CombinedChart
+    case toggleLineValues
+    case toggleBarValues
+    case removeDataSet
+    // CubicLineSampleFillFormatter
+    case toggleFilled
+    case toggleCircles
+    case toggleCubic
+    case toggleHorizontalCubic
+    case toggleStepped
+    // HalfPieChartController
+    case toggleXValues
+    case togglePercent
+    case toggleHole
+    case spin
+    case drawCenter
+    // RadarChart
+    case toggleXLabels
+    case toggleYLabels
+    case toggleRotate
+    case toggleHighlightCircle
     
-    // TODO: Turn in to struct and move extensions into appropriate classes
-    enum Key {
-        case toggleValues
-        case toggleIcons
-        case toggleHighlight
-        case animateX
-        case animateY
-        case animateXY
-        case saveToGallery
-        case togglePinchZoom
-        case toggleAutoScaleMinMax
-        case toggleData
-        case toggleBarBorders
+    var label: String {
+        switch self {
+        case .toggleValues: return "Toggle Y-Values"
+        case .toggleIcons: return "Toggle Icons"
+        case .toggleHighlight: return "Toggle Highlight"
+        case .animateX: return "Animate X"
+        case .animateY: return "Animate Y"
+        case .animateXY: return "Animate XY"
+        case .saveToGallery: return "Save to Camera Roll"
+        case .togglePinchZoom: return "Toggle PinchZoom"
+        case .toggleAutoScaleMinMax: return "Toggle auto scale min/max"
+        case .toggleData: return "Toggle Data"
+        case .toggleBarBorders: return "Toggle Bar Borders"
         // CandleChart
-        case toggleShadowColorSameAsCandle
+        case .toggleShadowColorSameAsCandle: return "Toggle shadow same color"
         // CombinedChart
-        case toggleLineValues
-        case toggleBarValues
-        case removeDataSet
+        case .toggleLineValues: return "Toggle Line Values"
+        case .toggleBarValues: return "Toggle Bar Values"
+        case .removeDataSet: return "Remove Random Set"
         // CubicLineSampleFillFormatter
-        case toggleFilled
-        case toggleCircles
-        case toggleCubic
-        case toggleHorizontalCubic
-        case toggleStepped
+        case .toggleFilled: return "Toggle Filled"
+        case .toggleCircles: return "Toggle Circles"
+        case .toggleCubic: return "Toggle Cubic"
+        case .toggleHorizontalCubic: return "Toggle Horizontal Cubic"
+        case .toggleStepped: return "Toggle Stepped"
         // HalfPieChartController
-        case toggleXValues
-        case togglePercent
-        case toggleHole
-        case spin
-        case drawCenter
+        case .toggleXValues: return "Toggle X-Values"
+        case .togglePercent: return "Toggle Percent"
+        case .toggleHole: return "Toggle Hole"
+        case .spin: return "Spin"
+        case .drawCenter: return "Draw CenterText"
         // RadarChart
-        case toggleXLabels
-        case toggleYLabels
-        case toggleRotate
-        case toggleHighlightCircle
+        case .toggleXLabels: return "Toggle X-Labels"
+        case .toggleYLabels: return "Toggle Y-Labels"
+        case .toggleRotate: return "Toggle Rotate"
+        case .toggleHighlightCircle: return "Toggle highlight circle"
+        }
     }
 }
 
@@ -79,10 +112,10 @@ class DemoBaseViewController: UIViewController, ChartViewDelegate {
         self.edgesForExtendedLayout = []
     }
     
-    func optionTapped(key: Option.Key) {}
+    func optionTapped(_ option: Option) {}
     
-    func handleOption(key: Option.Key, forChartView chartView: ChartViewBase) {
-        switch key {
+    func handleOption(_ option: Option, forChartView chartView: ChartViewBase) {
+        switch option {
         case .toggleValues:
             for set in chartView.data!.dataSets {
                 set.isDrawValuesEnabled = !set.isDrawValuesEnabled
@@ -321,7 +354,7 @@ extension DemoBaseViewController: UITableViewDelegate, UITableViewDataSource {
             optionsTableView?.removeFromSuperview()
             self.optionsTableView = nil
             
-            self.optionTapped(key: self.options[indexPath.row].key)
+            self.optionTapped(self.options[indexPath.row])
         }
         
     }

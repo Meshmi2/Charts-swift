@@ -25,13 +25,12 @@ class CombinedChartViewController: DemoBaseViewController {
         
         // Do any additional setup after loading the view.
         self.title = "Combined Chart"
-        self.options = [Option(key: .toggleLineValues, label: "Toggle Line Values"),
-                        Option(key: .toggleBarValues, label: "Toggle Bar Values"),
-                        Option(key: .saveToGallery, label: "Save to Camera Roll"),
-                        Option(key: .toggleData, label: "Toggle Data"),
-                        Option(key: .toggleBarBorders, label: "Show Bar Borders"),
-                        Option(key: .removeDataSet, label: "Remove Random Set")
-        ]
+        self.options = [.toggleLineValues,
+                        .toggleBarValues,
+                        .saveToGallery,
+                        .toggleData,
+                        .toggleBarBorders,
+                        .removeDataSet]
         
         chartView.delegate = self
         
@@ -92,8 +91,8 @@ class CombinedChartViewController: DemoBaseViewController {
         chartView.data = data
     }
     
-    override func optionTapped(key: Option.Key) {
-        switch key {
+    override func optionTapped(_ option: Option) {
+        switch option {
         case .toggleLineValues:
             for set in chartView.data!.dataSets {
                 if let set = set as? LineChartDataSet {
@@ -118,7 +117,7 @@ class CombinedChartViewController: DemoBaseViewController {
             chartView.notifyDataSetChanged()
             
         default:
-            super.handleOption(key: key, forChartView: chartView)
+            super.handleOption(option, forChartView: chartView)
         }
     }
     

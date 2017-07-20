@@ -31,18 +31,17 @@ class StackedBarChartViewController: DemoBaseViewController {
         
         // Do any additional setup after loading the view.
         self.title = "Stacked Bar Chart"
-        self.options = [Option(key: .toggleValues, label: "Toggle Values"),
-                        Option(key: .toggleIcons, label: "Toggle Icons"),
-                        Option(key: .toggleHighlight, label: "Toggle Highlight"),
-                        Option(key: .animateX, label: "Animate X"),
-                        Option(key: .animateY, label: "Animate Y"),
-                        Option(key: .animateXY, label: "Animate XY"),
-                        Option(key: .saveToGallery, label: "Save to Camera Roll"),
-                        Option(key: .togglePinchZoom, label: "Toggle PinchZoom"),
-                        Option(key: .toggleAutoScaleMinMax, label: "Toggle auto scale min/max"),
-                        Option(key: .toggleData, label: "Toggle Data"),
-                        Option(key: .toggleBarBorders, label: "Toggle Bar Borders")
-        ]
+        self.options = [.toggleValues,
+                        .toggleIcons,
+                        .toggleHighlight,
+                        .animateX,
+                        .animateY,
+                        .animateXY,
+                        .saveToGallery,
+                        .togglePinchZoom,
+                        .toggleAutoScaleMinMax,
+                        .toggleData,
+                        .toggleBarBorders]
         
         
         chartView.delegate = self
@@ -113,8 +112,8 @@ class StackedBarChartViewController: DemoBaseViewController {
         chartView.data = data
     }
     
-    override func optionTapped(key: Option.Key) {
-        super.handleOption(key: key, forChartView: chartView)
+    override func optionTapped(_ option: Option) {
+        super.handleOption(option, forChartView: chartView)
     }
     
     @IBAction func slidersValueChanged(_ sender: Any?) {
