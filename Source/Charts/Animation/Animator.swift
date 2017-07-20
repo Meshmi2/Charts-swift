@@ -16,7 +16,7 @@ import CoreGraphics
     import UIKit
 #endif
 
-public protocol AnimatorDelegate: class {
+protocol AnimatorDelegate: class {
     /// Called when the Animator has stepped.
     func animatorUpdated(_ animator: Animator)
     
@@ -24,16 +24,16 @@ public protocol AnimatorDelegate: class {
     func animatorStopped(_ animator: Animator)
 }
 
-public class Animator {
+class Animator {
     open weak var delegate: AnimatorDelegate?
-    public var updateBlock: (() -> Void)?
-    public var stopBlock: (() -> Void)?
+    var updateBlock: (() -> Void)?
+    var stopBlock: (() -> Void)?
     
     /// the phase that is animated and influences the drawn values on the x-axis
-    public var phaseX: Double = 1.0
+    var phaseX: Double = 1.0
     
     /// the phase that is animated and influences the drawn values on the y-axis
-    public var phaseY: Double = 1.0
+    var phaseY: Double = 1.0
     
     private var _startTimeX: TimeInterval = 0.0
     private var _startTimeY: TimeInterval = 0.0
@@ -56,7 +56,7 @@ public class Animator {
         stop()
     }
     
-    public func stop() {
+    func stop() {
         if _displayLink != nil {
             _displayLink?.remove(from: .main, forMode: .commonModes)
             _displayLink = nil
@@ -129,7 +129,7 @@ public class Animator {
     /// - parameter yAxisDuration: duration for animating the y axis
     /// - parameter easingX: an easing function for the animation on the x axis
     /// - parameter easingY: an easing function for the animation on the y axis
-    public func animate(xAxisDuration: TimeInterval, yAxisDuration: TimeInterval, easingOptionX: ChartEasingOption, easingOptionY: ChartEasingOption) {
+    func animate(xAxisDuration: TimeInterval, yAxisDuration: TimeInterval, easingOptionX: ChartEasingOption, easingOptionY: ChartEasingOption) {
         stop()
         
         _startTimeX = CACurrentMediaTime()
@@ -159,7 +159,7 @@ public class Animator {
     /// - parameter xAxisDuration: duration for animating the x axis
     /// - parameter yAxisDuration: duration for animating the y axis
     /// - parameter easingOption: the easing function for the animation
-    public func animate(xAxisDuration: TimeInterval, yAxisDuration: TimeInterval, easingOption: ChartEasingOption = .easeInOutSine) {
+    func animate(xAxisDuration: TimeInterval, yAxisDuration: TimeInterval, easingOption: ChartEasingOption = .easeInOutSine) {
         animate(xAxisDuration: xAxisDuration, yAxisDuration: yAxisDuration, easingOptionX: easingOption, easingOptionY: easingOption)
     }
     
@@ -167,7 +167,7 @@ public class Animator {
     /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
     /// - parameter xAxisDuration: duration for animating the x axis
     /// - parameter easing: an easing function for the animation
-    public func animate(xAxisDuration: TimeInterval, easingOption: ChartEasingOption = .easeInOutSine) {
+    func animate(xAxisDuration: TimeInterval, easingOption: ChartEasingOption = .easeInOutSine) {
         _startTimeX = CACurrentMediaTime()
         _durationX = xAxisDuration
         _endTimeX = _startTimeX + xAxisDuration
@@ -191,7 +191,7 @@ public class Animator {
     /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
     /// - parameter yAxisDuration: duration for animating the y axis
     /// - parameter easingOption: an easing function for the animation
-    public func animate(yAxisDuration: TimeInterval, easingOption: ChartEasingOption = .easeInOutSine) {
+    func animate(yAxisDuration: TimeInterval, easingOption: ChartEasingOption = .easeInOutSine) {
         _startTimeY = CACurrentMediaTime()
         _durationY = yAxisDuration
         _endTimeY = _startTimeY + yAxisDuration

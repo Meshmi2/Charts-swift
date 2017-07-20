@@ -112,20 +112,20 @@ final class CombinedChartRenderer: DataRenderer {
         for renderer in _renderers {
             var data: ChartData?
             
-            if renderer is BarChartRenderer {
-                data = (renderer as! BarChartRenderer).dataProvider?.barData
+            if let renderer = renderer as? BarChartRenderer {
+                data = renderer.dataProvider?.barData
             }
-            else if renderer is LineChartRenderer {
-                data = (renderer as! LineChartRenderer).dataProvider?.lineData
+            else if let renderer = renderer as? LineChartRenderer {
+                data = renderer.dataProvider?.lineData
             }
-            else if renderer is CandleStickChartRenderer {
-                data = (renderer as! CandleStickChartRenderer).dataProvider?.candleData
+            else if let renderer = renderer as? CandleStickChartRenderer {
+                data = renderer.dataProvider?.candleData
             }
-            else if renderer is ScatterChartRenderer {
-                data = (renderer as! ScatterChartRenderer).dataProvider?.scatterData
+            else if let renderer = renderer as? ScatterChartRenderer {
+                data = renderer.dataProvider?.scatterData
             }
-            else if renderer is BubbleChartRenderer {
-                data = (renderer as! BubbleChartRenderer).dataProvider?.bubbleData
+            else if let renderer = renderer as? BubbleChartRenderer {
+                data = renderer.dataProvider?.bubbleData
             }
             
             let dataIndex = data == nil ? nil : (chart?.data as? CombinedChartData)?.allData.index(where: {
@@ -140,7 +140,7 @@ final class CombinedChartRenderer: DataRenderer {
 
     /// - returns: The sub-renderer object at the specified index.
     public func getSubRenderer(index: Int) -> DataRenderer? {
-        if index >= _renderers.count || index < 0 {
+        if index >= _renderers.endIndex || index < 0 {
             return nil
         }
         else {

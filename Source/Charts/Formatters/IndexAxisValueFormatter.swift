@@ -18,7 +18,7 @@ public struct IndexAxisValueFormatter: AxisValueFormatter {
     public func stringForValue(_ value: Double, axis: AxisBase) -> String {
         let index = Int(value.rounded())
         
-        if index < 0 || index >= values.count || index != Int(value) {
+        if index < 0 || index >= values.endIndex || index != Int(value) {
             return ""
         }
         

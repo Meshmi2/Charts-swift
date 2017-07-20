@@ -145,10 +145,7 @@ class PieChartViewController: DemoBaseViewController {
     }
     
     // MARK: - Actions
-    @IBAction func slidersValueChanged(_ sender: Any?) {
-        let startYear = 1980
-        let endYear = startYear + Int(sliderX.value)
-        
+    @IBAction func slidersValueChanged(_ sender: Any?) {        
         sliderTextX.text = "\(Int(sliderX.value))"
         sliderTextY.text = "\(Int(sliderY.value))"
         

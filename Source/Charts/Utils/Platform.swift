@@ -13,19 +13,19 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 	public typealias Image = UIImage
 	public typealias NSUIScrollView = UIScrollView
 	public typealias NSUIGestureRecognizer = UIGestureRecognizer
-	public typealias NSUIGestureRecognizerState = UIGestureRecognizerState
+	public typealias GestureRecognizerState = UIGestureRecognizerState
 	public typealias NSUIGestureRecognizerDelegate = UIGestureRecognizerDelegate
-	public typealias NSUITapGestureRecognizer = UITapGestureRecognizer
+	public typealias TapGestureRecognizer = UITapGestureRecognizer
 	public typealias NSUIPanGestureRecognizer = UIPanGestureRecognizer
 #if !os(tvOS)
     public typealias NSUIPinchGestureRecognizer = UIPinchGestureRecognizer
-    public typealias NSUIRotationGestureRecognizer = UIRotationGestureRecognizer
+    public typealias RotationGestureRecognizer = UIRotationGestureRecognizer
 #endif
     public typealias NSUIScreen = UIScreen
 
 	public typealias NSUIDisplayLink = CADisplayLink
     
-    extension NSUITapGestureRecognizer {
+    extension TapGestureRecognizer {
         final func nsuiNumberOfTouches() -> Int {
             return numberOfTouches
         }
@@ -51,7 +51,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
     }
     
 #if !os(tvOS)
-    extension NSUIRotationGestureRecognizer {
+    extension RotationGestureRecognizer {
         final var nsuiRotation: CGFloat {
             get { return rotation }
             set { rotation = newValue }
@@ -184,10 +184,10 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 	public typealias NSUIGestureRecognizer = NSGestureRecognizer
     public typealias NSUIGestureRecognizerState = NSGestureRecognizer.State
 	public typealias NSUIGestureRecognizerDelegate = NSGestureRecognizerDelegate
-	public typealias NSUITapGestureRecognizer = NSClickGestureRecognizer
+	public typealias TapGestureRecognizer = NSClickGestureRecognizer
 	public typealias NSUIPanGestureRecognizer = NSPanGestureRecognizer
 	public typealias NSUIPinchGestureRecognizer = NSMagnificationGestureRecognizer
-	public typealias NSUIRotationGestureRecognizer = NSRotationGestureRecognizer
+	public typealias RotationGestureRecognizer = NSRotationGestureRecognizer
 	public typealias NSUIScreen = NSScreen
 
 	/** On OS X there is no CADisplayLink. Use a 60 fps timer to render the animations. */
@@ -252,7 +252,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 	}
 
 	/** The 'tap' gesture is mapped to clicks. */
-	extension NSUITapGestureRecognizer {
+	extension TapGestureRecognizer {
 		final func nsuiNumberOfTouches() -> Int {
 			return 1
 		}
@@ -278,7 +278,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 		}
     }
     
-    extension NSUIRotationGestureRecognizer {
+    extension RotationGestureRecognizer {
         /// FIXME: Currently there are no velocities in OSX gestures, and not way to create custom touch gestures.
         final var velocity: CGFloat {
             return 0.1

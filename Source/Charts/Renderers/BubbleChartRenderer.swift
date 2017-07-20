@@ -191,24 +191,23 @@ final class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer {
                     // Larger font for larger bubbles?
                     let valueFont = dataSet.valueFont
                     let lineHeight = valueFont.lineHeight
-
+                    
                     if dataSet.isDrawValuesEnabled {
-                        ChartUtils.drawText(
-                            context: context,
-                            text: text,
-                            point: CGPoint(
-                                x: pt.x,
-                                y: pt.y - (0.5 * lineHeight)),
-                            align: .center,
-                            attributes: [.font: valueFont, .foregroundColor: valueTextColor])
+                        ChartUtils.drawText(text,
+                                            at: CGPoint(x: pt.x,
+                                                        y: pt.y - (0.5 * lineHeight)),
+                                            align: .center,
+                                            attributes: [.font: valueFont,
+                                                         .foregroundColor: valueTextColor],
+                                            context: context)
                     }
                     
                     if let icon = e.icon, dataSet.isDrawIconsEnabled {
-                         ChartUtils.drawImage(context: context,
-                                              image: icon,
-                                              x: pt.x + iconsOffset.x,
-                                              y: pt.y + iconsOffset.y,
-                                              size: icon.size)
+                        ChartUtils.drawImage(icon,
+                                             x: pt.x + iconsOffset.x,
+                                             y: pt.y + iconsOffset.y,
+                                             size: icon.size,
+                                             context: context)
                     }
                     
                 }

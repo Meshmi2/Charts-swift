@@ -456,6 +456,6 @@ class LegendRenderer: Renderer {
 
     /// Draws the provided label at the given position.
     func drawLabel(context: CGContext, x: CGFloat, y: CGFloat, label: String, font: Font, textColor: Color) {
-        ChartUtils.drawText(context: context, text: label, point: CGPoint(x: x, y: y), align: .left, attributes: [.font: font, .foregroundColor: textColor])
+        ChartUtils.drawText(label, at: CGPoint(x: x, y: y), align: .left, attributes: [.font: font, .foregroundColor: textColor], context: context)
     }
 }

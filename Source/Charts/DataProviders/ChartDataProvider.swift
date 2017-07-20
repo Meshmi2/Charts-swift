@@ -14,6 +14,7 @@ import CoreGraphics
 
 
 public protocol ChartDataProvider: class {
+//    associatedtype ChartData: ChartData
     /// - returns: The minimum x-value of the chart, regardless of zoom or translation.
     var chartXMin: Double { get }
     

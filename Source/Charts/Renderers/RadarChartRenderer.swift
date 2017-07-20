@@ -166,18 +166,16 @@ final class RadarChartRenderer: LineRadarRenderer {
                 guard let formatter = dataSet.valueFormatter else { continue }
                 
                 if dataSet.isDrawValuesEnabled {
-                    ChartUtils.drawText(
-                        context: context,
-                        text: formatter.stringForValue(
-                            e.y,
-                            entry: e,
-                            dataSetIndex: i,
-                            viewPortHandler: viewPortHandler),
-                        point: CGPoint(x: p.x, y: p.y - yoffset - valueFont.lineHeight),
-                        align: .center,
-                        attributes: [.font: valueFont,
-                            .foregroundColor: dataSet.valueTextColorAt(j)]
-                    )
+                    ChartUtils.drawText(formatter.stringForValue(e.y,
+                                                                 entry: e,
+                                                                 dataSetIndex: i,
+                                                                 viewPortHandler: viewPortHandler),
+                                        at: CGPoint(x: p.x,
+                                                    y: p.y - yoffset - valueFont.lineHeight),
+                                        align: .center,
+                                        attributes: [.font: valueFont,
+                                                     .foregroundColor: dataSet.valueTextColorAt(j)],
+                                        context: context)
                 }
                 
                 if let icon = e.icon, dataSet.isDrawIconsEnabled {
@@ -187,11 +185,11 @@ final class RadarChartRenderer: LineRadarRenderer {
                         angle: sliceangle * CGFloat(j) * CGFloat(phaseX) + chart.rotationAngle)
                     pIcon.y += iconsOffset.x
                     
-                    ChartUtils.drawImage(context: context,
-                                         image: icon,
+                    ChartUtils.drawImage(icon,
                                          x: pIcon.x,
                                          y: pIcon.y,
-                                         size: icon.size)
+                                         size: icon.size,
+                                         context: context)
                 }
             }
         }

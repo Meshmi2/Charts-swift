@@ -19,23 +19,18 @@ import CoreGraphics
 class YAxisRendererRadarChart: YAxisRenderer {
     private weak var chart: RadarChartView?
     
-    init(viewPortHandler: ViewPortHandler, yAxis: YAxis, chart: RadarChartView?) {
-        super.init(viewPortHandler: viewPortHandler, yAxis: yAxis, transformer: nil)
-        
+    init(viewPortHandler: ViewPortHandler, axis: YAxis, chart: RadarChartView?) {
+        super.init(viewPortHandler: viewPortHandler, axis: axis, transformer: nil)
         self.chart = chart
     }
     
-    override func computeAxisValues(min yMin: Double, max yMax: Double) {
-        guard let
-            axis = axis as? YAxis
-            else { return }
-        
+    func computeAxisValues(min yMin: Double, max yMax: Double) {
         let labelCount = axis.labelCount
         let range = abs(yMax - yMin)
         
-        if labelCount == 0 || range <= 0 || range.isInfinite {
-            axis.entries = [Double]()
-            axis.centeredEntries = [Double]()
+        guard labelCount > 0, range > 0, !range.isInfinite else {
+            axis.entries = []
+            axis.centeredEntries = []
             return
         }
         
@@ -59,8 +54,8 @@ class YAxisRendererRadarChart: YAxisRenderer {
             interval = floor(10 * intervalMagnitude)
         }
         
-        let centeringEnabled = axis.isCenterAxisLabelsEnabled
-        var n = centeringEnabled ? 1 : 0
+        let isCenteringEnabled = axis.isCenterAxisLabelsEnabled
+        var n = isCenteringEnabled ? 1 : 0
 
         // force label count
         if axis.isForceLabelsEnabled {
@@ -82,9 +77,10 @@ class YAxisRendererRadarChart: YAxisRenderer {
         else {
             // no forced count
             
-            var first = interval == 0.0 ? 0.0 : ceil(yMin / interval) * interval
+            var first = (interval == 0.0) ?
+                0.0 : ceil(yMin / interval) * interval
             
-            if centeringEnabled {
+            if isCenteringEnabled {
                 first -= interval
             }
 
@@ -125,7 +121,7 @@ class YAxisRendererRadarChart: YAxisRenderer {
             axis.decimals = 0
         }
         
-        if centeringEnabled {
+        if isCenteringEnabled {
             axis.centeredEntries.reserveCapacity(n)
             axis.centeredEntries.removeAll()
             
@@ -142,57 +138,47 @@ class YAxisRendererRadarChart: YAxisRenderer {
     }
     
     override func renderAxisLabels(context: CGContext) {
-        guard let
-            yAxis = axis as? YAxis,
-            let chart = chart
-            else { return }
+        guard let chart = chart else { return }
         
-        if !yAxis.isEnabled || !yAxis.isDrawLabelsEnabled {
-            return
-        }
+        guard axis.isEnabled, axis.isDrawLabelsEnabled else { return }
         
-        let labelFont = yAxis.labelFont
-        let labelTextColor = yAxis.labelTextColor
+        let labelFont = axis.labelFont
+        let labelTextColor = axis.labelTextColor
         
         let center = chart.centerOffsets
         let factor = chart.factor
         
-        let labelLineHeight = yAxis.labelFont.lineHeight
+        let labelLineHeight = axis.labelFont.lineHeight
         
-        let from = yAxis.isDrawBottomYLabelEntryEnabled ? 0 : 1
-        let to = yAxis.isDrawTopYLabelEntryEnabled ? yAxis.entryCount : (yAxis.entryCount - 1)
+        let from = axis.isDrawBottomYLabelEntryEnabled ? 0 : 1
+        let to = axis.isDrawTopYLabelEntryEnabled ? axis.entryCount : (axis.entryCount - 1)
         
-        for j in stride(from: from, to: to, by: 1) {
-            let r = CGFloat(yAxis.entries[j] - yAxis._axisMinimum) * factor
+        for j in  from..<to {
+            let r = CGFloat(axis.entries[j] - axis._axisMinimum) * factor
             
             let p = ChartUtils.getPosition(center: center, dist: r, angle: chart.rotationAngle)
             
-            let label = yAxis.getFormattedLabel(j)
+            let label = axis.getFormattedLabel(j)
             
-            ChartUtils.drawText(
-                context: context,
-                text: label,
-                point: CGPoint(x: p.x + 10.0, y: p.y - labelLineHeight),
-                align: .left,
-                attributes: [
-                    .font: labelFont,
-                    .foregroundColor: labelTextColor
-                ])
+            ChartUtils.drawText(label,
+                                at: CGPoint(x: p.x + 10.0, y: p.y - labelLineHeight),
+                                align: .left,
+                                attributes: [
+                                    .font: labelFont,
+                                    .foregroundColor: labelTextColor],
+                                context: context)
         }
     }
     
     override func renderLimitLines(context: CGContext) {
         guard
-            let yAxis = axis as? YAxis,
             let chart = chart,
             let data = chart.data
             else { return }
         
-        var limitLines = yAxis.limitLines
+        let limitLines = axis.limitLines
         
-        if limitLines.count == 0 {
-            return
-        }
+        guard limitLines.count > 0 else { return }
         
         context.saveGState()
         
@@ -203,12 +189,8 @@ class YAxisRendererRadarChart: YAxisRenderer {
         
         let center = chart.centerOffsets
         
-        for i in 0 ..< limitLines.count {
-            let l = limitLines[i]
-            
-            if !l.isEnabled {
-                continue
-            }
+        for l in limitLines {
+            guard l.isEnabled else { continue }
             
             context.setStrokeColor(l.lineColor.cgColor)
             context.setLineWidth(l.lineWidth)

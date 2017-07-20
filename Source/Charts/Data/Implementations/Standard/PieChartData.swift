@@ -64,7 +64,7 @@ public class PieChartData: ChartData {
     ///
     /// - returns: `true` if a DataSet was removed, `false` ifno DataSet could be removed.
     public override func removeDataSetByIndex(_ index: Int) -> Bool {
-        if index >= _dataSets.count || index < 0 {
+        if index >= _dataSets.endIndex || index < 0 {
             return false
         }
         

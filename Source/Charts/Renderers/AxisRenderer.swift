@@ -12,42 +12,31 @@
 import Foundation
 import CoreGraphics
 
-class AxisRenderer: Renderer {
-    let viewPortHandler: ViewPortHandler
-    
+protocol AxisRenderer: Renderer {
+    associatedtype Axis: AxisBase
     /// base axis this axis renderer works with
-    var axis: AxisBase
+    var axis: Axis { get set }
     
     /// transformer to transform values to screen pixels and return
-    var transformer: Transformer?
-        
-    init(viewPortHandler: ViewPortHandler, transformer: Transformer?, axis: AxisBase) {
-        self.viewPortHandler = viewPortHandler
-        
-        self.transformer = transformer
-        self.axis = axis
-    }
-    
+    var transformer: Transformer? { get set }
+
     /// Draws the axis labels on the specified context
-    func renderAxisLabels(context: CGContext) {
-        fatalError("renderAxisLabels() cannot be called on AxisRendererBase")
-    }
+    func renderAxisLabels(context: CGContext)
     
     /// Draws the grid lines belonging to the axis.
-    func renderGridLines(context: CGContext) {
-        fatalError("renderGridLines() cannot be called on AxisRendererBase")
-    }
+    func renderGridLines(context: CGContext)
     
     /// Draws the line that goes alongside the axis.
-    func renderAxisLine(context: CGContext) {
-        fatalError("renderAxisLine() cannot be called on AxisRendererBase")
-    }
+    func renderAxisLine(context: CGContext)
     
     /// Draws the LimitLines associated with this axis to the screen.
-    func renderLimitLines(context: CGContext) {
-        fatalError("renderLimitLines() cannot be called on AxisRendererBase")
-    }
+    func renderLimitLines(context: CGContext)
     
+    /// Sets up the axis values. Computes the desired number of labels between the two given extremes.
+    func computeAxisValues(min: Double, max: Double)
+}
+
+extension AxisRenderer {
     /// Computes the axis values.
     /// - parameter min: the minimum value in the data object for this axis
     /// - parameter max: the maximum value in the data object for this axis
@@ -124,8 +113,7 @@ class AxisRenderer: Renderer {
             }
             
             n = labelCount
-        }
-        else {
+        } else {
             // no forced count
         
             var first = interval == 0.0 ? 0.0 : ceil(yMin / interval) * interval

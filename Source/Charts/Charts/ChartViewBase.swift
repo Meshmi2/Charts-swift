@@ -275,20 +275,19 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate {
         
         let frame = self.bounds
 
-        if _data === nil && noDataText.characters.count > 0 {
+        if _data == nil && noDataText.characters.count > 0 {
             context.saveGState()
             defer { context.restoreGState() }
             
-            ChartUtils.drawMultilineText(
-                context: context,
-                text: noDataText,
-                point: CGPoint(x: frame.width / 2.0, y: frame.height / 2.0),
-                attributes:
-                [.font: noDataFont,
-                 .foregroundColor: noDataTextColor],
-                constrainedToSize: self.bounds.size,
-                anchor: CGPoint(x: 0.5, y: 0.5),
-                angleRadians: 0.0)
+            ChartUtils.drawMultilineText(noDataText,
+                                         at: CGPoint(x: frame.width / 2,
+                                                     y: frame.height / 2),
+                                         constrainedToSize: self.bounds.size,
+                                         anchor: CGPoint(x: 0.5, y: 0.5),
+                                         angleRadians: 0,
+                                         attributes: [.font: noDataFont,
+                                                      .foregroundColor: noDataTextColor],
+                                         context: context)
             
             return
         }
@@ -323,13 +322,12 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate {
         
         attrs[.font] = description.font
         attrs[.foregroundColor] = description.textColor
-
-        ChartUtils.drawText(
-            context: context,
-            text: descriptionText,
-            point: position!,
-            align: description.textAlign,
-            attributes: attrs)
+        
+        ChartUtils.drawText(descriptionText,
+                            at: position!,
+                            align: description.textAlign,
+                            attributes: attrs,
+                            context: context)
     }
     
     // MARK: - Highlighting
@@ -522,7 +520,7 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate {
     // MARK: - Animation
     
     /// - returns: The animator responsible for animating chart values.
-    public var chartAnimator: Animator! {
+    var chartAnimator: Animator! {
         return _animator
     }
     
@@ -789,11 +787,11 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate {
     
     // MARK: - AnimatorDelegate
     
-    public func animatorUpdated(_ chartAnimator: Animator) {
+    func animatorUpdated(_ chartAnimator: Animator) {
         setNeedsDisplay()
     }
     
-    public func animatorStopped(_ chartAnimator: Animator) {
+    func animatorStopped(_ chartAnimator: Animator) {
         
     }
     

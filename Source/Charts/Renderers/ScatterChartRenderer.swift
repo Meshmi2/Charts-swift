@@ -151,23 +151,21 @@ final class ScatterChartRenderer: LineScatterCandleRadarRenderer {
                         viewPortHandler: viewPortHandler)
                     
                     if dataSet.isDrawValuesEnabled {
-                        ChartUtils.drawText(
-                            context: context,
-                            text: text,
-                            point: CGPoint(
-                                x: pt.x,
-                                y: pt.y - shapeSize - lineHeight),
-                            align: .center,
-                            attributes: [.font: valueFont, .foregroundColor: dataSet.valueTextColorAt(j)]
-                        )
+                        ChartUtils.drawText(text,
+                                            at: CGPoint(x: pt.x,
+                                                        y: pt.y - shapeSize - lineHeight),
+                                            align: .center,
+                                            attributes: [.font: valueFont,
+                                                         .foregroundColor: dataSet.valueTextColorAt(j)],
+                                            context: context)
                     }
                     
                     if let icon = e.icon, dataSet.isDrawIconsEnabled {
-                        ChartUtils.drawImage(context: context,
-                                             image: icon,
+                        ChartUtils.drawImage(icon,
                                              x: pt.x + iconsOffset.x,
                                              y: pt.y + iconsOffset.y,
-                                             size: icon.size)
+                                             size: icon.size,
+                                             context: context)
                     }
                 }
             }

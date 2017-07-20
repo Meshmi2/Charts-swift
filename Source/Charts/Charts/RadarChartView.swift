@@ -58,8 +58,8 @@ public class RadarChartView: PieRadarChartViewBase {
         
         renderer = RadarChartRenderer(chart: self, animator: _animator, viewPortHandler: viewPortHandler)
         
-        _yAxisRenderer = YAxisRendererRadarChart(viewPortHandler: viewPortHandler, yAxis: _yAxis, chart: self)
-        _xAxisRenderer = XAxisRendererRadarChart(viewPortHandler: viewPortHandler, xAxis: _xAxis, chart: self)
+        _yAxisRenderer = YAxisRendererRadarChart(viewPortHandler: viewPortHandler, axis: _yAxis, chart: self)
+        _xAxisRenderer = XAxisRendererRadarChart(viewPortHandler: viewPortHandler, axis: _xAxis, chart: self)
         
         self.highlighter = RadarHighlighter(chart: self)
     }

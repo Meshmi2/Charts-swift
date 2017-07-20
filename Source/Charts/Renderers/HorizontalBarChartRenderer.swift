@@ -364,12 +364,11 @@ final class HorizontalBarChartRenderer: BarChartRenderer {
                             px += iconsOffset.x
                             py += iconsOffset.y
                             
-                            ChartUtils.drawImage(
-                                context: context,
-                                image: icon,
-                                x: px,
-                                y: py,
-                                size: icon.size)
+                            ChartUtils.drawImage(icon,
+                                                 x: px,
+                                                 y: py,
+                                                 size: icon.size,
+                                                 context: context)
                         }
                     }
                 }
@@ -436,12 +435,11 @@ final class HorizontalBarChartRenderer: BarChartRenderer {
                                 px += iconsOffset.x
                                 py += iconsOffset.y
                                 
-                                ChartUtils.drawImage(
-                                    context: context,
-                                    image: icon,
-                                    x: px,
-                                    y: py,
-                                    size: icon.size)
+                                ChartUtils.drawImage(icon,
+                                                     x: px,
+                                                     y: py,
+                                                     size: icon.size,
+                                                     context: context)
                             }
                         }
                         else {
@@ -519,12 +517,11 @@ final class HorizontalBarChartRenderer: BarChartRenderer {
                                 }
                                 
                                 if let icon = e.icon, dataSet.isDrawIconsEnabled {
-                                    ChartUtils.drawImage(
-                                        context: context,
-                                        image: icon,
-                                        x: x + iconsOffset.x,
-                                        y: y + iconsOffset.y,
-                                        size: icon.size)
+                                    ChartUtils.drawImage(icon,
+                                                         x: x + iconsOffset.x,
+                                                         y: y + iconsOffset.y,
+                                                         size: icon.size,
+                                                         context: context)
                                 }
                             }
                         }
