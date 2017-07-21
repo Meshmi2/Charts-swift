@@ -4,4 +4,7 @@
    <FileRef
       location = "group:Charts.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:ChartsDemo-iOS/ChartsDemo-iOS.xcodeproj">
+   </FileRef>
 </Workspace>
