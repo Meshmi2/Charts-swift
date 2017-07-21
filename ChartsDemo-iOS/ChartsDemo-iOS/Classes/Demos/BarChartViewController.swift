@@ -76,7 +76,7 @@ class BarChartViewController: DemoBaseViewController {
         l.verticalAlignment = .bottom
         l.orientation = .horizontal
         l.drawInside = false
-        l.form = .square
+        l.form = .circle
         l.formSize = 9
         l.font = UIFont(name: "HelveticaNeue-Light", size: 11)!
         l.xEntrySpace = 4
