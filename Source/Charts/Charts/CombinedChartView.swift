@@ -153,5 +153,5 @@ public class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider 
     
     /// Set this to `true` to make the highlight operation full-bar oriented, `false` to make it highlight single values
     /// - returns: `true` the highlight is be full-bar oriented, `false` ifsingle-value
-    public var isHighlightFullBarEnabled: Bool = false    
+    public var isHighlightFullBarEnabled = false    
 }

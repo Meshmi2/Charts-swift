@@ -17,22 +17,6 @@ import CoreGraphics
 #endif
 
 public struct Legend {
-    public enum Position {
-        case rightOfChart
-        case rightOfChartCenter
-        case rightOfChartInside
-        case leftOfChart
-        case leftOfChartCenter
-        case leftOfChartInside
-        case belowChartLeft
-        case belowChartRight
-        case belowChartCenter
-        case aboveChartLeft
-        case aboveChartRight
-        case aboveChartCenter
-        case piechartCenter
-    }
-    
     public enum Form {
         /// Avoid drawing a form
         case none
@@ -97,7 +81,7 @@ public struct Legend {
     public var orientation: Orientation = .horizontal
     
     /// Flag indicating whether the legend will draw inside the chart or outside
-    public var drawInside: Bool = false
+    public var drawInside = false
     
     /// The text direction of the legend
     public var direction: Direction = .leftToRight
@@ -185,10 +169,8 @@ public struct Legend {
     /// you may want to set maxSizePercent when word wrapping, to set the point where the text wraps.
     /// 
     /// **default**: true
-    public var wordWrapEnabled = true
-    
     /// if this is set, then word wrapping the legend is enabled.
-    public var isWordWrapEnabled: Bool { return wordWrapEnabled }
+    public var isWordWrapEnabled = true
 
     /// The maximum relative size out of the whole chart view in percent.
     /// If the legend is to the right/left of the chart, then this affects the width of the legend.
@@ -204,7 +186,7 @@ public struct Legend {
         let formToTextSpace = self.formToTextSpace
         let xEntrySpace = self.xEntrySpace
         let yEntrySpace = self.yEntrySpace
-        let wordWrapEnabled = self.wordWrapEnabled
+        let wordWrapEnabled = self.isWordWrapEnabled
         let entries = self.entries
         let entryCount = entries.count
         

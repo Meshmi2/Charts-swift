@@ -40,11 +40,8 @@ public class BubbleChartDataSet: BarLineScatterCandleBubbleChartDataSet {
         super.init(values: values, label: label)
     }
     
-    var _maxSize = CGFloat(0.0)
-    
-    public var maxSize: CGFloat { return _maxSize }
-    public var normalizeSizeEnabled: Bool = true
-    public var isNormalizeSizeEnabled: Bool { return normalizeSizeEnabled }
+    public private(set) var maxSize: CGFloat = 0
+    public var isNormalizeSizeEnabled = true
     
     public func calcMinMax(entry e: ChartDataEntry) {
         guard let e = e as? BubbleChartDataEntry
@@ -54,8 +51,8 @@ public class BubbleChartDataSet: BarLineScatterCandleBubbleChartDataSet {
         
         let size = e.size
         
-        if size > _maxSize {
-            _maxSize = size
+        if size > maxSize {
+            maxSize = size
         }
     }
     

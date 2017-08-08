@@ -46,8 +46,8 @@ class Animator {
     private var _endTimeY: TimeInterval = 0.0
     private var _endTime: TimeInterval = 0.0
     
-    private var _enabledX: Bool = false
-    private var _enabledY: Bool = false
+    private var _enabledX = false
+    private var _enabledY = false
     
     private var _easingX: ChartEasingOption = .none
     private var _easingY: ChartEasingOption = .none

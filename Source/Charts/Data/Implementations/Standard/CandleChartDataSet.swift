@@ -144,7 +144,7 @@ public class CandleChartDataSet: LineScatterCandleRadarChartDataSet {
     /// when false, only "ticks" will show
     ///
     /// **default**: true
-    public var showCandleBar: Bool = true
+    public var showCandleBar = true
     
     /// the width of the candle-shadow-line in pixels.
     ///
@@ -155,10 +155,8 @@ public class CandleChartDataSet: LineScatterCandleRadarChartDataSet {
     public var shadowColor: Color?
     
     /// use candle color for the shadow
-    public var shadowColorSameAsCandle = false
-    
     /// Is the shadow color same as the candle color?
-    public var isShadowColorSameAsCandle: Bool { return shadowColorSameAsCandle }
+    public var isShadowColorSameAsCandle = false
     
     /// color for open == close
     public var neutralColor: Color?
@@ -171,15 +169,11 @@ public class CandleChartDataSet: LineScatterCandleRadarChartDataSet {
     
     /// Are increasing values drawn as filled?
     /// increasing candlesticks are traditionally hollow
-    public var increasingFilled = false
-    
     /// Are increasing values drawn as filled?
-    public var isIncreasingFilled: Bool { return increasingFilled }
+    public var isIncreasingFilled = false
     
     /// Are decreasing values drawn as filled?
     /// descreasing candlesticks are traditionally filled
-    public var decreasingFilled = true
-    
     /// Are decreasing values drawn as filled?
-    public var isDecreasingFilled: Bool { return decreasingFilled }
+    public var isDecreasingFilled = true
 }

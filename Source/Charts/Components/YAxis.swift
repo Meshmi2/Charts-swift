@@ -121,8 +121,8 @@ public class YAxis: AxisBase {
         
     public override func calculate(min dataMin: Double, max dataMax: Double) {
         // if custom, use value as is, else use data value
-        var min = _customAxisMin ? _axisMinimum : dataMin
-        var max = _customAxisMax ? _axisMaximum : dataMax
+        var min = isAxisMinCustom ? _axisMinimum : dataMin
+        var max = isAxisMaxCustom ? _axisMaximum : dataMax
         
         // temporary range (before calculations)
         let range = abs(max - min)
@@ -134,13 +134,13 @@ public class YAxis: AxisBase {
         }
         
         // bottom-space only effects non-custom min
-        if !_customAxisMin {
+        if !isAxisMinCustom {
             let bottomSpace = range * Double(spaceBottom)
             _axisMinimum = (min - bottomSpace)
         }
         
         // top-space only effects non-custom max
-        if !_customAxisMax {
+        if !isAxisMaxCustom {
             let topSpace = range * Double(spaceTop)
             _axisMaximum = (max + topSpace)
         }

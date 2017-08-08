@@ -112,7 +112,7 @@ final class CandleStickChartRenderer: LineScatterCandleRadarRenderer {
                 // draw the shadows
                 
                 let shadowColor: Color
-                if dataSet.shadowColorSameAsCandle {
+                if dataSet.isShadowColorSameAsCandle {
                     if open > close {
                         shadowColor = dataSet.decreasingColor ?? dataSet.color(atIndex: j)
                     }

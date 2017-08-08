@@ -18,7 +18,7 @@ public class DefaultAxisValueFormatter: AxisValueFormatter {
     
     public var block: Block?
     
-    public var hasAutoDecimals: Bool = false
+    public var hasAutoDecimals = false
     
     private var _formatter: NumberFormatter?
     public var formatter: NumberFormatter? {

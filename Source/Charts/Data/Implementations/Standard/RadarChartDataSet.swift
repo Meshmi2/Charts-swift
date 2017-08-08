@@ -64,7 +64,7 @@ public class RadarChartDataSet: LineRadarChartDataSet {
     /// flag indicating whether highlight circle should be drawn or not
     /// **default**: false
     /// - returns: `true` if highlight circle should be drawn, `false` ifnot
-    public var isDrawHighlightCircleEnabled: Bool = false
+    public var isDrawHighlightCircleEnabled = false
         
     public var highlightCircleFillColor: Color? = Color.white
     

@@ -38,7 +38,7 @@ public class PieRadarChartViewBase: ChartViewBase {
     /// On OSX this will keep two-finger multitouch rotation, and one-pointer mouse rotation.
     ///
     /// **default**: false
-    public var isRotationWithTwoFingers: Bool = false {
+    public var isRotationWithTwoFingers = false {
         didSet {
             #if !os(tvOS)
                 _rotationGestureRecognizer.isEnabled = isRotationWithTwoFingers

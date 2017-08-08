@@ -407,7 +407,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 	}
 
 	extension NSScrollView {
-		var scrollEnabled: Bool {
+		var isScrollEnabled: Bool {
             get {
                 return true
             }

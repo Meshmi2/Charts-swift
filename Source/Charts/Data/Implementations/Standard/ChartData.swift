@@ -512,25 +512,15 @@ public class ChartData {
     
     /// Enables / disables highlighting values for all DataSets this data object contains.
     /// If set to true, this means that values can be highlighted programmatically or by touch gesture.
-    public var highlightEnabled: Bool {
-        get {
-            for set in dataSets {
-                if !set.isHighlightEnabled {
-                    return false
-                }
-            }
-            
-            return true
-        }
+    /// if true, value highlightning is enabled
+    public var isHighlightEnabled: Bool {
+        get { return !dataSets.contains { !$0.isHighlightEnabled } }
         set {
             for set in dataSets {
                 set.isHighlightEnabled = newValue
             }
         }
     }
-    
-    /// if true, value highlightning is enabled
-    public var isHighlightEnabled: Bool { return highlightEnabled }
     
     /// Clears this data object from all DataSets and removes all Entries.
     /// Don't forget to invalidate the chart after this.

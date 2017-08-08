@@ -503,13 +503,9 @@ public class ChartDataSet: IChartDataSet {
     public var iconsOffset = CGPoint(x: 0, y: 0)
     
     /// Set the visibility of this DataSet. If not visible, the DataSet will not be drawn to the chart upon refreshing it.
-    public var visible = true
-    
     /// - returns: `true` if this DataSet is visible inside the chart, or `false` ifit is currently hidden.
-    public var isVisible: Bool {
-        return visible
-    }
-    
+    public var isVisible = true
+
     // MARK: - CustomStringConvertible
     
     public var description: String {

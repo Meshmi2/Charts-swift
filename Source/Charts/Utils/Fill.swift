@@ -18,10 +18,10 @@ public enum Fill {
     case color(CGColor)
     case linearGradient(CGGradient, angle: CGFloat)
     case radialGradient(CGGradient,
-    startOffsetPercent: CGPoint,
-    startRadiusPercent: CGFloat,
-    endOffsetPercent: CGPoint,
-    endRadiusPercent: CGFloat)
+        startOffsetPercent: CGPoint,
+        startRadiusPercent: CGFloat,
+        endOffsetPercent: CGPoint,
+        endRadiusPercent: CGFloat)
     case image(CGImage)
     case tiledImage(CGImage)
     case layer(CGLayer)

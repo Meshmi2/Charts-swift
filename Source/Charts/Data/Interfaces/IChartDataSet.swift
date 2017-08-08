@@ -215,8 +215,6 @@ public protocol IChartDataSet: class, MutableCollection, RandomAccessCollection,
     var iconsOffset: CGPoint { get set }
     
     /// Set the visibility of this DataSet. If not visible, the DataSet will not be drawn to the chart upon refreshing it.
-    var visible: Bool { get set }
-    
     /// - returns: `true` if this DataSet is visible inside the chart, or `false` ifit is currently hidden.
     var isVisible: Bool { get }
 }

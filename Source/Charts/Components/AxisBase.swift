@@ -150,13 +150,7 @@ public class AxisBase: ComponentBase {
     
     /// Extra spacing for `axisMaximum` to be added to automatically calculated `axisMaximum`
     public var spaceMax: Double = 0.0
-    
-    /// Flag indicating that the axis-min value has been customized
-    var _customAxisMin: Bool = false
-    
-    /// Flag indicating that the axis-max value has been customized
-    var _customAxisMax: Bool = false
-    
+
     /// Do not touch this directly, instead, use axisMinimum.
     /// This is automatically calculated to represent the real min value,
     /// and is used when calculating the effective minimum.
@@ -229,17 +223,19 @@ public class AxisBase: ComponentBase {
     
     /// By calling this method, any custom minimum value that has been previously set is reseted, and the calculation is done automatically.
     public func resetCustomAxisMin() {
-        _customAxisMin = false
+        isAxisMinCustom = false
     }
     
-    public var isAxisMinCustom: Bool { return _customAxisMin }
-    
+    /// Flag indicating that the axis-min value has been customized
+    public var isAxisMinCustom = false
+
     /// By calling this method, any custom maximum value that has been previously set is reseted, and the calculation is done automatically.
     public func resetCustomAxisMax() {
-        _customAxisMax = false
+        isAxisMaxCustom = false
     }
-    
-    public var isAxisMaxCustom: Bool { return _customAxisMax }
+
+    /// Flag indicating that the axis-max value has been customized
+    public var isAxisMaxCustom = false
         
     /// The minimum value for this axis.
     /// If set, this value will not be calculated automatically depending on the provided data.
@@ -249,7 +245,7 @@ public class AxisBase: ComponentBase {
             return _axisMinimum
         }
         set {
-            _customAxisMin = true
+            isAxisMinCustom = true
             _axisMinimum = newValue
             axisRange = abs(_axisMaximum - newValue)
         }
@@ -263,7 +259,7 @@ public class AxisBase: ComponentBase {
             return _axisMaximum
         }
         set {
-            _customAxisMax = true
+            isAxisMaxCustom = true
             _axisMaximum = newValue
             axisRange = abs(newValue - _axisMinimum)
         }
@@ -274,8 +270,8 @@ public class AxisBase: ComponentBase {
     /// - parameter dataMax: the y-max value according to chart
     public func calculate(min dataMin: Double, max dataMax: Double) {
         // if custom, use value as is, else use data value
-        var min = _customAxisMin ? _axisMinimum : (dataMin - spaceMin)
-        var max = _customAxisMax ? _axisMaximum : (dataMax + spaceMax)
+        var min = isAxisMinCustom ? _axisMinimum : (dataMin - spaceMin)
+        var max = isAxisMaxCustom ? _axisMaximum : (dataMax + spaceMax)
         
         // temporary range (before calculations)
         let range = abs(max - min)

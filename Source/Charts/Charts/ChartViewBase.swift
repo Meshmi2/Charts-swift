@@ -49,10 +49,7 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate {
     
     /// object that holds all data that was originally set for the chart, before it was modified or any filtering algorithms had been applied
     var _data: ChartData?
-    
-    /// If set to true, chart continues to scroll after touch up
-    public var dragDecelerationEnabled = true
-    
+
     /// Deceleration friction coefficient in [0 ; 1] interval, higher values indicate that speed will decrease slowly, for example if it set to 0, it will stop immediately.
     /// 1 is an invalid value, and will be converted to 0.999 automatically.
     private var _dragDecelerationFrictionCoef: CGFloat = 0.9
@@ -106,11 +103,9 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate {
     
     /// `true` if drawing the marker is enabled when tapping on values
     /// (use the `marker` property to specify a marker)
-    public var drawMarkers = true
-    
     /// - returns: `true` if drawing the marker is enabled when tapping on values
     /// (use the `marker` property to specify a marker)
-    public var isDrawMarkersEnabled: Bool { return drawMarkers }
+    public var isDrawMarkersEnabled = true
     
     /// The marker that is displayed when a value is clicked on the chart
     public var marker: Marker?
@@ -749,12 +744,11 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate {
         }
     }
     
+    /// If set to true, chart continues to scroll after touch up
     /// **default**: true
     /// - returns: `true` if chart continues to scroll after touch up, `false` ifnot.
-    public var isDragDecelerationEnabled: Bool {
-            return dragDecelerationEnabled
-    }
-    
+    public var isDragDecelerationEnabled = true
+
     /// Deceleration friction coefficient in [0 ; 1] interval, higher values indicate that speed will decrease slowly, for example if it set to 0, it will stop immediately.
     /// 1 is an invalid value, and will be converted to 0.999 automatically.
     /// 

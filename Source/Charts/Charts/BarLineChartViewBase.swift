@@ -21,14 +21,11 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     /// the maximum number of entries to which values will be drawn
     /// (entry numbers greater than this value will cause value-labels to disappear)
     var _maxVisibleCount = 100
-    
-    /// flag that indicates if auto scaling on the y axis is enabled
-    private var _autoScaleMinMaxEnabled = false
-    
+
     /// flag that indicates if pinch-zoom is enabled. if true, both x and y axis can be scaled simultaneously with 2 fingers, if false, x and y axis can be scaled separately
     /// **default**: false
     /// - returns: `true` if pinch-zoom is enabled, `false` ifnot
-    public var isPinchZoomEnabled: Bool = false {
+    public var isPinchZoomEnabled = false {
         didSet {
             #if !os(tvOS)
                 _pinchGestureRecognizer.isEnabled = isPinchZoomEnabled || isScaleXEnabled || isScaleYEnabled
@@ -49,7 +46,7 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     }
     
     /// is dragging enabled? (moving the chart with the finger) for the chart (this does not affect scaling).
-    public var isDragEnabled: Bool = true
+    public var isDragEnabled = true
     
     public var isScaleXEnabled = true {
         didSet {
@@ -84,14 +81,14 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     public var isDrawBordersEnabled = false
     
     /// When enabled, the values will be clipped to contentRect, otherwise they can bleed outside the content rect.
-    public var isClipValuesToContentEnabled: Bool = false
+    public var isClipValuesToContentEnabled = false
 
     /// Sets the minimum offset (padding) around the chart, defaults to 10
     public var minOffset = CGFloat(10.0)
     
     /// Sets whether the chart should keep its position (zoom / scroll) after a rotation (orientation change)
     /// **default**: false
-    public var keepPositionOnRotation: Bool = false
+    public var keepPositionOnRotation = false
     
     /// the object representing the left y-axis
     var _leftAxis: YAxis!
@@ -198,7 +195,7 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         drawGridBackground(context: context)
         
 
-        if _autoScaleMinMaxEnabled {
+        if isAutoScaleMinMaxEnabled {
             autoScale()
         }
 
@@ -487,7 +484,7 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     private var _isScaling = false
     private var _gestureScaleAxis = GestureScaleAxis.both
     private var _closestDataSetToTouch: ChartDataSet!
-    private var _panGestureReachedEdge: Bool = false
+    private var _panGestureReachedEdge = false
     private weak var _outerScrollView: NSUIScrollView?
     
     private var _lastPanPoint: CGPoint = .zero /// This is to prevent using setTranslation which resets velocity
@@ -1431,14 +1428,9 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     
     /// flag that indicates if auto scaling on the y axis is enabled.
     /// if yes, the y axis automatically adjusts to the min and max y values of the current x axis range whenever the viewport changes
-    public var autoScaleMinMaxEnabled: Bool {
-        get { return _autoScaleMinMaxEnabled }
-        set { _autoScaleMinMaxEnabled = newValue }
-    }
-    
     /// **default**: false
     /// - returns: `true` if auto scaling on the y axis is enabled.
-    public var isAutoScaleMinMaxEnabled : Bool { return autoScaleMinMaxEnabled }
+    public var isAutoScaleMinMaxEnabled = false
     
     /// Sets a minimum width to the specified y axis.
     public func setYAxisMinWidth(_ axis: YAxis.AxisDependency, width: CGFloat) {
