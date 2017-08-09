@@ -182,7 +182,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 	public typealias Image = NSImage
 	public typealias NSUIScrollView = NSScrollView
 	public typealias NSUIGestureRecognizer = NSGestureRecognizer
-    public typealias NSUIGestureRecognizerState = NSGestureRecognizer.State
+    public typealias GestureRecognizerState = NSGestureRecognizer.State
 	public typealias NSUIGestureRecognizerDelegate = NSGestureRecognizerDelegate
 	public typealias TapGestureRecognizer = NSClickGestureRecognizer
 	public typealias NSUIPanGestureRecognizer = NSPanGestureRecognizer
@@ -314,8 +314,8 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 
     extension NSScrollView {
         var nsuiIsScrollEnabled: Bool {
-            get { return scrollEnabled }
-            set { scrollEnabled = newValue }
+            get { return isScrollEnabled }
+            set { isScrollEnabled = newValue }
         }
     }
     
@@ -341,7 +341,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 			self.nsuiTouchesMoved(event.touches(matching: .any, in: self), withEvent: event)
 		}
 
-		public override func touchesCancelled(with event: NSEvent) {
+        open override func touchesCancelled(with event: NSEvent) {
 			self.nsuiTouchesCancelled(event.touches(matching: .any, in: self), withEvent: event)
 		}
 
