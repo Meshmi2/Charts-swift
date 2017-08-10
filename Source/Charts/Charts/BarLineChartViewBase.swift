@@ -789,7 +789,7 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     #endif
     
     #if os(OSX)
-    public func gestureRecognizerShouldBegin(gestureRecognizer: NSGestureRecognizer) -> Bool {
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: NSGestureRecognizer) -> Bool {
         return nsuiGestureRecognizerShouldBegin(gestureRecognizer)
     }
     #endif
